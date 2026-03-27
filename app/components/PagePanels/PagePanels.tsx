@@ -2,7 +2,7 @@
 
 import { PagePanelsPagePanels_Layout } from "@/types/graphql";
 import { logError } from "@/utils/logError";
-import { panelResolver } from "./PanelResolver";
+import { getPanelComponent } from "./PanelResolver";
 import PanelErrorBoundary from "./PanelErrorBoundary";
 
 interface PanelProps {
@@ -72,7 +72,7 @@ const Panel = async ({ panel, pageTitle, ...props }: PanelProps) => {
   let ComponentToRender;
 
   try {
-    ComponentToRender = await panelResolver.getComponentAsync(typename);
+    ComponentToRender = await getPanelComponent(typename);
   } catch (error) {
     logError("Panel failed to render", error, { panelType: typename });
     return <PanelFallback message="Panel failed to render" panelType={typename} />;
