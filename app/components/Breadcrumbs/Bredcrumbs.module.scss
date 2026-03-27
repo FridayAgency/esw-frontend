@@ -1,0 +1,55 @@
+@use "@/app/styles/generic/text-styles";
+
+.breadcrumbs {
+  padding: 0.37rem 0;
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 0.38rem;
+    list-style: none;
+  }
+
+  &__item,
+  &__link {
+    // // @extend.secondary-caption;
+  }
+
+  &__link {
+    color: var(--blue-brand, #003f87);
+    transition: var(--transition);
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--blue-500, #5a7798);
+    }
+  }
+
+  &__item {
+    color: var(--blue-500, #5a7798);
+    display: block;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 0;
+    flex-shrink: 1;
+
+    &[aria-current="page"] {
+      color: var(--blue-500, #5a7798);
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__separator {
+    color: var(--blue-500, #5a7798);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+}

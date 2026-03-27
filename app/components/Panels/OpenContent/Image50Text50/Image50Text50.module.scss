@@ -1,0 +1,112 @@
+@use "@/app/styles/generic/mixins";
+@use "@/app/styles/generic/text-styles";
+
+.image-50-text-50 {
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+  display: grid;
+  gap: 1em;
+
+  @include mixins.breakpoint-up(mobile) {
+    gap: 1.5rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    padding-left: var(--outer-margin-md);
+    padding-right: var(--outer-margin-md);
+    padding-bottom: 2.5rem;
+  }
+
+  @include mixins.breakpoint-up(large-desktop) {
+    padding-left: var(--outer-margin-lg);
+    padding-right: var(--outer-margin-lg);
+  }
+
+  &.image-left {
+    @include mixins.breakpoint-up(mobile) {
+      .image-50-text-50__figure {
+        grid-column: 1 / span 6;
+        grid-row: 1 / span 1;
+
+        &:after {
+          content: "";
+          left: -1rem;
+        }
+      }
+
+      .image-50-text-50__content {
+        grid-column: 8 / span 5;
+        grid-row: 1 / span 1;
+      }
+    }
+  }
+
+  &.image-right {
+    @include mixins.breakpoint-up(mobile) {
+      .image-50-text-50__figure {
+        grid-column: 7 / span 6;
+        grid-row: 1 / span 1;
+
+        &:after {
+          content: "";
+          right: -1rem;
+        }
+      }
+
+      .image-50-text-50__content {
+        grid-column: 1 / span 5;
+        grid-row: 1 / span 1;
+      }
+    }
+  }
+
+  &__figure {
+    display: grid;
+    gap: 1.5rem;
+    place-items: center;
+    text-align: center;
+    position: relative;
+
+    @include mixins.breakpoint-up(mobile) {
+      &:after {
+        content: "";
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        background: var(--Foundation-Signal-Green, #00d180);
+        bottom: 1.7rem;
+        z-index: -1;
+      }
+    }
+
+    img {
+      box-shadow: 0 0 30px 6px rgba(0, 0, 0, 0.16);
+    }
+  }
+
+  &__caption {
+    color: var(--Foundation-Orchestrated-Green, #063e2d);
+    @include text-styles.text-style("mobile-caption");
+    text-transform: uppercase;
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-caption");
+    }
+  }
+
+  &__content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      padding: 1.5rem 0;
+    }
+
+    p,
+    li,
+    a {
+      color: var(--Foundation-Black, #1e2221);
+      @include text-styles.text-style("mobile-body-large");
+    }
+  }
+}

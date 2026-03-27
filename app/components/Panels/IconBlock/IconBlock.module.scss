@@ -1,0 +1,51 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.icon-block {
+  padding: 3rem 0;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 5rem 0;
+  }
+
+  &__container {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  &__heading {
+    color: var(--Foundation-Orchestrated-Green, #063e2d);
+  }
+
+  &__list {
+    display: grid;
+    gap: 2.5rem;
+    list-style: none;
+
+    @include mixins.breakpoint-up(mobile) {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-item {
+      display: grid;
+      gap: 1rem;
+      max-width: 20rem;
+
+      svg {
+        width: 3.5rem;
+        height: 3.5rem;
+        aspect-ratio: 1/1;
+      }
+
+      h3 {
+        color: var(--Foundation-Orchestrated-Green, #063e2d);
+        @include text-styles.text-style("mobile-h4");
+      }
+
+      p {
+        @include text-styles.text-style("mobile-body-large");
+      }
+    }
+  }
+}

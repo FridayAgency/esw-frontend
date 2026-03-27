@@ -1,0 +1,97 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.resource-downloads {
+  background: var(--Gradient-Greys-1, linear-gradient(90deg, #f2f6f3 26.72%, #beccc5 100%));
+  padding: 3rem 0;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 2.5rem 0;
+    background: none;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+
+    @include mixins.breakpoint-up(mobile) {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-gap: 1.5rem;
+      background: linear-gradient(90deg, #f2f6f3 37.25%, #beccc5 100%);
+      padding: 2rem 0;
+    }
+  }
+
+  &__icon {
+    place-self: end;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 2 / span 2;
+      place-self: start start;
+      width: 7.875rem;
+      height: 7.875rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 4 / span 4;
+    }
+  }
+
+  &__title {
+    color: var(--Foundation-Black, #1e2221);
+    @include text-styles.text-style("mobile-h4");
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-h4");
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0 0 0;
+
+    display: grid;
+    gap: 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      // grid-template-columns: repeat(3, minmax(0, 1fr));
+      // gap: 2.5rem;
+    }
+  }
+
+  &__item {
+    a {
+      display: flex;
+      padding: 1.5rem;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      transition: var(--transition);
+      color: var(--Foundation-Orchestrated-Green, #063e2d);
+      @include text-styles.text-style("mobile-h5");
+      border-bottom: 1px solid var(--Neutral-Soft-Grey, #deebe5);
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-h5");
+      }
+
+      &:hover,
+      &:focus-visible {
+        color: var(--Foundation-Operational-Green, #007a4e);
+        border-bottom: 1px solid var(--Foundation-Signal-Green, #00d180);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--Foundation-Signal-Green, #00d180);
+      }
+    }
+  }
+}

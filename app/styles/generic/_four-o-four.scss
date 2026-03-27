@@ -1,0 +1,75 @@
+/** @format */
+
+@use "mixins";
+@use "text-styles";
+
+.four-o-four {
+  background: var(--Pink);
+
+  .container {
+    position: relative;
+
+    @include mixins.breakpoint-up(mobile) {
+      min-height: calc(100vh - 80px);
+    }
+
+    @include mixins.breakpoint-up(tablet) {
+      min-height: calc(100vh - 494px);
+    }
+  }
+
+  &__content {
+    padding: 7rem 0 12.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include mixins.breakpoint-up(mobile) {
+      padding: 10rem 0 15rem;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    position: relative;
+    margin-bottom: 2.44rem;
+
+    &:after {
+      position: absolute;
+      content: "";
+      background-image: url(/images/frown.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3.70819rem;
+      height: 0.48144rem;
+      bottom: -0.56rem;
+      right: calc(50% - 1.85rem);
+    }
+  }
+
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    &-title {
+    }
+  }
+
+  img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    max-height: 12rem;
+    width: auto;
+    @include mixins.breakpoint-up(mobile) {
+      display: block;
+
+      max-height: 18rem;
+    }
+  }
+}

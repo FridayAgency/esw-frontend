@@ -1,0 +1,34 @@
+@use "@/app/styles/generic/mixins";
+@use "@/app/styles/generic/text-styles";
+
+.latest-news {
+  padding: 2.5rem 0;
+  &__container {
+    row-gap: 2.5rem;
+  }
+
+  &__content {
+    grid-column: 1 / span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 1 / span 12;
+    }
+  }
+
+  &__posts {
+    grid-column: 1 / span 4;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: 1.5rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 1 / span 12;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 1.5rem;
+    }
+  }
+}

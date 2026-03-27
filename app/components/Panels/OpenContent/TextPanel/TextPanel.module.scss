@@ -1,0 +1,30 @@
+@use "@/app/styles/generic/mixins";
+
+.text-panel {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @include mixins.breakpoint-up(mobile) {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  &__content {
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 8;
+    }
+  }
+
+  &__button {
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 4;
+      margin-left: 1.5rem;
+    }
+  }
+}

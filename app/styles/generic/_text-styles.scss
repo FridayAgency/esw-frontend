@@ -1,0 +1,59 @@
+/**
+ * Text Styles from figma *
+ *
+ * @format
+ */
+
+@use "mixins";
+
+// Mixin to generate text style classes
+@mixin text-style($name) {
+  font-family: var(--#{$name}-font-family);
+  font-weight: var(--#{$name}-font-weight);
+  font-size: var(--#{$name}-font-size);
+  line-height: var(--#{$name}-line-height);
+  font-style: var(--#{$name}-font-style);
+}
+
+// List of text styles to generate (from Figma design system)
+$text-styles: (
+  // Desktop heading styles
+  "desktop-stats",
+  "desktop-h1",
+  "desktop-h2",
+  "desktop-h3",
+  "desktop-h4",
+  "desktop-h5",
+  // Mobile heading styles
+  "mobile-stats",
+  "mobile-h1",
+  "mobile-h2",
+  "mobile-h3",
+  "mobile-h4",
+  "mobile-h5",
+  // Desktop body styles
+  "desktop-body-large",
+  "desktop-body-large-bold",
+  "desktop-body-medium",
+  "desktop-body-default",
+  "desktop-body-small",
+  // Desktop utility styles
+  "desktop-caption",
+  "desktop-cta-primary",
+  "desktop-cta-secondary",
+  // Mobile body styles
+  "mobile-body-large",
+  "mobile-body-default",
+  "mobile-body-small",
+  // Mobile utility styles
+  "mobile-caption",
+  "mobile-cta-primary",
+  "mobile-cta-secondary"
+);
+
+// Generate all text style classes
+@each $style in $text-styles {
+  .#{$style} {
+    @include text-style($style);
+  }
+}

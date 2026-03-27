@@ -1,0 +1,121 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.feature-block {
+  transition: background 0.6s ease;
+  position: relative;
+  // The "Left Side" is just the base background
+  background-color: var(--Foundation-Operational-Green, #007a4e);
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%; // Covers exactly half
+    height: 100%;
+
+    // Initial state (Grey)
+    background-color: var(--Neutral-Soft-Grey, #deebe5);
+    transition: background-color 0.4s ease-in-out;
+    z-index: 0;
+  }
+
+  &--triggered {
+    &::after {
+      // Transition state (Signal Green)
+      background-color: var(--Foundation-Signal-Green, #00d180);
+    }
+
+    a,
+    button {
+      span:first-child {
+        background: var(--Foundation-Black, #1e2221);
+        --border-colour: var(--Foundation-Black, #1e2221);
+      }
+    }
+  }
+
+  &__container {
+    display: grid;
+    position: relative;
+    z-index: 1; // Ensure content is above the ::after overlay
+    @include mixins.breakpoint-up(mobile) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__image {
+    background: var(--Foundation-Operational-Green, #007a4e);
+    transition: background 0.6s ease;
+    img {
+      mix-blend-mode: hard-light;
+      height: 17.5rem;
+      aspect-ratio: 75/56;
+      object-position: top;
+
+      @include mixins.breakpoint-up(mobile) {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  &__content {
+    background: var(--Neutral-Soft-Grey, #deebe5);
+    transition:
+      background 0.6s ease,
+      color 0.6s ease;
+    padding: 2rem 1rem;
+    display: grid;
+    gap: 1.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      background: none;
+      padding: 5.06rem var(--outer-margin-md, 1.5rem) 6.06rem 6rem;
+    }
+
+    @include mixins.breakpoint-up(large-desktop) {
+      padding: 5.06rem var(--outer-margin-lg, 9.5rem) 6.06rem 6rem;
+    }
+  }
+
+  &__texture {
+    display: block;
+    width: 3.5rem;
+    height: 0.75rem;
+    background-image: radial-gradient(circle, black 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  &__text {
+    padding: 0 1.5rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  &__subtitle {
+    @include text-styles.text-style("mobile-h5");
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-h5");
+    }
+  }
+
+  &__title {
+    @include text-styles.text-style("mobile-h3");
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-h3");
+    }
+  }
+
+  &__description {
+    @include text-styles.text-style("mobile-body-large");
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-body-large");
+    }
+  }
+}

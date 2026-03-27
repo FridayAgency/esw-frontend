@@ -1,0 +1,8 @@
+# @format
+
+overwrite: true
+schema: ""
+generates:
+  types/graphql.ts:
+    plugins:
+      - "typescript"

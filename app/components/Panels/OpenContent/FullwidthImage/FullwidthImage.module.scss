@@ -1,0 +1,47 @@
+@use "@/app/styles/generic/mixins";
+@use "@/app/styles/generic/text-styles";
+
+.image {
+  @include mixins.breakpoint-up(mobile) {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+
+    padding-left: var(--outer-margin-md);
+    padding-right: var(--outer-margin-md);
+  }
+
+  @include mixins.breakpoint-up(large-desktop) {
+    padding-left: var(--outer-margin-lg);
+    padding-right: var(--outer-margin-lg);
+  }
+
+  &__figure {
+    display: grid;
+    gap: 1.5rem;
+    place-items: center;
+    text-align: center;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 2 / span 10;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0 0 30px 6px rgba(0, 0, 0, 0.16);
+  }
+
+  &__caption {
+    color: var(--Foundation-Orchestrated-Green, #063e2d);
+    @include text-styles.text-style("mobile-caption");
+    text-transform: uppercase;
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-caption");
+    }
+  }
+}

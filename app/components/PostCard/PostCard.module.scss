@@ -1,0 +1,112 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.card {
+  text-decoration: none;
+  background: var(--Foundation-White, #fff);
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+
+  @include mixins.breakpoint-up(mobile) {
+    grid-template-columns: repeat(14, minmax(0, 1fr));
+  }
+
+  &:hover {
+  }
+
+  &__image {
+    position: relative;
+    z-index: 1;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 10 / span 5;
+      grid-row: 1 / span 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    &-wrapper {
+      height: 8.875rem;
+      width: 13.332rem;
+
+      @include mixins.breakpoint-up(mobile) {
+        width: 100%;
+        height: 8.125rem;
+      }
+    }
+  }
+
+  &__content {
+    display: grid;
+    gap: 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 8;
+      grid-row: 1 / span 1;
+      gap: 3.56rem;
+    }
+
+    h3 {
+      color: var(--Foundation-Black, #1e2221);
+      @include text-styles.text-style("mobile-h4");
+    }
+
+    &--header {
+      display: grid;
+      gap: 1rem;
+
+      @include mixins.breakpoint-up(mobile) {
+        gap: 0.75rem;
+      }
+    }
+
+    &--date {
+      color: var(--Foundation-Black, #1e2221);
+      @include text-styles.text-style("mobile-body-small");
+    }
+  }
+
+  &__author {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    &-image {
+      display: block;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--Foundation-Orchestrated-Green, #063e2d);
+      border-radius: 50%;
+    }
+
+    &-name {
+      color: var(--Foundation-Orchestrated-Green, #063e2d);
+
+      @include text-styles.text-style("mobile-h5");
+    }
+  }
+
+  &__read-more {
+    display: none;
+
+    @include mixins.breakpoint-up(mobile) {
+      display: flex;
+      padding: 1rem;
+      align-items: center;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      color: var(--Foundation-Black, #1e2221);
+      @include text-styles.text-style("mobile-cta-primary");
+    }
+
+    &-ellipse {
+      height: 0.5rem;
+      width: 0.5rem;
+      border-radius: 50%;
+      background: var(--Foundation-Signal-Green, #00d180);
+    }
+  }
+}

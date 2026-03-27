@@ -1,0 +1,46 @@
+@use "@/app/styles/generic/mixins";
+@use "@/app/styles/generic/text-styles";
+
+.integrations {
+  padding: 3.75rem 0;
+  background: var(--Neutral-Dark-Grey, #8f9a95);
+  position: relative;
+  box-shadow: 0 0 32px 0 rgba(143, 154, 149, 0.3) inset;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 5.5rem 0;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: calc(50% - 6.25rem);
+    opacity: 0.8;
+    background-image: radial-gradient(circle, var(--Neutral-Mid-Grey) 3px, transparent 3px);
+    background-size: 10px 10px;
+
+    @include mixins.breakpoint-up(mobile) {
+      width: calc(50% - 17rem);
+    }
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__list {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1.5rem;
+    }
+  }
+}

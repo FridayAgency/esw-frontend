@@ -1,0 +1,73 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.stats-block {
+  background: var(--Foundation-Black, #1e2221);
+  padding: 4rem 0;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 6rem 0;
+  }
+
+  &__list {
+    display: grid;
+    gap: 4rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &-item {
+      display: grid;
+      gap: 0.5rem;
+      position: relative;
+      text-align: center;
+      padding: 1rem 1.5rem;
+
+      &:not(:last-child) {
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -2rem;
+          left: calc(50% - 1.5rem);
+          width: 3rem;
+          height: 1px;
+          background: var(--Neutral-Dark-Grey, #8f9a95);
+          opacity: 0.5;
+
+          @include mixins.breakpoint-up(mobile) {
+            display: none;
+          }
+        }
+      }
+
+      &-title {
+        color: var(--Foundation-White, #fff);
+        @include text-styles.text-style("mobile-caption");
+        text-transform: uppercase;
+
+        @include mixins.breakpoint-up(mobile) {
+          @include text-styles.text-style("desktop-caption");
+        }
+      }
+      &-value {
+        color: var(--Foundation-Signal-Green, #00d180);
+        @include text-styles.text-style("mobile-stats");
+        display: block;
+
+        @include mixins.breakpoint-up(mobile) {
+          @include text-styles.text-style("desktop-stats");
+        }
+      }
+
+      &-description {
+        color: var(--Foundation-White, #fff);
+        @include text-styles.text-style("mobile-h5");
+
+        @include mixins.breakpoint-up(mobile) {
+          @include text-styles.text-style("desktop-h5");
+        }
+      }
+    }
+  }
+}

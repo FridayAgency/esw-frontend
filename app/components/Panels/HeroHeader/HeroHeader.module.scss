@@ -1,0 +1,186 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+$article-gradient: linear-gradient(89deg, #9ce533 12.34%, #5dca7f 86.23%);
+$signal-green: var(--Foundation-Signal-Green, #00d180);
+
+.hero-header {
+  position: relative;
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    padding-top: 14.5rem;
+    padding-bottom: 12.2rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      padding-top: 16.5rem;
+      padding-bottom: 22.4rem;
+      gap: 1.5rem;
+    }
+
+    h1 {
+      color: #fff;
+      max-width: 47rem;
+    }
+
+    p {
+      color: #8f9a95;
+      @include text-styles.text-style("mobile-h4");
+      max-width: 47rem;
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-h4");
+      }
+
+      span {
+        color: #fff;
+      }
+    }
+  }
+
+  &__article {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    position: absolute;
+    bottom: -2rem;
+    right: 1rem;
+    left: 1rem;
+    background: #1e2221;
+    text-decoration: none;
+    isolation: isolate;
+    z-index: 3;
+
+    // 1. The initial 3px solid border
+    border: 3px solid var(--Foundation-Signal-Green, #00d180);
+    transition: border-color 0.3s ease;
+
+    @include mixins.breakpoint-up(mobile) {
+      width: fit-content;
+      right: var(--outer-margin-md, 1.5rem);
+      left: unset;
+      max-width: 29.2rem;
+      bottom: -3.75rem;
+    }
+
+    // 2. THE CORNER DOTS
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -0.45rem;
+      background-image:
+        radial-gradient(circle, $signal-green 50%, transparent 50%),
+        radial-gradient(circle, $signal-green 50%, transparent 50%),
+        radial-gradient(circle, $signal-green 50%, transparent 50%),
+        radial-gradient(circle, $signal-green 50%, transparent 50%);
+      background-position:
+        top left,
+        top right,
+        bottom left,
+        bottom right;
+      background-size: 0.75rem 0.75rem;
+      background-repeat: no-repeat;
+      z-index: 5;
+      pointer-events: none;
+      transition: background-image 0.3s ease;
+    }
+
+    // 3. THE GRADIENT OVERLAY (appears on hover)
+    &::after {
+      content: "";
+      position: absolute;
+      // Inset must be negative border-width to cover the original border area
+      inset: -#{3px};
+      padding: #{3px};
+      background: $article-gradient;
+
+      // Mask logic: draws the gradient ONLY in the padding area
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    &:hover {
+      border-color: transparent; // Swap solid for gradient
+
+      &::after {
+        opacity: 1;
+      }
+
+      &::before {
+        background-image:
+          radial-gradient(circle, #9ce533 50%, transparent 50%),
+          // Top Left
+          radial-gradient(circle, #85d852 50%, transparent 50%),
+          // Top Right
+          radial-gradient(circle, #9ce533 50%, transparent 50%),
+          // Bottom Left
+          radial-gradient(circle, #5dca7f 50%, transparent 50%); // Bottom Right
+      }
+    }
+
+    &__category {
+      @include text-styles.text-style("mobile-body-small");
+      width: fit-content;
+      padding: 0.5rem 1.25rem;
+      border-radius: 2rem;
+      background-color: #007a4e;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    &__content {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    &__title {
+      @include text-styles.text-style("mobile-h4");
+      color: #fff;
+      transition: color 0.3s ease;
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-h4");
+      }
+    }
+
+    &__arrow {
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateX(-1rem) translateY(0.44rem);
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+      // Align with the baseline of the text
+    }
+
+    // HOVER TEXT/ICON COLORS
+    &:hover {
+      .hero-header__article__category {
+        background-color: #9ce533;
+        color: #1e2221;
+      }
+      .hero-header__article__title {
+        background: $article-gradient;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-header__article__arrow {
+        opacity: 1;
+        transform: translateX(0) translateY(0.44rem);
+      }
+    }
+  }
+}

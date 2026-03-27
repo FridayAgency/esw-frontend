@@ -1,0 +1,62 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.accordion {
+  width: 100%;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e0e0e0;
+
+  &:first-child {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  &__trigger {
+    // // @extend.secondary-copy-bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+    gap: 2rem;
+    // align-items: center;
+    text-decoration: none;
+    border-bottom: 1px solid var(--blue-200, #d5dfea);
+    padding: 1rem 0.75rem;
+    color: var(--blue-brand, #003f87);
+    transition: var(--transition);
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--blue-100, #e8eef4);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--blue-500, #003f87);
+    }
+
+    svg {
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    &.open svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  &__inner {
+    border-top: 1px solid var(--blue-200, #d5dfea);
+    padding: 2rem 1rem;
+    background: var(--silver-50, #f8f8f8);
+  }
+}

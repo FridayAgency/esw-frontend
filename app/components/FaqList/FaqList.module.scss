@@ -1,0 +1,37 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include mixins.breakpoint-up(mobile) {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  &__heading {
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 6;
+      grid-row: 1 / span 1;
+    }
+  }
+
+  &__list {
+    list-style: none;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 7 / span 6;
+      grid-row: 1 / span 2;
+    }
+  }
+
+  &__cta {
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 6;
+      grid-row: 2 / span 1;
+    }
+  }
+}

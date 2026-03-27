@@ -1,0 +1,16 @@
+@use "@/app/styles/generic/mixins";
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: var(--white);
+  z-index: 1000;
+
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.06);
+
+  @include mixins.breakpoint-up(mobile) {
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
+  }
+}

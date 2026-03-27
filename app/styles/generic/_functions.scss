@@ -1,0 +1,18 @@
+/** @format */
+
+@use "sass:map";
+@function breakpoint-min($name, $breakpoints: $breakpoints) {
+  $min: map.get($breakpoints, $name);
+  @if $min != 0 {
+    @return $min + 0.02px;
+  }
+  @return null;
+}
+
+@function breakpoint-max($name, $breakpoints: $breakpoints) {
+  $max: map.get($breakpoints, $name);
+  @if $max != 0 {
+    @return $max;
+  }
+  @return null;
+}

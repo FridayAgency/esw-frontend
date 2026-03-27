@@ -1,0 +1,238 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.footer {
+  background: var(--blue-brand, #003f87);
+
+  &__container {
+    padding: 4rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    color: var(--blue-100);
+
+    @include mixins.breakpoint-up(mobile) {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include mixins.breakpoint-up(tablet) {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    h2 {
+      width: 100%;
+      // // @extend.primary-h6;
+      padding-bottom: 0.75rem;
+      text-transform: uppercase;
+      position: relative;
+
+      @include mixins.breakpoint-up(mobile) {
+        width: fit-content;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--green);
+      }
+    }
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      padding: 0 4.2rem 0 1rem;
+    }
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    @include mixins.breakpoint-up(tablet) {
+      padding: 0 1rem;
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    &-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: var(--blue-100);
+        transition: color 0.2s;
+        // // @extend.primary-copy-bold;
+
+        svg {
+          path {
+            fill: var(--blue-100, #d5dfea);
+          }
+        }
+
+        &:hover,
+        &:focus-visible {
+          color: var(--green-light, #7bdb40);
+
+          svg {
+            path {
+              fill: var(--green-light, #7bdb40);
+            }
+          }
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--green-light, #7bdb40);
+          outline-offset: 2px;
+        }
+      }
+    }
+
+    &-socials {
+      display: flex;
+      align-items: center;
+      gap: 2.56rem;
+      list-style: none;
+
+      a {
+        svg {
+          path {
+            fill: var(--blue-200, #d5dfea);
+          }
+        }
+
+        &:hover,
+        &:focus-visible {
+          svg {
+            path {
+              fill: var(--green-light, #7bdb40);
+            }
+          }
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--green-light, #7bdb40);
+          outline-offset: 2px;
+        }
+      }
+    }
+
+    &-cta {
+      a {
+        width: 100%;
+
+        @include mixins.breakpoint-up(mobile) {
+          width: fit-content;
+        }
+      }
+    }
+  }
+
+  &__account {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    @include mixins.breakpoint-up(tablet) {
+      padding: 0 1rem;
+    }
+
+    a {
+      color: var(--blue-200);
+      transition: color 0.2s;
+      // // @extend.secondary-h6;
+      text-decoration: none;
+      display: flex;
+      gap: 0.38rem;
+
+      svg {
+        path {
+          fill: var(--blue-100, #d5dfea);
+        }
+      }
+
+      &:hover,
+      &:focus-visible {
+        color: var(--green-light, #7bdb40);
+
+        svg {
+          path {
+            fill: var(--green-light, #7bdb40);
+          }
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--green-light, #7bdb40);
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    @include mixins.breakpoint-up(tablet) {
+      padding: 0 1rem;
+    }
+
+    &-menus {
+      ul {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 1rem;
+        column-gap: 1.5rem;
+        transition: color 0.2s ease-in-out;
+
+        @include mixins.breakpoint-up(tablet) {
+          grid-template-columns: 1fr;
+        }
+
+        a {
+          color: var(--blue-200, #d5dfea);
+          // // @extend.secondary-caption;
+          text-decoration: none;
+
+          &:hover,
+          &:focus-visible {
+            color: var(--green-light, #7bdb40);
+          }
+
+          &:focus-visible {
+            outline: 2px solid var(--green-light, #7bdb40);
+            outline-offset: 2px;
+          }
+        }
+      }
+    }
+  }
+
+  &__copyright {
+    text-align: center;
+    background: var(--blue-dark);
+    padding: 1rem 0;
+    // // @extend.primary-copy;
+    color: var(--blue-200);
+  }
+}

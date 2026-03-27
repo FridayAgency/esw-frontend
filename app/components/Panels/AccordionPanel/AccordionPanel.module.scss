@@ -1,0 +1,9 @@
+@use "@/app/styles/generic/mixins";
+
+.accordion-panel {
+  padding: 2.5rem 0;
+
+  @include mixins.breakpoint-up(tablet) {
+    padding: 5rem 0;
+  }
+}

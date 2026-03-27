@@ -1,0 +1,57 @@
+@use "@/app/styles/generic/mixins";
+@use "@/app/styles/generic/text-styles";
+
+.integration {
+  display: block;
+  background: var(--Foundation-White, #fff);
+  box-shadow: 0 0 30px 6px rgba(0, 0, 0, 0.16);
+  padding: 1rem 0.5rem;
+  text-decoration: none;
+  display: flex;
+  gap: 1rem;
+
+  @include mixins.breakpoint-up(mobile) {
+    gap: 2.5rem;
+  }
+
+  &__image {
+    border: 2px solid var(--Neutral-Soft-Grey, #deebe5);
+    width: 5.5rem;
+    height: 4.3rem;
+    flex-shrink: 0;
+
+    @include mixins.breakpoint-up(mobile) {
+      width: 11rem;
+      height: 9.51931rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    @include mixins.breakpoint-up(mobile) {
+      justify-content: space-between;
+    }
+
+    h3 {
+      @include text-styles.text-style("mobile-h4");
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-h4");
+      }
+    }
+
+    svg {
+      place-self: flex-end;
+    }
+  }
+
+  &__text {
+    @include mixins.breakpoint-up(mobile) {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+}

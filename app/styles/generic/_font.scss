@@ -1,0 +1,124 @@
+/** @format */
+
+/**
+ * 1. Typography
+ */
+
+@use "text-styles" as *;
+@use "mixins";
+
+html,
+body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-body);
+  font-size: var(--font-base-size);
+  line-height: 140%;
+  font-style: normal;
+  color: var(--Foundation-Black, #1e2221);
+
+  b,
+  strong {
+    font-weight: var(--font-body-bold-weight);
+  }
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: var(--font-body);
+  font-style: normal;
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+p,
+li {
+  widows: 2;
+  orphans: 2;
+  // text-wrap: balance;
+}
+
+p {
+  color: var(--Foundation-Black, #1e2221);
+
+  b,
+  strong {
+    font-weight: 600;
+  }
+}
+
+a {
+  color: var(--Foundation-Operational-Green, #007a4e);
+  transition: color 0.3s ease;
+
+  &:focus {
+    color: inherit;
+  }
+
+  &:hover {
+    color: var(--Foundation-Orchestrated-Green, #063e2d);
+  }
+
+  &:focus-visible {
+    outline: 4px solid var(--Foundation-Operational-Green, #007a4e);
+
+    border-radius: 0.25rem;
+    outline-offset: 0.25rem;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--Foundation-Black, #1e2221);
+}
+
+h1 {
+  @include text-style("mobile-h1");
+
+  @include mixins.breakpoint-up(mobile) {
+    @include text-style("desktop-h1");
+  }
+}
+
+h2 {
+  @include text-style("mobile-h2");
+  @include mixins.breakpoint-up(mobile) {
+    @include text-style("desktop-h2");
+  }
+}
+h3 {
+  @include text-style("mobile-h3");
+  @include mixins.breakpoint-up(mobile) {
+    @include text-style("desktop-h3");
+  }
+}
+h4 {
+  @include text-style("mobile-h4");
+  @include mixins.breakpoint-up(mobile) {
+    @include text-style("desktop-h4");
+  }
+}
+h5 {
+  @include text-style("mobile-h5");
+  @include mixins.breakpoint-up(mobile) {
+    @include text-style("desktop-h5");
+  }
+}
+h6 {
+  @include text-style("mobile-h6");
+  @include mixins.breakpoint-up(mobile) {
+    @include text-style("desktop-h6");
+  }
+}

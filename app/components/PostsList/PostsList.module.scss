@@ -1,0 +1,157 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.posts {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.7rem;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-search {
+      position: relative;
+      input {
+        border: 1px solid var(--neutrals-black);
+
+        padding: 0.75rem;
+
+        color: var(--neutrals-black);
+        position: relative;
+
+        &::placeholder {
+          color: var(--neutrals-black);
+        }
+      }
+
+      button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0.75rem;
+        background: none;
+        border: none;
+      }
+    }
+
+    &-sort {
+      position: relative;
+      select {
+        border-radius: 0.375rem;
+        padding: 1rem;
+        border: none;
+        color: var(--neutrals-black);
+        background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20fill%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20d%3D%27M13.5675%201.06754L7.31754%207.31754C7.25949%207.37565%207.19056%207.42175%207.11469%207.4532C7.03881%207.48465%206.95748%207.50084%206.87535%207.50084C6.79321%207.50084%206.71188%207.48465%206.63601%207.4532C6.56014%207.42175%206.49121%207.37565%206.43316%207.31754L0.18316%201.06754C0.0658846%200.95026%200%200.7912%200%200.625347C0%200.459495%200.0658846%200.300435%200.18316%200.18316C0.300435%200.0658843%200.459495%200%200.625347%200C0.7912%200%200.95026%200.0658843%201.06753%200.18316L6.87535%205.99175L12.6832%200.18316C12.7412%200.125091%2012.8102%200.0790281%2012.886%200.0476015C12.9619%200.0161748%2013.0432%200%2013.1253%200C13.2075%200%2013.2888%200.0161748%2013.3647%200.0476015C13.4405%200.0790281%2013.5095%200.125091%2013.5675%200.18316C13.6256%200.241229%2013.6717%200.310167%2013.7031%200.386037C13.7345%200.461908%2013.7507%200.543226%2013.7507%200.625347C13.7507%200.707469%2013.7345%200.788787%2013.7031%200.864658C13.6717%200.940528%2013.6256%201.00947%2013.5675%201.06754Z%27%20fill%3D%27%23345478%27/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 0.875rem;
+        padding-right: 2.5rem;
+        font-family: inherit;
+        appearance: none;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.69rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1.56rem;
+      row-gap: 2.69rem;
+    }
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--blue-500, #5a7798);
+
+    p {
+      // @extend.primary-copy;
+    }
+  }
+
+  &__categories {
+    ul {
+      list-style: none;
+      margin: 0 0 1rem 0;
+      padding: 0;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    li {
+      a {
+        display: inline-block;
+        padding: 0.4rem 0.75rem;
+        border-radius: 0.375rem;
+        background: var(--off-white, #f6f8fb);
+        color: var(--blue-brand, #003f87);
+        text-decoration: none;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__pagination {
+    &-pages {
+      display: flex;
+      gap: 0.38rem;
+    }
+
+    button {
+      padding: 1rem;
+
+      color: var(--neutrals-black);
+      border: 1px solid var(--neutrals-black);
+      background: var(--neutrals-white);
+
+      @include mixins.breakpoint-up(tablet) {
+        padding: 1rem 1.5rem;
+      }
+
+      &:hover,
+      &:focus-visible {
+        background: var(--neutrals-black);
+        border-color: var(--neutrals-black);
+      }
+
+      &:focus-visible {
+        outline: 3px solid var(--neutrals-black);
+        outline-offset: 2px;
+      }
+
+      &.active {
+        background: var(--neutrals-black);
+        color: var(--neutrals-white);
+        border-color: var(--neutrals-black);
+        pointer-events: none;
+      }
+
+      &:disabled {
+        color: var(--blue-200);
+        background: var(--neutrals-white);
+        cursor: default;
+      }
+    }
+  }
+}

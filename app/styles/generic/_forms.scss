@@ -1,0 +1,203 @@
+/**
+ * FORM BASE STYLES
+ *
+ * @format
+ */
+
+@use "mixins";
+@use "text-styles";
+
+select {
+  cursor: pointer;
+  appearance: none;
+  /* stylelint-disable function-url-scheme-allowed-list */
+  background-image: url(/images/select.svg);
+  /* stylelint-enable function-url-scheme-allowed-list */
+  background-size: 1rem 1rem;
+  background-repeat: no-repeat;
+  background-position: center right 1rem;
+  position: relative;
+}
+
+.gravityform {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--White, #fff);
+
+  padding: 1.5rem;
+  height: 100%;
+
+  @include mixins.breakpoint-up(tablet) {
+    padding: 2.5rem;
+  }
+
+  @include mixins.breakpoint-up(tablet) {
+    gap: 2rem;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    h2 {
+    }
+    p {
+      color: var(--Grey-9, #616161);
+    }
+  }
+
+  .gfield {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    input,
+    textarea {
+      border-radius: 0.5rem;
+      background: var(--Grey-10);
+      color: var(--Grey-9, #616161);
+      border: none;
+      padding: 1rem;
+
+      &:focus-visible {
+        outline: 2px solid var(--Black);
+      }
+
+      &.error {
+        border: 2px solid var(--Error);
+      }
+    }
+
+    textarea {
+      min-height: 10rem;
+    }
+  }
+
+  .gform-honey {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    z-index: -1;
+  }
+
+  .gfield-checkbox {
+    border: none;
+
+    &.privacy {
+      .fieldset-inputs {
+        grid-template-columns: 1fr;
+
+        label {
+          color: var(--brand-smoke-200, #5c5a5c);
+        }
+      }
+    }
+
+    .checkbox {
+      display: flex;
+      justify-content: flex-start;
+
+      gap: 0.5rem;
+      input {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 0.25rem;
+
+        background: var(--White, #fff);
+        margin-top: 0.25rem;
+
+        &:focus-visible {
+          outline: 2px solid var(--Black);
+        }
+
+        &.error {
+          box-shadow: 0px 0px 0px 1px var(--Error);
+        }
+      }
+
+      &.privacy {
+        align-items: flex-start;
+        input {
+          margin-top: 0.35rem;
+        }
+      }
+
+      label {
+        color: var(--Grey-9, #616161);
+
+        a {
+          color: var(--Red);
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+
+    .field-description {
+      display: none;
+    }
+
+    // .fieldset-inputs {
+    //   display: grid;
+    //   grid-template-columns: repeat(2, minmax(0, 1fr));
+    //   column-gap: 1.5rem;
+    //   row-gap: 1rem;
+    // }
+  }
+
+  .gform-submit {
+    button {
+      width: 100%;
+    }
+    @include mixins.breakpoint-up(tablet) {
+      width: fit-content;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      row-gap: 2rem;
+    }
+  }
+
+  label {
+    color: var(--Black, #262626);
+  }
+
+  .error-message {
+    color: #bf0000;
+    font-size: 13px;
+    width: 100%;
+  }
+}
+
+.thanks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--White, #fff);
+  padding: 1.5rem;
+
+  @include mixins.breakpoint-up(tablet) {
+    padding: 2.5rem;
+    gap: 2rem;
+  }
+
+  h2 {
+    padding-bottom: 0.5rem;
+  }
+}

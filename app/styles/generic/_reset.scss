@@ -1,0 +1,291 @@
+/**
+ * ------------------------------------------------------------ *\
+ * 	Reset
+ * \* ------------------------------------------------------------
+ *
+ * @format
+ */
+
+@use "mixins";
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+main {
+  display: block;
+}
+
+template {
+  display: none;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-size-adjust: none;
+  font-size: var(--font-base-size);
+  background: var(--White);
+}
+
+img,
+iframe,
+video,
+audio,
+object {
+  max-width: 100%;
+}
+
+img,
+iframe {
+  border: 0 none;
+}
+
+img {
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+address {
+  font-style: normal;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+a,
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+input[type="file"],
+input[type="image"],
+label[for] {
+  cursor: pointer;
+}
+
+button[disabled],
+input[disabled],
+textarea[disabled],
+select[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="color"],
+textarea,
+a[href^="tel"] {
+  appearance: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  appearance: none;
+}
+
+textarea {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+nav ul,
+nav ol {
+  list-style: none outside none;
+}
+
+input::placeholder {
+  color: inherit;
+  opacity: 1;
+}
+textarea::placeholder {
+  color: inherit;
+  opacity: 1;
+}
+
+// input:-webkit-autofill {
+// 	-webkit-text-fill-color: inherit;
+// 	-webkit-box-shadow: 0 0 0 1000px #fff inset;
+// }
+
+input[type="text"],
+input[type="button"],
+input[type="tel"],
+input[type="email"],
+input[type="submit"],
+input[type="date"],
+input[type="search"],
+textarea {
+  appearance: none;
+}
+
+// p {
+//   margin-bottom: 1.5rem;
+// }
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+.wp-caption {
+  max-width: 300px;
+  text-align: center;
+  margin: 0 auto;
+
+  @include mixins.breakpoint-up(mobile) {
+    max-width: 100%;
+  }
+}
+
+.wp-caption-text {
+  color: var(--Black, #262626);
+  font-family: proxima-nova;
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 160%; /* 1.4rem */
+  opacity: 0.9;
+}
+
+.wp-video {
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  @include mixins.breakpoint-up(mobile) {
+    max-width: 100%;
+  }
+  video {
+    height: 200px;
+
+    @include mixins.breakpoint-up(mobile) {
+      height: auto;
+    }
+  }
+}
+
+.youtube-responsive-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+img.aligncenter {
+  display: block;
+  margin: 40px auto 50px !important;
+}
+
+img.alignright {
+  float: right;
+  margin: 10px auto 20px 10px !important;
+}
+
+/** COOKIE YES **/
+
+.cky-consent-container {
+  @include mixins.breakpoint-up(mobile) {
+    bottom: calc(50% - 105px) !important;
+    left: calc(50% - 220px) !important;
+  }
+}
+
+.dot-texture {
+  // /* Dark background to make the white dots pop */
+  // background-color: #121212;
+
+  /* Create a 1px white circle */
+  background-image: radial-gradient(circle, black 0.5px, transparent 0.5px);
+
+  /* Control the density (e.g., dots every 24px) */
+  background-size: 2px 2px;
+}
