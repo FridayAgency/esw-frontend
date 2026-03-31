@@ -1,131 +1,229 @@
-import { GET_FOOTER_DATA } from "@/data/fragments";
-import client from "@/lib/client";
-import { CompanyInformation, Menu, SocialMediaUrLs } from "@/types/graphql";
 import Container from "../Container";
 
 import styles from "./Footer.module.scss";
+import Logo from "../Logo";
 import Icon from "../Icon";
-import Button from "../Button";
-import { LogoWhite } from "../Logo";
-
-interface FooterData {
-  companyInformation: CompanyInformation;
-  socialMediaURLs: SocialMediaUrLs;
-  footerMenu: Menu;
-
-  mainMenu: Menu;
-}
 
 const Footer: React.FC = async () => {
-  const { companyInformation, socialMediaURLs, footerMenu, mainMenu } = await client.query<FooterData>(GET_FOOTER_DATA);
-
   return (
     <footer className={styles.footer}>
       <Container className={styles["footer__container"]}>
-        <div className={styles["footer__menu"]}>
-          <h2>Menu</h2>
-        </div>
-
-        <div className={styles["footer__contact"]}>
-          <div className={styles["footer__contact-info"]}>
-            <h2>Contact Us</h2>
-            <ul className={styles["footer__contact-links"]}>
-              <li>
-                <a href={`mailto:${companyInformation?.companyInfo?.email}`}>
-                  {companyInformation?.companyInfo?.email}
+        <div className={styles["footer__header"]}>
+          <Logo />
+          <div className={styles["footer__actions-mobile"]}>
+            <button type="button" className={styles["footer__cta"]}>
+              Talk to Us
+            </button>
+            <ul className={styles["footer__socials"]}>
+              <li className={styles["footer__socials-item"]}>
+                <a href="#" aria-label="LinkedIn">
+                  <Icon type="linkedIn" />
                 </a>
               </li>
-              <li>
-                <a href={`tel:${companyInformation?.companyInfo?.phoneNumber}`}>
-                  {companyInformation?.companyInfo?.phoneNumber}
+              <li className={styles["footer__socials-item"]}>
+                <a href="#" aria-label="Vimeo">
+                  <Icon type="vimeo" />
+                </a>
+              </li>
+              <li className={styles["footer__socials-item"]}>
+                <a href="#" aria-label="Instagram">
+                  <Icon type="instagram" />
                 </a>
               </li>
             </ul>
           </div>
+        </div>
 
-          <div>
-            <ul className={styles["footer__contact-socials"]}>
-              {socialMediaURLs?.socialMediaTags?.xTag && (
-                <li>
-                  <a
-                    href={socialMediaURLs?.socialMediaTags?.xTag}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X"
-                  >
-                    {" "}
-                    <Icon type="x" />{" "}
-                  </a>{" "}
-                </li>
-              )}
-              {socialMediaURLs?.socialMediaTags?.linkedinTag && (
-                <li>
-                  <a
-                    href={socialMediaURLs?.socialMediaTags?.linkedinTag}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                  >
-                    <Icon type="linkedIn" />
-                  </a>
-                </li>
-              )}
-              {socialMediaURLs?.socialMediaTags?.facebookTag && (
-                <li>
-                  <a
-                    href={socialMediaURLs?.socialMediaTags?.facebookTag}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Facebook"
-                  >
-                    <Icon type="facebook" />
-                  </a>
-                </li>
-              )}
+        <nav className={styles["footer__nav"]} aria-label="Footer navigation">
+          <div className={styles["footer__nav-group"]}>
+            <h2 className={styles["footer__nav-heading"]}>Why ESW</h2>
+            <ul className={styles["footer__nav-list"]}>
+              <li className={styles["footer__nav-item"]}>
+                <a href="#">Why Choose ESW</a>
+              </li>
+              <li className={styles["footer__nav-item"]}>
+                <a href="#">About the Company</a>
+              </li>
+              <li className={styles["footer__nav-item"]}>
+                <a href="#">Customer Success Stories</a>
+              </li>
             </ul>
           </div>
 
-          <div className={styles["footer__contact-cta"]}>
-            <Button href="/quick-quote" colour="green">
-              Get A Quick Quote
-            </Button>
-          </div>
-        </div>
-
-        <div className={styles["footer__account"]}>
-          <h2>My account</h2>
-          <a
-            href={companyInformation?.companyInfo?.myCapitalFlowLink?.url || "#"}
-            target={companyInformation?.companyInfo?.myCapitalFlowLink?.target || "_self"}
-            rel={
-              companyInformation?.companyInfo?.myCapitalFlowLink?.target === "_blank"
-                ? "noopener noreferrer"
-                : undefined
-            }
-          >
-            {companyInformation?.companyInfo?.myCapitalFlowLink?.title}
-          </a>
-        </div>
-
-        <div className={styles["footer__logo"]}>
-          <LogoWhite />
-
-          <div className={styles["footer__logo-menus"]}>
-            {footerMenu?.menuItems?.edges?.length && (
-              <ul className={styles["footer__menu-upper"]}>
-                {footerMenu.menuItems.edges.map((item: any) => (
-                  <li key={item.node.id}>
-                    <a href={item.node.uri || "#"}>{item.node.label}</a>
-                  </li>
-                ))}
+          <div className={styles["footer__nav-group"]}>
+            <div className={styles["footer__nav-sub-group"]}>
+              <h2 className={styles["footer__nav-heading"]}>Platform</h2>
+              <ul className={styles["footer__nav-list"]}>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Platform Overview</a>
+                </li>
               </ul>
-            )}
+            </div>
+            <div className={styles["footer__nav-sub-group"]}>
+              <h3 className={styles["footer__nav-subheading"]}>Products</h3>
+              <ul className={styles["footer__nav-list"]}>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Global Checkout</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Worldwide Omnichannel</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Agentic Commerce</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Commerce Platform Connectors</a>
+                </li>
+              </ul>
+            </div>
+            <div className={styles["footer__nav-sub-group"]}>
+              <h3 className={styles["footer__nav-subheading"]}>Services</h3>
+              <ul className={styles["footer__nav-list"]}>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Merchant of Record</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Growth Services</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Customer Services</a>
+                </li>
+              </ul>
+            </div>
+            <div className={styles["footer__nav-sub-group"]}>
+              <h3 className={styles["footer__nav-subheading"]}>Ecosystem</h3>
+              <ul className={styles["footer__nav-list"]}>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Global Logistics Infrastructure</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Partner Ecosystem</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Partner Integrations</a>
+                </li>
+              </ul>
+            </div>
           </div>
+
+          <div className={styles["footer__nav-group"]}>
+            <h2 className={styles["footer__nav-heading"]}>Solutions</h2>
+            <div className={styles["footer__nav-sub-group"]}>
+              <h3 className={styles["footer__nav-subheading"]}>Use Cases</h3>
+              <ul className={styles["footer__nav-list"]}>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">New Market Launch</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Consolidate Global Commerce Stack</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Improve International Margin</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Simplify Global Operations</a>
+                </li>
+              </ul>
+            </div>
+            <div className={styles["footer__nav-sub-group"]}>
+              <h3 className={styles["footer__nav-subheading"]}>Role</h3>
+              <ul className={styles["footer__nav-list"]}>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Ecommerce</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Operations</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Finance</a>
+                </li>
+              </ul>
+            </div>
+            <div className={styles["footer__nav-sub-group"]}>
+              <h3 className={styles["footer__nav-subheading"]}>Industries</h3>
+              <ul className={styles["footer__nav-list"]}>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Fashion &amp; Apparel</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Luxury</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Beauty</a>
+                </li>
+                <li className={styles["footer__nav-item"]}>
+                  <a href="#">Consumer Electronics</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className={styles["footer__nav-group"]}>
+            <ul className={styles["footer__nav-list-secondary"]}>
+              <li className={styles["footer__nav-item"]}>
+                <a href="#">Resources</a>
+              </li>
+              <li className={styles["footer__nav-item"]}>
+                <a href="#">Careers</a>
+              </li>
+              <li className={styles["footer__nav-item"]}>
+                <a href="#">Blog</a>
+              </li>
+              <li className={styles["footer__nav-item"]}>
+                <a href="#">Newsroom</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <div className={styles["footer__actions-desktop"]}>
+          <button type="button" className={styles["footer__cta"]}>
+            Talk to Us
+          </button>
+          <ul className={styles["footer__socials"]}>
+            <li className={styles["footer__socials-item"]}>
+              <a href="#" aria-label="LinkedIn">
+                <Icon type="linkedIn" />
+              </a>
+            </li>
+            <li className={styles["footer__socials-item"]}>
+              <a href="#" aria-label="Vimeo">
+                <Icon type="vimeo" />
+              </a>
+            </li>
+            <li className={styles["footer__socials-item"]}>
+              <a href="#" aria-label="Instagram">
+                <Icon type="instagram" />
+              </a>
+            </li>
+          </ul>
         </div>
+
+        <nav className={styles["footer__legal"]} aria-label="Legal">
+          <ul className={styles["footer__legal-list"]}>
+            <li className={styles["footer__legal-item"]}>
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li className={styles["footer__legal-item"]}>
+              <a href="#">Cookie Settings</a>
+            </li>
+            <li className={styles["footer__legal-item"]}>
+              <a href="#">Terms &amp; Conditions</a>
+            </li>
+            <li className={styles["footer__legal-item"]}>
+              <a href="#">Acceptable Use Policy</a>
+            </li>
+            <li className={styles["footer__legal-item"]}>
+              <a href="#">Modern Slavery Statement</a>
+            </li>
+            <li className={styles["footer__legal-item"]}>
+              <a href="#">Sitemap</a>
+            </li>
+          </ul>
+        </nav>
       </Container>
-      <div className={styles["footer__copyright"]}>
-        <p>© {new Date().getFullYear()} Capitalflow</p>
-      </div>
+
+      <div className={styles["footer__copyright"]}>&copy; {new Date().getFullYear()} ESW</div>
     </footer>
   );
 };

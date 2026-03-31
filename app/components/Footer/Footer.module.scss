@@ -2,237 +2,220 @@
 @use "@/app/styles/generic/mixins";
 
 .footer {
-  background: var(--blue-brand, #003f87);
+  background: var(--Foundation-Black, #1e2221);
+  box-shadow: 0 4px 12px 0 rgba(255, 255, 255, 0.07);
+
+  a {
+    text-decoration: none;
+  }
 
   &__container {
-    padding: 4rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    color: var(--blue-100);
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
 
     @include mixins.breakpoint-up(mobile) {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 6.5rem 0 0;
+      grid-template-columns: auto repeat(12, minmax(0, 1fr)) auto;
+      gap: 0;
     }
 
     @include mixins.breakpoint-up(tablet) {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
-
-    h2 {
-      width: 100%;
-      // // @extend.primary-h6;
-      padding-bottom: 0.75rem;
-      text-transform: uppercase;
-      position: relative;
-
-      @include mixins.breakpoint-up(mobile) {
-        width: fit-content;
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: var(--green);
-      }
+      grid-template-columns: 9.5rem repeat(12, minmax(0, 1fr)) 9.5rem;
     }
   }
 
-  &__menu {
+  &__header {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3.5rem;
 
-    @include mixins.breakpoint-up(tablet) {
-      padding: 0 4.2rem 0 1rem;
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 1;
+      justify-content: flex-start;
+      padding: 0 1.5rem;
     }
   }
 
-  &__contact {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    @include mixins.breakpoint-up(tablet) {
-      padding: 0 1rem;
-    }
-
-    &-info {
+  &__actions {
+    &-mobile {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.4rem;
+
+      @include mixins.breakpoint-up(tablet) {
+        display: none;
+      }
     }
 
-    &-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
+    &-desktop {
+      display: none;
 
-      a {
+      @include mixins.breakpoint-up(tablet) {
         display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-decoration: none;
-        color: var(--blue-100);
-        transition: color 0.2s;
-        // // @extend.primary-copy-bold;
-
-        svg {
-          path {
-            fill: var(--blue-100, #d5dfea);
-          }
-        }
-
-        &:hover,
-        &:focus-visible {
-          color: var(--green-light, #7bdb40);
-
-          svg {
-            path {
-              fill: var(--green-light, #7bdb40);
-            }
-          }
-        }
-
-        &:focus-visible {
-          outline: 2px solid var(--green-light, #7bdb40);
-          outline-offset: 2px;
-        }
+        flex-direction: column;
+        gap: 1.4rem;
+        grid-column: 12 / span 2;
       }
     }
+  }
 
-    &-socials {
-      display: flex;
-      align-items: center;
-      gap: 2.56rem;
-      list-style: none;
+  &__cta {
+    border-radius: 2rem;
+    background: var(--Emphasis-Lime, #9ce533);
+    display: flex;
+    padding: 0.625rem 0.5rem 0.5625rem 0.5625rem;
+    justify-content: center;
+    align-items: center;
+    color: var(--Foundation-Black, #1e2221);
+    text-align: center;
+    @include text-styles.text-style("desktop-body-large-bold");
+    min-width: 10.2rem;
+  }
 
-      a {
+  &__socials {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0.4rem;
+
+    &-item {
+      width: 3.1135rem;
+      height: 3.1135rem;
+      aspect-ratio: 1/1;
+
+      &:hover {
         svg {
           path {
-            fill: var(--blue-200, #d5dfea);
+            fill: var(--Emphasis-Lime, #9ce533);
           }
-        }
-
-        &:hover,
-        &:focus-visible {
-          svg {
-            path {
-              fill: var(--green-light, #7bdb40);
-            }
-          }
-        }
-
-        &:focus-visible {
-          outline: 2px solid var(--green-light, #7bdb40);
-          outline-offset: 2px;
-        }
-      }
-    }
-
-    &-cta {
-      a {
-        width: 100%;
-
-        @include mixins.breakpoint-up(mobile) {
-          width: fit-content;
         }
       }
     }
   }
 
-  &__account {
+  &__nav {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    @include mixins.breakpoint-up(tablet) {
-      padding: 0 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-column: 2 / span 13;
+      padding-bottom: 4rem;
     }
 
-    a {
-      color: var(--blue-200);
-      transition: color 0.2s;
-      // // @extend.secondary-h6;
-      text-decoration: none;
-      display: flex;
-      gap: 0.38rem;
-
-      svg {
-        path {
-          fill: var(--blue-100, #d5dfea);
-        }
-      }
-
-      &:hover,
-      &:focus-visible {
-        color: var(--green-light, #7bdb40);
-
-        svg {
-          path {
-            fill: var(--green-light, #7bdb40);
-          }
-        }
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--green-light, #7bdb40);
-        outline-offset: 2px;
-      }
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 2 / span 10;
+      padding: 0 1.5rem 4rem;
     }
   }
 
-  &__logo {
+  &__nav-group {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    @include mixins.breakpoint-up(tablet) {
-      padding: 0 1rem;
-    }
+    gap: 1rem;
+  }
 
-    &-menus {
-      ul {
-        list-style: none;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        row-gap: 1rem;
-        column-gap: 1.5rem;
-        transition: color 0.2s ease-in-out;
+  &__nav-heading {
+    color: var(--Foundation-White, #fff);
+    @include text-styles.text-style("mobile-body-default");
+  }
 
-        @include mixins.breakpoint-up(tablet) {
-          grid-template-columns: 1fr;
-        }
+  &__nav-sub-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
+  &__nav-subheading {
+    color: var(--Foundation-White, #fff);
+    @include text-styles.text-style("mobile-body-default");
+  }
+
+  &__nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    &-secondary {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .footer__nav-item {
         a {
-          color: var(--blue-200, #d5dfea);
-          // // @extend.secondary-caption;
-          text-decoration: none;
-
-          &:hover,
-          &:focus-visible {
-            color: var(--green-light, #7bdb40);
-          }
-
-          &:focus-visible {
-            outline: 2px solid var(--green-light, #7bdb40);
-            outline-offset: 2px;
-          }
+          color: var(--Foundation-White, #fff);
+          @include text-styles.text-style("mobile-body-default");
         }
       }
+    }
+  }
+
+  &__nav-item {
+    a {
+      color: var(--Neutral-Mid-Grey, #beccc5);
+      @include text-styles.text-style("mobile-body-default");
+    }
+  }
+
+  &__legal {
+    padding-top: 2rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 14;
+      background: var(--Foundation-Black, #1e2221);
+      box-shadow:
+        0 4px 12px 0 rgba(255, 255, 255, 0.07),
+        0 2px 6px 2px rgba(0, 0, 0, 0.15);
+      padding: 0.94rem 0;
+    }
+  }
+
+  &__legal-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      flex-direction: row;
+      column-gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      row-gap: 0.5rem;
+    }
+  }
+
+  &__legal-item {
+    a {
+      color: var(--Foundation-Commerce-Canvas, #f2f6f3);
+      @include text-styles.text-style("mobile-body-default");
     }
   }
 
   &__copyright {
-    text-align: center;
-    background: var(--blue-dark);
-    padding: 1rem 0;
-    // // @extend.primary-copy;
-    color: var(--blue-200);
+    background: var(--Foundation-Signal-Green, #00d180);
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: stretch;
+
+    color: var(--Foundation-Black, #1e2221);
+    @include text-styles.text-style("mobile-caption");
   }
 }
