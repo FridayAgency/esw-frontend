@@ -2,7 +2,7 @@
 @use "@/app/styles/generic/mixins";
 
 .icon-block {
-  padding: 3rem 0;
+  padding: 3.5rem 0;
 
   @include mixins.breakpoint-up(mobile) {
     padding: 5rem 0;
@@ -30,7 +30,7 @@
     &-item {
       display: grid;
       gap: 1rem;
-      max-width: 20rem;
+      max-width: 21rem;
 
       svg {
         width: 3.5rem;

@@ -4,6 +4,34 @@
 .stats-block {
   background: var(--Foundation-Black, #1e2221);
   padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+
+  &__parallax-bg {
+    position: absolute;
+    // Extend 80px beyond top and bottom so translateY has room to travel
+    // without ever revealing empty space (overflow:hidden clips the excess)
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(/assets/pattern-3.svg);
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: 100%;
+
+    pointer-events: none;
+    will-change: transform;
+
+    // @include mixins.breakpoint-up(mobile) {
+    //   background-size: 40%;
+    // }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+  }
 
   @include mixins.breakpoint-up(mobile) {
     padding: 6rem 0;

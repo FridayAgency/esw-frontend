@@ -1,29 +1,18 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
+import "./styles/tailwind.css";
 import "./styles/main.scss";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollRestoration from "./components/ScrollRestoration";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { DM_Sans } from "next/font/google";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const matter = localFont({
-  src: [
-    { path: "../public/fonts/Matter/Matter-TRIAL-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-RegularItalic.woff2", weight: "400", style: "italic" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-Medium.woff2", weight: "500", style: "normal" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-MediumItalic.woff2", weight: "500", style: "italic" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-SemiBold.woff2", weight: "600", style: "normal" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-SemiBoldItalic.woff2", weight: "600", style: "italic" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-Bold.woff2", weight: "700", style: "normal" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-BoldItalic.woff2", weight: "700", style: "italic" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-Heavy.woff2", weight: "800", style: "normal" },
-    { path: "../public/fonts/Matter/Matter-TRIAL-HeavyItalic.woff2", weight: "800", style: "italic" },
-  ],
-  variable: "--font-matter",
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -38,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en" className={dmSans.variable}>
       <body>
         {/* <Header /> */}
 

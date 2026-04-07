@@ -1,0 +1,20 @@
+@use "@/app/styles/generic/mixins";
+
+.divider {
+  display: block;
+  width: 3.5rem;
+  height: 0.75rem;
+  background-size: 4px 4px;
+
+  &--white {
+    background-image: radial-gradient(circle, var(--Foundation-White, #fff) 1px, transparent 1px);
+  }
+
+  &--signal-green {
+    background-image: radial-gradient(circle, var(--Foundation-Signal-Green, #00d180) 1px, transparent 1px);
+  }
+
+  &--foundation-green {
+    background-image: radial-gradient(circle, var(--Foundation-Orchestrated-Green, #063e2d) 1px, transparent 1px);
+  }
+}

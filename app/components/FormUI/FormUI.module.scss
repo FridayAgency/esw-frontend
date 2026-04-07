@@ -97,6 +97,33 @@
     resize: vertical;
     min-height: 120px;
   }
+
+  &--dark {
+    label {
+      color: var(--Foundation-White, #fff);
+      font-weight: 500;
+    }
+
+    input,
+    textarea {
+      border-color: var(--Foundation-White, #fff);
+      background: var(--Foundation-White, #fff);
+      box-shadow: none;
+      border-radius: 0.25rem;
+      padding: 0.75rem 1rem;
+      color: var(--Neutral-Dark-Grey, #8f9a95);
+
+      &::placeholder {
+        font-weight: 400;
+        color: var(--Neutral-Dark-Grey, #8f9a95);
+      }
+
+      &:focus {
+        border-color: var(--Foundation-Signal-Green, #00d180);
+        box-shadow: 0 0 0 3px rgba(0, 209, 128, 0.15);
+      }
+    }
+  }
 }
 
 .error {

@@ -3,37 +3,72 @@
 
 .feature-block {
   padding: 4.5rem 0 3rem;
-  background: var(--Foundation-Orchestrated-Green, #063e2d);
+  background: var(--Foundation-Commerce-Canvas, #f2f6f3);
   position: relative;
-  color: var(--Foundation-White, #fff);
-
-  h2 {
-    color: var(--Foundation-White, #fff);
-  }
 
   &:after {
     content: "";
     width: 100%;
-    height: 100%;
+
     height: 37.75rem;
     position: absolute;
     top: 0;
     right: 0;
-    background: url(/assets/texture4.svg) no-repeat;
+    background: url(/assets/texture-6.svg) no-repeat;
     background-position: top right;
     transform: scaleY(-1);
+
+    @include mixins.breakpoint-up(mobile) {
+      top: unset;
+      bottom: 0;
+      transform: unset;
+      background-position: bottom right;
+    }
+  }
+
+  &.left {
+    &:after {
+      @include mixins.breakpoint-up(mobile) {
+        background-position: bottom right;
+        transform: scaleX(-1);
+        top: unset;
+        bottom: 0;
+      }
+    }
+
+    .feature-block__image {
+      @include mixins.breakpoint-up(mobile) {
+        grid-column: 2 / span 4;
+        grid-row: 1/2;
+        width: 100%;
+      }
+
+      @include mixins.breakpoint-up(tablet) {
+        grid-column: 2 / span 3;
+      }
+    }
+
+    .feature-block__content {
+      @include mixins.breakpoint-up(mobile) {
+        grid-column: 7 / span 6;
+        grid-row: 1/2;
+      }
+      @include mixins.breakpoint-up(tablet) {
+        grid-column: 7 / span 5;
+      }
+    }
   }
 
   &__container {
     display: grid;
-    gap: 1rem;
+    gap: 3rem;
     position: relative;
     z-index: 1;
     place-items: center;
 
     @include mixins.breakpoint-up(mobile) {
       grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 3rem;
+      gap: 1.5rem;
       place-items: start;
     }
   }
@@ -42,26 +77,27 @@
     width: 16.4375rem;
 
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 9 / span 3;
+      grid-column: 8 / span 4;
       grid-row: 1/2;
+      width: 100%;
     }
-  }
 
-  &__divider {
-    display: block;
-    width: 3.5rem;
-    height: 0.75rem;
-    background-image: radial-gradient(circle, var(--Foundation-Signal-Green) 0.5px, transparent 0.5px);
-    background-size: 4px 4px;
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 8 / span 3;
+    }
   }
 
   &__content {
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
 
     @include mixins.breakpoint-up(mobile) {
       grid-column: 1 / span 6;
       grid-row: 1/2;
+    }
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 1 / span 5;
     }
   }
 
@@ -77,12 +113,8 @@
   }
 
   &__subtitle {
-    color: var(--Foundation-Signal-Green, #00d180);
-    @include text-styles.text-style("mobile-h5");
-
-    @include mixins.breakpoint-up(mobile) {
-      @include text-styles.text-style("desktop-h5");
-    }
+    color: var(--Foundation-Operational-Green, #007a4e);
+    @include text-styles.text-style("desktop-caption");
   }
 
   &__description {

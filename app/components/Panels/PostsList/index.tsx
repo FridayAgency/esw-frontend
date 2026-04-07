@@ -1,7 +1,7 @@
 import { GET_POSTS } from "@/data/fragments";
 import client from "@/lib/client";
 import { Category, PostConnection, RootQueryToCategoryConnection } from "@/types/graphql";
-import { normalizeCategories } from "@/utils/normalizeCategory";
+
 import { removeNodes } from "@fridayagency/utils";
 import PostsList from "../../PostsList";
 
@@ -14,9 +14,8 @@ const PostList = async () => {
   const items = posts ? removeNodes(posts) : [];
 
   const rawCategories = categories ? removeNodes<Category>(categories) : [];
-  const categoriesList = normalizeCategories(rawCategories);
 
-  return <PostsList items={items} categories={categoriesList} />;
+  return <PostsList items={items} />;
 };
 
 export default PostList;

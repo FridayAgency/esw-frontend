@@ -1,0 +1,35 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.postTldr {
+  padding: 2.5rem 0;
+}
+
+.postTldr__card {
+  background: linear-gradient(to right, #f2f6f3 26.722%, #beccc5 100%);
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--Foundation-Black, #1e2221);
+}
+
+.postTldr__title {
+  @include text-styles.text-style("mobile-h5");
+  letter-spacing: 0.18px;
+
+  @include mixins.breakpoint-up(mobile) {
+    @include text-styles.text-style("desktop-h5");
+  }
+}
+
+.postTldr__list {
+  @include text-styles.text-style("mobile-body-large");
+  list-style: disc;
+  padding-left: 1.25rem;
+
+  @include mixins.breakpoint-up(mobile) {
+    @include text-styles.text-style("desktop-body-large");
+  }
+}

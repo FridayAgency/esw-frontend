@@ -2,33 +2,40 @@
 @use "@/app/styles/generic/mixins";
 
 .primary-product-section {
-  padding: 3rem 0;
+  padding: 13.25rem 0 4rem;
   background: var(--Foundation-Commerce-Canvas, #f2f6f3);
+  overflow: hidden;
+  position: relative;
 
   @include mixins.breakpoint-up(mobile) {
-    padding: 3rem 0 3.7rem;
+    padding: 5rem 0 8.75rem;
   }
 
   &__container {
-    display: grid;
+    // display: grid;
+    // gap: 1rem;
 
-    @include mixins.breakpoint-up(mobile) {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
+    // @include mixins.breakpoint-up(mobile) {
+    //   grid-template-columns: repeat(12, minmax(0, 1fr));
+    //   gap: 1.5rem;
+    // }
   }
 
   &__svg {
-    width: 9.67294rem;
-    height: 9.8125rem;
-    place-self: end;
+    width: 12.13338rem;
+    height: 12.30844rem;
+    aspect-ratio: 69/70;
+    position: absolute;
+    top: -2rem;
+    right: -4.5rem;
 
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 1 / span 6;
-      width: 30.34738rem;
-      height: 30.78519rem;
-      place-self: start start;
-      transform: translateX(calc(-1 * (var(--outer-margin-lg) + 3rem)));
+      width: 30.1875rem;
+      height: 30.625rem;
+      aspect-ratio: 69/70;
+      top: unset;
+      right: -3rem;
+      bottom: -17rem;
     }
   }
 
@@ -41,19 +48,12 @@
       gap: 2rem;
     }
 
-    &-header {
+    &-title {
+      @include text-styles.text-style("mobile-h3");
+      color: var(--Foundation-Operational-Green, #007a4e);
+
       @include mixins.breakpoint-up(mobile) {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      h2 {
-        @include text-styles.text-style("mobile-h3");
-        color: var(--Foundation-Operational-Green, #007a4e);
-
-        @include mixins.breakpoint-up(mobile) {
-          @include text-styles.text-style("desktop-h2");
-        }
+        @include text-styles.text-style("desktop-h2");
       }
     }
   }
@@ -70,6 +70,10 @@
     display: grid;
     gap: 1.5rem;
     list-style: none;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   &__product {
@@ -118,7 +122,7 @@
 
     &-arrow {
       position: absolute;
-      bottom: 0;
+      bottom: 1rem;
       right: 1.5rem;
 
       @include mixins.breakpoint-up(mobile) {
@@ -127,162 +131,6 @@
         bottom: unset;
         padding: 1rem;
       }
-    }
-  }
-
-  &__cta-mobile {
-    display: grid;
-    place-items: end;
-
-    @include mixins.breakpoint-up(mobile) {
-      display: none;
-    }
-  }
-}
-
-.primary-services-section {
-  background: var(--Neutral-Soft-Grey, #deebe5);
-  box-shadow: 0 0 32px 0 rgba(143, 154, 149, 0.3) inset;
-  padding: 7.5rem 0 2.5rem;
-  position: relative;
-  overflow: hidden;
-
-  @include mixins.breakpoint-up(mobile) {
-    padding: 0 0 6rem;
-    background: var(--Foundation-Commerce-Canvas, #f2f6f3);
-    box-shadow: unset;
-  }
-
-  &__container {
-    @include mixins.breakpoint-up(mobile) {
-      padding: 0 4.3rem;
-    }
-  }
-
-  &__svg {
-    position: absolute;
-    top: -2.1rem;
-    right: -3.75rem;
-    width: 12.13338rem;
-    height: 12.30844rem;
-    opacity: 0.6;
-
-    @include mixins.breakpoint-up(mobile) {
-      width: 27.0625rem;
-      height: 27.4375rem;
-      top: 2.6rem;
-      right: -15rem;
-      opacity: 0.3;
-    }
-  }
-
-  &__services {
-    display: grid;
-    gap: 1.25rem;
-    padding: 0 2.25rem;
-
-    @include mixins.breakpoint-up(mobile) {
-      grid-template-columns: repeat(11, minmax(0, 1fr));
-      gap: 0;
-      background: var(--Neutral-Soft-Grey, #deebe5);
-      box-shadow: 0 0 32px 0 rgba(143, 154, 149, 0.3) inset;
-      padding: 4rem 5rem 6rem;
-      row-gap: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    &-header {
-      @include mixins.breakpoint-up(mobile) {
-        display: flex;
-        justify-content: space-between;
-        grid-column: 1 / span 9;
-        padding: 0.64rem 0;
-      }
-
-      h2 {
-        color: var(--Foundation-Operational-Green, #007a4e);
-        @include text-styles.text-style("mobile-h3");
-
-        @include mixins.breakpoint-up(mobile) {
-          @include text-styles.text-style("desktop-h2");
-        }
-      }
-    }
-
-    &-cta {
-      &-desktop {
-        display: none;
-
-        @include mixins.breakpoint-up(mobile) {
-          display: block;
-        }
-      }
-
-      &-mobile {
-        display: block;
-
-        @include mixins.breakpoint-up(mobile) {
-          display: none;
-        }
-      }
-    }
-  }
-
-  &__list {
-    @include mixins.breakpoint-up(mobile) {
-      display: flex;
-      justify-content: space-between;
-      grid-column: 1 / span 9;
-    }
-
-    ul {
-      list-style: none;
-      display: grid;
-      gap: 1.25rem;
-
-      @include mixins.breakpoint-up(mobile) {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-  }
-
-  &__service {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border: 1px solid var(--Neutral-Soft-Grey, #deebe5);
-    background: var(--Foundation-White, #fff);
-    box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.07);
-    text-decoration: none;
-    height: 100%;
-    position: relative;
-    padding-bottom: 4rem;
-
-    &-content {
-      padding: 0 1rem;
-      display: grid;
-      gap: 0.86rem;
-    }
-
-    &-title {
-      color: var(--Foundation-Orchestrated-Green, #063e2d);
-      @include text-styles.text-style("mobile-h4");
-
-      @include mixins.breakpoint-up(mobile) {
-        @include text-styles.text-style("desktop-h4");
-      }
-    }
-
-    &-description {
-      color: var(--Foundation-Black, #1e2221);
-      @include text-styles.text-style("body-default");
-    }
-
-    &-arrow {
-      position: absolute;
-      bottom: 0.5rem;
-      right: 1rem;
     }
   }
 }

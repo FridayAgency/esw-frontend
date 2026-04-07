@@ -9,18 +9,21 @@ import Button from "../../Button";
 import styles from "./FeatureBlock.module.scss";
 import { ClassName } from "@fridayagency/classnames";
 import ImageWithTexture from "../../ImageWithTexture/Index";
+import Devider from "../../Divider";
 
 interface FeatureBlockProps {
-  light?: boolean;
+  dark?: boolean;
   imagePosition?: "left" | "right";
 }
 
-const FeatureBlock: React.FC<FeatureBlockProps> = ({ light, imagePosition = "right" }) => {
+const FeatureBlock: React.FC<FeatureBlockProps> = ({ dark, imagePosition = "right" }) => {
   const sectionClass = new ClassName([styles["feature-block"], styles[imagePosition]]);
 
-  if (light) {
-    sectionClass.add(styles["feature-block--light"]);
+  if (dark) {
+    sectionClass.add(styles["feature-block--dark"]);
   }
+
+  console.log(dark);
 
   return (
     <section className={sectionClass.toString()}>
@@ -29,10 +32,9 @@ const FeatureBlock: React.FC<FeatureBlockProps> = ({ light, imagePosition = "rig
           <ImageWithTexture />
         </div>
         <div className={styles["feature-block__content"]}>
-          <div className={styles["feature-block__divider"]}></div>
+          <Devider />
           <div className={styles["feature-block__text"]}>
             <div className={styles["feature-block__heading"]}>
-         
               <p className={styles["feature-block__subtitle"]}> Why ESW?</p>
               <TextRevealHeading blockColour="#00D180">
                 <h2 className={styles["feature-block__title"]}>Because We’ve Done this Before. </h2>
@@ -54,7 +56,7 @@ const FeatureBlock: React.FC<FeatureBlockProps> = ({ light, imagePosition = "rig
               <p>ESW becomes your partner in these critical choices.</p>
             </div>
 
-            <Button variant="text" colour="light">
+            <Button variant="text" colour={dark ? "light" : "dark"}>
               Read More
             </Button>
           </div>

@@ -1,0 +1,112 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.access-report {
+  padding: 5rem 0;
+  background: var(--gradient-dark, linear-gradient(73.52deg, #1e2221 7.04%, #184c39 100%));
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--drop-2-box-shadow);
+
+  &__dots {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 18rem;
+      opacity: 0.4;
+      background-image: url("data:image/svg+xml;utf8,<svg width='6' height='6' xmlns='http://www.w3.org/2000/svg'><rect width='3' height='3' fill='%2300d180'/></svg>");
+      background-size: 6px 6px;
+      background-repeat: repeat;
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__card {
+    background: var(--Foundation-Black, #1e2221);
+    border-radius: 0.5rem;
+    padding: 3.625rem 1rem;
+    box-shadow: var(--shadow-drop-1-box-shadow);
+    width: 100%;
+    max-width: 35rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      padding: 3.625rem 2.5rem;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1.625rem;
+  }
+
+  &__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__title {
+    @include text-styles.text-style("mobile-h3");
+    color: var(--Foundation-White, #fff);
+
+    @include mixins.breakpoint-up(tablet) {
+      @include text-styles.text-style("desktop-h3");
+    }
+  }
+
+  &__subtitle {
+    @include text-styles.text-style("mobile-body-default");
+    color: var(--Neutral-Mid-Grey, #beccc5);
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__note {
+    @include text-styles.text-style("mobile-body-default");
+    color: var(--Neutral-Mid-Grey, #beccc5);
+  }
+
+  &__success {
+    @include text-styles.text-style("mobile-body-default");
+    color: var(--Foundation-Signal-Green, #00d180);
+    padding: 1rem 0;
+  }
+}

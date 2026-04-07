@@ -6,6 +6,7 @@ import Button from "../../Button";
 import ScrollTriggerWrapper from "../../ScrollTriggerWrapper";
 
 import styles from "./FeatureBlock.module.scss";
+import Globe from "@/app/components/react-bits/globe";
 
 export interface FeatureBlockProps {}
 
@@ -18,7 +19,7 @@ const FeatureBlockGreenEmphises: React.FC<FeatureBlockProps> = () => {
     >
       <Container flush className={styles["feature-block__container"]}>
         <div className={styles["feature-block__image"]}>
-          <Image src={globe} alt="Globe" />
+          <Globe />
         </div>
         <div className={styles["feature-block__content"]}>
           <div className={`${styles["feature-block__texture"]} `}></div>

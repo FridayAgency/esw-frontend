@@ -32,27 +32,17 @@ const PostCard = <T extends WordPressPostType = Post | CaseStudy>({ post }: { po
         <div className={styles["card__image-wrapper"]}>
           <ImageWithTexture />
         </div>
-
-        <div className={styles["card__read-more"]}>
-          <span className={styles["card__read-more-ellipse"]}></span>
-          <span>Read More</span>
-        </div>
       </div>
 
       <div className={styles["card__content"]}>
+        <div className={styles["card__content--category"]}>Blog</div>
         <div className={styles["card__content--header"]}>
           <h3>{title}</h3>
-          <span className={styles["card__content--date"]}>
-            Published <DateFormated date={date} />
-          </span>
         </div>
 
-        <div className={styles["card__author"]}>
-          <div className={styles["card__author-image"]}></div>
-          <div className={styles["card__author-meta"]}>
-            <span className={styles["card__author-name"]}>{author?.node.name}</span>
-          </div>
-        </div>
+        <span className={styles["card__arrow"]}>
+          <Icon type="arrowRight" />
+        </span>
       </div>
     </Link>
   );

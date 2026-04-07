@@ -22,7 +22,7 @@ const HeroHeader: React.FC = () => {
       </Suspense>
       <Container className={styles["hero-header__container"]}>
         <TextRevealHeading blockColour="#00D180">
-          <h1>We Help Brands Master the Craft of Global Commerce.</h1>
+          <h1>We Help Brands Master the Orchestration of Global Commerce</h1>
         </TextRevealHeading>
 
         <p>

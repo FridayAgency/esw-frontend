@@ -13,6 +13,7 @@ interface FormInputProps {
   required?: boolean;
   inputRef?: RefObject<HTMLInputElement | null>;
   className?: string;
+  theme?: "light" | "dark";
 }
 
 const FormInput = ({
@@ -26,8 +27,9 @@ const FormInput = ({
   required,
   inputRef,
   className,
+  theme = "light",
 }: FormInputProps) => (
-  <div className={[styles.field, className].filter(Boolean).join(" ")}>
+  <div className={[styles.field, theme === "dark" ? styles["field--dark"] : undefined, className].filter(Boolean).join(" ")}>
     <label htmlFor={id}>{label}</label>
     <span className={styles["field__wrapper"]}>
       <input

@@ -1,0 +1,72 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.fileUpload {
+  width: 100%;
+
+  &__dropzone {
+    background: var(--Foundation-White, #fff);
+    border-radius: 0.5rem;
+    padding: 1.25rem 4.6875rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.625rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--Foundation-Signal-Green, #00d180);
+      outline: none;
+    }
+
+    &--error {
+      border-color: var(--error, #d32f2f);
+    }
+  }
+
+  &__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--Neutral-Dark-Grey, #8f9a95);
+  }
+
+  &__label {
+    @include text-styles.text-style("mobile-body-large");
+    font-weight: 600;
+    color: var(--Neutral-Dark-Grey, #8f9a95);
+    text-align: center;
+  }
+
+  &__hint {
+    @include text-styles.text-style("desktop-body-default");
+    color: var(--Neutral-Dark-Grey, #8f9a95);
+    text-align: center;
+  }
+
+  &__error {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--error, #d32f2f);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+}

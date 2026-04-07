@@ -12,13 +12,6 @@ import { FRAGMENTS } from "@fridayagency/graphql-client";
 export const PAGEPANELS_FRAGMENT = (() => {
   const mappings: [typeName: string, fragment: string][] = [
     ["PagePanelsPagePanelsPageHeaderLayout", PAGEHEADER_FRAGMENT],
-    ["PagePanelsPagePanelsTextHeaderLayout", TEXTHEADER_FRAGMENT],
-    ["PagePanelsPagePanelsEditorContentLayout", EDITORCONTENT_FRAGMENT],
-    ["PagePanelsPagePanelsTextAndImagePanelLayout", TEXTANDIMAGEPANEL_FRAGMENT],
-    ["PagePanelsPagePanelsContactPanelLayout", CONTACTPANEL_FRAGMENT],
-    ["PagePanelsPagePanelsLatestNewsLayout", LATESTNEWS_FRAGMENT],
-    ["PagePanelsPagePanelsAccordionPanelLayout", ACCORDIONPANEL_FRAGMENT],
-    ["PagePanelsPagePanelsResourceDownloadsLayout", RESOURCEDOWNLOADS_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");

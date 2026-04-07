@@ -54,7 +54,7 @@ const IconBlock = () => {
     <section className={styles["icon-block"]}>
       <Container className={styles["icon-block__container"]}>
         <TextRevealHeading blockColour="#00D180">
-          <h2 className={styles["icon-block__heading"]}>It’s Complex. We Get It. </h2>
+          <h2 className={styles["icon-block__heading"]}>Global Expansion Breaks in Predictable Ways. </h2>
         </TextRevealHeading>
 
         <ul className={styles["icon-block__list"]}>
