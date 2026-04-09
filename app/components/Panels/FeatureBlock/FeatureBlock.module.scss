@@ -59,6 +59,60 @@
     }
   }
 
+  &.feature-block--no-image {
+    .feature-block__content {
+      @include mixins.breakpoint-up(mobile) {
+        grid-column: 2 / span 10;
+        grid-row: 1/2;
+      }
+
+      @include mixins.breakpoint-up(tablet) {
+        grid-column: 3 / span 8;
+      }
+    }
+
+    &::before {
+      @include mixins.breakpoint-up(mobile) {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: url(/assets/texture-6.svg) no-repeat;
+        transform: scaleY(-1);
+        background-position: bottom right;
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  &.feature-block--dark {
+    background: var(--Foundation-Orchestrated-Green, #063e2d);
+
+    .feature-block__title {
+      color: var(--Foundation-White, #fff);
+    }
+
+    .feature-block__description {
+      p,
+      li,
+      a {
+        color: var(--Foundation-White, #fff);
+      }
+    }
+
+    &:after {
+      background-image: url(/assets/Texture4.svg);
+    }
+
+    &.feature-block--no-image {
+      &::before {
+        background-image: url(/assets/Texture4.svg);
+      }
+    }
+  }
+
   &__container {
     display: grid;
     gap: 3rem;
@@ -77,13 +131,13 @@
     width: 16.4375rem;
 
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 8 / span 4;
+      grid-column: 9 / span 4;
       grid-row: 1/2;
       width: 100%;
     }
 
     @include mixins.breakpoint-up(tablet) {
-      grid-column: 8 / span 3;
+      grid-column: 9 / span 3;
     }
   }
 
@@ -94,6 +148,7 @@
     @include mixins.breakpoint-up(mobile) {
       grid-column: 1 / span 6;
       grid-row: 1/2;
+      gap: 1.5rem;
     }
 
     @include mixins.breakpoint-up(tablet) {
@@ -105,6 +160,10 @@
     display: grid;
     gap: 1.5rem;
     padding: 0 1.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      padding: 0 0 0 1.5rem;
+    }
   }
 
   &__heading {
@@ -120,12 +179,19 @@
   &__description {
     display: grid;
     gap: 1.5rem;
-    p {
+    p,
+    li,
+    a {
       @include text-styles.text-style("mobile-body-large");
 
       @include mixins.breakpoint-up(mobile) {
         @include text-styles.text-style("desktop-body-large");
       }
+    }
+
+    ul,
+    ol {
+      padding-left: 1.5rem;
     }
   }
 }

@@ -3,8 +3,22 @@ import DotGrid from "../../DotGrid";
 import Container from "../../Container";
 import styles from "./HeroHeader.module.scss";
 import TextRevealHeading from "../../TextRevealHeading";
+import { PagePanelsPagePanelsHeroHeaderLayout } from "@/types/graphql";
 
-const HeroHeader: React.FC = () => {
+import parse from "html-react-parser";
+
+export const HERO_HEADER_FRAGMENT = `
+    copy
+    title
+`;
+
+interface HeroHeaderProps {
+  panel: PagePanelsPagePanelsHeroHeaderLayout;
+}
+
+const HeroHeader: React.FC<HeroHeaderProps> = ({ panel }) => {
+  const { copy, title } = panel || {};
+
   return (
     <section className={styles["hero-header"]}>
       <Suspense>
@@ -21,14 +35,17 @@ const HeroHeader: React.FC = () => {
         />
       </Suspense>
       <Container className={styles["hero-header__container"]}>
-        <TextRevealHeading blockColour="#00D180">
-          <h1>We Help Brands Master the Orchestration of Global Commerce</h1>
-        </TextRevealHeading>
+        <div className={styles["hero-header__content"]}>
+          {title && (
+            <TextRevealHeading blockColour="#00D180">
+              <h1>{title}</h1>
+            </TextRevealHeading>
+          )}
 
-        <p>
-          Technology Platform Supporting <span>150+</span> enterprise brands operating across<span> 200+</span> global
-          markets.
-        </p>
+          {copy && <div className={styles["hero-header__copy"]}>{parse(copy)}</div>}
+        </div>
+
+        {/* TODO : Connect this to a dynamic article link */}
 
         <a href="#" className={styles["hero-header__article"]}>
           <div className={styles["hero-header__article__category"]}>New Research</div>

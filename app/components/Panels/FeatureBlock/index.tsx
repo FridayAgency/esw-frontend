@@ -10,53 +10,66 @@ import styles from "./FeatureBlock.module.scss";
 import { ClassName } from "@fridayagency/classnames";
 import ImageWithTexture from "../../ImageWithTexture/Index";
 import Devider from "../../Divider";
+import { PagePanelsPagePanelsFeatureBlockLayout } from "@/types/graphql";
+
+import parse from "html-react-parser";
+import { sub } from "date-fns";
+
+export const FEATURE_BLOCK_FRAGMENT = `
+
+          background
+          text
+          subtitle
+          title
+          image {
+            ...AcfMediaItem
+          }
+          callToAction {
+            ...AcfLinkFragment
+          }
+          imagePosition
+
+`;
 
 interface FeatureBlockProps {
-  dark?: boolean;
-  imagePosition?: "left" | "right";
+  panel: PagePanelsPagePanelsFeatureBlockLayout;
 }
 
-const FeatureBlock: React.FC<FeatureBlockProps> = ({ dark, imagePosition = "right" }) => {
-  const sectionClass = new ClassName([styles["feature-block"], styles[imagePosition]]);
+const FeatureBlock: React.FC<FeatureBlockProps> = ({ panel }) => {
+  const { background, text, title, image, callToAction, imagePosition, subtitle } = panel || {};
 
-  if (dark) {
+  const sectionClass = new ClassName([styles["feature-block"], styles[imagePosition ?? "right"]]);
+
+  if (background === "dark") {
     sectionClass.add(styles["feature-block--dark"]);
   }
 
-  console.log(dark);
+  if (!image) {
+    sectionClass.add(styles["feature-block--no-image"]);
+  }
 
   return (
     <section className={sectionClass.toString()}>
       <Container className={styles["feature-block__container"]}>
-        <div className={styles["feature-block__image"]}>
-          <ImageWithTexture />
-        </div>
+        {image && image?.node && (
+          <div className={styles["feature-block__image"]}>
+            <ImageWithTexture image={image.node} variant="frame" />
+          </div>
+        )}
         <div className={styles["feature-block__content"]}>
           <Devider />
           <div className={styles["feature-block__text"]}>
             <div className={styles["feature-block__heading"]}>
-              <p className={styles["feature-block__subtitle"]}> Why ESW?</p>
-              <TextRevealHeading blockColour="#00D180">
-                <h2 className={styles["feature-block__title"]}>Because We’ve Done this Before. </h2>
-              </TextRevealHeading>
+              {subtitle && <p className={styles["feature-block__subtitle"]}>{subtitle}</p>}
+              {title && (
+                <TextRevealHeading blockColour="#00D180">
+                  <h2 className={styles["feature-block__title"]}>{title}</h2>
+                </TextRevealHeading>
+              )}
             </div>
-            <div className={styles["feature-block__description"]}>
-              <p>
-                <strong>At Scale, in Real Markets, with Real Revenue on the Line.</strong>
-              </p>
-              <p>
-                At scale, payments, compliance, localisation, logistics and customer experience do
-                not operate independently. They interact.
-              </p>
-              <p>
-                ESW has built the expertise to navigate these interactions, and the relationships to make them work.
-                When you choose ESW, you’re not just choosing a provider, you’re choosing a partner with a proven track
-                record of success.
-              </p>
-              <p>ESW becomes your partner in these critical choices.</p>
-            </div>
+            <div className={styles["feature-block__description"]}>{text && parse(text)}</div>
 
-            <Button variant="text" colour={dark ? "light" : "dark"}>
+            <Button variant="text" colour={background === "dark" ? "light" : "dark"}>
               Read More
             </Button>
           </div>

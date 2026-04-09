@@ -41,13 +41,11 @@ const CatchallPage = async ({ params }: PageParams) => {
 
   if (content?.revisions?.edges.length) {
     const latestRevision = content.revisions.edges[0].node;
-    console.log("Using latest revision for preview:", latestRevision);
+
     content = latestRevision;
   } else {
     console.warn("No revisions found for preview, using original content");
   }
-
-  console.log("Fetched content node for preview:", content);
 
   switch (contentNode.__typename) {
     case "Page":

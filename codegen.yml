@@ -1,7 +1,7 @@
 # @format
 
 overwrite: true
-schema: ""
+schema: "http://esw-backend.local/graphql"
 generates:
   types/graphql.ts:
     plugins:

@@ -68,8 +68,6 @@ export async function generateCategorySeoMetadata(
       variables: { id: slug },
     });
 
-    console.log("Category SEO data:", category.seo);
-
     if (!category?.seo) {
       return createFallbackMetadata(fallbackTitle, "The requested page could not be found.");
     }
@@ -92,8 +90,6 @@ export async function generateAuthorSeoMetadata(
     const { user } = await client.query<{ user: User }>(GET_AUTHOR_SEO, {
       variables: { id: slug },
     });
-
-    console.log("Author SEO data:", user);
 
     if (!user?.seo) {
       return createFallbackMetadata(fallbackTitle, "The requested page could not be found.");

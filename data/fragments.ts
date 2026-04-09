@@ -1,9 +1,17 @@
 import { ACCORDIONPANEL_FRAGMENT } from "@/app/components/Panels/AccordionPanel";
+import { CASE_STUDY_GATEWAY_FRAGMENT } from "@/app/components/Panels/CaseStudyGateway";
 import { CONTACTPANEL_FRAGMENT } from "@/app/components/Panels/ContactPanel";
 import { EDITORCONTENT_FRAGMENT } from "@/app/components/Panels/EditorContent";
+import { FEATURE_BLOCK_FRAGMENT } from "@/app/components/Panels/FeatureBlock";
+import { FEATURE_BLOCK_GREEN_EMPHASIS_FRAGMENT } from "@/app/components/Panels/FeatureBlockGreenEmphasis";
+import { HERO_HEADER_FRAGMENT } from "@/app/components/Panels/HeroHeader";
+import { HERO_HEADER_SIMPLE_FRAGMENT } from "@/app/components/Panels/HeroHeaderSimple";
+import { LIST_ICON_FRAGMENT } from "@/app/components/Panels/IconBlock";
 import { LATESTNEWS_FRAGMENT } from "@/app/components/Panels/LatestNews";
+import { LOGO_BLOCK_FRAGMENT } from "@/app/components/Panels/LogoBlock";
 import { PAGEHEADER_FRAGMENT } from "@/app/components/Panels/PageHeader";
 import { RESOURCEDOWNLOADS_FRAGMENT } from "@/app/components/Panels/ResourceDownloads";
+import { STATS_BLOCK_FRAGMENT } from "@/app/components/Panels/StatsBlock";
 import { TEXTANDIMAGEPANEL_FRAGMENT } from "@/app/components/Panels/TextAndImagePanel";
 import { TEXTHEADER_FRAGMENT } from "@/app/components/Panels/TextHeader";
 
@@ -11,7 +19,14 @@ import { FRAGMENTS } from "@fridayagency/graphql-client";
 
 export const PAGEPANELS_FRAGMENT = (() => {
   const mappings: [typeName: string, fragment: string][] = [
-    ["PagePanelsPagePanelsPageHeaderLayout", PAGEHEADER_FRAGMENT],
+    ["PagePanelsPagePanelsHeroHeaderSimpleLayout", HERO_HEADER_SIMPLE_FRAGMENT],
+    ["PagePanelsPagePanelsLogoBlockLayout", LOGO_BLOCK_FRAGMENT],
+    ["PagePanelsPagePanelsFeatureBlockLayout", FEATURE_BLOCK_FRAGMENT],
+    ["PagePanelsPagePanelsHeroHeaderLayout", HERO_HEADER_FRAGMENT],
+    ["PagePanelsPagePanelsIconBlockLayout", LIST_ICON_FRAGMENT],
+    ["PagePanelsPagePanelsStatsBlockLayout", STATS_BLOCK_FRAGMENT],
+    ["PagePanelsPagePanelsCaseStudyGatewayLayout", CASE_STUDY_GATEWAY_FRAGMENT],
+    ["PagePanelsPagePanelsFeatureBlockGreenEmphasisLayout", FEATURE_BLOCK_GREEN_EMPHASIS_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");

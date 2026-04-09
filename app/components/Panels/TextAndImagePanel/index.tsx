@@ -29,8 +29,6 @@ const generateClassName = (base: string, modifier?: string) => {
 const TextAndImagePanel: React.FC<{ panel: PagePanelsPagePanelsTextAndImagePanelLayout }> = ({ panel }) => {
   const { copy, callToAction, image, imagePosition } = panel;
 
-  console.log("Rendering TextAndImagePanel with imagePosition:", imagePosition);
-
   const imageClass = generateClassName(
     styles["text-and-image__image"],
     imagePosition?.toLowerCase() === "right" ? styles.reverse : undefined,

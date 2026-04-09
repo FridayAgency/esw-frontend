@@ -6,6 +6,11 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
 
 .hero-header {
   position: relative;
+  margin-bottom: 0.7rem;
+
+  @include mixins.breakpoint-up(mobile) {
+    margin-bottom: 2.75rem;
+  }
 
   &__container {
     position: relative;
@@ -19,15 +24,29 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
       padding-top: 16.5rem;
       padding-bottom: 22.4rem;
       gap: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  &__content {
+    display: grid;
+    gap: 1.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      padding: 0 0 0 1.5rem;
+    }
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 8;
     }
 
     h1 {
-      color: #fff;
-      max-width: 41rem;
+      color: var(--Foundation-White, #fff);
     }
 
     p {
-      color: #8f9a95;
+      color: var(--Neutral-Dark-Grey, #8f9a95);
       @include text-styles.text-style("mobile-h4");
       max-width: 47rem;
 
@@ -35,8 +54,12 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
         @include text-styles.text-style("desktop-h4");
       }
 
+      strong {
+        color: var(--Foundation-White, #fff);
+      }
+
       span {
-        color: #fff;
+        color: var(--Foundation-White, #fff);
       }
     }
   }

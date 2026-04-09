@@ -29,13 +29,11 @@ const ErrorFallback = ({ title, description, onRetry }: ErrorFallbackProps) => {
         <p style={{ margin: 0, color: "var(--copy)" }}>{description}</p>
         <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>
           {onRetry ? (
-            <Button type="button" onClick={onRetry} buttonType="primary" colour="blue">
+            <Button type="button" onClick={onRetry}>
               Try again
             </Button>
           ) : null}
-          <Button href="/" buttonType="secondary">
-            Back to homepage
-          </Button>
+          <Button href="/">Back to homepage</Button>
         </div>
       </section>
     </Container>

@@ -82,11 +82,7 @@ const ApplicationProcess: React.FC = () => {
           <div className={styles["application-process__divider"]} aria-hidden="true" />
           <h2 className={styles["application-process__heading"]}>Our Application Process</h2>
 
-          <div
-            role="tablist"
-            aria-label="Application process steps"
-            className={styles["application-process__tabs"]}
-          >
+          <div role="tablist" aria-label="Application process steps" className={styles["application-process__tabs"]}>
             {steps.map((step, index) => {
               const isActive = activeStep === index;
               const tabClass = new ClassName([styles["application-process__tab"]]);
@@ -129,7 +125,7 @@ const ApplicationProcess: React.FC = () => {
         </div>
 
         <div className={styles["application-process__image"]} aria-hidden="true">
-          <ImageWithTexture />
+          {/* <ImageWithTexture /> */}
         </div>
       </Container>
     </section>

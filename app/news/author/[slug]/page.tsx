@@ -38,8 +38,6 @@ const NewsAuthorPage: NextPage<PageParams> = async ({ params }) => {
 
   const pageUri = processPageUri(slug);
 
-  console.log("Fetching news for author slug:", pageUri);
-
   try {
     const { posts } = await client.query<{
       posts: RootQueryToPostConnection;

@@ -29,9 +29,7 @@ const PostCard = <T extends WordPressPostType = Post | CaseStudy>({ post }: { po
     <Link className={styles.card} href={uri ?? ""}>
       {/* {featuredImage && <ImageComponent image={featuredImage.node} />} */}
       <div className={styles["card__image"]}>
-        <div className={styles["card__image-wrapper"]}>
-          <ImageWithTexture />
-        </div>
+        <div className={styles["card__image-wrapper"]}>{/* <ImageWithTexture /> */}</div>
       </div>
 
       <div className={styles["card__content"]}>

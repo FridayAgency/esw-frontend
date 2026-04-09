@@ -11,10 +11,22 @@
   &__container {
     display: grid;
     gap: 2.5rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: 1.5rem;
+      row-gap: 3rem;
+    }
   }
 
   &__heading {
-    color: var(--Foundation-Orchestrated-Green, #063e2d);
+    h2 {
+      color: var(--Foundation-Orchestrated-Green, #063e2d);
+    }
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 1 / span 9;
+    }
   }
 
   &__list {
@@ -25,6 +37,7 @@
     @include mixins.breakpoint-up(mobile) {
       display: flex;
       justify-content: space-between;
+      grid-column: 1 / span 12;
     }
 
     &-item {
@@ -46,6 +59,12 @@
       p {
         @include text-styles.text-style("mobile-body-large");
       }
+    }
+  }
+
+  &__cta {
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 1 / span 12;
     }
   }
 }

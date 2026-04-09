@@ -1,3 +1,4 @@
+import { PagePanelsPagePanelsCaseStudyGatewayLayout } from "@/types/graphql";
 import Button from "../../Button";
 import Carousel from "../../Carousel";
 import CaseStudyCard from "../../CaseStudyCard";
@@ -5,21 +6,31 @@ import Container from "../../Container";
 
 import styles from "./CaseStudyGateway.module.scss";
 
-interface CaseStudyGatewayProps {}
+export const CASE_STUDY_GATEWAY_FRAGMENT = `
+    ... on PagePanelsPagePanelsCaseStudyGatewayLayout {
+          title
+        }
+`;
 
-const CaseStudyGateway: React.FC<CaseStudyGatewayProps> = () => {
+interface CaseStudyGatewayProps {
+  panel: PagePanelsPagePanelsCaseStudyGatewayLayout;
+}
+
+const CaseStudyGateway: React.FC<CaseStudyGatewayProps> = ({ panel }) => {
+  const { title } = panel || {};
+
   return (
     <section className={styles["case-study-gateway"]}>
       <Container flush className={styles["case-study-gateway__container"]}>
         <div className={styles["case-study-gateway__header"]}>
-          <h2>Customer Success Stories</h2>
+          {title && <h2 className={styles["case-study-gateway__title"]}>{title}</h2>}
           <div className={styles["case-study-gateway__cta-desktop"]}>
             <Button variant="text">Read All</Button>
           </div>
         </div>
 
+        {/* TODO : ADD case studies mapping */}
         <div>
-          {/* Map over case studies and render CaseStudyCard components here */}
           <Carousel
             className={styles["case-study-gateway__carousel"]}
             gap={16}
