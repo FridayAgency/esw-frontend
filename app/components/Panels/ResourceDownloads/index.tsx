@@ -5,10 +5,9 @@ import Button from "../../Button";
 
 export const RESOURCEDOWNLOADS_FRAGMENT = `
   title
-
   resources {
-    resourceTitle
-    file {
+    title
+    files {
       node {
           sourceUrl
       }
@@ -18,6 +17,7 @@ export const RESOURCEDOWNLOADS_FRAGMENT = `
 
 const ResourceDownloads: React.FC<{ panel: PagePanelsPagePanelsResourceDownloadsLayout }> = ({ panel }) => {
   const { title, resources } = panel || {};
+
   return (
     <section className={styles["resource-downloads"]}>
       <Container className={styles["resource-downloads__container"]}>
@@ -76,10 +76,10 @@ const ResourceDownloads: React.FC<{ panel: PagePanelsPagePanelsResourceDownloads
             {resources && resources.length > 0 && (
               <ul className={styles["resource-downloads__list"]}>
                 {resources.map((resource, index) => {
-                  if (!resource?.file?.node?.sourceUrl || !resource?.resourceTitle) return null;
+                  if (!resource?.files?.node?.sourceUrl || !resource?.title) return null;
                   return (
                     <li key={index} className={styles["resource-downloads__item"]}>
-                      <a href={resource.file.node.sourceUrl} target="_blank" rel="noopener noreferrer">
+                      <a href={resource.files.node.sourceUrl} target="_blank" rel="noopener noreferrer">
                         <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M18.661 10.9194L17.2207 9.48037L11.8207 14.9098V0H9.78165V14.9098L4.38165 9.48037L2.94141 10.9194L10.8011 18.8098L18.661 10.9194Z"
@@ -91,7 +91,7 @@ const ResourceDownloads: React.FC<{ panel: PagePanelsPagePanelsResourceDownloads
                           />
                         </svg>
 
-                        {resource.resourceTitle}
+                        {resource.title}
                       </a>
                     </li>
                   );

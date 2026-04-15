@@ -1,0 +1,31 @@
+@use "@/app/styles/generic/mixins";
+
+.open-content {
+  position: relative;
+  overflow: hidden;
+
+  //   &__texture {
+  //     display: none;
+
+  //     @include mixins.breakpoint-up(mobile) {
+  //       display: block;
+  //       position: absolute;
+  //       right: 0;
+  //       top: 0;
+
+  //       width: 15.25rem; // 244px — visual width after rotation
+  //       height: 20.75rem; // 332px — visual height after rotation
+  //       overflow: hidden;
+  //       pointer-events: none;
+
+  //       img {
+  //         position: absolute;
+  //         top: 50%;
+  //         left: 50%;
+  //         width: 20.75rem; // 332px — becomes visual height after rotation
+  //         height: 15.25rem; // 244px — becomes visual width after rotation
+  //         object-fit: cover;
+  //       }
+  //     }
+  //   }
+}

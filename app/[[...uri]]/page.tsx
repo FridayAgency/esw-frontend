@@ -2,10 +2,12 @@ import { processPageUri } from "@fridayagency/utils";
 import { generateSeoMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import client from "@/lib/client";
-import { Page, Post } from "@/types/graphql";
+import { Page, Post, Product } from "@/types/graphql";
 import { GET_CONTENTNODE } from "@/data/fragments";
 import PagePanels from "../components/PagePanels";
 import PostTemplate from "../components/PostTemplate";
+import LatestPosts from "../components/Panels/LatestPosts";
+import { Metadata } from "next";
 
 interface PageParams {
   params: Promise<{ uri: string[] }>;
@@ -40,7 +42,7 @@ const CatchallPage = async ({ params }: PageParams) => {
 
   if (!pageUri) notFound();
 
-  const { contentNode } = await client.query<{ contentNode: Page | Post }>(GET_CONTENTNODE, {
+  const { contentNode } = await client.query<{ contentNode: Page | Post | Product }>(GET_CONTENTNODE, {
     variables: { uri: pageUri },
   });
 
@@ -53,6 +55,15 @@ const CatchallPage = async ({ params }: PageParams) => {
         <PagePanels
           panels={page?.pagePanels?.pagePanels?.filter((panel) => panel !== null) ?? undefined}
           pageTitle={page.title ?? ""}
+        />
+      );
+
+    case "Product":
+      const product = contentNode as Product;
+      return (
+        <PagePanels
+          panels={product?.pagePanels?.pagePanels?.filter((panel) => panel !== null) ?? undefined}
+          pageTitle={product.title ?? ""}
         />
       );
 

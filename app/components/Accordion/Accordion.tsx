@@ -32,7 +32,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, de
   const id = `accordion-${title.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
-    <div className={styles["accordion-item"]}>
+    <div className={`${styles["accordion-item"]} ${isOpen ? styles.open : ""}`}>
       <button
         className={`${styles["accordion-item__trigger"]} ${isOpen ? styles.open : ""}`}
         onClick={handleToggle}
@@ -41,7 +41,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, de
         aria-controls={id}
       >
         <span>{title}</span>
-        <Icon type="down" />
+        <Icon type="chevronDown" />
       </button>
 
       <div

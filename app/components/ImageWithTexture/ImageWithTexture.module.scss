@@ -38,7 +38,7 @@
     &::before {
       content: "";
       position: absolute;
-      inset: -0.2rem;
+      inset: -0.25rem;
       background-image:
         radial-gradient(circle, var(--Neutral-Dark-Grey, #8f9a95) 50%, transparent 50%),
         radial-gradient(circle, var(--Neutral-Dark-Grey, #8f9a95) 50%, transparent 50%),
@@ -49,7 +49,7 @@
         top right,
         bottom left,
         bottom right;
-      background-size: 0.3rem 0.35rem;
+      background-size: 0.5rem 0.5rem;
       background-repeat: no-repeat;
       z-index: 5;
       pointer-events: none;

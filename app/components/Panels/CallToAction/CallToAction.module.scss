@@ -3,6 +3,7 @@
 
 .cta {
   padding: 4rem 0;
+  background: var(--Foundation-Commerce-Canvas, #f2f6f3);
 
   @include mixins.breakpoint-up(mobile) {
     padding: 5.5rem 0;
@@ -13,23 +14,30 @@
     padding: 3.5rem 1rem 3rem 1rem;
     display: grid;
     gap: 1rem;
+    position: relative;
 
     @include mixins.breakpoint-up(mobile) {
       padding: 4rem 0;
       grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 1.5rem;
     }
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      background: var(--Foundation-Signal-Green, #00d180);
+      height: 0.75rem;
+      bottom: -0.75rem;
+    }
   }
 
-  &__texture {
-    display: block;
-    width: 3.5rem;
-    height: 0.75rem;
-    background-image: url("data:image/svg+xml;utf8,<svg width='4' height='4' xmlns='http://www.w3.org/2000/svg'><rect width='2' height='2' fill='white'/></svg>");
-    background-size: 4px 4px;
-    background-repeat: repeat;
+  &__divider {
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 2 / span 12;
+      grid-column: 2 / span 11;
     }
   }
 
@@ -38,8 +46,9 @@
     gap: 1rem;
 
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 1 / span 7;
-      grid-template-columns: auto 1fr;
+      grid-column: 1 / span 6;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 1.5rem;
     }
   }
 
@@ -64,6 +73,7 @@
     @include mixins.breakpoint-up(mobile) {
       @include text-styles.text-style("desktop-caption");
       margin-top: 0.5rem;
+      grid-column: 1 / span 2;
     }
   }
 
@@ -73,15 +83,18 @@
     @include text-styles.text-style("mobile-h2");
 
     @include mixins.breakpoint-up(mobile) {
-      @include text-styles.text-style("desktop-h2");
+      font-size: 1.875rem;
+      line-height: 120%; /* 2.25rem */
+      letter-spacing: -0.01875rem;
+      grid-column: 3 / span 5;
     }
   }
 
   &__button {
     @include mixins.breakpoint-up(mobile) {
       grid-column: 8 / span 3;
-      display: flex;
-      align-items: center;
+      // display: flex;
+      // align-items: center;
     }
   }
 }

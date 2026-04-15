@@ -5,82 +5,16 @@
 .nav {
   display: none;
 
-  @include mixins.breakpoint-up(mobile) {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto 1fr;
-    row-gap: 1rem;
-  }
-
-  @include mixins.breakpoint-up(tablet) {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  @include mixins.breakpoint-up(small-desktop) {
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr;
-    column-gap: 1.5rem;
-  }
-
-  .logo {
-    height: 1.5rem;
-    svg {
-      height: 100%;
-      width: auto;
-    }
-
-    @include mixins.breakpoint-up(mobile) {
-      grid-column: 1/2;
-      grid-row: 1/2;
-      place-self: center start;
-    }
-  }
-
-  // &__items {
-  //   @include mixins.breakpoint-up(mobile) {
-  //     display: flex;
-  //     gap: 1.5rem;
-  //     align-items: center;
-  //     grid-column: 1/3;
-  //     grid-row: 2/3;
-  //   }
+  // @include mixins.breakpoint-up(small-desktop) {
+  //   display: block;
   // }
 
-  &-list {
-    @include mixins.breakpoint-up(mobile) {
-      display: flex;
-      // justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      position: relative;
-    }
-
-    &-wrapper {
-      @include mixins.breakpoint-up(mobile) {
-        grid-column: 1/3;
-        grid-row: 2/3;
-      }
-
-      @include mixins.breakpoint-up(small-desktop) {
-        grid-column: 2/3;
-        grid-row: 1/2;
-        place-self: center start;
-      }
-    }
-  }
-
-  &__actions {
-    @include mixins.breakpoint-up(mobile) {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-      justify-content: flex-end;
-      grid-column: 2/3;
-      grid-row: 1/2;
-    }
-  }
+  // &-list {
+  //   @include mixins.breakpoint-up(mobile) {
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     flex-wrap: wrap;
+  //   }
+  // }
 }

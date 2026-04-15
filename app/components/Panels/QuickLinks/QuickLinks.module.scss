@@ -1,0 +1,110 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.quick-links {
+  background: var(--Foundation-White, #fff);
+  padding: 2.5rem 0;
+  overflow: hidden;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 5rem 0;
+    background: url("/assets/light-grey-texture.svg") no-repeat center;
+    background-position: bottom right;
+  }
+
+  &__container {
+    display: grid;
+    gap: 1.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      position: relative;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-column: 1 / span 6;
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__title {
+    color: var(--Foundation-Orchestrated-Green, #063e2d);
+    padding-left: 1.5rem;
+
+    @include text-styles.text-style("mobile-h2");
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-h2");
+      letter-spacing: -0.025rem;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem 0.5rem 1.5rem;
+    text-decoration: none;
+    color: var(--Foundation-Black, #1e2221);
+    transition: color var(--transition, 0.3s ease-in-out);
+
+    @include text-styles.text-style("mobile-h4");
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-h4");
+    }
+
+    &:hover {
+      color: var(--Foundation-Orchestrated-Green, #063e2d);
+
+      .quick-links__arrow {
+        transform: translateX(4px);
+      }
+    }
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition, 0.3s ease-in-out);
+  }
+
+  // &__decoration {
+  //   display: none;
+
+  //   @include mixins.breakpoint-up(mobile) {
+  //     display: flex;
+  //     align-items: center;
+  //     grid-column: 7 / span 6;
+  //     pointer-events: none;
+
+  //     img {
+  //       width: 100%;
+  //       height: auto;
+  //       opacity: 0.5;
+  //       object-fit: contain;
+  //     }
+  //   }
+  // }
+}

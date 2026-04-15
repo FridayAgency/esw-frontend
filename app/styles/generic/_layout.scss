@@ -37,7 +37,7 @@ html {
   width: 100%;
   max-width: var(--page-width);
 
-  @include mixins.breakpoint-up(mobile) {
+  @include mixins.breakpoint-up(tablet) {
     padding-left: var(--outer-margin-md);
     padding-right: var(--outer-margin-md);
   }

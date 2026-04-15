@@ -1,13 +1,102 @@
 import Container from "../Container";
-
 import styles from "./Footer.module.scss";
 import Logo from "../Logo";
 import Icon from "../Icon";
+import { Menu, MenuItem } from "@/types/graphql";
+import client from "@/lib/client";
+import { FRAGMENTS } from "@fridayagency/graphql-client";
+
+// A "section" is a group of child links beneath an optional sub-heading.
+// Formed by splitting child items on nodes whose path === "#title".
+type NavSection = {
+  heading: string | null;
+  items: MenuItem[];
+};
+
+/**
+ * Split a flat list of child menu items into labelled sections.
+ *
+ * Items with path === "#title" act as section dividers in WordPress.
+ * If the very first divider has the same label as the parent item
+ * (e.g. "Platform" inside the Platform column) it is skipped because
+ * the parent heading already covers it.
+ */
+function groupChildItems(edges: Array<{ node: MenuItem }>, parentLabel: string): NavSection[] {
+  const sections: NavSection[] = [];
+  let current: NavSection = { heading: null, items: [] };
+
+  for (const { node } of edges) {
+    if (node.path === "#title") {
+      // Skip the redundant first divider that mirrors the parent label
+      if (node.label === parentLabel && sections.length === 0 && current.items.length === 0) {
+        continue;
+      }
+      // Flush the current section before starting a new one
+      if (current.heading !== null || current.items.length > 0) {
+        sections.push(current);
+      }
+      current = { heading: node.label ?? null, items: [] };
+    } else {
+      current.items.push(node);
+    }
+  }
+
+  // Flush the last section
+  if (current.heading !== null || current.items.length > 0) {
+    sections.push(current);
+  }
+
+  return sections;
+}
 
 const Footer: React.FC = async () => {
+  const { menu } = await client.query<{ menu: Menu }>(
+    `query GetMenu($id: ID!) {
+        menu(id: $id, idType: NAME) {
+          menuItems(first: 100) {
+            edges {
+              node {
+                ...MenuItemFragment
+                childItems(first: 100) {
+                  edges {
+                    node {
+                      ...MenuItemFragment
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+  ${FRAGMENTS.MENU_ITEM_FRAGMENT}
+`,
+    { variables: { id: "Main Menu" } },
+  );
+
+  // Only top-level items (parentId is null in WordPress).
+  // Cast is needed because Edge's generic `node: Node` widens the inferred type.
+  const topLevelItems = (menu?.menuItems?.edges ?? [])
+    .filter(({ node }) => !(node as MenuItem).parentId)
+    .map(({ node }) => node as MenuItem);
+
+  // "Home" lives at the top of column 1, above the first major heading
+  const homeItem = topLevelItems.find((item) => item.path === "/");
+
+  // First 3 top-level items that have children become the major nav columns
+  // (Why ESW → col 1, Platform → col 2, Solutions → col 3)
+  const majorColumns = topLevelItems.filter((item) => (item.childItems?.edges?.length ?? 0) > 0).slice(0, 3);
+
+  const majorIds = new Set(majorColumns.map((i) => i.databaseId));
+
+  // Everything except Home and the major columns shares the 4th column
+  // (Resources, Careers + children, Blog, …)
+  const secondaryItems = topLevelItems.filter((item) => !majorIds.has(item.databaseId) && item.path !== "/");
+
   return (
     <footer className={styles.footer}>
       <Container className={styles["footer__container"]}>
+        {/* Logo + CTA — mobile: stacked at top; desktop: left sidebar via grid */}
         <div className={styles["footer__header"]}>
           <Logo />
           <div className={styles["footer__actions-mobile"]}>
@@ -35,147 +124,81 @@ const Footer: React.FC = async () => {
         </div>
 
         <nav className={styles["footer__nav"]} aria-label="Footer navigation">
-          <div className={styles["footer__nav-group"]}>
-            <h2 className={styles["footer__nav-heading"]}>Why ESW</h2>
-            <ul className={styles["footer__nav-list"]}>
-              <li className={styles["footer__nav-item"]}>
-                <a href="#">Why Choose ESW</a>
-              </li>
-              <li className={styles["footer__nav-item"]}>
-                <a href="#">About the Company</a>
-              </li>
-              <li className={styles["footer__nav-item"]}>
-                <a href="#">Customer Success Stories</a>
-              </li>
-            </ul>
-          </div>
+          {/* Columns 1–3: major items with children (Why ESW, Platform, Solutions) */}
+          {majorColumns.map((item, colIndex) => {
+            const sections = groupChildItems(item.childItems?.edges ?? [], item.label ?? "");
+            // If any section has a heading, render the structured sub-group layout
+            const hasSections = sections.some((s) => s.heading !== null);
 
-          <div className={styles["footer__nav-group"]}>
-            <div className={styles["footer__nav-sub-group"]}>
-              <h2 className={styles["footer__nav-heading"]}>Platform</h2>
-              <ul className={styles["footer__nav-list"]}>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Platform Overview</a>
-                </li>
-              </ul>
-            </div>
-            <div className={styles["footer__nav-sub-group"]}>
-              <h3 className={styles["footer__nav-subheading"]}>Products</h3>
-              <ul className={styles["footer__nav-list"]}>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Global Checkout</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Worldwide Omnichannel</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Agentic Commerce</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Commerce Platform Connectors</a>
-                </li>
-              </ul>
-            </div>
-            <div className={styles["footer__nav-sub-group"]}>
-              <h3 className={styles["footer__nav-subheading"]}>Services</h3>
-              <ul className={styles["footer__nav-list"]}>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Merchant of Record</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Growth Services</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Customer Services</a>
-                </li>
-              </ul>
-            </div>
-            <div className={styles["footer__nav-sub-group"]}>
-              <h3 className={styles["footer__nav-subheading"]}>Ecosystem</h3>
-              <ul className={styles["footer__nav-list"]}>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Global Logistics Infrastructure</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Partner Ecosystem</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Partner Integrations</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+            return (
+              <div key={item.databaseId} className={styles["footer__nav-group"]}>
+                {colIndex === 0 && homeItem && (
+                  <a href={homeItem.path ?? "/"} className={styles["footer__nav-heading"]}>
+                    {homeItem.label}
+                  </a>
+                )}
+                <h2 className={styles["footer__nav-heading"]}>{item.label}</h2>
 
-          <div className={styles["footer__nav-group"]}>
-            <h2 className={styles["footer__nav-heading"]}>Solutions</h2>
-            <div className={styles["footer__nav-sub-group"]}>
-              <h3 className={styles["footer__nav-subheading"]}>Use Cases</h3>
-              <ul className={styles["footer__nav-list"]}>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">New Market Launch</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Consolidate Global Commerce Stack</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Improve International Margin</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Simplify Global Operations</a>
-                </li>
-              </ul>
-            </div>
-            <div className={styles["footer__nav-sub-group"]}>
-              <h3 className={styles["footer__nav-subheading"]}>Role</h3>
-              <ul className={styles["footer__nav-list"]}>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Ecommerce</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Operations</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Finance</a>
-                </li>
-              </ul>
-            </div>
-            <div className={styles["footer__nav-sub-group"]}>
-              <h3 className={styles["footer__nav-subheading"]}>Industries</h3>
-              <ul className={styles["footer__nav-list"]}>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Fashion &amp; Apparel</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Luxury</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Beauty</a>
-                </li>
-                <li className={styles["footer__nav-item"]}>
-                  <a href="#">Consumer Electronics</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+                {hasSections ? (
+                  sections.map((section, i) => (
+                    <div key={i} className={styles["footer__nav-sub-group"]}>
+                      {section.heading && <h3 className={styles["footer__nav-subheading"]}>{section.heading}</h3>}
+                      {section.items.length > 0 && (
+                        <ul className={styles["footer__nav-list"]}>
+                          {section.items.map((child) => (
+                            <li key={child.databaseId} className={styles["footer__nav-item"]}>
+                              <a href={child.uri ?? child.path ?? "#"}>{child.label}</a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  // Simple column — no sub-section headings (e.g. Why ESW)
+                  <ul className={styles["footer__nav-list"]}>
+                    {(item.childItems?.edges ?? []).map(({ node }) => {
+                      const child = node as MenuItem;
+                      return (
+                        <li key={child.databaseId} className={styles["footer__nav-item"]}>
+                          <a href={child.uri ?? child.path ?? "#"}>{child.label}</a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+            );
+          })}
 
+          {/* Column 4: secondary items (Home, Resources, Careers, Blog, …) */}
           <div className={styles["footer__nav-group"]}>
             <ul className={styles["footer__nav-list-secondary"]}>
-              <li className={styles["footer__nav-item"]}>
-                <a href="#">Resources</a>
-              </li>
-              <li className={styles["footer__nav-item"]}>
-                <a href="#">Careers</a>
-              </li>
-              <li className={styles["footer__nav-item"]}>
-                <a href="#">Blog</a>
-              </li>
-              <li className={styles["footer__nav-item"]}>
-                <a href="#">Newsroom</a>
-              </li>
+              {secondaryItems.map((item) => {
+                const children = item.childItems?.edges ?? [];
+                return (
+                  <li key={item.databaseId} className={styles["footer__nav-item"]}>
+                    <a href={item.uri ?? item.path ?? "#"}>{item.label}</a>
+                    {children.length > 0 && (
+                      <ul className={styles["footer__nav-list"]}>
+                        {children.map(({ node }) => {
+                          const child = node as MenuItem;
+                          return (
+                            <li key={child.databaseId} className={styles["footer__nav-item"]}>
+                              <a href={child.uri ?? child.path ?? "#"}>{child.label}</a>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </nav>
 
+        {/* Desktop CTA + socials — right sidebar via grid, hidden on mobile */}
         <div className={styles["footer__actions-desktop"]}>
           <button type="button" className={styles["footer__cta"]}>
             Talk to Us
@@ -199,6 +222,7 @@ const Footer: React.FC = async () => {
           </ul>
         </div>
 
+        {/* Legal links bar */}
         <nav className={styles["footer__legal"]} aria-label="Legal">
           <ul className={styles["footer__legal-list"]}>
             <li className={styles["footer__legal-item"]}>
@@ -219,11 +243,33 @@ const Footer: React.FC = async () => {
             <li className={styles["footer__legal-item"]}>
               <a href="#">Sitemap</a>
             </li>
+            <li className={styles["footer__legal-item"]}>
+              <a href="#">Legal Hub</a>
+            </li>
+            <li className={styles["footer__legal-item"]}>
+              <a href="#">Accessibility Statement</a>
+            </li>
           </ul>
         </nav>
+
+        <p className={styles["footer__disclaimer"]}>
+          Monthly Active Recipients: Pursuant to the Digital Services Act, Article 24(2), our average monthly recipients
+          are 241,559.42.
+        </p>
       </Container>
 
-      <div className={styles["footer__copyright"]}>&copy; {new Date().getFullYear()} ESW</div>
+      {/* Copyright bar */}
+      <div className={styles["footer__copyright"]}>
+        <Container className={styles["footer__copyright-container"]}>
+          <div className={styles["footer__copyright-left"]}>
+            <span className={styles["footer__copyright-year"]}>&copy; {new Date().getFullYear()} ESW</span>
+            <span className={styles["footer__copyright-rights"]}>All Rights Reserved</span>
+          </div>
+          <span className={styles["footer__copyright-site"]}>
+            Site by <a href="#">Friday</a>
+          </span>
+        </Container>
+      </div>
     </footer>
   );
 };

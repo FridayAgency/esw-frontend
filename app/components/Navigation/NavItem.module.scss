@@ -4,73 +4,47 @@
 @use "@/app/styles/generic/text-styles";
 
 .nav-item {
+  // &__button {
+  //   padding-left: 20px;
+  // }
+
   &__link {
-    display: flex;
-    padding: 1.5rem 1rem;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--Warm-Grey-500, rgba(225, 220, 214, 0.6));
     text-decoration: none;
-    color: var(--black-500);
-    transition: color 0.2s ease-in;
+    display: block;
+    transition: all 0.2s ease-in;
+    color: var(--Foundation-Black, #1e2221);
+    @include text-styles.text-style("mobile-h4");
+    padding: 0.44rem 0;
 
-    svg {
-      path {
-        stroke: var(--black-500);
-        stroke-width: 1px;
-      }
+    // @include mixins.breakpoint-up(mobile) {
+    //   padding: 0 16px;
+    //   font-size: 0.9rem;
+    //   font-weight: 600;
+    //   line-height: 160%;
+    // }
 
-      @include mixins.breakpoint-up(mobile) {
-        display: none;
-      }
-    }
-
-    &.active {
-      color: var(--black);
-      font-weight: 500;
-      pointer-events: none;
-
-      svg {
-        path {
-          stroke: var(--black);
-        }
-      }
-    }
-
-    @include mixins.breakpoint-up(mobile) {
-      border-bottom: 0;
-      padding: 0.5rem 0.75rem;
-      font-size: 1rem;
-      line-height: 1.5rem;
+    @include mixins.breakpoint-up(tablet) {
+      color: var(--Foundation-White, #fff);
+      @include text-styles.text-style("desktop-body-medium");
+      padding: 1.2rem 0;
     }
 
     &:hover,
     &:focus-visible {
       @include mixins.breakpoint-up(mobile) {
-        color: var(--dark-aqua);
+        color: var(--Foundation-Signal-Green, #00d180);
       }
     }
 
     &:focus-visible {
-      outline: 4px solid var(--dark-aqua);
-      outline-offset: -0.25rem;
+      outline: 4px solid var(--Foundation-Signal-Green, #00d180);
+
+      border-radius: 0.25rem;
+      outline-offset: 0.25rem;
     }
 
     &.active {
-      span {
-        position: relative;
-        width: fit-content;
-        &::after {
-          content: "";
-          width: 100%;
-          height: 1px;
-          background: var(--Black);
-          position: absolute;
-          bottom: -0.25rem;
-          right: 0;
-          left: 0;
-        }
-      }
+      color: var(--Foundation-Signal-Green, #00d180);
     }
   }
 }

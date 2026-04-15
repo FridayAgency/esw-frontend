@@ -15,6 +15,7 @@
     @include mixins.breakpoint-up(mobile) {
       grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 1.5rem;
+      place-items: center start;
     }
 
     &::before {
@@ -22,7 +23,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      background-image: url("/assets/ck.png");
+      background-image: var(--logo-image);
       background-repeat: repeat-y;
       background-size: contain;
       filter: blur(2px) grayscale(100%);
@@ -43,7 +44,7 @@
       width: 100%;
       height: 20.9375rem;
       z-index: 1;
-      background-image: url("/assets/ck.png");
+      background-image: var(--logo-image);
       background-repeat: no-repeat;
       background-position: left top;
       background-size: cover;
@@ -64,12 +65,19 @@
 
   &__logo {
     background: var(--Foundation-White, #fff);
-    width: 10.1875rem;
+    // width: 10.1875rem;
     height: 5.25656rem;
+    padding: 0.55825rem 1.11644rem;
+
+    img {
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+    }
 
     @include mixins.breakpoint-up(mobile) {
       grid-column: 1 / span 3;
-      width: 13.6875rem;
+
       height: 7.0625rem;
     }
   }
@@ -110,15 +118,17 @@
     p {
       color: var(--Foundation-Operational-Green, #007a4e);
       @include text-styles.text-style("mobile-h5");
-
       letter-spacing: 0.01125rem;
     }
     &-image {
-      width: 4rem;
-      height: 4rem;
-      aspect-ratio: 1/1;
-      border-radius: 50%;
-      background: var(--Foundation-Signal-Green, #00d180);
+      flex-shrink: 0;
+      img {
+        width: 4rem;
+        height: 4rem;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
   }
 }

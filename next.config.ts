@@ -8,17 +8,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "capitalflow.local",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "capitalflowdev.wpenginepowered.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "http",
-        hostname: "capitalflowdev.wpenginepowered.com",
+        hostname: "esw1dev.wpenginepowered.com",
         pathname: "/**",
       },
     ],

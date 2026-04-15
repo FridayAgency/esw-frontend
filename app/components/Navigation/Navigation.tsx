@@ -1,48 +1,64 @@
 /** @format */
 
-import { Menu, MenuItem, MenuToMenuItemConnectionEdge } from "@/types/graphql";
-import Link from "next/link";
-
-import styles from "./Navigation.module.scss";
-import NavitemWithChildren from "./NavitemWithChildren";
-import NavItem from "./NavItem";
-
-import MobileNav from "./MobileNav";
-
+import { Menu, MenuToMenuItemConnectionEdge } from "@/types/graphql";
+import { FRAGMENTS } from "@fridayagency/graphql-client";
 import client from "@/lib/client";
-import { GET_MENU } from "@/data/fragments";
+import { logError } from "@/utils/logError";
+import MobileNav from "./MobileNav";
+import DesktopNav from "./DesktopNav";
 
 const Navigation: React.FC = async () => {
   try {
-    const { menu } = await client.query<{ menu: Menu }>(GET_MENU, { variables: { id: "Main Menu" } });
+    const { menu } = await client.query<{ menu: Menu }>(
+      `query GetMenu($id: ID!) {
+        menu(id: $id, idType: NAME) {
+          menuItems(first:100) {
+            edges {
+              node {
+                ...MenuItemFragment
+                cssClasses
+                childItems(first:100) {
+                  edges {
+                    node {
+                      ...MenuItemFragment
+                      cssClasses
+                    
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+  ${FRAGMENTS.MENU_ITEM_FRAGMENT}
+`,
+      { variables: { id: "Main Menu" } },
+    );
+
     if (!menu?.menuItems?.edges) {
-      console.warn("Navigation: No menu items found");
       return null;
     }
 
-    const topLevelItems = menu.menuItems.edges.filter((item: MenuToMenuItemConnectionEdge) => !item.node.parentId);
+    const filteredMenu = {
+      ...menu,
+      menuItems: {
+        ...menu.menuItems,
+        edges: (menu.menuItems.edges as MenuToMenuItemConnectionEdge[]).filter(
+          ({ node }) => !node.cssClasses?.includes("footer-only"),
+        ),
+      },
+    };
 
     return (
       <>
-        <MobileNav menu={menu} />
-
-        <nav aria-label="Site navigation" className={styles.nav}>
-          <ul className={styles["nav-list"]}>
-            {topLevelItems.map((item: MenuToMenuItemConnectionEdge) => {
-              const hasChildren = item.node.childItems?.edges && item.node.childItems.edges.length > 0;
-
-              if (hasChildren) {
-                return <NavitemWithChildren item={item.node} key={item.node.databaseId} />;
-              }
-
-              return <NavItem item={item.node} key={item.node.databaseId} />;
-            })}
-          </ul>
-        </nav>
+        <MobileNav menu={filteredMenu as Menu} />
+        <DesktopNav menu={filteredMenu as Menu} />
       </>
     );
   } catch (error) {
-    console.error("Navigation: Failed to load menu", error);
+    logError("Failed to fetch navigation menu", error);
     return null;
   }
 };

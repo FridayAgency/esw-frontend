@@ -6,12 +6,15 @@
 }
 
 .accordion-item {
-  border-bottom: 1px solid #e0e0e0;
-
-  &:first-child {
-    border-top: 1px solid #e0e0e0;
+  border-bottom: 2px solid var(--Foundation-Commerce-Canvas, #f2f6f3);
+  &.open {
+    border-bottom: 2px solid var(--Foundation-Operational-Green, #007a4e);
   }
 
+  &:hover,
+  &:focus-visible {
+    border-bottom: 2px solid var(--Foundation-Operational-Green, #007a4e);
+  }
   &__trigger {
     // // @extend.secondary-copy-bold;
     display: flex;
@@ -21,19 +24,23 @@
     gap: 2rem;
     // align-items: center;
     text-decoration: none;
-    border-bottom: 1px solid var(--blue-200, #d5dfea);
-    padding: 1rem 0.75rem;
-    color: var(--blue-brand, #003f87);
+    border: none;
+
+    background: var(--Foundation-White, #fff);
+    padding: 0.75rem 1rem;
     transition: var(--transition);
     width: 100%;
-    background: none;
-    border: none;
-    cursor: pointer;
+    color: var(--Foundation-Black, #1e2221);
+    @include text-styles.text-style("mobile-h5");
 
-    &:hover,
-    &:focus-visible {
-      background: var(--blue-100, #e8eef4);
+    /* shadow/drop 1 */
+    box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.07);
+
+    @include mixins.breakpoint-up(tablet) {
+      @include text-styles.text-style("desktop-h5");
     }
+
+    cursor: pointer;
 
     &:focus-visible {
       outline: 2px solid var(--blue-500, #003f87);
@@ -42,10 +49,16 @@
     svg {
       flex-shrink: 0;
       transition: transform 0.3s ease;
+      path {
+        fill: var(--Neutral-Dark-Grey, #8f9a95);
+      }
     }
 
-    &.open svg {
-      transform: rotate(180deg);
+    &.open {
+      border-bottom: none;
+      svg {
+        transform: rotate(180deg);
+      }
     }
   }
 
@@ -55,8 +68,8 @@
   }
 
   &__inner {
-    border-top: 1px solid var(--blue-200, #d5dfea);
+    border-bottom: 2px solid transparent;
     padding: 2rem 1rem;
-    background: var(--silver-50, #f8f8f8);
+    background: var(--Foundation-White, #fff);
   }
 }

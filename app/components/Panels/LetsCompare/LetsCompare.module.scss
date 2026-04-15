@@ -1,0 +1,181 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.lets-compare {
+  background-color: var(--Foundation-Commerce-Canvas);
+  padding: 4.5rem 0;
+  position: relative;
+
+  @include mixins.breakpoint-up(tablet) {
+    padding: 5rem 0;
+  }
+
+  &__container {
+    @include mixins.breakpoint-up(tablet) {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1.5rem;
+      padding-left: var(--outer-margin-md);
+      padding-right: var(--outer-margin-md);
+    }
+
+    @include mixins.breakpoint-up(large-desktop) {
+      padding-left: var(--outer-margin-lg);
+      padding-right: var(--outer-margin-lg);
+    }
+  }
+
+  &:after {
+    @include mixins.breakpoint-up(mobile) {
+      content: "";
+      width: 8rem;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background: url(/assets/pattern-13.svg) no-repeat;
+      background-position: top right;
+    }
+  }
+
+  &:before {
+    @include mixins.breakpoint-up(mobile) {
+      content: "";
+      width: 8rem;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      top: 0;
+      background: url(/assets/pattern-13.svg) no-repeat;
+      background-position: top left;
+      transform: scaleX(-1);
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding: 0 0 0 1rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      padding: 0;
+      grid-column: 2 / span 10;
+      gap: 2.5rem;
+    }
+  }
+
+  &__heading {
+    @include text-styles.text-style("mobile-h2");
+    color: var(--Foundation-Orchestrated-Green);
+
+    text-align: left;
+
+    @include mixins.breakpoint-up(tablet) {
+      @include text-styles.text-style("desktop-h2");
+      text-align: center;
+    }
+  }
+
+  &__table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 1rem 0 0;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+
+    @include mixins.breakpoint-up(tablet) {
+      table-layout: fixed;
+    }
+  }
+
+  // Header row: empty first cell
+  &__th-empty {
+    background-color: var(--Foundation-Black);
+    border-bottom: 1px solid var(--Neutral-Dark-Grey);
+    width: 8.5rem;
+    min-width: 8.5rem;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+
+    @include mixins.breakpoint-up(tablet) {
+      width: 10.25rem;
+      min-width: 10.25rem;
+    }
+  }
+
+  // Header row: ESW / Competitors column headers
+  &__th {
+    @include text-styles.text-style("mobile-body-large-bold");
+    background-color: var(--Foundation-Black);
+    color: var(--Foundation-White);
+    border-bottom: 1px solid var(--Neutral-Dark-Grey);
+    border-left: 1px solid var(--Neutral-Dark-Grey);
+    padding: 1.5rem;
+    text-align: center;
+    min-width: 12.9rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      @include text-styles.text-style("desktop-body-large-bold");
+    }
+  }
+
+  // Category label column (row headers)
+  &__row-header {
+    @include text-styles.text-style("mobile-body-large-bold");
+    background-color: var(--Foundation-Black);
+    color: var(--Foundation-White);
+    border-bottom: 1px solid var(--Neutral-Dark-Grey);
+    border-right: 1px solid var(--Neutral-Dark-Grey);
+    padding: 1.5rem;
+    text-align: left;
+    vertical-align: middle;
+    width: 8.5rem;
+    min-width: 8.5rem;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+
+    @include mixins.breakpoint-up(tablet) {
+      width: 10.25rem;
+      min-width: 10.25rem;
+      @include text-styles.text-style("desktop-body-large-bold");
+    }
+  }
+
+  // ESW column cells
+  &__td--esw {
+    @include text-styles.text-style("mobile-body-default");
+    background-color: var(--Function-Soft-Mint);
+    color: var(--Foundation-Black);
+    border-bottom: 1px solid var(--Neutral-Dark-Grey);
+    padding: 1.5rem;
+    vertical-align: middle;
+
+    @include mixins.breakpoint-up(tablet) {
+      @include text-styles.text-style("desktop-body-default");
+    }
+  }
+
+  // Competitors column cells
+  &__td--competitors {
+    @include text-styles.text-style("mobile-body-default");
+    background-color: var(--Foundation-White);
+    color: var(--Foundation-Black);
+    border-bottom: 1px solid var(--Neutral-Dark-Grey);
+    border-left: 1px solid var(--Neutral-Dark-Grey);
+    padding: 1.5rem;
+    vertical-align: middle;
+
+    @include mixins.breakpoint-up(tablet) {
+      @include text-styles.text-style("desktop-body-default");
+    }
+  }
+}

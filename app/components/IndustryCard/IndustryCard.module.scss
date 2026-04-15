@@ -31,9 +31,16 @@
   }
 
   &__icon {
-    width: 6rem;
-    height: 6rem;
-    aspect-ratio: 1/1;
+    svg {
+      width: 6rem;
+      height: 6rem;
+      aspect-ratio: 1/1;
+
+      path {
+        fill: var(--Foundation-Orchestrated-Green, #063e2d);
+        stroke: var(--Foundation-Signal-Green, #00d180);
+      }
+    }
   }
 
   &__content {

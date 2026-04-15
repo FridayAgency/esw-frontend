@@ -5,6 +5,7 @@ import TextRevealHeading from "../../TextRevealHeading";
 
 import styles from "./IconBlock.module.scss";
 import Icon from "../../Icon";
+import { ClassName } from "@fridayagency/classnames";
 
 export const LIST_ICON_FRAGMENT = `
   title
@@ -41,6 +42,12 @@ interface IconBlockProps {
 const IconBlock: React.FC<IconBlockProps> = ({ panel }) => {
   const { title, list, callToAction } = panel;
 
+  const listClass = new ClassName(styles["icon-block__list"]);
+
+  if (list && list.length > 3) {
+    listClass.add(styles["icon-block__list--columns"]);
+  }
+
   return (
     <section className={styles["icon-block"]}>
       <Container className={styles["icon-block__container"]}>
@@ -52,7 +59,7 @@ const IconBlock: React.FC<IconBlockProps> = ({ panel }) => {
           </div>
         )}
 
-        <ul className={styles["icon-block__list"]}>
+        <ul className={listClass.toString()}>
           {list &&
             list.length &&
             list.map((item, index) => {

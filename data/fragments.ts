@@ -1,4 +1,6 @@
 import { ACCORDIONPANEL_FRAGMENT } from "@/app/components/Panels/AccordionPanel";
+import { CALLTOACTION_FRAGMENT } from "@/app/components/Panels/CallToAction";
+import { CALL_TO_ACTION_WITH_IMAGES_FRAGMENT } from "@/app/components/Panels/CallToActionWithImages";
 import { CASE_STUDY_GATEWAY_FRAGMENT } from "@/app/components/Panels/CaseStudyGateway";
 import { CONTACTPANEL_FRAGMENT } from "@/app/components/Panels/ContactPanel";
 import { EDITORCONTENT_FRAGMENT } from "@/app/components/Panels/EditorContent";
@@ -7,15 +9,35 @@ import { FEATURE_BLOCK_GREEN_EMPHASIS_FRAGMENT } from "@/app/components/Panels/F
 import { HERO_HEADER_FRAGMENT } from "@/app/components/Panels/HeroHeader";
 import { HERO_HEADER_SIMPLE_FRAGMENT } from "@/app/components/Panels/HeroHeaderSimple";
 import { LIST_ICON_FRAGMENT } from "@/app/components/Panels/IconBlock";
+import { INDUSTYCARDS_FRAGMENT } from "@/app/components/Panels/IndustryCards";
 import { LATESTNEWS_FRAGMENT } from "@/app/components/Panels/LatestNews";
+import { LETS_COMPARE_FRAGMENT } from "@/app/components/Panels/LetsCompare";
 import { LOGO_BLOCK_FRAGMENT } from "@/app/components/Panels/LogoBlock";
+import { OPEN_CONTENT_FRAGMENT } from "@/app/components/Panels/OpenContent";
 import { PAGEHEADER_FRAGMENT } from "@/app/components/Panels/PageHeader";
+import { PRIMARYPRODUCTSECTION_FRAGMENT } from "@/app/components/Panels/PrimaryProductSection";
+import { QUICK_LINKS_FRAGMENT } from "@/app/components/Panels/QuickLinks";
 import { RESOURCEDOWNLOADS_FRAGMENT } from "@/app/components/Panels/ResourceDownloads";
 import { STATS_BLOCK_FRAGMENT } from "@/app/components/Panels/StatsBlock";
-import { TEXTANDIMAGEPANEL_FRAGMENT } from "@/app/components/Panels/TextAndImagePanel";
-import { TEXTHEADER_FRAGMENT } from "@/app/components/Panels/TextHeader";
+import { TESTIMONIAL_FRAGMENT } from "@/app/components/Panels/Testimonial";
 
 import { FRAGMENTS } from "@fridayagency/graphql-client";
+
+export const ACF_MEDIAITEM_FRAGMENT = `
+fragment AcfMediaItem on AcfMediaItemConnectionEdge {
+  node {
+    altText
+    sourceUrl
+    srcSet
+    databaseId
+    caption
+    mediaDetails {
+      height
+      width
+    }
+  }
+}
+`;
 
 export const PAGEPANELS_FRAGMENT = (() => {
   const mappings: [typeName: string, fragment: string][] = [
@@ -27,6 +49,16 @@ export const PAGEPANELS_FRAGMENT = (() => {
     ["PagePanelsPagePanelsStatsBlockLayout", STATS_BLOCK_FRAGMENT],
     ["PagePanelsPagePanelsCaseStudyGatewayLayout", CASE_STUDY_GATEWAY_FRAGMENT],
     ["PagePanelsPagePanelsFeatureBlockGreenEmphasisLayout", FEATURE_BLOCK_GREEN_EMPHASIS_FRAGMENT],
+    ["PagePanelsPagePanelsPrimaryProductSectionLayout", PRIMARYPRODUCTSECTION_FRAGMENT],
+    ["PagePanelsPagePanelsOpenContentLayout", OPEN_CONTENT_FRAGMENT],
+    ["PagePanelsPagePanelsResourceDownloadsLayout", RESOURCEDOWNLOADS_FRAGMENT],
+    ["PagePanelsPagePanelsCallToActionLayout", CALLTOACTION_FRAGMENT],
+    ["PagePanelsPagePanelsTestimonialLayout", TESTIMONIAL_FRAGMENT],
+    ["PagePanelsPagePanelsAccordionPanelLayout", ACCORDIONPANEL_FRAGMENT],
+    ["PagePanelsPagePanelsIndustryCardsLayout", INDUSTYCARDS_FRAGMENT],
+    ["PagePanelsPagePanelsCallToActionWithImagesLayout", CALL_TO_ACTION_WITH_IMAGES_FRAGMENT],
+    ["PagePanelsPagePanelsLetsCompareLayout", LETS_COMPARE_FRAGMENT],
+    ["PagePanelsPagePanelsQuickLinksLayout", QUICK_LINKS_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");
@@ -37,7 +69,7 @@ export const PAGEPANELS_FRAGMENT = (() => {
       ${blocks}
     }
   }
-    ${FRAGMENTS.ACF_MEDIA_ITEM}
+    ${ACF_MEDIAITEM_FRAGMENT}
     ${FRAGMENTS.LINK_FRAGMENT}
   `;
 })();
@@ -99,6 +131,19 @@ query GetContentNode($uri: ID!) {
     slug
     __typename
     ... on Page {
+      id
+      title
+      pagePanels {
+        ...PagePanelsFragment
+      }
+      seo {
+        schema {
+          raw
+        }
+      }
+    }
+
+    ... on Product {
       id
       title
       pagePanels {

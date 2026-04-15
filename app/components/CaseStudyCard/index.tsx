@@ -1,20 +1,31 @@
 import Link from "next/link";
 
 import styles from "./CaseStudyCard.module.scss";
+import { CaseStudy } from "@/types/graphql";
+import ImageComponent from "../ImageComponent";
+import Icon from "../Icon";
 
-const CaseStudyCard = () => {
+interface CaseStudyCardProps {
+  caseStudy: CaseStudy;
+}
+
+const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ caseStudy }) => {
+  const { title, caseStudyCard, uri } = caseStudy;
   return (
-    <Link className={styles["case-study"]} href="#">
-      <div className={styles["case-study__image"]}></div>
+    <Link className={styles["case-study"]} href={uri ?? "#"}>
+      {caseStudyCard?.logo && (
+        <div className={styles["case-study__image"]}>
+          <ImageComponent image={caseStudyCard?.logo?.node} />
+        </div>
+      )}
       <div className={styles["case-study__content"]}>
-        <h3 className={styles["case-study__title"]}>Charlotte Tilbury</h3>
-        <p className={styles["case-study__description"]}>
-          How Charlotte Tilbury turned International Complexity into a Growth Advantage
-        </p>
+        <div className={styles["case-study__copy"]}>
+          <h3 className={styles["case-study__title"]}>{title}</h3>
+          <p className={styles["case-study__description"]}>{caseStudyCard?.cardCopy}</p>
+        </div>
 
         <div className={styles["case-study__read-more"]}>
-          <span className={styles["ellipse"]}></span>
-          <span>Read More</span>
+          <Icon type="arrowRight" />
         </div>
       </div>
     </Link>

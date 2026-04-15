@@ -8,6 +8,7 @@
   width: 100%;
   background: var(--Foundation-White, #fff);
   text-decoration: none;
+  height: 100%;
 
   @include mixins.breakpoint-up(mobile) {
     max-width: unset;
@@ -16,6 +17,10 @@
   &:hover {
     .case-study__image:after {
       background: var(--Foundation-Signal-Green, #00d180);
+    }
+    .case-study__read-more {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 
@@ -26,9 +31,17 @@
     height: 8.56rem;
     width: 100%;
     position: relative;
+    justify-content: center;
 
     @include mixins.breakpoint-up(mobile) {
       height: 10.25rem;
+      padding: 1.2rem;
+    }
+
+    img {
+      width: auto;
+      height: 100%;
+      object-fit: contain;
     }
 
     &:after {
@@ -49,12 +62,21 @@
     padding: 2rem 1.5rem 1.5rem 1.5rem;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    height: 100%;
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
   }
 
   &__title {
     color: var(--Foundation-Operational-Green, #007a4e);
     @include text-styles.text-style("mobile-caption");
+    text-transform: uppercase;
 
     @include mixins.breakpoint-up(mobile) {
       @include text-styles.text-style("desktop-caption");
@@ -71,18 +93,17 @@
   }
 
   &__read-more {
-    display: flex;
-    padding: 1rem;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--Foundation-Black, #1e2221);
-    @include text-styles.text-style("mobile-cta-primary");
+    flex-shrink: 0;
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateX(-1rem);
 
-    .ellipse {
-      border-radius: 0.5rem;
-      background: var(--Foundation-Signal-Green, #00d180);
-      width: 0.5rem;
-      height: 0.5rem;
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      path {
+        fill: var(--Foundation-Operational-Green, #007a4e);
+      }
     }
   }
 }

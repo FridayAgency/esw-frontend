@@ -5,7 +5,7 @@
 import { MenuItem } from "@/types/graphql";
 import { usePathname } from "next/navigation";
 import styles from "./NavItem.module.scss";
-import Button from "../Button";
+
 import { memo, useMemo } from "react";
 import Link from "next/link";
 
@@ -26,7 +26,7 @@ const NavItem = memo(({ item }: NavItemProps) => {
   const pathname = usePathname();
 
   // Memoize the active state calculation
-  const isActive = useMemo(() => pathname === item.uri, [pathname, item.uri]);
+  const isActive = useMemo(() => pathname.replaceAll("/", "") === item.uri?.replaceAll("/", ""), [pathname, item.uri]);
 
   // Memoize the component rendering based on item type
   const content = useMemo(() => {

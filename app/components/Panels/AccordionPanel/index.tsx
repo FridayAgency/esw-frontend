@@ -10,9 +10,7 @@ export const ACCORDIONPANEL_FRAGMENT = `
    content
    title
  }
-   callToAction {
-       ...AcfLinkFragment
-   }
+
 `;
 
 const AccordionPanel: React.FC<{ panel: PagePanelsPagePanelsAccordionPanelLayout }> = ({ panel }) => {
@@ -28,7 +26,6 @@ const AccordionPanel: React.FC<{ panel: PagePanelsPagePanelsAccordionPanelLayout
               content: item?.content ?? "",
             })) ?? []
           }
-          cta={callToAction || undefined}
         />
       </Container>
     </section>

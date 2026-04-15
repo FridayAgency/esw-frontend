@@ -7,6 +7,9 @@
   overflow: hidden;
   position: relative;
 
+  /* shadow/inner */
+  box-shadow: 0 0 32px 0 rgba(143, 154, 149, 0.3) inset;
+
   @include mixins.breakpoint-up(mobile) {
     padding: 5rem 0 8.75rem;
   }
@@ -83,6 +86,19 @@
     box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.07);
     position: relative;
     display: block;
+    border: 1px solid var(--Neutral-Soft-Grey, #deebe5);
+
+    /* shadow/drop 1 */
+    box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.07);
+    transition: var(--transition);
+
+    &:hover {
+      border: 1px solid var(--Neutral-Dark-Grey, #8f9a95);
+
+      .primary-product-section__product-title {
+        background: rgba(0, 209, 128, 0.6);
+      }
+    }
 
     @include mixins.breakpoint-up(mobile) {
       display: flex;
@@ -99,6 +115,16 @@
         right: unset;
         left: 0;
       }
+
+      svg {
+        width: 3.5rem;
+        height: 3.5rem;
+
+        @include mixins.breakpoint-up(mobile) {
+          width: 6rem;
+          height: 6rem;
+        }
+      }
     }
 
     &-content {
@@ -109,7 +135,7 @@
     &-title {
       color: var(--Foundation-Orchestrated-Green, #063e2d);
       @include text-styles.text-style("mobile-h4");
-
+      transition: var(--transition);
       @include mixins.breakpoint-up(mobile) {
         @include text-styles.text-style("desktop-h4");
       }

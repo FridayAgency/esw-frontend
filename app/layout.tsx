@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={dmSans.variable}>
       <body>
-        {/* <Header /> */}
+        <Header />
 
         <main>{children}</main>
 

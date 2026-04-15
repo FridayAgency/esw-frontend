@@ -1,27 +1,47 @@
+import { PagePanelsPagePanelsCallToActionLayout } from "@/types/graphql";
 import Button from "../../Button";
 import Container from "../../Container";
 
 import styles from "./CallToAction.module.scss";
+import { sub } from "date-fns";
+import Divider from "../../Divider";
+
+export const CALLTOACTION_FRAGMENT = `
+    subtitle
+    title
+    callToAction {
+     ...AcfLinkFragment
+    }
+`;
 
 interface CallToActionProps {
   // Define any props for the CallToAction component here
+  panel: PagePanelsPagePanelsCallToActionLayout;
 }
 
-const CallToAction: React.FC<CallToActionProps> = () => {
+const CallToAction: React.FC<CallToActionProps> = ({ panel }) => {
+  const { title, subtitle, callToAction } = panel || {};
   return (
     <section className={styles["cta"]}>
       <Container className={styles["cta__container"]}>
         <div className={styles["cta__content"]}>
-          <div className={styles["cta__texture"]}></div>
+          <Divider className={styles["cta__divider"]} colour="white" />
           <div className={styles["cta__text"]}>
             <div className={styles["cta__header"]}>
-              <p className={styles["cta__subtitle"]}>TALK TO AN EXPERT</p>
-              <h2 className={styles["cta__title"]}>Talk to us About Your Expansion Priorities.</h2>
+              {subtitle && <p className={styles["cta__subtitle"]}>{subtitle}</p>}
+              {title && <h2 className={styles["cta__title"]}>{title}</h2>}
             </div>
             <div className={styles["cta__button"]}>
-              <Button variant="outline" colour="light">
-                Talk To Us
-              </Button>
+              {callToAction?.url && callToAction?.title && (
+                <Button
+                  href={callToAction.url}
+                  target={callToAction.target ?? "_self"}
+                  variant="outline"
+                  colour="light"
+                >
+                  {callToAction?.title || "Talk To Us"}
+                </Button>
+              )}
             </div>
           </div>
         </div>

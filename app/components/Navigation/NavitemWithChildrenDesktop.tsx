@@ -8,51 +8,33 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useMemo, useRef } from "react";
 
-import styles from "./NavItemWithChildren.module.scss";
+import styles from "./NavItemWithChildrenDesktop.module.scss";
 import { ClassName } from "@fridayagency/classnames";
 import Icon from "../Icon";
-
-const VOWEL_SOUND_WORDS = ["sme", "mba", "mri", "fbi", "ngo", "html", "xml", "sql"];
-const CONSONANT_SOUND_WORDS = ["one", "once", "university", "union", "european", "user"];
-const TITLE_URI = "#title";
-
-const getArticle = (word: string): string => {
-  const lower = word.toLowerCase();
-  const firstChar = word.charAt(0).toLowerCase();
-  const vowels = ["a", "e", "i", "o", "u"];
-
-  if (VOWEL_SOUND_WORDS.includes(lower)) return "An";
-  if (CONSONANT_SOUND_WORDS.some((w) => lower.startsWith(w))) return "A";
-
-  return vowels.includes(firstChar) ? "An" : "A";
-};
-
-const cleanLabel = (label: string): string => {
-  return label.replace(/\[.*?\]:\s*/g, "").trim();
-};
+import Divider from "../Divider";
 
 interface GroupedItems {
   heading: string | null | undefined;
   items: MenuToMenuItemConnectionEdge[];
 }
 
-const NavitemWithChildrenDesktop: React.FC<{ item: MenuItem }> = ({ item }) => {
+const BLUR_TIMEOUT = 150;
+
+const NavItemWithChildrenDesktop: React.FC<{ item: MenuItem }> = ({ item }) => {
   const [showSubmenu, setShowSubmenu] = useState<boolean>(false);
-  const [mounted, setMounted] = useState(false);
   const path = usePathname();
   const itemClass = new ClassName(["nav-item", styles["nav__item"]]);
   const blurTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const triggerId = `submenu-trigger-${item.id}`;
 
-  const nestedItems = useMemo(() => item?.childItems?.edges || [], [item?.childItems?.edges]);
-  const shouldAddArticle = item.label?.toLowerCase() === "i am";
-  const isSectorMenu = item.label?.toLowerCase() === "my sector";
+  const nestedItems = item?.childItems?.edges || [];
 
   const groupedItems = useMemo(() => {
     // Collect all IDs that are children of #title items
     const titleChildrenIds = new Set<string>();
     nestedItems.forEach((edge) => {
       const node = edge.node as MenuItem;
-      if (node.uri === TITLE_URI && node.childItems?.edges) {
+      if (node.uri === "#title" && node.childItems?.edges) {
         node.childItems.edges.forEach((child: MenuToMenuItemConnectionEdge) => {
           if (child.node.id) titleChildrenIds.add(child.node.id);
         });
@@ -61,7 +43,7 @@ const NavitemWithChildrenDesktop: React.FC<{ item: MenuItem }> = ({ item }) => {
 
     return nestedItems.reduce((acc: GroupedItems[], edge: MenuToMenuItemConnectionEdge) => {
       const node = edge.node as MenuItem;
-      if (node.uri === TITLE_URI) {
+      if (node.uri === "#title") {
         const childItems = node.childItems?.edges || [];
         acc.push({ heading: node.label, items: childItems });
       } else if (!titleChildrenIds.has(node.id)) {
@@ -76,21 +58,32 @@ const NavitemWithChildrenDesktop: React.FC<{ item: MenuItem }> = ({ item }) => {
     if (!focusInCurrentTarget(e)) {
       blurTimeoutRef.current = setTimeout(() => {
         setShowSubmenu(false);
-      }, 150);
+      }, BLUR_TIMEOUT);
     }
   };
 
-  const handleMouseEnter = () => setShowSubmenu(true);
+  const handleMouseEnter = () => {
+    if (blurTimeoutRef.current) {
+      clearTimeout(blurTimeoutRef.current);
+      blurTimeoutRef.current = null;
+    }
+    setShowSubmenu(true);
+  };
+
   const handleMouseLeave = () => setShowSubmenu(false);
 
   const handleClick = () => {
+    if (blurTimeoutRef.current) {
+      clearTimeout(blurTimeoutRef.current);
+      blurTimeoutRef.current = null;
+    }
     setShowSubmenu((prev) => !prev);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape" && showSubmenu) {
       setShowSubmenu(false);
-      e.currentTarget.querySelector("button")?.focus();
+      (e.currentTarget as HTMLElement).querySelector<HTMLButtonElement>(`#${triggerId}`)?.focus();
     }
   };
 
@@ -103,84 +96,76 @@ const NavitemWithChildrenDesktop: React.FC<{ item: MenuItem }> = ({ item }) => {
   }, []);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     setShowSubmenu(false);
   }, [path]);
 
-  const normalizedPath = mounted ? path.replace(/\/$/, "") : "";
-  const isTopLevelActive = mounted && normalizedPath === item.uri?.replace(/\/$/, "");
+  const normalizedPath = path.replace(/\/$/, "");
+  const isTopLevelActive = normalizedPath === item.uri?.replace(/\/$/, "");
 
   return (
-    <div
+    <li
       className={itemClass.toString()}
+      style={groupedItems.length < 4 ? { position: "relative" } : undefined}
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onKeyDown={handleKeyDown}
     >
       <button
+        id={triggerId}
+        type="button"
         className={`${styles.trigger} ${isTopLevelActive ? styles.active : ""} ${
           showSubmenu ? styles.show : styles.hide
         }`}
         onClick={handleClick}
         aria-expanded={showSubmenu}
         aria-haspopup="true"
+        aria-controls={`submenu-${item.id}`}
       >
         <span>{item.label}</span>
         <span aria-hidden="true" className={styles["icon--down"]}>
-          <Icon type="down" />
+          <Icon type="chevronDown" />
         </span>
       </button>
 
-      <ul
-        aria-label={`${item.label} submenu`}
+      <div
+        id={`submenu-${item.id}`}
+        role="region"
+        aria-labelledby={triggerId}
         className={`${styles["nav__item-children"]} ${showSubmenu ? styles.show : styles.hide} ${
-          groupedItems.length === 3 ? styles.columns : ""
-        }
-        } ${isSectorMenu ? styles.sector : ""}`}
+          groupedItems.length > 3 ? styles.wide : ""
+        }`}
       >
-        {groupedItems.map((group, groupIndex) => (
-          <li key={groupIndex} className={styles["nav__item-children-group"]}>
-            {group.heading && (
-              <span className={styles["nav__item-children-heading"]} aria-label="Menu section">
-                {group.heading}
-              </span>
-            )}
-            <ul>
-              {group.items.map((edge: MenuToMenuItemConnectionEdge) => {
-                const node = edge.node as MenuItem;
-                const label = node.label || "";
-                const cleanedLabel = cleanLabel(label);
-                const displayLabel = shouldAddArticle ? `${getArticle(cleanedLabel)} ${cleanedLabel}` : cleanedLabel;
-                const isItemActive = mounted && normalizedPath === node.uri?.replace(/\/$/, "");
-                const hasChildren = node.childItems?.edges && node.childItems.edges.length > 0;
-                const isViewAll = displayLabel.toLowerCase().includes("view all");
-
-                return (
-                  <li className={isItemActive ? styles.active : ""} key={node.id}>
-                    <Link
-                      className={`${styles["nav__item-children-link"]} ${isItemActive ? styles.active : ""} ${isViewAll ? styles["view-all"] : ""}`}
-                      href={node.uri ?? ""}
-                    >
-                      {isViewAll && (
-                        <span aria-hidden="true">
-                          <Icon type="right" />
-                        </span>
-                      )}
-                      {displayLabel}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </li>
-        ))}
-      </ul>
-    </div>
+        <div className={styles["nav__item-children-container"]}>
+          {groupedItems.map((group, groupIndex) => (
+            <div
+              key={groupIndex}
+              className={`${styles["nav__item-children-group"]} ${
+                group.heading === "Platform" ? styles["platform"] : ""
+              }`}
+            >
+              {group.heading && <span className={styles["nav__item-children-heading"]}>{group.heading}</span>}
+              <ul>
+                {group.items.map((edge: MenuToMenuItemConnectionEdge) => {
+                  const isItemActive = normalizedPath === edge.node.uri?.replace(/\/$/, "");
+                  return (
+                    <li key={edge.node.id}>
+                      <Link
+                        className={`${styles["nav__item-children-link"]} ${isItemActive ? styles.active : ""}`}
+                        href={edge.node.uri ?? ""}
+                      >
+                        {edge.node.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </li>
   );
 };
 
-export default NavitemWithChildrenDesktop;
+export default NavItemWithChildrenDesktop;
