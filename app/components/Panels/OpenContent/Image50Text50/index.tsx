@@ -6,11 +6,14 @@ import { ClassName } from "@fridayagency/classnames";
 import parse from "html-react-parser";
 
 import styles from "./Image50Text50.module.scss";
-import { PagePanelsPagePanelsBlocksImage50Text50Layout } from "@/types/graphql";
+import {
+  PagePanelsPagePanelsBlocksImage50Text50Layout,
+  PostfieldsOpenContentImage50Text50Layout,
+} from "@/types/graphql";
 import ImageComponent from "@/app/components/ImageComponent/ImageComponent";
 
 interface Image50Text50Props {
-  panel: PagePanelsPagePanelsBlocksImage50Text50Layout;
+  panel: PagePanelsPagePanelsBlocksImage50Text50Layout | PostfieldsOpenContentImage50Text50Layout;
 }
 
 const Image50Text50: React.FC<Image50Text50Props> = ({ panel }) => {

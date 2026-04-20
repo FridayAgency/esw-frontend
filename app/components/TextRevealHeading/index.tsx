@@ -130,7 +130,7 @@ const TextRevealHeading: React.FC<TextRevealHeadingProps> = ({
 
   useGSAP(
     () => {
-      init();
+      document.fonts.ready.then(init);
       return cleanup;
     },
     { scope: containerRef, dependencies: [init, cleanup] },

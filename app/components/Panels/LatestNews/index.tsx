@@ -13,20 +13,34 @@ export const LATESTNEWS_FRAGMENT = `
     title
 `;
 
-const LatestNews: React.FC<{ panel: PagePanelsPagePanelsLatestNewsLayout }> = async ({ panel }) => {
-  const { title, subtitle } = panel;
+interface LatestNewsProps {
+  panel?: PagePanelsPagePanelsLatestNewsLayout;
+  title?: string;
+  posts?: Post[];
+}
+
+const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, posts: propPosts }) => {
+  const { title: panelTitle } = panel || {};
+
+  const title = propTitle || panelTitle;
+
+  let postsToDisplay: Post[] = [];
 
   try {
-    const { posts } = await client.query<{ posts: PostConnection }>(GET_POSTS, {
-      variables: { first: 3 },
-    });
+    if (propPosts && propPosts.length > 0) {
+      postsToDisplay = propPosts;
+    } else {
+      const { posts } = await client.query<{ posts: PostConnection }>(GET_POSTS, {
+        variables: { first: 3 },
+      });
 
-    const postsToDisplay = posts ? removeNodes<Post>(posts) : [];
+      postsToDisplay = posts ? removeNodes<Post>(posts) : [];
+    }
 
     return (
       <section className={styles["latest-posts"]}>
         <Container className={styles["latest-posts__container"]}>
-          <h2 className={styles["latest-posts__title"]}>Articles of Interest</h2>
+          <h2 className={styles["latest-posts__title"]}>{title}</h2>
           <div className={styles["latest-posts__grid"]} role="tabpanel">
             {postsToDisplay.map((post) => (
               <PostCard key={post.databaseId} post={post} />

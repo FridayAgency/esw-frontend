@@ -8,6 +8,10 @@
   display: grid;
   gap: 1rem;
 
+  border: 1px solid var(--Neutral-Soft-Grey, #deebe5);
+  background: var(--Foundation-White, #fff);
+  position: relative;
+
   @include mixins.breakpoint-up(mobile) {
     grid-template-columns: 15.5rem 1fr;
     gap: 2.5rem;
@@ -28,15 +32,6 @@
   &__image {
     position: relative;
     z-index: 1;
-
-    // @include mixins.breakpoint-up(mobile) {
-    //   grid-column: 10 / span 5;
-    //   grid-row: 1 / span 1;
-    //   display: flex;
-    //   flex-direction: column;
-    //   justify-content: space-between;
-    //   gap: 1.25rem;
-    // }
 
     &-wrapper {
       height: 8.875rem;
@@ -74,14 +69,91 @@
       color: var(--Foundation-White, #fff);
       @include text-styles.text-style("mobile-body-small");
     }
+
+    &--meta {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      @include mixins.breakpoint-up(mobile) {
+        gap: 1rem;
+      }
+    }
+
+    &--date {
+      color: var(--Foundation-Black, #1e2221);
+
+      @include text-styles.text-style("mobile-body-small");
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-body-small");
+      }
+    }
+  }
+
+  &--featured {
+    grid-template-columns: 1fr;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .card__image-wrapper {
+      height: 16rem;
+      width: 100%;
+
+      @include mixins.breakpoint-up(mobile) {
+        height: 22rem;
+      }
+    }
+
+    .card__content {
+      justify-content: center;
+
+      h2 {
+        color: var(--Foundation-Black, #1e2221);
+        @include text-styles.text-style("mobile-h3");
+      }
+    }
+  }
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &-avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &-name {
+      color: var(--Foundation-Orchestrated-Green, #063e2d);
+      @include text-styles.text-style("mobile-h5");
+    }
   }
 
   &__arrow {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
 
     @include mixins.breakpoint-up(mobile) {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
       svg {
         transform: translateX(-1rem);
         opacity: 0;

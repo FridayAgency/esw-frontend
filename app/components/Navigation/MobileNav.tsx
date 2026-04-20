@@ -27,8 +27,6 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
     closeModal();
   }, [path]);
 
-  console.log(menu?.menuItems?.edges);
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>

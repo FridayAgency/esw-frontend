@@ -1,0 +1,161 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+$article-gradient: linear-gradient(89deg, #9ce533 12.34%, #5dca7f 86.23%);
+$signal-green: var(--Foundation-Signal-Green, #00d180);
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem 1rem;
+  text-decoration: none;
+  isolation: isolate;
+  z-index: 3;
+  position: relative;
+
+  // 1. The initial 3px solid border
+  border: 1px solid var(--Foundation-Operational-Green, #007a4e);
+  background: var(--Foundation-Black, #1e2221);
+  transition: border-color 0.3s ease;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 2rem 6rem;
+    flex-direction: row;
+    gap: 1.6rem;
+  }
+
+  // 3. THE GRADIENT OVERLAY (appears on hover)
+  &::after {
+    content: "";
+    position: absolute;
+    // Inset must be negative border-width to cover the original border area
+    inset: -#{1px};
+    padding: #{1px};
+    background: $article-gradient;
+
+    // Mask logic: draws the gradient ONLY in the padding area
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  &:hover {
+    border-color: transparent; // Swap solid for gradient
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &__image {
+    display: none;
+
+    @include mixins.breakpoint-up(mobile) {
+      display: block;
+      max-width: 21.77175rem;
+      max-height: 13.80644rem;
+    }
+  }
+
+  &__category {
+    display: flex;
+    width: fit-content;
+    padding: 0.5rem 1.5rem;
+    gap: 0.5rem;
+    border-radius: 2rem;
+    background: var(--Foundation-Operational-Green, #007a4e);
+    color: var(--Foundation-White, #fff);
+    @include text-styles.text-style("mobile-body-small");
+    transition: var(--transition);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      gap: 1.75rem;
+      justify-content: center;
+    }
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &-avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &-name {
+      color: var(--Foundation-White, #fff);
+      @include text-styles.text-style("mobile-h5");
+    }
+  }
+
+  &__title {
+    @include text-styles.text-style("mobile-h4");
+    color: var(--Foundation-White, #fff);
+    transition: var(--transition);
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-h4");
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateX(-1rem) translateY(0.44rem);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    right: 2.5rem;
+    bottom: 2.5rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      path {
+        fill: var(--Emphasis-Lime, #9ce533);
+      }
+    }
+  }
+
+  // HOVER TEXT/ICON COLORS
+  &:hover {
+    .card__category {
+      background-color: #9ce533;
+      color: #1e2221;
+    }
+    .card__title {
+      background: $article-gradient;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card__arrow {
+      opacity: 1;
+      transform: translateX(0) translateY(0.44rem);
+    }
+  }
+}

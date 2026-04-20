@@ -1,17 +1,23 @@
 import Container from "@/app/components/Container";
 
 import styles from "./FullwidthImage.module.scss";
-import { PagePanelsPagePanelsBlocksFullWidthImageLayout } from "@/types/graphql";
+import {
+  MediaItem,
+  PagePanelsPagePanelsBlocksFullWidthImageLayout,
+  PostfieldsOpenContentFullWidthImageLayout,
+} from "@/types/graphql";
 import ImageComponent from "@/app/components/ImageComponent";
 
 import parse from "html-react-parser";
 
 interface FullWidthImageProps {
-  panel: PagePanelsPagePanelsBlocksFullWidthImageLayout;
+  panel?: PagePanelsPagePanelsBlocksFullWidthImageLayout | PostfieldsOpenContentFullWidthImageLayout;
+  image?: any;
 }
 
-const FullWidthImage: React.FC<FullWidthImageProps> = ({ panel }) => {
-  const { image } = panel || {};
+const FullWidthImage: React.FC<FullWidthImageProps> = ({ panel, image: propImage }) => {
+  const { image: panelImage } = panel || {};
+  const image = propImage || panelImage;
 
   if (!image || !image.node) {
     return null;

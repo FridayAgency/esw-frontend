@@ -1,4 +1,5 @@
 import { ACCORDIONPANEL_FRAGMENT } from "@/app/components/Panels/AccordionPanel";
+import { BLOG_LANDING_HEADER_FRAGMENT } from "@/app/components/Panels/BlogLandingHeader";
 import { CALLTOACTION_FRAGMENT } from "@/app/components/Panels/CallToAction";
 import { CALL_TO_ACTION_WITH_IMAGES_FRAGMENT } from "@/app/components/Panels/CallToActionWithImages";
 import { CASE_STUDY_GATEWAY_FRAGMENT } from "@/app/components/Panels/CaseStudyGateway";
@@ -59,6 +60,8 @@ export const PAGEPANELS_FRAGMENT = (() => {
     ["PagePanelsPagePanelsCallToActionWithImagesLayout", CALL_TO_ACTION_WITH_IMAGES_FRAGMENT],
     ["PagePanelsPagePanelsLetsCompareLayout", LETS_COMPARE_FRAGMENT],
     ["PagePanelsPagePanelsQuickLinksLayout", QUICK_LINKS_FRAGMENT],
+    ["PagePanelsPagePanelsBlogLandingHeaderLayout", BLOG_LANDING_HEADER_FRAGMENT],
+    ["PagePanelsPagePanelsLatestNewsLayout", LATESTNEWS_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");
@@ -84,12 +87,49 @@ fragment PostFragment on Post {
   date
   excerpt
   content
+  postfields {
+      tldr {
+        listItem
+      }
+      openContent {
+        __typename
+        ... on PostfieldsOpenContentTextPanelLayout {
+          content
+          callToAction {
+            ...AcfLinkFragment
+          }
+        }
+        ... on PostfieldsOpenContentFullWidthImageLayout {
+          image {
+            ...AcfMediaItem
+          }
+        }
+        ... on PostfieldsOpenContentImage50Text50Layout {
+          imagePosition
+          text
+          image {
+            ...AcfMediaItem
+          }
+        }
+        ... on PostfieldsOpenContentQuoteLayout {
+          quote
+        }
+        ... on PostfieldsOpenContentDividerLayout {
+          fieldGroupName
+        }
+      }
+    }
   featuredImage {
     ...MediaItemFragment
   }
   author {
     node {
       name
+      uri
+      description
+      avatar(size: 120) {
+        url
+      }
     }
   }
   categories {

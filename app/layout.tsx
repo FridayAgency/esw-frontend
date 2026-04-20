@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-
 import "./styles/tailwind.css";
 import "./styles/main.scss";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ScrollRestoration from "./components/ScrollRestoration";
 import { DM_Sans } from "next/font/google";
 
 const dmSans = DM_Sans({
@@ -27,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={dmSans.variable}>
+    <html lang="en" className={dmSans.variable} data-scroll-behavior="smooth">
       <body>
         <Header />
 

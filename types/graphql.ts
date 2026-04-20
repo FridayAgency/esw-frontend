@@ -2816,6 +2816,8 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Industry = 'INDUSTRY',
   /** The Type of Content object */
+  Integration = 'INTEGRATION',
+  /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
   Post = 'POST',
@@ -2947,6 +2949,12 @@ export type ContentTypeToTaxonomyConnectionPageInfo = PageInfo & TaxonomyConnect
 export enum ContentTypesOfCategoryEnum {
   /** The Type of Content object */
   Post = 'POST'
+}
+
+/** Allowed Content Types of the IntegrationCategory taxonomy. */
+export enum ContentTypesOfIntegrationCategoryEnum {
+  /** The Type of Content object */
+  Integration = 'INTEGRATION'
 }
 
 /** Allowed Content Types of the PostFormat taxonomy. */
@@ -3083,6 +3091,66 @@ export type CreateIndustryPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
   industry?: Maybe<Industry>;
+};
+
+/** Input for the createIntegrationCategory mutation. */
+export type CreateIntegrationCategoryInput = {
+  /** The slug that the integration_category will be an alias of */
+  aliasOf?: InputMaybe<Scalars['String']['input']>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The description of the integration_category object */
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** The name of the integration_category object to mutate */
+  name: Scalars['String']['input'];
+  /** The database ID of the integration_category that should be set as the parent. This field cannot be used in conjunction with parentId */
+  parentDatabaseId?: InputMaybe<Scalars['Int']['input']>;
+  /** The ID of the integration_category that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
+  parentId?: InputMaybe<Scalars['ID']['input']>;
+  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createIntegrationCategory mutation. */
+export type CreateIntegrationCategoryPayload = {
+  __typename?: 'CreateIntegrationCategoryPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The created integration_category */
+  integrationCategory?: Maybe<IntegrationCategory>;
+};
+
+/** Input for the createIntegration mutation. */
+export type CreateIntegrationInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The excerpt of the object */
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  /** Set connections between the integration and integrationCategories */
+  integrationCategories?: InputMaybe<IntegrationIntegrationCategoriesInput>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createIntegration mutation. */
+export type CreateIntegrationPayload = {
+  __typename?: 'CreateIntegrationPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  integration?: Maybe<Integration>;
 };
 
 /** Input for the createMediaItem mutation. */
@@ -3660,6 +3728,48 @@ export type DeleteIndustryPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
   /** The object before it was deleted */
   industry?: Maybe<Industry>;
+};
+
+/** Input for the deleteIntegrationCategory mutation. */
+export type DeleteIntegrationCategoryInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the integrationCategory to delete */
+  id: Scalars['ID']['input'];
+};
+
+/** The payload for the deleteIntegrationCategory mutation. */
+export type DeleteIntegrationCategoryPayload = {
+  __typename?: 'DeleteIntegrationCategoryPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The deleted term object */
+  integrationCategory?: Maybe<IntegrationCategory>;
+};
+
+/** Input for the deleteIntegration mutation. */
+export type DeleteIntegrationInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The ID of the integration to delete */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** The payload for the deleteIntegration mutation. */
+export type DeleteIntegrationPayload = {
+  __typename?: 'DeleteIntegrationPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The object before it was deleted */
+  integration?: Maybe<Integration>;
 };
 
 /** Input for the deleteMediaItem mutation. */
@@ -7108,6 +7218,935 @@ export type IndustryToPreviewConnectionEdge = Edge & IndustryConnectionEdge & On
   node: Industry;
 };
 
+/** The integration type */
+export type Integration = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfIntegrationContent & {
+  __typename?: 'Integration';
+  /**
+   * The ancestors of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  ancestors?: Maybe<IntegrationToIntegrationConnection>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** The excerpt of the post. */
+  excerpt?: Maybe<Scalars['String']['output']>;
+  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+  /** The database identifier for the featured image node assigned to the content node */
+  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Globally unique ID of the featured image assigned to the node */
+  featuredImageId?: Maybe<Scalars['ID']['output']>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the integration object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
+  /** The globally unique identifier of the integration object. */
+  id: Scalars['ID']['output'];
+  /** Connection between the Integration type and the integrationCategory type */
+  integrationCategories?: Maybe<IntegrationToIntegrationCategoryConnection>;
+  /** Fields of the IntegrationContent ACF Field Group */
+  integrationContent?: Maybe<IntegrationContent>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  integrationId: Scalars['Int']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /**
+   * The parent of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  parent?: Maybe<IntegrationToParentConnectionEdge>;
+  /** The password for the integration object. */
+  password?: Maybe<Scalars['String']['output']>;
+  /** Connection between the integration type and the integration type */
+  preview?: Maybe<IntegrationToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** The Yoast SEO data of the ContentNode */
+  seo?: Maybe<PostTypeSeo>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** Connection between the Integration type and the TermNode type */
+  terms?: Maybe<IntegrationToTermNodeConnection>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The integration type */
+export type IntegrationAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The integration type */
+export type IntegrationContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The integration type */
+export type IntegrationEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The integration type */
+export type IntegrationEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The integration type */
+export type IntegrationExcerptArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The integration type */
+export type IntegrationIntegrationCategoriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<IntegrationToIntegrationCategoryConnectionWhereArgs>;
+};
+
+
+/** The integration type */
+export type IntegrationTermsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<IntegrationToTermNodeConnectionWhereArgs>;
+};
+
+
+/** The integration type */
+export type IntegrationTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** The integrationCategory type */
+export type IntegrationCategory = DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & {
+  __typename?: 'IntegrationCategory';
+  /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+  ancestors?: Maybe<IntegrationCategoryToAncestorsIntegrationCategoryConnection>;
+  /** Connection between the integrationCategory type and its children integrationCategories. */
+  children?: Maybe<IntegrationCategoryToIntegrationCategoryConnection>;
+  /** Connection between the IntegrationCategory type and the ContentNode type */
+  contentNodes?: Maybe<IntegrationCategoryToContentNodeConnection>;
+  /** The number of objects connected to the object */
+  count?: Maybe<Scalars['Int']['output']>;
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** The description of the object */
+  description?: Maybe<Scalars['String']['output']>;
+  /** Connection between the TermNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
+  /** Connection between the TermNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
+  /** The globally unique ID for the object */
+  id: Scalars['ID']['output'];
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of databaseId
+   */
+  integrationCategoryId?: Maybe<Scalars['Int']['output']>;
+  /** Connection between the IntegrationCategory type and the integration type */
+  integrations?: Maybe<IntegrationCategoryToIntegrationConnection>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The link to the term */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The human friendly name of the object. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** Connection between the integrationCategory type and its parent integrationCategory. */
+  parent?: Maybe<IntegrationCategoryToParentIntegrationCategoryConnectionEdge>;
+  /** Database id of the parent node */
+  parentDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** The globally unique identifier of the parent node. */
+  parentId?: Maybe<Scalars['ID']['output']>;
+  /** The Yoast SEO data of the Integration Categories taxonomy. */
+  seo?: Maybe<TaxonomySeo>;
+  /** An alphanumeric identifier for the object unique to its type. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** Connection between the IntegrationCategory type and the Taxonomy type */
+  taxonomy?: Maybe<IntegrationCategoryToTaxonomyConnectionEdge>;
+  /** The name of the taxonomy that the object is associated with */
+  taxonomyName?: Maybe<Scalars['String']['output']>;
+  /** The ID of the term group that this term object belongs to */
+  termGroupId?: Maybe<Scalars['Int']['output']>;
+  /** The taxonomy ID that the object is associated with */
+  termTaxonomyId?: Maybe<Scalars['Int']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The integrationCategory type */
+export type IntegrationCategoryAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The integrationCategory type */
+export type IntegrationCategoryChildrenArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<IntegrationCategoryToIntegrationCategoryConnectionWhereArgs>;
+};
+
+
+/** The integrationCategory type */
+export type IntegrationCategoryContentNodesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<IntegrationCategoryToContentNodeConnectionWhereArgs>;
+};
+
+
+/** The integrationCategory type */
+export type IntegrationCategoryEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The integrationCategory type */
+export type IntegrationCategoryEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The integrationCategory type */
+export type IntegrationCategoryIntegrationsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<IntegrationCategoryToIntegrationConnectionWhereArgs>;
+};
+
+/** A paginated collection of integrationCategory Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of integrationCategory Nodes */
+export type IntegrationCategoryConnection = {
+  /** A list of edges (relational context) between RootQuery and connected integrationCategory Nodes */
+  edges: Array<IntegrationCategoryConnectionEdge>;
+  /** A list of connected integrationCategory Nodes */
+  nodes: Array<IntegrationCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationCategoryConnectionPageInfo;
+};
+
+/** Represents a connection to a integrationCategory. Contains both the integrationCategory Node and metadata about the relationship. */
+export type IntegrationCategoryConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected integrationCategory Node */
+  node: IntegrationCategory;
+};
+
+/** Pagination metadata specific to &quot;IntegrationCategoryConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;IntegrationCategoryConnectionEdge&quot; Nodes. */
+export type IntegrationCategoryConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Identifier types for retrieving a specific IntegrationCategory. Determines which unique property (global ID, database ID, slug, etc.) is used to locate the IntegrationCategory. */
+export enum IntegrationCategoryIdType {
+  /** The Database ID for the node */
+  DatabaseId = 'DATABASE_ID',
+  /** The hashed Global ID */
+  Id = 'ID',
+  /** The name of the node */
+  Name = 'NAME',
+  /** Url friendly name of the node */
+  Slug = 'SLUG',
+  /** The URI for the node */
+  Uri = 'URI'
+}
+
+/** Connection between the IntegrationCategory type and the integrationCategory type */
+export type IntegrationCategoryToAncestorsIntegrationCategoryConnection = Connection & IntegrationCategoryConnection & {
+  __typename?: 'IntegrationCategoryToAncestorsIntegrationCategoryConnection';
+  /** Edges for the IntegrationCategoryToAncestorsIntegrationCategoryConnection connection */
+  edges: Array<IntegrationCategoryToAncestorsIntegrationCategoryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<IntegrationCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationCategoryToAncestorsIntegrationCategoryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type IntegrationCategoryToAncestorsIntegrationCategoryConnectionEdge = Edge & IntegrationCategoryConnectionEdge & {
+  __typename?: 'IntegrationCategoryToAncestorsIntegrationCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: IntegrationCategory;
+};
+
+/** Pagination metadata specific to &quot;IntegrationCategoryToAncestorsIntegrationCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of IntegrationCategoryToAncestorsIntegrationCategoryConnection Nodes. */
+export type IntegrationCategoryToAncestorsIntegrationCategoryConnectionPageInfo = IntegrationCategoryConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'IntegrationCategoryToAncestorsIntegrationCategoryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the IntegrationCategory type and the ContentNode type */
+export type IntegrationCategoryToContentNodeConnection = Connection & ContentNodeConnection & {
+  __typename?: 'IntegrationCategoryToContentNodeConnection';
+  /** Edges for the IntegrationCategoryToContentNodeConnection connection */
+  edges: Array<IntegrationCategoryToContentNodeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<ContentNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationCategoryToContentNodeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type IntegrationCategoryToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
+  __typename?: 'IntegrationCategoryToContentNodeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: ContentNode;
+};
+
+/** Pagination metadata specific to &quot;IntegrationCategoryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of IntegrationCategoryToContentNodeConnection Nodes. */
+export type IntegrationCategoryToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'IntegrationCategoryToContentNodeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the IntegrationCategoryToContentNodeConnection connection */
+export type IntegrationCategoryToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: InputMaybe<Array<InputMaybe<ContentTypesOfIntegrationCategoryEnum>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the IntegrationCategory type and the integrationCategory type */
+export type IntegrationCategoryToIntegrationCategoryConnection = Connection & IntegrationCategoryConnection & {
+  __typename?: 'IntegrationCategoryToIntegrationCategoryConnection';
+  /** Edges for the IntegrationCategoryToIntegrationCategoryConnection connection */
+  edges: Array<IntegrationCategoryToIntegrationCategoryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<IntegrationCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationCategoryToIntegrationCategoryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type IntegrationCategoryToIntegrationCategoryConnectionEdge = Edge & IntegrationCategoryConnectionEdge & {
+  __typename?: 'IntegrationCategoryToIntegrationCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: IntegrationCategory;
+};
+
+/** Pagination metadata specific to &quot;IntegrationCategoryToIntegrationCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of IntegrationCategoryToIntegrationCategoryConnection Nodes. */
+export type IntegrationCategoryToIntegrationCategoryConnectionPageInfo = IntegrationCategoryConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'IntegrationCategoryToIntegrationCategoryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the IntegrationCategoryToIntegrationCategoryConnection connection */
+export type IntegrationCategoryToIntegrationCategoryConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Connection between the IntegrationCategory type and the integration type */
+export type IntegrationCategoryToIntegrationConnection = Connection & IntegrationConnection & {
+  __typename?: 'IntegrationCategoryToIntegrationConnection';
+  /** Edges for the IntegrationCategoryToIntegrationConnection connection */
+  edges: Array<IntegrationCategoryToIntegrationConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Integration>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationCategoryToIntegrationConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type IntegrationCategoryToIntegrationConnectionEdge = Edge & IntegrationConnectionEdge & {
+  __typename?: 'IntegrationCategoryToIntegrationConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Integration;
+};
+
+/** Pagination metadata specific to &quot;IntegrationCategoryToIntegrationConnection&quot; collections. Provides cursors and flags for navigating through sets of IntegrationCategoryToIntegrationConnection Nodes. */
+export type IntegrationCategoryToIntegrationConnectionPageInfo = IntegrationConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'IntegrationCategoryToIntegrationConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the IntegrationCategoryToIntegrationConnection connection */
+export type IntegrationCategoryToIntegrationConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the IntegrationCategory type and the integrationCategory type */
+export type IntegrationCategoryToParentIntegrationCategoryConnectionEdge = Edge & IntegrationCategoryConnectionEdge & OneToOneConnection & {
+  __typename?: 'IntegrationCategoryToParentIntegrationCategoryConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: IntegrationCategory;
+};
+
+/** Connection between the IntegrationCategory type and the Taxonomy type */
+export type IntegrationCategoryToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
+  __typename?: 'IntegrationCategoryToTaxonomyConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Taxonomy;
+};
+
+/** A paginated collection of integration Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of integration Nodes */
+export type IntegrationConnection = {
+  /** A list of edges (relational context) between RootQuery and connected integration Nodes */
+  edges: Array<IntegrationConnectionEdge>;
+  /** A list of connected integration Nodes */
+  nodes: Array<Integration>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationConnectionPageInfo;
+};
+
+/** Represents a connection to a integration. Contains both the integration Node and metadata about the relationship. */
+export type IntegrationConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected integration Node */
+  node: Integration;
+};
+
+/** Pagination metadata specific to &quot;IntegrationConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;IntegrationConnectionEdge&quot; Nodes. */
+export type IntegrationConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;IntegrationContent&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type IntegrationContent = AcfFieldGroup & AcfFieldGroupFields & IntegrationContent_Fields & {
+  __typename?: 'IntegrationContent';
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;IntegrationContent&quot; Field Group */
+  cardDiscription?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;IntegrationContent&quot; Field Group */
+export type IntegrationContent_Fields = {
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;IntegrationContent&quot; Field Group */
+  cardDiscription?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Identifier types for retrieving a specific Integration. Specifies which unique attribute is used to find an exact Integration. */
+export enum IntegrationIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Set relationships between the integration to integrationCategories */
+export type IntegrationIntegrationCategoriesInput = {
+  /** If true, this will append the integrationCategory to existing related integrationCategories. If false, this will replace existing relationships. Default true. */
+  append?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The input list of items to set. */
+  nodes?: InputMaybe<Array<InputMaybe<IntegrationIntegrationCategoriesNodeInput>>>;
+};
+
+/** List of integrationCategories to connect the integration to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
+export type IntegrationIntegrationCategoriesNodeInput = {
+  /** The description of the integrationCategory. This field is used to set a description of the integrationCategory if a new one is created during the mutation. */
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the integrationCategory. If present, this will be used to connect to the integration. If no existing integrationCategory exists with this ID, no connection will be made. */
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** The name of the integrationCategory. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the integrationCategory. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the Integration type and the integrationCategory type */
+export type IntegrationToIntegrationCategoryConnection = Connection & IntegrationCategoryConnection & {
+  __typename?: 'IntegrationToIntegrationCategoryConnection';
+  /** Edges for the IntegrationToIntegrationCategoryConnection connection */
+  edges: Array<IntegrationToIntegrationCategoryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<IntegrationCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationToIntegrationCategoryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type IntegrationToIntegrationCategoryConnectionEdge = Edge & IntegrationCategoryConnectionEdge & {
+  __typename?: 'IntegrationToIntegrationCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The Yoast SEO Primary integration_category */
+  isPrimary?: Maybe<Scalars['Boolean']['output']>;
+  /** The item at the end of the edge */
+  node: IntegrationCategory;
+};
+
+/** Pagination metadata specific to &quot;IntegrationToIntegrationCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of IntegrationToIntegrationCategoryConnection Nodes. */
+export type IntegrationToIntegrationCategoryConnectionPageInfo = IntegrationCategoryConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'IntegrationToIntegrationCategoryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the IntegrationToIntegrationCategoryConnection connection */
+export type IntegrationToIntegrationCategoryConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Connection between the integration type and the integration type */
+export type IntegrationToIntegrationConnection = Connection & IntegrationConnection & {
+  __typename?: 'IntegrationToIntegrationConnection';
+  /** Edges for the IntegrationToIntegrationConnection connection */
+  edges: Array<IntegrationToIntegrationConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Integration>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationToIntegrationConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type IntegrationToIntegrationConnectionEdge = Edge & IntegrationConnectionEdge & {
+  __typename?: 'IntegrationToIntegrationConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  node: Integration;
+};
+
+/** Pagination metadata specific to &quot;IntegrationToIntegrationConnection&quot; collections. Provides cursors and flags for navigating through sets of IntegrationToIntegrationConnection Nodes. */
+export type IntegrationToIntegrationConnectionPageInfo = IntegrationConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'IntegrationToIntegrationConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the integration type and the integration type */
+export type IntegrationToParentConnectionEdge = Edge & IntegrationConnectionEdge & OneToOneConnection & {
+  __typename?: 'IntegrationToParentConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The node of the connection, without the edges
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  node: Integration;
+};
+
+/** Connection between the integration type and the integration type */
+export type IntegrationToPreviewConnectionEdge = Edge & IntegrationConnectionEdge & OneToOneConnection & {
+  __typename?: 'IntegrationToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Integration;
+};
+
+/** Connection between the Integration type and the TermNode type */
+export type IntegrationToTermNodeConnection = Connection & TermNodeConnection & {
+  __typename?: 'IntegrationToTermNodeConnection';
+  /** Edges for the IntegrationToTermNodeConnection connection */
+  edges: Array<IntegrationToTermNodeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<TermNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: IntegrationToTermNodeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type IntegrationToTermNodeConnectionEdge = Edge & TermNodeConnectionEdge & {
+  __typename?: 'IntegrationToTermNodeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: TermNode;
+};
+
+/** Pagination metadata specific to &quot;IntegrationToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of IntegrationToTermNodeConnection Nodes. */
+export type IntegrationToTermNodeConnectionPageInfo = PageInfo & TermNodeConnectionPageInfo & WpPageInfo & {
+  __typename?: 'IntegrationToTermNodeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the IntegrationToTermNodeConnection connection */
+export type IntegrationToTermNodeConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** The Taxonomy to filter terms by */
+  taxonomies?: InputMaybe<Array<InputMaybe<TaxonomyEnum>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** A Gravity Forms list field. */
 export type ListField = FormField & GfFieldWithAddIconUrlSetting & GfFieldWithAdminLabelSetting & GfFieldWithChoices & GfFieldWithColumnsSetting & GfFieldWithConditionalLogicSetting & GfFieldWithCssClassSetting & GfFieldWithDeleteIconUrlSetting & GfFieldWithDescriptionSetting & GfFieldWithErrorMessageSetting & GfFieldWithLabelPlacementSetting & GfFieldWithLabelSetting & GfFieldWithMaxRowsSetting & GfFieldWithPersonalData & GfFieldWithPrepopulateFieldSetting & GfFieldWithRulesSetting & Node & {
   __typename?: 'ListField';
@@ -7889,7 +8928,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkable Interface */
-export type MenuItemObjectUnion = CaseStudy | Category | Industry | Page | Post | Product | Tag | Testimonial;
+export type MenuItemObjectUnion = CaseStudy | Category | Industry | Integration | IntegrationCategory | Page | Post | Product | Tag | Testimonial;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -9486,6 +10525,33 @@ export type PagePanelsPagePanelsBlocks_Layout = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
+/** The &quot;PagePanelsPagePanelsBlogLandingHeaderLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsBlogLandingHeaderLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsBlogLandingHeaderLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsBlogLandingHeaderLayout';
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBlogLandingHeaderLayout&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBlogLandingHeaderLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsBlogLandingHeaderLayout&quot; Field Group */
+export type PagePanelsPagePanelsBlogLandingHeaderLayout_Fields = {
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBlogLandingHeaderLayout&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBlogLandingHeaderLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 /** The &quot;PagePanelsPagePanelsCallToActionLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PagePanelsPagePanelsCallToActionLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsCallToActionLayout_Fields & PagePanelsPagePanels_Layout & {
   __typename?: 'PagePanelsPagePanelsCallToActionLayout';
@@ -9848,6 +10914,25 @@ export type PagePanelsPagePanelsIndustryCardsLayout_FieldsIndustriesArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** The &quot;PagePanelsPagePanelsIntegrationsLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsIntegrationsLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsIntegrationsLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsIntegrationsLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsIntegrationsLayout&quot; Field Group */
+export type PagePanelsPagePanelsIntegrationsLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
 /** The &quot;PagePanelsPagePanelsLatestNewsLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -10813,7 +11898,7 @@ export enum PluginStatusEnum {
 }
 
 /** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
-export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & {
+export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & WithAcfPostfields & {
   __typename?: 'Post';
   /**
    * The ancestors of the content node.
@@ -10914,6 +11999,8 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
    * @deprecated Deprecated in favor of the databaseId field
    */
   postId: Scalars['Int']['output'];
+  /** Fields of the Postfields ACF Field Group */
+  postfields?: Maybe<Postfields>;
   /** Connection between the post type and the post type */
   preview?: Maybe<PostToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -13268,6 +14355,8 @@ export enum PostStatusEnum {
   AcfDisabled = 'ACF_DISABLED',
   /** Automatically saved content that has not been manually saved */
   AutoDraft = 'AUTO_DRAFT',
+  /** Objects with the dp-rewrite-republish status */
+  DpRewriteRepublish = 'DP_REWRITE_REPUBLISH',
   /** Content that is saved but not yet published or visible to the public */
   Draft = 'DRAFT',
   /** Objects with the future status */
@@ -14477,6 +15566,185 @@ export type PostTypeSeo = {
   twitterDescription?: Maybe<Scalars['String']['output']>;
   twitterImage?: Maybe<MediaItem>;
   twitterTitle?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;Postfields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type Postfields = AcfFieldGroup & AcfFieldGroupFields & Postfields_Fields & {
+  __typename?: 'Postfields';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;flexible_content&quot; Field Type added to the schema as part of the &quot;Postfields&quot; Field Group */
+  openContent?: Maybe<Array<Maybe<PostfieldsOpenContent_Layout>>>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;Postfields&quot; Field Group */
+  tldr?: Maybe<Array<Maybe<PostfieldsTldr>>>;
+};
+
+/** The &quot;PostfieldsOpenContentDividerLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostfieldsOpenContentDividerLayout = AcfFieldGroup & AcfFieldGroupFields & PostfieldsOpenContentDividerLayout_Fields & PostfieldsOpenContent_Layout & {
+  __typename?: 'PostfieldsOpenContentDividerLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PostfieldsOpenContentDividerLayout&quot; Field Group */
+export type PostfieldsOpenContentDividerLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PostfieldsOpenContentFullWidthImageLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostfieldsOpenContentFullWidthImageLayout = AcfFieldGroup & AcfFieldGroupFields & PostfieldsOpenContentFullWidthImageLayout_Fields & PostfieldsOpenContent_Layout & {
+  __typename?: 'PostfieldsOpenContentFullWidthImageLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentFullWidthImageLayout&quot; Field Group */
+  image?: Maybe<AcfMediaItemConnectionEdge>;
+};
+
+/** Interface representing fields of the ACF &quot;PostfieldsOpenContentFullWidthImageLayout&quot; Field Group */
+export type PostfieldsOpenContentFullWidthImageLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentFullWidthImageLayout&quot; Field Group */
+  image?: Maybe<AcfMediaItemConnectionEdge>;
+};
+
+/** The &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostfieldsOpenContentImage50Text50Layout = AcfFieldGroup & AcfFieldGroupFields & PostfieldsOpenContentImage50Text50Layout_Fields & PostfieldsOpenContent_Layout & {
+  __typename?: 'PostfieldsOpenContentImage50Text50Layout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group */
+  image?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group */
+  imagePosition?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group */
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group */
+export type PostfieldsOpenContentImage50Text50Layout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group */
+  image?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group */
+  imagePosition?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group */
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PostfieldsOpenContentQuoteLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostfieldsOpenContentQuoteLayout = AcfFieldGroup & AcfFieldGroupFields & PostfieldsOpenContentQuoteLayout_Fields & PostfieldsOpenContent_Layout & {
+  __typename?: 'PostfieldsOpenContentQuoteLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentQuoteLayout&quot; Field Group */
+  quote?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PostfieldsOpenContentQuoteLayout&quot; Field Group */
+export type PostfieldsOpenContentQuoteLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentQuoteLayout&quot; Field Group */
+  quote?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PostfieldsOpenContentTextPanelLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostfieldsOpenContentTextPanelLayout = AcfFieldGroup & AcfFieldGroupFields & PostfieldsOpenContentTextPanelLayout_Fields & PostfieldsOpenContent_Layout & {
+  __typename?: 'PostfieldsOpenContentTextPanelLayout';
+  /** Field of the &quot;link&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentTextPanelLayout&quot; Field Group */
+  callToAction?: Maybe<AcfLink>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentTextPanelLayout&quot; Field Group */
+  content?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PostfieldsOpenContentTextPanelLayout&quot; Field Group */
+export type PostfieldsOpenContentTextPanelLayout_Fields = {
+  /** Field of the &quot;link&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentTextPanelLayout&quot; Field Group */
+  callToAction?: Maybe<AcfLink>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentTextPanelLayout&quot; Field Group */
+  content?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Layout of the &quot;openContent&quot; Field of the &quot;Postfields&quot; Field Group Field */
+export type PostfieldsOpenContent_Layout = {
+  /** The name of the ACF Flex Field Layout */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PostfieldsTldr&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostfieldsTldr = AcfFieldGroup & AcfFieldGroupFields & PostfieldsTldr_Fields & {
+  __typename?: 'PostfieldsTldr';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PostfieldsTldr&quot; Field Group */
+  listItem?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PostfieldsTldr&quot; Field Group */
+export type PostfieldsTldr_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PostfieldsTldr&quot; Field Group */
+  listItem?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;Postfields&quot; Field Group */
+export type Postfields_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;flexible_content&quot; Field Type added to the schema as part of the &quot;Postfields&quot; Field Group */
+  openContent?: Maybe<Array<Maybe<PostfieldsOpenContent_Layout>>>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;Postfields&quot; Field Group */
+  tldr?: Maybe<Array<Maybe<PostfieldsTldr>>>;
 };
 
 /** Content that supports a draft preview mode. Allows viewing unpublished changes before they are made publicly available. Previewing unpublished changes requires appropriate permissions. */
@@ -15735,6 +17003,10 @@ export type RootMutation = {
   createComment?: Maybe<CreateCommentPayload>;
   /** The createIndustry mutation */
   createIndustry?: Maybe<CreateIndustryPayload>;
+  /** The createIntegration mutation */
+  createIntegration?: Maybe<CreateIntegrationPayload>;
+  /** The createIntegrationCategory mutation */
+  createIntegrationCategory?: Maybe<CreateIntegrationCategoryPayload>;
   /** The createMediaItem mutation */
   createMediaItem?: Maybe<CreateMediaItemPayload>;
   /** The createPage mutation */
@@ -15763,6 +17035,10 @@ export type RootMutation = {
   deleteGfEntry?: Maybe<DeleteGfEntryPayload>;
   /** The deleteIndustry mutation */
   deleteIndustry?: Maybe<DeleteIndustryPayload>;
+  /** The deleteIntegration mutation */
+  deleteIntegration?: Maybe<DeleteIntegrationPayload>;
+  /** The deleteIntegrationCategory mutation */
+  deleteIntegrationCategory?: Maybe<DeleteIntegrationCategoryPayload>;
   /** The deleteMediaItem mutation */
   deleteMediaItem?: Maybe<DeleteMediaItemPayload>;
   /** The deletePage mutation */
@@ -15809,6 +17085,10 @@ export type RootMutation = {
   updateGfEntry?: Maybe<UpdateGfEntryPayload>;
   /** The updateIndustry mutation */
   updateIndustry?: Maybe<UpdateIndustryPayload>;
+  /** The updateIntegration mutation */
+  updateIntegration?: Maybe<UpdateIntegrationPayload>;
+  /** The updateIntegrationCategory mutation */
+  updateIntegrationCategory?: Maybe<UpdateIntegrationCategoryPayload>;
   /** The updateMediaItem mutation */
   updateMediaItem?: Maybe<UpdateMediaItemPayload>;
   /** The updatePage mutation */
@@ -15851,6 +17131,18 @@ export type RootMutationCreateCommentArgs = {
 /** The root mutation */
 export type RootMutationCreateIndustryArgs = {
   input: CreateIndustryInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreateIntegrationArgs = {
+  input: CreateIntegrationInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreateIntegrationCategoryArgs = {
+  input: CreateIntegrationCategoryInput;
 };
 
 
@@ -15935,6 +17227,18 @@ export type RootMutationDeleteGfEntryArgs = {
 /** The root mutation */
 export type RootMutationDeleteIndustryArgs = {
   input: DeleteIndustryInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteIntegrationArgs = {
+  input: DeleteIntegrationInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteIntegrationCategoryArgs = {
+  input: DeleteIntegrationCategoryInput;
 };
 
 
@@ -16077,6 +17381,18 @@ export type RootMutationUpdateIndustryArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdateIntegrationArgs = {
+  input: UpdateIntegrationInput;
+};
+
+
+/** The root mutation */
+export type RootMutationUpdateIntegrationCategoryArgs = {
+  input: UpdateIntegrationCategoryInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdateMediaItemArgs = {
   input: UpdateMediaItemInput;
 };
@@ -16189,6 +17505,19 @@ export type RootQuery = WithAcfOptionsPageCompanyDetails & WithAcfOptionsPageOpt
    * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
    */
   industryBy?: Maybe<Industry>;
+  /** An object of the integration Type.  */
+  integration?: Maybe<Integration>;
+  /**
+   * A integration object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  integrationBy?: Maybe<Integration>;
+  /** Connection between the RootQuery type and the integrationCategory type */
+  integrationCategories?: Maybe<RootQueryToIntegrationCategoryConnection>;
+  /** A 0bject */
+  integrationCategory?: Maybe<IntegrationCategory>;
+  /** Connection between the RootQuery type and the integration type */
+  integrations?: Maybe<RootQueryToIntegrationConnection>;
   /** An object of the mediaItem Type.  */
   mediaItem?: Maybe<MediaItem>;
   /**
@@ -16474,6 +17803,50 @@ export type RootQueryIndustryByArgs = {
   industryId?: InputMaybe<Scalars['Int']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   uri?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryIntegrationArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<IntegrationIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryIntegrationByArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  integrationId?: InputMaybe<Scalars['Int']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  uri?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryIntegrationCategoriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToIntegrationCategoryConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryIntegrationCategoryArgs = {
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<IntegrationCategoryIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryIntegrationsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToIntegrationConnectionWhereArgs>;
 };
 
 
@@ -17438,6 +18811,158 @@ export type RootQueryToIndustryConnectionPageInfo = IndustryConnectionPageInfo &
 
 /** Arguments for filtering the RootQueryToIndustryConnection connection */
 export type RootQueryToIndustryConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the RootQuery type and the integrationCategory type */
+export type RootQueryToIntegrationCategoryConnection = Connection & IntegrationCategoryConnection & {
+  __typename?: 'RootQueryToIntegrationCategoryConnection';
+  /** Edges for the RootQueryToIntegrationCategoryConnection connection */
+  edges: Array<RootQueryToIntegrationCategoryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<IntegrationCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToIntegrationCategoryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToIntegrationCategoryConnectionEdge = Edge & IntegrationCategoryConnectionEdge & {
+  __typename?: 'RootQueryToIntegrationCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: IntegrationCategory;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToIntegrationCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToIntegrationCategoryConnection Nodes. */
+export type RootQueryToIntegrationCategoryConnectionPageInfo = IntegrationCategoryConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToIntegrationCategoryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToIntegrationCategoryConnection connection */
+export type RootQueryToIntegrationCategoryConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Connection between the RootQuery type and the integration type */
+export type RootQueryToIntegrationConnection = Connection & IntegrationConnection & {
+  __typename?: 'RootQueryToIntegrationConnection';
+  /** Edges for the RootQueryToIntegrationConnection connection */
+  edges: Array<RootQueryToIntegrationConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Integration>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToIntegrationConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToIntegrationConnectionEdge = Edge & IntegrationConnectionEdge & {
+  __typename?: 'RootQueryToIntegrationConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Integration;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToIntegrationConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToIntegrationConnection Nodes. */
+export type RootQueryToIntegrationConnectionPageInfo = IntegrationConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToIntegrationConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToIntegrationConnection connection */
+export type RootQueryToIntegrationConnectionWhereArgs = {
   /** Filter the connection based on dates */
   dateQuery?: InputMaybe<DateQueryInput>;
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -18572,6 +20097,7 @@ export type SeoContentTypes = {
   __typename?: 'SEOContentTypes';
   caseStudy?: Maybe<SeoContentType>;
   industry?: Maybe<SeoContentType>;
+  integration?: Maybe<SeoContentType>;
   mediaItem?: Maybe<SeoContentType>;
   page?: Maybe<SeoContentType>;
   post?: Maybe<SeoContentType>;
@@ -19832,6 +21358,8 @@ export type TaxonomyConnectionPageInfo = {
 export enum TaxonomyEnum {
   /** Taxonomy enum category */
   Category = 'CATEGORY',
+  /** Taxonomy enum integration_category */
+  Integrationcategory = 'INTEGRATIONCATEGORY',
   /** Taxonomy enum post_format */
   Postformat = 'POSTFORMAT',
   /** Taxonomy enum post_tag */
@@ -20983,6 +22511,72 @@ export type UpdateIndustryPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The Post object mutation type. */
   industry?: Maybe<Industry>;
+};
+
+/** Input for the updateIntegrationCategory mutation. */
+export type UpdateIntegrationCategoryInput = {
+  /** The slug that the integration_category will be an alias of */
+  aliasOf?: InputMaybe<Scalars['String']['input']>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The description of the integration_category object */
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the integrationCategory object to update */
+  id: Scalars['ID']['input'];
+  /** The name of the integration_category object to mutate */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** The database ID of the integration_category that should be set as the parent. This field cannot be used in conjunction with parentId */
+  parentDatabaseId?: InputMaybe<Scalars['Int']['input']>;
+  /** The ID of the integration_category that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
+  parentId?: InputMaybe<Scalars['ID']['input']>;
+  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updateIntegrationCategory mutation. */
+export type UpdateIntegrationCategoryPayload = {
+  __typename?: 'UpdateIntegrationCategoryPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The created integration_category */
+  integrationCategory?: Maybe<IntegrationCategory>;
+};
+
+/** Input for the updateIntegration mutation. */
+export type UpdateIntegrationInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The excerpt of the object */
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the integration object */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Set connections between the integration and integrationCategories */
+  integrationCategories?: InputMaybe<IntegrationIntegrationCategoriesInput>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updateIntegration mutation. */
+export type UpdateIntegrationPayload = {
+  __typename?: 'UpdateIntegrationPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  integration?: Maybe<Integration>;
 };
 
 /** Input for the updateMediaItem mutation. */
@@ -22311,6 +23905,12 @@ export type WithAcfIndustryCardDetails = {
   industryCardDetails?: Maybe<IndustryCardDetails>;
 };
 
+/** Provides access to fields of the &quot;IntegrationContent&quot; ACF Field Group via the &quot;integrationContent&quot; field */
+export type WithAcfIntegrationContent = {
+  /** Fields of the IntegrationContent ACF Field Group */
+  integrationContent?: Maybe<IntegrationContent>;
+};
+
 /** Access point for the &quot;CompanyDetails&quot; ACF Options Page */
 export type WithAcfOptionsPageCompanyDetails = {
   companyDetails?: Maybe<CompanyDetails>;
@@ -22325,6 +23925,12 @@ export type WithAcfOptionsPageOptions = {
 export type WithAcfPagePanels = {
   /** Fields of the PagePanels ACF Field Group */
   pagePanels?: Maybe<PagePanels>;
+};
+
+/** Provides access to fields of the &quot;Postfields&quot; ACF Field Group via the &quot;postfields&quot; field */
+export type WithAcfPostfields = {
+  /** Fields of the Postfields ACF Field Group */
+  postfields?: Maybe<Postfields>;
 };
 
 /** Provides access to fields of the &quot;ProductCard&quot; ACF Field Group via the &quot;productCard&quot; field */

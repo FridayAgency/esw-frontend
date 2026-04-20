@@ -2,7 +2,9 @@
 @use "@/app/styles/generic/text-styles";
 
 .image {
+  padding: 2rem 0;
   @include mixins.breakpoint-up(mobile) {
+    padding: 2.5rem 0;
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(12, minmax(0, 1fr));

@@ -3,10 +3,10 @@ import Container from "@/app/components/Container/Container";
 import Editor from "@/app/components/Editor";
 
 import styles from "./TextPanel.module.scss";
-import { PagePanelsPagePanelsBlocksTextPanelLayout } from "@/types/graphql";
+import { PagePanelsPagePanelsBlocksTextPanelLayout, PostfieldsOpenContentTextPanelLayout } from "@/types/graphql";
 
 interface TextPanelProps {
-  panel: PagePanelsPagePanelsBlocksTextPanelLayout;
+  panel: PagePanelsPagePanelsBlocksTextPanelLayout | PostfieldsOpenContentTextPanelLayout;
 }
 
 //
