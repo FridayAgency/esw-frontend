@@ -11,7 +11,6 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import styles from "./NavItemWithChildrenDesktop.module.scss";
 import { ClassName } from "@fridayagency/classnames";
 import Icon from "../Icon";
-import Divider from "../Divider";
 
 interface GroupedItems {
   heading: string | null | undefined;
