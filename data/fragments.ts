@@ -3,19 +3,18 @@ import { BLOG_LANDING_HEADER_FRAGMENT } from "@/app/components/Panels/BlogLandin
 import { CALLTOACTION_FRAGMENT } from "@/app/components/Panels/CallToAction";
 import { CALL_TO_ACTION_WITH_IMAGES_FRAGMENT } from "@/app/components/Panels/CallToActionWithImages";
 import { CASE_STUDY_GATEWAY_FRAGMENT } from "@/app/components/Panels/CaseStudyGateway";
-import { CONTACTPANEL_FRAGMENT } from "@/app/components/Panels/ContactPanel";
-import { EDITORCONTENT_FRAGMENT } from "@/app/components/Panels/EditorContent";
+
 import { FEATURE_BLOCK_FRAGMENT } from "@/app/components/Panels/FeatureBlock";
 import { FEATURE_BLOCK_GREEN_EMPHASIS_FRAGMENT } from "@/app/components/Panels/FeatureBlockGreenEmphasis";
 import { HERO_HEADER_FRAGMENT } from "@/app/components/Panels/HeroHeader";
 import { HERO_HEADER_SIMPLE_FRAGMENT } from "@/app/components/Panels/HeroHeaderSimple";
 import { LIST_ICON_FRAGMENT } from "@/app/components/Panels/IconBlock";
 import { INDUSTYCARDS_FRAGMENT } from "@/app/components/Panels/IndustryCards";
-import { LATESTNEWS_FRAGMENT } from "@/app/components/Panels/LatestNews";
+
 import { LETS_COMPARE_FRAGMENT } from "@/app/components/Panels/LetsCompare";
 import { LOGO_BLOCK_FRAGMENT } from "@/app/components/Panels/LogoBlock";
 import { OPEN_CONTENT_FRAGMENT } from "@/app/components/Panels/OpenContent";
-import { PAGEHEADER_FRAGMENT } from "@/app/components/Panels/PageHeader";
+
 import { PRIMARYPRODUCTSECTION_FRAGMENT } from "@/app/components/Panels/PrimaryProductSection";
 import { QUICK_LINKS_FRAGMENT } from "@/app/components/Panels/QuickLinks";
 import { RESOURCEDOWNLOADS_FRAGMENT } from "@/app/components/Panels/ResourceDownloads";
@@ -38,6 +37,10 @@ fragment AcfMediaItem on AcfMediaItemConnectionEdge {
     }
   }
 }
+`;
+
+export const LATESTNEWS_FRAGMENT = `
+    title
 `;
 
 export const PAGEPANELS_FRAGMENT = (() => {
@@ -229,6 +232,23 @@ query GetContentNode($id: ID!) {
       }
     }
 
+      ... on Product {
+      id
+      title
+      pagePanels {
+        ...PagePanelsFragment
+      } 
+      revisions(first: 1, where: {orderby: {field: MODIFIED, order: DESC}}) { 
+        edges {
+          node {
+            pagePanels {
+              ...PagePanelsFragment
+            }
+          }
+        }
+      }
+    }
+
     ... on Post {
       ...PostFragment
       revisions(first: 1, where: {orderby: {field: MODIFIED, order: DESC}}) {
@@ -295,6 +315,8 @@ query GetPosts($first: Int = 50) {
 }
 ${POST_FRAGMENT}
 ${FRAGMENTS.MEDIAITEM_FRAGMENT}
+${FRAGMENTS.LINK_FRAGMENT}
+${FRAGMENTS.ACF_MEDIA_ITEM}
 ${CATEHORY_FRAGMENT}
 `;
 

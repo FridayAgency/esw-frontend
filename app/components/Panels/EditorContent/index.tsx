@@ -1,4 +1,3 @@
-import { PagePanelsPagePanelsEditorContentLayout } from "@/types/graphql";
 import Container from "../../Container";
 import Editor from "../../Editor";
 
@@ -8,14 +7,15 @@ export const EDITORCONTENT_FRAGMENT = `
     content
 `;
 
-const EditorContent: React.FC<{ panel: PagePanelsPagePanelsEditorContentLayout }> = ({ panel }) => {
-  const { content } = panel || {};
+const EditorContent: React.FC = () => {
+  // const { content } = panel || {};
 
-  if (!content) return null;
+  // if (!content) return null;
 
   return (
     <Container innerSection className={styles["editor-content"]}>
-      <Editor content={content} />
+      <h1>Editor</h1>
+      {/* <Editor content={content} /> */}
     </Container>
   );
 };

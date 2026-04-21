@@ -6,7 +6,7 @@ import { Page, Post, Product } from "@/types/graphql";
 import { GET_CONTENTNODE } from "@/data/fragments";
 import PagePanels from "../components/PagePanels";
 import PostTemplate from "../components/PostTemplate";
-import LatestPosts from "../components/Panels/LatestPosts";
+
 import { Metadata } from "next";
 
 interface PageParams {
@@ -77,106 +77,3 @@ const CatchallPage = async ({ params }: PageParams) => {
 };
 
 export default CatchallPage;
-
-// const PageTest = () => {
-//   return (
-//     <div style={{ paddingBottom: "10rem" }}>
-//       <HeroHeader />
-
-//       <FeatureBlockGreenEmphises />
-//       <HeroHeaderSimple />
-
-//       <IconBlock />
-
-//       <FeatureBlock />
-//       <FeatureBlock imagePosition="left" />
-//       <StatsBlock />
-//       <PrimaryProductSection />
-
-//       <CaseStudyGateway />
-//       <LatestPosts />
-
-//       <LogoBlock />
-
-//       <Testimonial />
-
-//       <LetsCompare />
-
-//       {/* <FeatureBlock />
-//       <StatsBlock />
-//       <PrimaryProductSection />
-
-//       <ResourceDownloads
-//         panel={{
-//           title: "Resource Downloads",
-//           callToAction: { url: "#", title: "loriem" },
-//           resources: [
-//             {
-//               resourceTitle: "Download this Document",
-//               file: {
-//                 node: {
-//                   id: "1",
-//                   sourceUrl: "https://example.com/resource1.pdf",
-//                 },
-//               },
-//             },
-//             {
-//               resourceTitle: "Download this Document",
-//               file: {
-//                 node: {
-//                   id: "2",
-//                   sourceUrl: "https://example.com/resource2.pdf",
-//                 },
-//               },
-//             },
-//           ],
-//         }}
-//       />
-//       <Faqs />
-//       <TextPanel />
-//       <FullWidthImage />
-//       <Quote />
-//       <Image50Text50 imagePosition="left" />
-//       <Image50Text50 imagePosition="right" />
-//       <CaseStudyGateway />
-//       <CallToAction />
-//       <Testimonial />
-
-//       <LatestPosts />
-
-//       <Industries />
-
-//       <FaqCategories />
-
-//       <StayConnected />
-
-//       <AccessReport />
-
-//       <LetsCompare />
-
-//       <ApplicationProcess />
-
-//       <Integrations />
-
-//       <div style={{ padding: "0 2rem" }}>
-//         <PostTLDR
-//           items={[
-//             "Lorem ipsum dolor sit amet consectetur. Amet ac malesuada lectus sed tempor enim auctor eget.",
-//             "Tincidunt lacus sit a suscipit massa facilisis vitae.",
-//             "Lorem ipsum dolor sit amet consectetur. Amet ac malesuada lectus sed tempor enim auctor eget.",
-//           ]}
-//         />
-
-//         <BlogHeroArticle
-//           category="Category"
-//           title="Signal Report: Commerce Trends Predicted for 2030."
-//           authorName="Author Name"
-//           authorImage="/assets/ck.png"
-//           articleImage="/assets/ck.png"
-//           href="/path/to/article"
-//         /> */}
-//     </div>
-//   );
-// };
-
-// export default PageTest;

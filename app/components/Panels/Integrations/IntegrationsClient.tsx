@@ -23,7 +23,7 @@ const IntegrationsClient: React.FC<Props> = ({ integrationList, integrationCateg
       const matchesCategory =
         selectedCategory === null ||
         integration.integrationCategories?.edges?.some(
-          (edge) => edge?.node?.databaseId === selectedCategory
+          (edge) => (edge?.node as IntegrationCategory)?.databaseId === selectedCategory
         );
       return matchesSearch && matchesCategory;
     });

@@ -9,10 +9,6 @@ import styles from "./LatestNews.module.scss";
 import Button from "../../Button";
 import { removeNodes } from "@fridayagency/utils";
 
-export const LATESTNEWS_FRAGMENT = `
-    title
-`;
-
 interface LatestNewsProps {
   panel?: PagePanelsPagePanelsLatestNewsLayout;
   title?: string;

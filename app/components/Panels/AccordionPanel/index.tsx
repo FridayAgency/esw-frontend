@@ -14,7 +14,7 @@ export const ACCORDIONPANEL_FRAGMENT = `
 `;
 
 const AccordionPanel: React.FC<{ panel: PagePanelsPagePanelsAccordionPanelLayout }> = ({ panel }) => {
-  const { title, accordionItems, callToAction } = panel;
+  const { title, accordionItems } = panel;
   return (
     <section className={styles["accordion-panel"]}>
       <Container className={styles["accordion-panel__container"]}>
