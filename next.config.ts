@@ -13,6 +13,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  redirects: async () => {
+    return [
+      {
+        source: "/w",
+        destination: "/resources",
+        permanent: true,
+      },
+      {
+        source: "/wp-admin",
+        destination: `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-admin/`,
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
