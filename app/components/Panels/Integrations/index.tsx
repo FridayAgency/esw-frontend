@@ -1,43 +1,28 @@
-import Container from "../../Container";
-import IntegrationCard from "../../IntegrationCard";
+import client from "@/lib/client";
+import { GET_INTEGRATIONS } from "@/data/fragments";
+import { removeNodes } from "@fridayagency/utils";
+import { Integration, IntegrationCategory } from "@/types/graphql";
+import IntegrationsClient from "./IntegrationsClient";
 
-import styles from "./Integrations.module.scss";
+const Integrations: React.FC = async () => {
+  try {
+    const { integrations, integrationCategories } = await client.query(GET_INTEGRATIONS);
 
-interface IntegrationsProps {}
+    const integrationList = integrations ? removeNodes<Integration>(integrations) : [];
+    const integrationCategoryList = integrationCategories
+      ? removeNodes<IntegrationCategory>(integrationCategories)
+      : [];
 
-const Integrations: React.FC<IntegrationsProps> = () => {
-  return (
-    <section className={styles["integrations"]}>
-      <Container className={styles["integrations__container"]}>
-        <ul className={styles["integrations__list"]}>
-          <li>
-            <IntegrationCard />
-          </li>
-          <li>
-            <IntegrationCard />
-          </li>
-          <li>
-            <IntegrationCard />
-          </li>
-          <li>
-            <IntegrationCard />
-          </li>
-          <li>
-            <IntegrationCard />
-          </li>
-          <li>
-            <IntegrationCard />
-          </li>
-          <li>
-            <IntegrationCard />
-          </li>
-          <li>
-            <IntegrationCard />
-          </li>
-        </ul>
-      </Container>
-    </section>
-  );
+    return (
+      <IntegrationsClient
+        integrationList={integrationList}
+        integrationCategoryList={integrationCategoryList}
+      />
+    );
+  } catch (error) {
+    console.error("Error rendering Integrations component:", error);
+    return null;
+  }
 };
 
 export default Integrations;

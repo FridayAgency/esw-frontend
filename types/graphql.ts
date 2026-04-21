@@ -7878,6 +7878,8 @@ export type IntegrationContent = AcfFieldGroup & AcfFieldGroupFields & Integrati
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;IntegrationContent&quot; Field Group */
+  integrationUrl?: Maybe<Scalars['String']['output']>;
 };
 
 /** Interface representing fields of the ACF &quot;IntegrationContent&quot; Field Group */
@@ -7889,6 +7891,8 @@ export type IntegrationContent_Fields = {
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;IntegrationContent&quot; Field Group */
+  integrationUrl?: Maybe<Scalars['String']['output']>;
 };
 
 /** Identifier types for retrieving a specific Integration. Specifies which unique attribute is used to find an exact Integration. */

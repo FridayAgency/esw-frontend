@@ -465,3 +465,42 @@ query GetMenu($id: ID!) {
 }
 ${FRAGMENTS.MENU_ITEM_FRAGMENT}
 `;
+
+export const GET_INTEGRATIONS = `
+query GetIntegrations {
+  integrations(first: 200) {
+    edges {
+      node {
+        title
+        databaseId
+        featuredImage{
+         ...MediaItemFragment
+        }
+        integrationContent {
+          integrationUrl
+          cardDiscription
+        }
+        integrationCategories {
+          edges {
+            node {
+              slug
+              name
+              databaseId
+            }
+          }
+        }
+      }
+    }
+  }
+  integrationCategories{
+    edges{
+      node{
+        name
+        databaseId
+        uri
+      }
+    }
+  }
+}
+  ${FRAGMENTS.MEDIAITEM_FRAGMENT}
+`;
