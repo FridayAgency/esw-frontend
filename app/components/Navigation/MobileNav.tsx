@@ -11,7 +11,7 @@ import Burger from "../Burger";
 
 import styles from "./MobileNav.module.scss";
 import { useModal } from "@fridayagency/hooks";
-import NavitemWithChildren from "./NavitemWithChildren";
+import NavItemWithChildren from "./NavItemWithChildren";
 import NavItem from "./NavItem";
 import Logo from "../Logo";
 import Link from "next/link";
@@ -58,7 +58,7 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
                 if (item.node.childItems?.edges.length) {
                   return (
                     <Fragment key={item.node.id}>
-                      <NavitemWithChildren item={item.node} />
+                      <NavItemWithChildren item={item.node} />
                     </Fragment>
                   );
                 } else {
