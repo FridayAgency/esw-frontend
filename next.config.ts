@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     unoptimized: process.env.NODE_ENV === "development",
     remotePatterns: [
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "esw1dev.wpenginepowered.com",
         pathname: "/**",
       },
