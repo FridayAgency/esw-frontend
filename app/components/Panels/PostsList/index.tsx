@@ -1,13 +1,23 @@
-import { GET_POSTS } from "@/data/fragments";
+import { GET_POSTS } from "@/data";
 import client from "@/lib/client";
-import { Category, PostConnection, RootQueryToCategoryConnection } from "@/types/graphql";
+import {
+  Category,
+  PagePanelsPagePanelsPostsListLayout,
+  Post,
+  PostConnection,
+  RootQueryToCategoryConnection,
+} from "@/types/graphql";
 
 import { removeNodes } from "@fridayagency/utils";
 import PostsList from "../../PostsList";
 
 import styles from "./PostsList.module.scss";
 
-const PostList = async () => {
+interface PostListProps {
+  panel: PagePanelsPagePanelsPostsListLayout;
+}
+
+const PostList: React.FC<PostListProps> = async ({ panel }) => {
   const { posts, categories } = await client.query<{
     posts: PostConnection;
     categories: RootQueryToCategoryConnection;
@@ -17,9 +27,11 @@ const PostList = async () => {
 
   const rawCategories = categories ? removeNodes<Category>(categories) : [];
 
+  const featuredItem = ((panel?.featuredPost as any)?.nodes?.[0] as Post) ?? undefined;
+
   return (
     <section className={styles["posts-list"]}>
-      <PostsList items={items} categories={rawCategories} />
+      <PostsList items={items} categories={rawCategories} featuredPost={featuredItem} activeCategory="all" />
     </section>
   );
 };

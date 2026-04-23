@@ -1,0 +1,135 @@
+@use "@/app/styles/generic/mixins";
+
+$ball-mobile: 7.8125rem; // 125px
+$ball-desktop: 12.25rem; // 196px
+
+.hero-header-logos {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--Foundation-Black, #1e2221);
+  min-height: 41.5rem;
+
+  @include mixins.breakpoint-up(mobile) {
+    min-height: 54.125rem;
+  }
+
+  &:before {
+    @include mixins.breakpoint-up(mobile) {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 38.375rem;
+      height: calc(100% - 7rem);
+      background-image: url("/assets/header-texture-left.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: bottom left;
+    }
+  }
+
+  &:after {
+    // content: "";
+    // position: absolute;
+
+    // right: 0;
+    // bottom: 0;
+    // background-image: url("/assets/header-mobile.svg");
+    // height: 100%;
+    // width: 100%;
+    // z-index: 1;
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    // background-position: bottom right;
+
+    @include mixins.breakpoint-up(mobile) {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 38.375rem;
+      height: calc(100% - 7rem);
+      background-image: url("/assets/header-texture-right.svg");
+      background-position: bottom right;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+// Hidden on mobile — the server-rendered HeroHeaderLogosMobile takes over
+.hero-header-logos--desktop-only {
+  display: none;
+
+  @include mixins.breakpoint-up(mobile) {
+    display: block;
+  }
+}
+
+// ── Ball ─────────────────────────────────────────────────────────────────────
+// Position is driven entirely by Matter.js via inline styles.
+// The initial translateY keeps balls hidden until the rAF loop takes over.
+
+.hero-header-logos__container {
+  position: relative;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+}
+
+.hero-header-logos__ball {
+  position: absolute;
+  width: $ball-mobile;
+  height: $ball-mobile;
+  z-index: 1;
+  transform: translateY(-200vh);
+  will-change: top, left;
+  border-radius: 50%;
+  overflow: hidden;
+
+  @include mixins.breakpoint-up(mobile) {
+    width: $ball-desktop;
+    height: $ball-desktop;
+  }
+
+  // 7-colour palette cycling — light source at 35% 30% for sphere depth
+  &:nth-child(7n + 1) {
+    background: var(--Function-Soft-Blue, #bed2ff);
+  } // lavender
+  &:nth-child(7n + 2) {
+    background: var(--Emphasis-Lime, #9ce533);
+  } // lime
+  &:nth-child(7n + 3) {
+    background: var(--Foundation-Signal-Green, #00d180);
+  } // sage
+  &:nth-child(7n + 4) {
+    background: var(--Neutral-Soft-Grey, #deebe5);
+  } // grey
+  &:nth-child(7n + 5) {
+    background: var(--Function-Soft-Mint, #cff3e4);
+  } // teal
+  &:nth-child(7n + 6) {
+    background: var(--Foundation-Signal-Green, #00d180);
+  } // yellow-green
+  &:nth-child(7n + 7) {
+    background: var(--Neutral-Mid-Grey, #beccc5);
+  } // white
+}
+
+.hero-header-logos__ball-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 82%;
+  height: 50%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.hero-header-logos__ball-logo--darken {
+  mix-blend-mode: darken;
+}
+.hero-header-logos__ball-logo--multiply {
+  mix-blend-mode: multiply;
+}

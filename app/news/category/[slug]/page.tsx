@@ -1,5 +1,5 @@
 import PostList from "@/app/components/PostsList";
-import { GET_POSTS_BY_CATEGORY } from "@/data/fragments";
+import { GET_POSTS_BY_CATEGORY } from "@/data";
 import client from "@/lib/client";
 import { Category, Post, RootQueryToCategoryConnection, RootQueryToPostConnection } from "@/types/graphql";
 import { processPageUri, removeNodes } from "@fridayagency/utils";

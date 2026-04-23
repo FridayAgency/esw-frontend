@@ -10,6 +10,10 @@
   text-decoration: none;
   height: 100%;
 
+  &--fullwidth {
+    max-width: none;
+  }
+
   @include mixins.breakpoint-up(mobile) {
     max-width: unset;
   }

@@ -4,6 +4,8 @@ import {
   PagePanelsPagePanelsBlocksFullWidthImageLayout,
   PagePanelsPagePanelsBlocksImage50Text50Layout,
   PagePanelsPagePanelsBlocksQuoteLayout,
+  PagePanelsPagePanelsBlocksDividerLayout,
+  PagePanelsPagePanelsBlocksGalleryLayout,
 } from "@/types/graphql";
 
 import TextPanel from "./TextPanel";
@@ -11,12 +13,15 @@ import FullWidthImage from "./FullwidthImage";
 import Image50Text50 from "./Image50Text50";
 import Quote from "./Quote";
 import styles from "./OpenContent.module.scss";
+import Divider from "./Divider";
 
 type OpenContentBlock =
   | PagePanelsPagePanelsBlocksTextPanelLayout
   | PagePanelsPagePanelsBlocksFullWidthImageLayout
   | PagePanelsPagePanelsBlocksImage50Text50Layout
-  | PagePanelsPagePanelsBlocksQuoteLayout;
+  | PagePanelsPagePanelsBlocksQuoteLayout
+  | PagePanelsPagePanelsBlocksDividerLayout
+  | PagePanelsPagePanelsBlocksGalleryLayout;
 
 export const OPEN_CONTENT_FRAGMENT = `
 
@@ -43,6 +48,18 @@ export const OPEN_CONTENT_FRAGMENT = `
         ... on PagePanelsPagePanelsBlocksQuoteLayout {
             quote
         }
+                   ... on PagePanelsPagePanelsBlocksDividerLayout {
+              __typename
+            }
+            ... on PagePanelsPagePanelsBlocksGalleryLayout {
+              images {
+                edges {
+                  node {
+                    altText
+                  }
+                }
+              }
+            }
     }
 
 
@@ -76,6 +93,10 @@ const OpenContent: React.FC<OpenContentProps> = ({ panel }) => {
             return <Image50Text50 key={index} panel={block} />;
           case "PagePanelsPagePanelsBlocksQuoteLayout":
             return <Quote key={index} panel={block} />;
+          case "PagePanelsPagePanelsBlocksDividerLayout":
+            return <Divider key={index} panel={block} />;
+          // case "PagePanelsPagePanelsBlocksGalleryLayout":
+          //   return <div key={index} className={styles["gallery"]} />;
           default:
             return null;
         }

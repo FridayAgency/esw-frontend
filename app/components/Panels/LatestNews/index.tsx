@@ -1,5 +1,5 @@
 import { GET } from "@/app/api/submit-contact/route";
-import { GET_POSTS } from "@/data/fragments";
+import { GET_POSTS } from "@/data";
 import client from "@/lib/client";
 import { PagePanelsPagePanelsLatestNewsLayout, Post, PostConnection } from "@/types/graphql";
 import Container from "../../Container";

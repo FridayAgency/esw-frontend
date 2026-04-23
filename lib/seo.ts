@@ -2,7 +2,7 @@ import { convertSeo } from "@fridayagency/utils";
 import { Metadata } from "next";
 import client from "./client";
 import { Category, ContentNode, User } from "@/types/graphql";
-import { GET_AUTHOR_SEO, GET_CATEGORY_SEO, GET_SEO } from "@/data/fragments";
+import { GET_AUTHOR_SEO, GET_CATEGORY_SEO, GET_SEO } from "@/data";
 
 /**
  * Helper to create fallback metadata

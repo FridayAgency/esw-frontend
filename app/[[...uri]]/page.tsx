@@ -3,13 +3,13 @@ import { generateSeoMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import client from "@/lib/client";
 import { Page, Post, Product } from "@/types/graphql";
-import { GET_CONTENTNODE } from "@/data/fragments";
+import { GET_CONTENTNODE } from "@/data";
 import PagePanels from "../components/PagePanels";
 import PostTemplate from "../components/PostTemplate";
 
 import { Metadata } from "next";
 
-interface PageParams {
+export interface PageParams {
   params: Promise<{ uri: string[] }>;
 }
 
@@ -52,10 +52,12 @@ const CatchallPage = async ({ params }: PageParams) => {
     case "Page":
       const page = contentNode as Page;
       return (
-        <PagePanels
-          panels={page?.pagePanels?.pagePanels?.filter((panel) => panel !== null) ?? undefined}
-          pageTitle={page.title ?? ""}
-        />
+        <>
+          <PagePanels
+            panels={page?.pagePanels?.pagePanels?.filter((panel) => panel !== null) ?? undefined}
+            pageTitle={page.title ?? ""}
+          />
+        </>
       );
 
     case "Product":

@@ -6,7 +6,8 @@ import Button from "../../Button";
 import ScrollTriggerWrapper from "../../ScrollTriggerWrapper";
 
 import styles from "./FeatureBlock.module.scss";
-import Globe from "@/app/components/react-bits/globe";
+
+import Globe from "./GlobeClient";
 import { PagePanelsPagePanelsFeatureBlockGreenEmphasisLayout } from "@/types/graphql";
 
 import parse from "html-react-parser";

@@ -1,0 +1,98 @@
+@use "@/app/styles/generic/mixins";
+
+$ball: 7.8125rem; // 125px
+
+.hero-header-logos-mobile {
+  background-color: var(--Foundation-Black, #1e2221);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  // padding-bottom: 3rem;
+  height: 41rem;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/assets/header-mobile.svg");
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+
+    @include mixins.breakpoint-up(mobile) {
+      left: unset;
+      width: 38.375rem;
+      height: calc(100% - 7rem);
+      background-image: url("/assets/header-texture-right.svg");
+      background-position: bottom right;
+    }
+  }
+
+  @include mixins.breakpoint-up(mobile) {
+    display: none;
+  }
+}
+
+.hero-header-logos-mobile__grid {
+  position: relative; // absolute children are positioned within this
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.hero-header-logos-mobile__ball {
+  position: absolute; // x/y set via inline style from algorithm
+  width: $ball;
+  height: $ball;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 2;
+
+  // 7-colour palette cycling — light source at 35% 30% for sphere depth
+  &:nth-child(7n + 1) {
+    background: var(--Function-Soft-Blue, #bed2ff);
+  } // lavender
+  &:nth-child(7n + 2) {
+    background: var(--Emphasis-Lime, #9ce533);
+  } // lime
+  &:nth-child(7n + 3) {
+    background: var(--Foundation-Signal-Green, #00d180);
+  } // sage
+  &:nth-child(7n + 4) {
+    background: var(--Neutral-Soft-Grey, #deebe5);
+  } // grey
+  &:nth-child(7n + 5) {
+    background: var(--Function-Soft-Mint, #cff3e4);
+  } // teal
+  &:nth-child(7n + 6) {
+    background: var(--Foundation-Signal-Green, #00d180);
+  } // yellow-green
+  &:nth-child(7n + 7) {
+    background: var(--Neutral-Mid-Grey, #beccc5);
+  } // white
+}
+
+.hero-header-logos-mobile__ball-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 82%;
+  height: 50%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.hero-header-logos-mobile__ball-logo--darken {
+  mix-blend-mode: darken;
+}
+
+.hero-header-logos-mobile__ball-logo--multiply {
+  mix-blend-mode: multiply;
+}

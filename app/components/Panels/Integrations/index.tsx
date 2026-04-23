@@ -1,5 +1,5 @@
 import client from "@/lib/client";
-import { GET_INTEGRATIONS } from "@/data/fragments";
+import { GET_INTEGRATIONS } from "@/data";
 import { removeNodes } from "@fridayagency/utils";
 import { Integration, IntegrationCategory } from "@/types/graphql";
 import IntegrationsClient from "./IntegrationsClient";

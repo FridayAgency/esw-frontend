@@ -17,13 +17,11 @@ const IntegrationsClient: React.FC<Props> = ({ integrationList, integrationCateg
 
   const filtered = useMemo(() => {
     return integrationList.filter((integration) => {
-      const matchesSearch =
-        !searchTerm ||
-        integration.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = !searchTerm || integration.title?.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory =
         selectedCategory === null ||
         integration.integrationCategories?.edges?.some(
-          (edge) => (edge?.node as IntegrationCategory)?.databaseId === selectedCategory
+          (edge) => (edge?.node as IntegrationCategory)?.databaseId === selectedCategory,
         );
       return matchesSearch && matchesCategory;
     });
@@ -32,19 +30,35 @@ const IntegrationsClient: React.FC<Props> = ({ integrationList, integrationCateg
   return (
     <>
       <div className={styles["integrations__filter-area"]}>
-        <Container>
+        <Container className={styles["integrations__filter-container"]} flush>
           <div className={styles["integrations__search"]}>
             <p className={styles["integrations__search-label"]}>Find Your Integration</p>
             <label className={styles["integrations__search-bar"]}>
               <svg
                 className={styles["integrations__search-icon"]}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
                 viewBox="0 0 20 20"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
               >
-                <circle cx="8.5" cy="8.5" r="7" stroke="#1e2221" strokeWidth="1.5" />
-                <path d="M13.5 13.5L18.5 18.5" stroke="#1e2221" strokeWidth="1.5" strokeLinecap="round" />
+                <g opacity="0.5">
+                  <path
+                    d="M9.16209 15.8252C12.842 15.8252 15.8252 12.842 15.8252 9.16209C15.8252 5.48218 12.842 2.49902 9.16209 2.49902C5.48218 2.49902 2.49902 5.48218 2.49902 9.16209C2.49902 12.842 5.48218 15.8252 9.16209 15.8252Z"
+                    stroke="#8F9A95"
+                    strokeWidth="1.66577"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M17.4906 17.4906L13.9092 13.9092"
+                    stroke="#8F9A95"
+                    strokeWidth="1.66577"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </g>
               </svg>
               <input
                 type="text"

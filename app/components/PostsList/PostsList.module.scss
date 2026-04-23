@@ -68,24 +68,23 @@
     }
 
     li {
-      button {
+      a {
+        display: inline-block;
         border-radius: 2rem;
         background: var(--Neutral-Mid-Grey, #beccc5);
-
         color: var(--Foundation-Black, #1e2221);
         @include text-styles.text-style("desktop-body-large-bold");
         padding: 0.5rem 1.5rem;
-        border: none;
+        text-decoration: none;
         cursor: pointer;
 
         &:hover {
           background: var(--Foundation-Signal-Green, #00d180);
         }
+        &.active {
+          background: var(--Foundation-Signal-Green, #00d180) !important;
+        }
       }
-    }
-
-    &--active {
-      background: var(--Foundation-Signal-Green, #00d180) !important;
     }
   }
 

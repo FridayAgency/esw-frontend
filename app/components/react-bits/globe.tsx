@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  useDeferredValue,
-} from "react";
+import React, { useEffect, useRef, useState, useCallback, useDeferredValue } from "react";
 import { cn } from "@/lib/utils";
 
 type GlobeInstance = {
@@ -62,9 +56,7 @@ type GlobeInstance = {
       }) => void,
     ) => void;
   };
-  onGlobeClick: (
-    fn: (coords: { lat: number; lng: number }, event: MouseEvent) => void,
-  ) => GlobeInstance;
+  onGlobeClick: (fn: (coords: { lat: number; lng: number }, event: MouseEvent) => void) => GlobeInstance;
   (element: HTMLElement): GlobeInstance;
 };
 
@@ -143,10 +135,7 @@ export interface GlobeProps {
   globeOpacity?: number;
 
   /** Callback when globe is clicked */
-  onGlobeClick?: (
-    coords: { lat: number; lng: number },
-    event: MouseEvent,
-  ) => void;
+  onGlobeClick?: (coords: { lat: number; lng: number }, event: MouseEvent) => void;
 }
 
 interface LandDot {
@@ -273,9 +262,7 @@ export const Globe: React.FC<GlobeProps> = ({
 
   const deferredPrimaryColor = useDeferredValue(primaryColor);
   const deferredNeutralColor = useDeferredValue(neutralColor);
-  const deferredAtmosphereColor = useDeferredValue(
-    atmosphereColor || neutralColor,
-  );
+  const deferredAtmosphereColor = useDeferredValue(atmosphereColor || neutralColor);
   const deferredGlobeColor = useDeferredValue(globeColor);
 
   const DEG2RAD = Math.PI / 180;
@@ -340,7 +327,7 @@ export const Globe: React.FC<GlobeProps> = ({
       }
     };
 
-    loadScripts();
+    setTimeout(loadScripts, 3000);
   }, []);
 
   const processLandMap = useCallback(
@@ -449,14 +436,10 @@ export const Globe: React.FC<GlobeProps> = ({
                   });
                 } else {
                   if (object.material.map) object.material.map.dispose();
-                  if (object.material.lightMap)
-                    object.material.lightMap.dispose();
-                  if (object.material.bumpMap)
-                    object.material.bumpMap.dispose();
-                  if (object.material.normalMap)
-                    object.material.normalMap.dispose();
-                  if (object.material.specularMap)
-                    object.material.specularMap.dispose();
+                  if (object.material.lightMap) object.material.lightMap.dispose();
+                  if (object.material.bumpMap) object.material.bumpMap.dispose();
+                  if (object.material.normalMap) object.material.normalMap.dispose();
+                  if (object.material.specularMap) object.material.specularMap.dispose();
                   if (object.material.envMap) object.material.envMap.dispose();
                   object.material.dispose();
                 }
@@ -498,10 +481,7 @@ export const Globe: React.FC<GlobeProps> = ({
       }
 
       const container = containerRef.current;
-      const containerWidth =
-        width === "auto"
-          ? container.parentElement?.getBoundingClientRect().width || 600
-          : width;
+      const containerWidth = width === "auto" ? container.parentElement?.getBoundingClientRect().width || 600 : width;
       const containerHeight = height === "auto" ? containerWidth : height;
 
       const landMapImage = new Image();
@@ -568,13 +548,11 @@ export const Globe: React.FC<GlobeProps> = ({
         world.controls().enabled = interactive;
         world.controls().enableZoom = enableZoom;
 
-        world.onGlobeClick(
-          (coords: { lat: number; lng: number }, event: MouseEvent) => {
-            if (onGlobeClickRef.current) {
-              onGlobeClickRef.current(coords, event);
-            }
-          },
-        );
+        world.onGlobeClick((coords: { lat: number; lng: number }, event: MouseEvent) => {
+          if (onGlobeClickRef.current) {
+            onGlobeClickRef.current(coords, event);
+          }
+        });
 
         globeRef.current = world;
 
@@ -585,12 +563,7 @@ export const Globe: React.FC<GlobeProps> = ({
         });
 
         const animateArcs = () => {
-          if (
-            !globeRef.current ||
-            dotsRef.current.length === 0 ||
-            isAnimatingRef.current
-          )
-            return;
+          if (!globeRef.current || dotsRef.current.length === 0 || isAnimatingRef.current) return;
 
           if (!isVisibleRef.current) return;
 
@@ -612,13 +585,10 @@ export const Globe: React.FC<GlobeProps> = ({
               endLng: selectedDots[i + arcCount].lng,
             }));
 
-            const labels: Label[] = Array.from(
-              { length: arcCount },
-              (_, i) => ({
-                lat: selectedDots[i + arcCount].lat,
-                lng: selectedDots[i + arcCount].lng,
-              }),
-            );
+            const labels: Label[] = Array.from({ length: arcCount }, (_, i) => ({
+              lat: selectedDots[i + arcCount].lat,
+              lng: selectedDots[i + arcCount].lng,
+            }));
 
             const rings: Ring[] = Array.from({ length: arcCount }, (_, i) => ({
               lat: selectedDots[i + arcCount].lat,
@@ -649,10 +619,7 @@ export const Globe: React.FC<GlobeProps> = ({
           clearTimeout(resizeTimeout);
           resizeTimeout = setTimeout(() => {
             if (!globeRef.current || !container.parentElement) return;
-            const newWidth =
-              width === "auto"
-                ? container.parentElement.getBoundingClientRect().width
-                : width;
+            const newWidth = width === "auto" ? container.parentElement.getBoundingClientRect().width : width;
             const newHeight = height === "auto" ? newWidth : height;
             globeRef.current.width(newWidth);
             globeRef.current.height(newHeight);
@@ -767,18 +734,13 @@ export const Globe: React.FC<GlobeProps> = ({
   return (
     <div
       ref={containerRef}
-      className={cn(
-        "relative overflow-hidden",
-        interactive ? "cursor-grab" : "cursor-default",
-        className,
-      )}
+      className={cn("relative overflow-hidden", interactive ? "cursor-grab" : "cursor-default", className)}
       style={{
         width: width === "auto" ? "100%" : width,
         height: height === "auto" ? "auto" : height,
         opacity: isGlobeVisible ? 1 : 0,
         transform: isGlobeVisible ? "scale(1)" : "scale(0.85)",
-        transition:
-          "opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
+        transition: "opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
       }}
     />
   );

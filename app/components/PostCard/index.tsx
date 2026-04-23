@@ -30,11 +30,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAutho
         <div className={styles["card__content--meta"]}>
           {postType ? (
             <div className={styles["card__content--category"]}>{postType === "blog" ? "Blog" : "News"}</div>
-          ) : (
-            categories?.edges?.[0]?.node?.name && (
-              <div className={styles["card__content--category"]}>{categories.edges[0].node.name}</div>
-            )
-          )}
+          ) : null}
 
           {showDate && post.date && (
             <div className={styles["card__content--date"]}>

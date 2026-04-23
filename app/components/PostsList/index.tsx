@@ -1,7 +1,8 @@
 "use client";
 
-import { CaseStudy, Category, Post } from "@/types/graphql";
+import { Category, Post } from "@/types/graphql";
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import Container from "../Container";
 import styles from "./PostsList.module.scss";
 import PostCard from "../PostCard";
@@ -15,36 +16,30 @@ interface PostsListProps {
   items: Post[];
   itemsPerPage?: number;
   categories?: Category[];
+  featuredPost?: Post;
+  activeCategory?: string;
 }
-export const PostsList: React.FC<PostsListProps> = ({ items, itemsPerPage = ITEMS_PER_PAGE, categories }) => {
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+export const PostsList: React.FC<PostsListProps> = ({
+  items,
+  itemsPerPage = ITEMS_PER_PAGE,
+  categories,
+  featuredPost,
+  activeCategory,
+}) => {
   const [visibleCount, setVisibleCount] = useState(itemsPerPage);
 
-  const featuredItem = items[0] ?? null;
-
   const filteredItems = useMemo(() => {
-    const rest = items.slice(1);
-    if (!selectedCategory) return rest;
-    return rest.filter((item) => {
-      const postCategoryIds: number[] =
-        item.categories?.edges?.map((e: any) => e.node?.databaseId).filter(Boolean) ?? [];
-      return postCategoryIds.includes(selectedCategory);
-    });
-  }, [items, selectedCategory]);
+    return featuredPost ? items.filter((p) => p.databaseId !== featuredPost.databaseId) : items;
+  }, [items, featuredPost]);
 
   const gridItems = filteredItems.slice(0, visibleCount);
   const hasMore = filteredItems.length > visibleCount;
 
-  const handleCategoryClick = (databaseId: number | null) => {
-    setSelectedCategory(databaseId);
-    setVisibleCount(itemsPerPage);
-  };
-
   return (
     <Container flush className={styles.posts}>
-      {featuredItem && (
+      {featuredPost && (
         <div className={styles["posts__featured"]}>
-          <PostCardFeatured post={featuredItem} />
+          <PostCardFeatured post={featuredPost} />
         </div>
       )}
 
@@ -53,27 +48,23 @@ export const PostsList: React.FC<PostsListProps> = ({ items, itemsPerPage = ITEM
         {categories && categories.length > 0 && (
           <div className={styles["posts__categories"]}>
             <h2>Categories</h2>
-            <nav aria-label="Filter by category">
+            <nav aria-label="Browse by category">
               <ul>
                 <li>
-                  <button
-                    onClick={() => handleCategoryClick(null)}
-                    className={!selectedCategory ? styles["posts__categories--active"] : ""}
-                  >
+                  <Link href="/blog" className={activeCategory?.replaceAll("/", "") === "all" ? styles["active"] : ""}>
                     All
-                  </button>
+                  </Link>
                 </li>
                 {categories.map((cat) => {
                   const key = String(cat?.slug ?? cat?.databaseId ?? cat?.name ?? "cat");
-                  const isActive = selectedCategory === cat.databaseId;
                   return (
                     <li key={key}>
-                      <button
-                        onClick={() => handleCategoryClick(cat.databaseId ?? null)}
-                        className={isActive ? styles["posts__categories--active"] : ""}
+                      <Link
+                        href={`/blog/category/${cat.slug}`}
+                        className={activeCategory?.replaceAll("/", "") === cat.slug ? styles["active"] : ""}
                       >
                         {cat.name ?? cat.slug}
-                      </button>
+                      </Link>
                     </li>
                   );
                 })}

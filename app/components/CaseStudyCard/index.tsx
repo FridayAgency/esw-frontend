@@ -7,12 +7,13 @@ import Icon from "../Icon";
 
 interface CaseStudyCardProps {
   caseStudy: CaseStudy;
+  fullwidth?: boolean;
 }
 
-const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ caseStudy }) => {
+const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ caseStudy, fullwidth }) => {
   const { title, caseStudyCard, uri } = caseStudy;
   return (
-    <Link className={styles["case-study"]} href={uri ?? "#"}>
+    <Link className={`${styles["case-study"]} ${fullwidth ? styles["case-study--fullwidth"] : ""}`} href={uri ?? "#"}>
       {caseStudyCard?.logo && (
         <div className={styles["case-study__image"]}>
           <ImageComponent image={caseStudyCard?.logo?.node} />

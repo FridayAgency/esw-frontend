@@ -16,6 +16,10 @@
   width: 101%;
   height: 101%;
   pointer-events: none;
-  will-change: transfrom;
+  will-change: transform;
   z-index: 1;
+}
+
+.container {
+  visibility: hidden;
 }

@@ -1,6 +1,6 @@
 import PagePanels from "@/app/components/PagePanels";
 import PostTemplate from "@/app/components/PostTemplate";
-import { GET_CONTENTNODE_PREVIEW } from "@/data/fragments";
+import { GET_CONTENTNODE_PREVIEW } from "@/data";
 import client from "@/lib/client";
 import { Page, Post } from "@/types/graphql";
 

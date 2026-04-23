@@ -1,11 +1,9 @@
 "use client";
 
-import { useRef, type ElementType, type ReactNode, type ComponentPropsWithoutRef } from "react";
+import { useRef, type ElementType, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface ScrollTriggerWrapperProps {
   children: ReactNode;
@@ -42,8 +40,11 @@ const ScrollTriggerWrapper: React.FC<ScrollTriggerWrapperProps> = ({
       start,
       once: true,
       onEnter: () => {
+        if (!ref.current) return;
+        ref.current.style.visibility = "visible";
+
         if (triggerClassName) {
-          ref.current?.classList.add(triggerClassName);
+          ref.current.classList.add(triggerClassName);
         }
         if (from) {
           gsap.fromTo(ref.current, { ...from }, { ...to, duration });
@@ -52,10 +53,19 @@ const ScrollTriggerWrapper: React.FC<ScrollTriggerWrapperProps> = ({
         }
       },
     });
+
+    // Wait for full page load before measuring positions
+    if (document.readyState === "complete") {
+      ScrollTrigger.refresh();
+    } else {
+      window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
+    }
   }, []);
 
+  const initialStyle: React.CSSProperties = from ? { visibility: "hidden" } : {};
+
   return (
-    <Tag ref={ref} className={className}>
+    <Tag ref={ref} className={className} style={initialStyle}>
       {children}
     </Tag>
   );
