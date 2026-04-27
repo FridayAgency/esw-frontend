@@ -18,8 +18,9 @@
   }
 
   &:hover {
-    h3 {
+    h3 span {
       background: rgba(0, 209, 128, 0.6);
+      box-shadow: 0 0 0 3px white;
     }
     .card__arrow {
       svg {
@@ -57,6 +58,13 @@
     h3 {
       color: var(--Foundation-Black, #1e2221);
       @include text-styles.text-style("mobile-h4");
+
+      span {
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        padding: 0 0.1875rem;
+        transition: background var(--transition), box-shadow var(--transition);
+      }
     }
 
     &--category {

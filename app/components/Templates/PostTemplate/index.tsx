@@ -1,4 +1,4 @@
-import { Post, PostfieldsOpenContent_Layout, PostfieldsTldr } from "@/types/graphql";
+import { CareerPost, NewsArticle, Post, PostfieldsOpenContent_Layout, PostfieldsTldr } from "@/types/graphql";
 
 import styles from "./PostTemplate.module.scss";
 
@@ -10,10 +10,17 @@ import PostContent from "../../PostContent";
 import PostAuthor from "../../PostAuthor";
 import LatestNews from "../../Panels/LatestNews";
 
-const PostTemplate: React.FC<{ post: Post }> = async ({ post }) => {
-  const { title, featuredImage, postfields, categories } = post;
+const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async ({ post }) => {
+  const { title, featuredImage, postfields } = post;
 
-  const relatedPosts = categories?.edges?.[0]?.node?.posts ? removeNodes<Post>(categories.edges[0].node.posts) : [];
+  let relatedPosts: (Post | NewsArticle | CareerPost)[] = [];
+  if ('categories' in post && post.categories?.edges?.[0]?.node?.posts) {
+    relatedPosts = removeNodes<Post>(post.categories.edges[0].node.posts);
+  } else if ('newsCategories' in post && post.newsCategories?.edges?.[0]?.node?.newsArticles) {
+    relatedPosts = removeNodes<NewsArticle>(post.newsCategories.edges[0].node.newsArticles);
+  } else if ('careerCategories' in post && post.careerCategories?.edges?.[0]?.node?.careerPosts) {
+    relatedPosts = removeNodes<CareerPost>(post.careerCategories.edges[0].node.careerPosts);
+  }
 
   const tldr = postfields?.tldr ? postfields.tldr : null;
 

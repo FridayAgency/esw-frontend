@@ -1,6 +1,6 @@
 "use client";
 
-import { Category, Post } from "@/types/graphql";
+import { Category, NewsArticle, NewsCategory, Post } from "@/types/graphql";
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Container from "../Container";
@@ -13,9 +13,9 @@ import Icon from "../Icon";
 const ITEMS_PER_PAGE = 6;
 
 interface PostsListProps {
-  items: Post[];
+  items: Post[] | NewsArticle[];
   itemsPerPage?: number;
-  categories?: Category[];
+  categories?: Category[] | NewsCategory[];
   featuredPost?: Post;
   activeCategory?: string;
 }

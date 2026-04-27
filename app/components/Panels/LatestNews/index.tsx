@@ -1,7 +1,7 @@
 import { GET } from "@/app/api/submit-contact/route";
 import { GET_POSTS } from "@/data";
 import client from "@/lib/client";
-import { PagePanelsPagePanelsLatestNewsLayout, Post, PostConnection } from "@/types/graphql";
+import { CareerPost, NewsArticle, PagePanelsPagePanelsLatestNewsLayout, Post, PostConnection } from "@/types/graphql";
 import Container from "../../Container";
 import PostCard from "../../PostCard";
 
@@ -12,7 +12,7 @@ import { removeNodes } from "@fridayagency/utils";
 interface LatestNewsProps {
   panel?: PagePanelsPagePanelsLatestNewsLayout;
   title?: string;
-  posts?: Post[];
+  posts?: (Post | NewsArticle | CareerPost)[];
 }
 
 const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, posts: propPosts }) => {
@@ -20,7 +20,7 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
 
   const title = propTitle || panelTitle;
 
-  let postsToDisplay: Post[] = [];
+  let postsToDisplay: (Post | NewsArticle | CareerPost)[] = [];
 
   try {
     if (propPosts && propPosts.length > 0) {
@@ -30,7 +30,7 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
         variables: { first: 3 },
       });
 
-      postsToDisplay = posts ? removeNodes<Post>(posts) : [];
+      postsToDisplay = posts ? removeNodes<Post>(posts) as Post[] : [];
     }
 
     return (

@@ -2,7 +2,7 @@ import { processPageUri } from "@fridayagency/utils";
 import { generateSeoMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import client from "@/lib/client";
-import { CaseStudy, Industry, Page, Post, Product } from "@/types/graphql";
+import { CareerPost, CaseStudy, Industry, NewsArticle, Page, Post, Product } from "@/types/graphql";
 import { GET_CONTENTNODE } from "@/data";
 import { Metadata } from "next";
 import PostTemplate from "../components/Templates/PostTemplate";
@@ -33,10 +33,9 @@ const CatchallPage = async ({ params }: PageParams) => {
 
   if (!pageUri) notFound();
 
-  const { contentNode } = await client.query<{ contentNode: Page | Post | Product | CaseStudy | Industry }>(
-    GET_CONTENTNODE,
-    { variables: { uri: pageUri } },
-  );
+  const { contentNode } = await client.query<{
+    contentNode: Page | Post | Product | CaseStudy | Industry | NewsArticle | CareerPost;
+  }>(GET_CONTENTNODE, { variables: { uri: pageUri } });
 
   if (!contentNode) notFound();
 
@@ -49,8 +48,9 @@ const CatchallPage = async ({ params }: PageParams) => {
       return <PagePanelsTemplate panels={extractPanels(node)} pageTitle={node.title ?? ""} />;
     }
 
-    case "Post": {
-      return <PostTemplate post={contentNode as Post} />;
+    case "Post":
+    case "NewsArticle": {
+      return <PostTemplate post={contentNode as Post | NewsArticle | CareerPost} />;
     }
 
     default:

@@ -1,4 +1,4 @@
-import { Post } from "@/types/graphql";
+import { CareerPost, NewsArticle, Post } from "@/types/graphql";
 import Link from "next/link";
 import Icon from "../Icon";
 import Image from "next/image";
@@ -7,14 +7,14 @@ import styles from "./PostCard.module.scss";
 import ImageWithTexture from "../ImageWithTexture/Index";
 
 interface PostCardProps {
-  post: Post;
-  postType?: "blog" | "news";
+  post: Post | NewsArticle | CareerPost;
+  postType?: "blog" | "news" | "career";
   showDate?: boolean;
   showAuthor?: boolean;
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAuthor }) => {
-  const { uri, title, featuredImage, categories, author } = post;
+  const { uri, title, featuredImage, author } = post;
 
   return (
     <Link className={styles["card"]} href={uri ?? ""}>
@@ -29,7 +29,9 @@ const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAutho
       <div className={styles["card__content"]}>
         <div className={styles["card__content--meta"]}>
           {postType ? (
-            <div className={styles["card__content--category"]}>{postType === "blog" ? "Blog" : "News"}</div>
+            <div className={styles["card__content--category"]}>
+              {postType === "blog" ? "Blog" : postType === "news" ? "News" : "Career"}
+            </div>
           ) : null}
 
           {showDate && post.date && (
@@ -39,7 +41,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAutho
           )}
         </div>
 
-        <div className={styles["card__content--header"]}>{<h3>{title}</h3>}</div>
+        <div className={styles["card__content--header"]}><h3><span>{title}</span></h3></div>
 
         {showAuthor && author?.node?.name && (
           <div className={styles["card__author"]}>
