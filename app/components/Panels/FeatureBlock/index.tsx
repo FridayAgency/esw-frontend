@@ -69,9 +69,11 @@ const FeatureBlock: React.FC<FeatureBlockProps> = ({ panel }) => {
             </div>
             <div className={styles["feature-block__description"]}>{text && parse(text)}</div>
 
-            <Button variant="text" colour={background === "dark" ? "light" : "dark"}>
-              Read More
-            </Button>
+            {callToAction && callToAction.url && (
+              <Button href={callToAction.url} variant="text" colour={background === "dark" ? "light" : "dark"}>
+                {callToAction.title}
+              </Button>
+            )}
           </div>
         </div>
       </Container>

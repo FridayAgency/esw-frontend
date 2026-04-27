@@ -189,7 +189,7 @@ export enum AvatarRatingEnum {
 }
 
 /** The caseStudy type */
-export type CaseStudy = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCaseStudyCard & {
+export type CaseStudy = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCaseStudyCard & WithAcfPagePanels & {
   __typename?: 'CaseStudy';
   /**
    * The ancestors of the content node.
@@ -265,6 +265,8 @@ export type CaseStudy = ContentNode & DatabaseIdentifier & MenuItemLinkable & No
   modified?: Maybe<Scalars['String']['output']>;
   /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
   modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /** Fields of the PagePanels ACF Field Group */
+  pagePanels?: Maybe<PagePanels>;
   /**
    * The parent of the content node.
    * @deprecated This content type is not hierarchical and typically will not have a parent
@@ -4104,7 +4106,7 @@ export type HierarchicalTermNodeEnqueuedStylesheetsArgs = {
 };
 
 /** The industry type */
-export type Industry = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfIndustryCardDetails & {
+export type Industry = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfIndustryCardDetails & WithAcfPagePanels & {
   __typename?: 'Industry';
   /**
    * The ancestors of the content node.
@@ -4178,6 +4180,8 @@ export type Industry = ContentNode & DatabaseIdentifier & MenuItemLinkable & Nod
   modified?: Maybe<Scalars['String']['output']>;
   /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
   modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /** Fields of the PagePanels ACF Field Group */
+  pagePanels?: Maybe<PagePanels>;
   /**
    * The parent of the content node.
    * @deprecated This content type is not hierarchical and typically will not have a parent
@@ -7749,6 +7753,56 @@ export type PagePanelsPagePanelsList = AcfFieldGroup & AcfFieldGroupFields & Pag
   title?: Maybe<Scalars['String']['output']>;
 };
 
+/** The &quot;PagePanelsPagePanelsListRepeater&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsListRepeater = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsListRepeater_Fields & {
+  __typename?: 'PagePanelsPagePanelsListRepeater';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsListRepeater&quot; Field Group */
+  listItems?: Maybe<Array<Maybe<PagePanelsPagePanelsListRepeaterListItems>>>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsListRepeater&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PagePanelsPagePanelsListRepeaterListItems&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsListRepeaterListItems = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsListRepeaterListItems_Fields & {
+  __typename?: 'PagePanelsPagePanelsListRepeaterListItems';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsListRepeaterListItems&quot; Field Group */
+  listItem?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsListRepeaterListItems&quot; Field Group */
+export type PagePanelsPagePanelsListRepeaterListItems_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsListRepeaterListItems&quot; Field Group */
+  listItem?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsListRepeater&quot; Field Group */
+export type PagePanelsPagePanelsListRepeater_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsListRepeater&quot; Field Group */
+  listItems?: Maybe<Array<Maybe<PagePanelsPagePanelsListRepeaterListItems>>>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsListRepeater&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 /** Interface representing fields of the ACF &quot;PagePanelsPagePanelsList&quot; Field Group */
 export type PagePanelsPagePanelsList_Fields = {
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsList&quot; Field Group */
@@ -8119,6 +8173,29 @@ export type PagePanelsPagePanelsTestimonialLayout_FieldsTestimonialArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** The &quot;PagePanelsPagePanelsTwoListsPanelLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsTwoListsPanelLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsTwoListsPanelLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsTwoListsPanelLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsTwoListsPanelLayout&quot; Field Group */
+  listRepeater?: Maybe<Array<Maybe<PagePanelsPagePanelsListRepeater>>>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsTwoListsPanelLayout&quot; Field Group */
+export type PagePanelsPagePanelsTwoListsPanelLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsTwoListsPanelLayout&quot; Field Group */
+  listRepeater?: Maybe<Array<Maybe<PagePanelsPagePanelsListRepeater>>>;
 };
 
 /** Layout of the &quot;pagePanels&quot; Field of the &quot;PagePanels&quot; Field Group Field */

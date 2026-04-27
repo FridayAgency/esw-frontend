@@ -15,11 +15,7 @@ query GetContentNode($uri: ID!) {
       pagePanels {
         ...PagePanelsFragment
       }
-      seo {
-        schema {
-          raw
-        }
-      }
+   
     }
 
     ... on Product {
@@ -28,16 +24,30 @@ query GetContentNode($uri: ID!) {
       pagePanels {
         ...PagePanelsFragment
       }
-      seo {
-        schema {
-          raw
-        }
-      }
+     
     }
 
     ... on Post {
       ...PostFragment
     }
+
+
+    ... on CaseStudy {
+      id
+      title
+      pagePanels {
+        ...PagePanelsFragment
+      }
+}
+
+... on Industry {
+databaseId
+title
+pagePanels {
+...PagePanelsFragment
+}
+}
+
   }
 }
 ${PAGEPANELS_FRAGMENT}
@@ -95,6 +105,40 @@ query GetContentNodePreview($id: ID!) {
         }
       }
     }
+
+
+    ... on Industry {
+      databaseId
+      title
+      pagePanels {
+        ...PagePanelsFragment
+      }
+      revisions(first: 1, where: {orderby: {field: MODIFIED, order: DESC}}) {
+        edges {
+          node {
+            pagePanels {
+              ...PagePanelsFragment
+            }
+          }
+        }
+      }
+    }
+
+    ... on CaseStudy {
+      id
+      title
+      pagePanels {
+        ...PagePanelsFragment
+      }
+      revisions(first: 1, where: {orderby: {field: MODIFIED, order: DESC}}) {
+        edges {
+          node {
+            pagePanels {
+              ...PagePanelsFragment
+            }
+          }
+        }
+      }
   }
 }
 ${PAGEPANELS_FRAGMENT}

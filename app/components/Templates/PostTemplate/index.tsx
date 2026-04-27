@@ -1,22 +1,14 @@
 import { Post, PostfieldsOpenContent_Layout, PostfieldsTldr } from "@/types/graphql";
 
-import ImageComponent from "../ImageComponent";
-import DateFormated from "../DateFormated";
-import Editor from "../Editor";
-
-import Container from "../Container";
-import Breadcrumbs from "../Breadcrumbs";
-
 import styles from "./PostTemplate.module.scss";
 
 import { removeNodes } from "@fridayagency/utils";
-import PostCard from "../PostCard";
-import BlogLandingHeader from "../Panels/BlogLandingHeader";
-import LatestNews from "../Panels/LatestNews";
-import FullWidthImage from "../Panels/OpenContent/FullwidthImage";
-import PostTLDR from "../PostTLDR";
-import PostContent from "../PostContent";
-import PostAuthor from "../PostAuthor";
+import BlogLandingHeader from "../../Panels/BlogLandingHeader";
+import FullWidthImage from "../../Panels/OpenContent/FullwidthImage";
+import PostTLDR from "../../PostTLDR";
+import PostContent from "../../PostContent";
+import PostAuthor from "../../PostAuthor";
+import LatestNews from "../../Panels/LatestNews";
 
 const PostTemplate: React.FC<{ post: Post }> = async ({ post }) => {
   const { title, featuredImage, postfields, categories } = post;

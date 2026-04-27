@@ -1,9 +1,8 @@
-import PagePanels from "@/app/components/PagePanels";
-import PostTemplate from "@/app/components/PostTemplate";
+import PagePanelsTemplate from "@/app/components/Templates/PagePanelsTemplate";
+import PostTemplate from "@/app/components/Templates/PostTemplate";
 import { GET_CONTENTNODE_PREVIEW } from "@/data";
 import client from "@/lib/client";
-import { Page, Post } from "@/types/graphql";
-
+import { CaseStudy, Industry, Page, Post, Product } from "@/types/graphql";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 
@@ -11,10 +10,12 @@ interface PageParams {
   params: Promise<{ id: string }>;
 }
 
+type ContentNode = Page | Post | Product | CaseStudy | Industry;
+
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const CatchallPage = async ({ params }: PageParams) => {
+const CatchallPreviewPage = async ({ params }: PageParams) => {
   const { id } = await params;
 
   const cookieStore = await cookies();
@@ -25,45 +26,32 @@ const CatchallPage = async ({ params }: PageParams) => {
     Authorization: `Bearer ${authCookie}`,
   };
 
-  const { contentNode } = await client.query<{ contentNode: Page | Post }>(
+  const { contentNode } = await client.query<{ contentNode: ContentNode }>(
     GET_CONTENTNODE_PREVIEW,
-    {
-      variables: { id },
-      headers,
-      // Ensure we bypass cache for preview
-    },
+    { variables: { id }, headers },
     0,
   );
 
   if (!contentNode) notFound();
 
-  let content = contentNode;
-
-  if (content?.revisions?.edges.length) {
-    const latestRevision = content.revisions.edges[0].node;
-
-    content = latestRevision;
-  } else {
-    console.warn("No revisions found for preview, using original content");
-  }
+  const content = contentNode.revisions?.edges.length ? contentNode.revisions.edges[0].node : contentNode;
 
   switch (contentNode.__typename) {
     case "Page":
-      const page = content as Page;
-      return (
-        <PagePanels
-          panels={page?.pagePanels?.pagePanels?.filter((panel) => panel !== null) ?? undefined}
-          pageTitle={page.title ?? ""}
-        />
-      );
+    case "Product":
+    case "CaseStudy":
+    case "Industry": {
+      const node = content as Page;
+      return <PagePanelsTemplate panels={node?.pagePanels?.pagePanels} pageTitle={node.title ?? ""} />;
+    }
 
-    case "Post":
-      const post = content as Post;
-      return <PostTemplate post={post} />;
+    case "Post": {
+      return <PostTemplate post={content as Post} />;
+    }
 
     default:
       notFound();
   }
 };
 
-export default CatchallPage;
+export default CatchallPreviewPage;
