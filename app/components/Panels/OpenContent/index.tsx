@@ -14,6 +14,7 @@ import Image50Text50 from "./Image50Text50";
 import Quote from "./Quote";
 import styles from "./OpenContent.module.scss";
 import Divider from "./Divider";
+import GalleryBlock from "./GalleryBlock";
 
 type OpenContentBlock =
   | PagePanelsPagePanelsBlocksTextPanelLayout
@@ -24,13 +25,12 @@ type OpenContentBlock =
   | PagePanelsPagePanelsBlocksGalleryLayout;
 
 export const OPEN_CONTENT_FRAGMENT = `
-
     blocks {
         __typename
         ... on PagePanelsPagePanelsBlocksTextPanelLayout {
             content
-            callToAction{
-              ...AcfLinkFragment
+            callToAction {
+                ...AcfLinkFragment
             }
         }
         ... on PagePanelsPagePanelsBlocksFullWidthImageLayout {
@@ -48,21 +48,17 @@ export const OPEN_CONTENT_FRAGMENT = `
         ... on PagePanelsPagePanelsBlocksQuoteLayout {
             quote
         }
-                   ... on PagePanelsPagePanelsBlocksDividerLayout {
-              __typename
-            }
-            ... on PagePanelsPagePanelsBlocksGalleryLayout {
-              images {
+        ... on PagePanelsPagePanelsBlocksDividerLayout {
+            __typename
+        }
+        ... on PagePanelsPagePanelsBlocksGalleryLayout {
+            images {
                 edges {
-                  node {
-                    altText
-                  }
+                   ...AcfMediaItem
                 }
-              }
             }
+        }
     }
-
-
 `;
 
 interface OpenContentProps {
@@ -78,9 +74,6 @@ const OpenContent: React.FC<OpenContentProps> = ({ panel }) => {
 
   return (
     <div className={styles["open-content"]}>
-      {/* <div className={styles["open-content__texture"]} aria-hidden="true">
-        <img src="/assets/pattern-5.svg" alt="" />
-      </div> */}
       {(blocks.filter(Boolean) as OpenContentBlock[]).map((block, index) => {
         switch (block.__typename) {
           case "PagePanelsPagePanelsBlocksTextPanelLayout":
@@ -94,9 +87,9 @@ const OpenContent: React.FC<OpenContentProps> = ({ panel }) => {
           case "PagePanelsPagePanelsBlocksQuoteLayout":
             return <Quote key={index} panel={block} />;
           case "PagePanelsPagePanelsBlocksDividerLayout":
-            return <Divider key={index} panel={block} />;
-          // case "PagePanelsPagePanelsBlocksGalleryLayout":
-          //   return <div key={index} className={styles["gallery"]} />;
+            return <Divider key={index} />;
+          case "PagePanelsPagePanelsBlocksGalleryLayout":
+            return <GalleryBlock key={index} panel={block} />;
           default:
             return null;
         }

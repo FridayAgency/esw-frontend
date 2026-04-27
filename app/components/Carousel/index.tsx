@@ -18,6 +18,7 @@ interface CarouselProps {
   showArrows?: boolean; // default: true
   loop?: boolean; // default: false — wrap around when reaching the first/last page
   disableAt?: number; // screen width (px) at which carousel becomes a plain flex layout
+  dark?: boolean; // default: false - use dark styles for dots and arrows
 }
 
 const DEFAULT_GAP = 0;
@@ -34,6 +35,7 @@ const Carousel: React.FC<CarouselProps> = ({
   showArrows = true,
   loop = false,
   disableAt,
+  dark = false,
 }) => {
   const slides = useMemo(() => React.Children.toArray(children), [children]);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -164,7 +166,7 @@ const Carousel: React.FC<CarouselProps> = ({
       </div>
 
       {!isDisabled && (showArrows || showDots) && (
-        <div className={styles.carousel__nav}>
+        <div className={styles.carousel__nav + (dark ? ` ${styles["carousel__nav--dark"]}` : "")}>
           {showArrows && (
             <button
               className={`${styles.carousel__arrow} ${styles["carousel__arrow--prev"]}`}

@@ -53,6 +53,20 @@
     align-items: center;
     gap: 1.5rem;
     padding: 0 0.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      justify-content: flex-end;
+    }
+
+    &--dark {
+      .carousel__arrow {
+        svg {
+          path {
+            fill: var(--Foundation-Orchestrated-Green, #063e2d);
+          }
+        }
+      }
+    }
   }
 
   &__arrow {
@@ -61,7 +75,9 @@
     border: none;
 
     &:disabled {
-      opacity: 0;
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 
