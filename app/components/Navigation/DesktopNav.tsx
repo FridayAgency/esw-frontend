@@ -2,6 +2,8 @@
 
 "use client";
 
+import { useRef } from "react";
+import { useModal } from "@fridayagency/hooks";
 import { Menu, MenuItem, MenuToMenuItemConnectionEdge } from "@/types/graphql";
 import Link from "next/link";
 
@@ -12,12 +14,16 @@ import Button from "../Button";
 import Container from "../Container";
 import NavItemWithChildrenDesktop from "./NavItemWithChildrenDesktop";
 import NavItem from "./NavItem";
+import TalkToUsModal from "./TalkToUsModal";
 
 interface DesktopNavProps {
   menu: Menu;
 }
 
 const DesktopNav: React.FC<DesktopNavProps> = ({ menu }) => {
+  const modalRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+  const { isOpen, openModal, closeModal } = useModal(modalRef);
+
   if (!menu?.menuItems?.edges) {
     return null;
   }
@@ -34,16 +40,22 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menu }) => {
   };
 
   return (
-    <Container flush className={styles.nav}>
-      <Link href="/" className={styles.logo} aria-label="Go to homepage">
-        <Logo />
-      </Link>
-      <nav className={styles["nav-list-wrapper"]} aria-label="Primary navigation">
-        <ul className={styles["nav-list"]}>{topLevel.map((item) => renderNode(item))}</ul>
+    <>
+      <Container flush className={styles.nav}>
+        <Link href="/" className={styles.logo} aria-label="Go to homepage">
+          <Logo />
+        </Link>
+        <nav className={styles["nav-list-wrapper"]} aria-label="Primary navigation">
+          <ul className={styles["nav-list"]}>{topLevel.map((item) => renderNode(item))}</ul>
 
-        <button className={styles.cta}>Talk to Us</button>
-      </nav>
-    </Container>
+          <button className={styles.cta} onClick={openModal} aria-haspopup="dialog" aria-expanded={isOpen}>
+            Talk to Us
+          </button>
+        </nav>
+      </Container>
+
+      {isOpen && <TalkToUsModal ref={modalRef} onClose={closeModal} />}
+    </>
   );
 };
 

@@ -20,11 +20,13 @@ import Icon from "../Icon";
 const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
   const navRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   const path = usePathname();
+  const [talkToUsOpen, setTalkToUsOpen] = useState(false);
 
   const { isOpen, openModal, closeModal } = useModal(navRef);
 
   useEffect(() => {
     closeModal();
+    setTalkToUsOpen(false);
   }, [path]);
 
   return (
@@ -38,6 +40,7 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
           onClick={() => {
             if (isOpen) {
               closeModal();
+              setTalkToUsOpen(false);
             } else {
               openModal();
             }
@@ -71,14 +74,44 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
               })}
         </ul>
 
-        <div className={styles.nav__actions}>
-          <button>Talk to Us</button>
+        <div className={styles["nav__actions"]}>
+          <button onClick={() => setTalkToUsOpen(true)}>Talk to Us</button>
           <a href="#">
             <Icon type="profile" />
             My Account
           </a>
         </div>
       </nav>
+
+      <div
+        className={`${styles["talk-to-us"]} ${talkToUsOpen ? styles["talk-to-us--open"] : ""}`}
+        aria-hidden={!talkToUsOpen}
+      >
+        <button className={styles["talk-to-us__back"]} onClick={() => setTalkToUsOpen(false)} aria-label="Back to menu">
+          <Icon type="arrowRight" />
+          Back
+        </button>
+
+        <p className={styles["talk-to-us__heading"]}>How can we help?</p>
+
+        <div className={styles["talk-to-us__cards"]}>
+          <a href="#" className={styles["talk-to-us__card"]}>
+            <div className={styles["talk-to-us__card-content"]}>
+              <p className={styles["talk-to-us__card-title"]}>I&apos;m a Shopper.</p>
+              <p className={styles["talk-to-us__card-body"]}>I need help with my order.</p>
+            </div>
+            <span className={styles["talk-to-us__card-cta"]}>Orders &amp; Returns</span>
+          </a>
+
+          <a href="/contact" className={styles["talk-to-us__card"]}>
+            <div className={styles["talk-to-us__card-content"]}>
+              <p className={styles["talk-to-us__card-title"]}>I&apos;m a Brand.</p>
+              <p className={styles["talk-to-us__card-body"]}>I want to talk to the ESW team.</p>
+            </div>
+            <span className={styles["talk-to-us__card-cta"]}>Talk to Us</span>
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

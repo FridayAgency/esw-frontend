@@ -1,0 +1,52 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.banner {
+  display: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  &.hide {
+    max-height: 0;
+  }
+
+  &.show {
+    max-height: 3.5rem;
+  }
+
+  @include mixins.breakpoint-up(tablet) {
+    display: block;
+
+    background: var(--Pure-Black, #000);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem 0;
+
+    ul {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+
+      li {
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          color: var(--Neutral-Mid-Grey, #beccc5);
+          text-decoration: none;
+          @include text-styles.text-style("desktop-body-default");
+          transition: var(--transition);
+
+          &:hover {
+            color: var(--Foundation-Signal-Green, #00d180);
+          }
+        }
+      }
+    }
+  }
+}

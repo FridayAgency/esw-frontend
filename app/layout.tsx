@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { DM_Sans } from "next/font/google";
 import GSAPProvider from "./components/GsapProvider";
+import Banner from "./components/Banner";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
