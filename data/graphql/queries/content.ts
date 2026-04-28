@@ -150,10 +150,23 @@ query GetContentNodePreview($id: ID!) {
 
     ... on NewsArticle {
       ...NewsArticleFragment
+      revisions(first: 1, where: {orderby: {field: MODIFIED, order: DESC}}) {
+        edges {
+          node {
+            ...NewsArticleFragment
+          }
+        }
+      }
     }
 
     ... on CareerPost {
       ...CareerPostFragment
+      revisions(first: 1, where: {orderby: {field: MODIFIED, order: DESC}}) {
+        edges {
+          node {
+            ...CareerPostFragment
+        }
+      } 
     }
   }
 }
