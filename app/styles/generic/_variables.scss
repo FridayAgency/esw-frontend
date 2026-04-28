@@ -74,7 +74,7 @@ $fallback-stack:
   --desktop-cta-secondary-font-style: normal;
   --desktop-stats-font-family: var(--font-dm-sans), sans-serif;
   --desktop-stats-font-size: 4.5rem;
-  --desktop-stats-line-height: 3.85rem;
+  --desktop-stats-line-height: 4.75rem; /* 105.556% */
   --desktop-stats-font-weight: 800;
   --desktop-stats-font-style: normal;
   --desktop-stats-letter-spacing: -0.07rem;
@@ -153,7 +153,7 @@ $fallback-stack:
   --mobile-cta-secondary-font-style: normal;
   --mobile-stats-font-family: var(--font-dm-sans), sans-serif;
   --mobile-stats-font-size: 4.5rem;
-  --mobile-stats-line-height: 100%;
+  --mobile-stats-line-height: 4.75rem; /* 105.556% */
   --mobile-stats-font-weight: 800;
   --mobile-stats-font-style: normal;
   --mobile-stats-letter-spacing: -0.02rem;

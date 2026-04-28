@@ -7,12 +7,14 @@ import ImageComponent from "../ImageComponent";
 
 export interface ImageWithTextureProps {
   image: MediaItem;
-  variant?: "frame";
+  variant?: "frame" | "frame-no-padding";
   className?: string;
 }
 
 const ImageWithTexture: React.FC<ImageWithTextureProps> = ({ image, variant, className }) => {
-  const outerClass = new ClassName([styles.image]).addIf(styles["image--frame"], variant === "frame");
+  const outerClass = new ClassName([styles.image])
+    .addIf(styles["image--frame"], variant === "frame")
+    .addIf(styles["image--frame-no-padding"], variant === "frame-no-padding");
 
   if (className) {
     outerClass.add(className);

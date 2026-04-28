@@ -21,7 +21,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAutho
       {featuredImage && (
         <div className={styles["card__image"]}>
           <div className={styles["card__image-wrapper"]}>
-            <ImageWithTexture image={featuredImage.node} variant="frame" />
+            <ImageWithTexture image={featuredImage.node} variant="frame-no-padding" />
           </div>
         </div>
       )}
@@ -41,7 +41,11 @@ const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAutho
           )}
         </div>
 
-        <div className={styles["card__content--header"]}><h3><span>{title}</span></h3></div>
+        <div className={styles["card__content--header"]}>
+          <h3>
+            <span>{title}</span>
+          </h3>
+        </div>
 
         {showAuthor && author?.node?.name && (
           <div className={styles["card__author"]}>

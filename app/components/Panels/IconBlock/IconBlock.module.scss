@@ -70,6 +70,10 @@
       h3 {
         color: var(--Foundation-Orchestrated-Green, #063e2d);
         @include text-styles.text-style("mobile-h4");
+
+        @include mixins.breakpoint-up(mobile) {
+          @include text-styles.text-style("desktop-h4");
+        }
       }
 
       p {
