@@ -27,11 +27,21 @@ const toBase64 = (str: string) =>
 
 const ImageComponent: React.FC<ImageComponentProps> = ({ image, ...props }) => {
   if (!image) return null;
+
+  const src = image.sourceUrl ?? "";
+  const alt = image.altText ?? "";
+  const isSvg = src.toLowerCase().endsWith(".svg");
+
+  if (isSvg) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={src} alt={alt} aria-hidden={!image.altText} />;
+  }
+
   return (
     <Image
       placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-      src={image.sourceUrl ?? ""}
-      alt={image.altText ?? ""}
+      src={src}
+      alt={alt}
       aria-hidden={!image.altText}
       height={image.mediaDetails?.height ?? undefined}
       width={image.mediaDetails?.width ?? undefined}

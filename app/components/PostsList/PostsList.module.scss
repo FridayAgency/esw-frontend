@@ -88,6 +88,24 @@
     }
   }
 
+  &__title {
+    padding: 0 1rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 1 / span 4;
+      padding: 0;
+    }
+
+    h2 {
+      color: var(--Foundation-Operational-Green, #007a4e);
+      @include text-styles.text-style("mobile-h3");
+
+      @include mixins.breakpoint-up(tablet) {
+        @include text-styles.text-style("desktop-h3");
+      }
+    }
+  }
+
   &__load-more {
     display: flex;
     justify-content: center;

@@ -1,6 +1,6 @@
 "use client";
 
-import { Category, NewsArticle, NewsCategory, Post } from "@/types/graphql";
+import { CareerPost, Category, NewsArticle, NewsCategory, Post } from "@/types/graphql";
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Container from "../Container";
@@ -13,11 +13,12 @@ import Icon from "../Icon";
 const ITEMS_PER_PAGE = 6;
 
 interface PostsListProps {
-  items: Post[] | NewsArticle[];
+  items: (Post | NewsArticle | CareerPost)[];
   itemsPerPage?: number;
   categories?: Category[] | NewsCategory[];
   featuredPost?: Post;
   activeCategory?: string;
+  title?: string;
 }
 export const PostsList: React.FC<PostsListProps> = ({
   items,
@@ -25,6 +26,7 @@ export const PostsList: React.FC<PostsListProps> = ({
   categories,
   featuredPost,
   activeCategory,
+  title,
 }) => {
   const [visibleCount, setVisibleCount] = useState(itemsPerPage);
 
@@ -45,6 +47,11 @@ export const PostsList: React.FC<PostsListProps> = ({
 
       <div className={styles["posts__content"]}>
         {" "}
+        {title && !categories?.length && (
+          <div className={styles["posts__title"]}>
+            <h2>{title}</h2>
+          </div>
+        )}
         {categories && categories.length > 0 && (
           <div className={styles["posts__categories"]}>
             <h2>Categories</h2>
@@ -82,7 +89,13 @@ export const PostsList: React.FC<PostsListProps> = ({
               {gridItems.length > 0 && (
                 <div className={styles["posts__list"]}>
                   {gridItems.map((item) => (
-                    <PostCard key={item.databaseId ?? item.id ?? item.slug} post={item} showAuthor showDate />
+                    <PostCard
+                      key={item.databaseId ?? item.slug}
+                      post={item}
+                      postType={item.__typename === "NewsArticle" ? "news" : item.__typename === "CareerPost" ? "career" : "blog"}
+                      showAuthor
+                      showDate
+                    />
                   ))}
                 </div>
               )}

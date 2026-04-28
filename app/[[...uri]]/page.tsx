@@ -7,6 +7,7 @@ import { GET_CONTENTNODE } from "@/data";
 import { Metadata } from "next";
 import PostTemplate from "../components/Templates/PostTemplate";
 import PagePanelsTemplate from "../components/Templates/PagePanelsTemplate";
+import { calculateReadTime } from "@/lib/readTime";
 
 export interface PageParams {
   params: Promise<{ uri: string[] }>;
@@ -17,6 +18,12 @@ type NodeWithPanels = Page | Product | CaseStudy | Industry;
 function extractPanels(node: NodeWithPanels) {
   return (node as Page).pagePanels?.pagePanels?.filter((panel) => panel !== null) ?? undefined;
 }
+
+const breadcrumbConfig: Partial<Record<string, { href: string; label: string }[]>> = {
+  CaseStudy: [{ href: "/customer-success-stories", label: "Customer Success Stories" }],
+  Product: [{ href: "/products", label: "Products" }],
+  Industry: [{ href: "/industries", label: "Industries" }],
+};
 
 export async function generateStaticParams() {
   return [];
@@ -45,7 +52,18 @@ const CatchallPage = async ({ params }: PageParams) => {
     case "CaseStudy":
     case "Industry": {
       const node = contentNode as NodeWithPanels;
-      return <PagePanelsTemplate panels={extractPanels(node)} pageTitle={node.title ?? ""} />;
+      const breadcrumbs = breadcrumbConfig[contentNode.__typename ?? ""];
+      const panels = extractPanels(node);
+      const readTime = breadcrumbs ? calculateReadTime(panels ?? []) : undefined;
+      return (
+        <PagePanelsTemplate
+          panels={panels}
+          pageTitle={node.title ?? ""}
+          showBreadcrumbs={!!breadcrumbs}
+          breadcrumbs={breadcrumbs}
+          readTime={readTime}
+        />
+      );
     }
 
     case "Post":

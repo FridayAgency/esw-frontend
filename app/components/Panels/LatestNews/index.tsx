@@ -1,7 +1,14 @@
 import { GET } from "@/app/api/submit-contact/route";
-import { GET_POSTS } from "@/data";
+import { GET_LATEST_POSTS_AND_NEWS, GET_POSTS } from "@/data";
 import client from "@/lib/client";
-import { CareerPost, NewsArticle, PagePanelsPagePanelsLatestNewsLayout, Post, PostConnection } from "@/types/graphql";
+import {
+  CareerPost,
+  NewsArticle,
+  NewsArticleConnection,
+  PagePanelsPagePanelsLatestNewsLayout,
+  Post,
+  PostConnection,
+} from "@/types/graphql";
 import Container from "../../Container";
 import PostCard from "../../PostCard";
 
@@ -26,11 +33,21 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
     if (propPosts && propPosts.length > 0) {
       postsToDisplay = propPosts;
     } else {
-      const { posts } = await client.query<{ posts: PostConnection }>(GET_POSTS, {
-        variables: { first: 3 },
+      const { posts, newsArticles } = await client.query<{
+        posts: PostConnection;
+        newsArticles: NewsArticleConnection;
+      }>(GET_LATEST_POSTS_AND_NEWS, {
+        variables: { first: 10 },
       });
 
-      postsToDisplay = posts ? removeNodes<Post>(posts) as Post[] : [];
+      const allPosts = [
+        ...(posts ? (removeNodes<Post>(posts) as Post[]) : []),
+        ...(newsArticles ? (removeNodes<NewsArticle>(newsArticles) as NewsArticle[]) : []),
+      ];
+
+      postsToDisplay = allPosts
+        .sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime())
+        .slice(0, 3);
     }
 
     return (
@@ -39,7 +56,17 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
           <h2 className={styles["latest-posts__title"]}>{title}</h2>
           <div className={styles["latest-posts__grid"]} role="tabpanel">
             {postsToDisplay.map((post) => (
-              <PostCard key={post.databaseId} post={post} />
+              <PostCard
+                key={post.databaseId}
+                post={post}
+                postType={
+                  post.__typename === "NewsArticle"
+                    ? "news"
+                    : post.__typename === "CareerPost"
+                      ? "career"
+                      : "blog"
+                }
+              />
             ))}
 
             <span className={styles["latest-posts__cta"]}>

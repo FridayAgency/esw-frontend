@@ -1,0 +1,96 @@
+/** @format */
+
+@use "@/app/styles/generic/mixins";
+@use "@/app/styles/generic/text-styles";
+
+.ctaButton {
+  @include text-styles.text-style("desktop-body-large-bold");
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
+  background: var(--Emphasis-Lime, #9ce533);
+  border: none;
+  min-width: 9.125rem;
+  height: 3rem;
+  padding: 0 1.5rem;
+  color: var(--Foundation-Black, #1e2221);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  z-index: 2;
+
+  .ellipse {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--Foundation-Black, #1e2221);
+    overflow: visible;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    --border-colour: var(--Emphasis-Lime, #9ce533);
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid var(--border-colour);
+      opacity: 0;
+      transition: none;
+      z-index: 0;
+    }
+
+    &:before {
+      width: 4.75rem;
+      height: 4.75rem;
+    }
+
+    &:after {
+      width: 7.25rem;
+      height: 7.25rem;
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    .ellipse {
+      opacity: 1;
+
+      &:before,
+      &:after {
+        animation: ring-pulse 0.3s ease-out forwards;
+      }
+
+      &:after {
+        animation-delay: 0.05s;
+      }
+    }
+  }
+
+  &:focus-visible {
+    outline: 4px solid var(--Foundation-Black, #1e2221);
+    outline-offset: 4px;
+  }
+
+  @keyframes ring-pulse {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}

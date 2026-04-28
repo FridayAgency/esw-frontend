@@ -2,6 +2,7 @@ import Container from "../Container";
 import styles from "./Footer.module.scss";
 import Logo from "../Logo";
 import Icon from "../Icon";
+import TalkToUsButton from "../TalkToUsButton";
 import { Menu, MenuItem } from "@/types/graphql";
 import client from "@/lib/client";
 import { FRAGMENTS } from "@fridayagency/graphql-client";
@@ -100,9 +101,7 @@ const Footer: React.FC = async () => {
         <div className={styles["footer__header"]}>
           <Logo />
           <div className={styles["footer__actions-mobile"]}>
-            <button type="button" className={styles["footer__cta"]}>
-              Talk to Us
-            </button>
+            <TalkToUsButton />
             <ul className={styles["footer__socials"]}>
               <li className={styles["footer__socials-item"]}>
                 <a href="#" aria-label="LinkedIn">
@@ -200,9 +199,7 @@ const Footer: React.FC = async () => {
 
         {/* Desktop CTA + socials — right sidebar via grid, hidden on mobile */}
         <div className={styles["footer__actions-desktop"]}>
-          <button type="button" className={styles["footer__cta"]}>
-            Talk to Us
-          </button>
+          <TalkToUsButton />
           <ul className={styles["footer__socials"]}>
             <li className={styles["footer__socials-item"]}>
               <a href="#" aria-label="LinkedIn">

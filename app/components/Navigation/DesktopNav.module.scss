@@ -49,20 +49,3 @@
     }
   }
 }
-
-.cta {
-  @include mixins.breakpoint-up(tablet) {
-    border-radius: 2rem;
-    background: var(--Emphasis-Lime, #9ce533);
-    border: none;
-    display: flex;
-    min-width: 9.125rem;
-    height: fit-content;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0.62rem 0;
-    color: var(--Foundation-Black, #1e2221);
-    text-align: center;
-    @include text-styles.text-style("desktop-body-large-bold");
-  }
-}

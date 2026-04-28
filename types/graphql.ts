@@ -149,6 +149,33 @@ export type AcfOptionsPage = {
   parentId?: Maybe<Scalars['String']['output']>;
 };
 
+/** The &quot;AuthorCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type AuthorCustomFields = AcfFieldGroup & AcfFieldGroupFields & AuthorCustomFields_Fields & {
+  __typename?: 'AuthorCustomFields';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AuthorCustomFields&quot; Field Group */
+  jobRole?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AuthorCustomFields&quot; Field Group */
+  linkedinUrl?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;AuthorCustomFields&quot; Field Group */
+export type AuthorCustomFields_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AuthorCustomFields&quot; Field Group */
+  jobRole?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AuthorCustomFields&quot; Field Group */
+  linkedinUrl?: Maybe<Scalars['String']['output']>;
+};
+
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export type Avatar = {
   __typename?: 'Avatar';
@@ -20065,10 +20092,12 @@ export type UpdateUserPayload = {
 };
 
 /** A registered user account. Users can be assigned roles, author content, and have various capabilities within the site. */
-export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdentifiable & {
+export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdentifiable & WithAcfAuthorCustomFields & {
   __typename?: 'User';
   /** The admin color scheme preference for the user. Possible values include &quot;fresh&quot;, &quot;light&quot;, &quot;blue&quot;, &quot;coffee&quot;, &quot;ectoplasm&quot;, &quot;midnight&quot;, &quot;ocean&quot;, &quot;sunrise&quot;. Default is &quot;fresh&quot;. */
   adminColor?: Maybe<Scalars['String']['output']>;
+  /** Fields of the AuthorCustomFields ACF Field Group */
+  authorCustomFields?: Maybe<AuthorCustomFields>;
   /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
   avatar?: Maybe<Avatar>;
   /** User metadata option name. Usually it will be &quot;wp_capabilities&quot;. */
@@ -21140,6 +21169,12 @@ export type WpPageInfo = {
   seo?: Maybe<SeoPostTypePageInfo>;
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Provides access to fields of the &quot;AuthorCustomFields&quot; ACF Field Group via the &quot;authorCustomFields&quot; field */
+export type WithAcfAuthorCustomFields = {
+  /** Fields of the AuthorCustomFields ACF Field Group */
+  authorCustomFields?: Maybe<AuthorCustomFields>;
 };
 
 /** Provides access to fields of the &quot;CaseStudyCard&quot; ACF Field Group via the &quot;caseStudyCard&quot; field */

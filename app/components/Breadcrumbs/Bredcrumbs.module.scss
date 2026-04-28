@@ -1,55 +1,95 @@
 @use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
 
 .breadcrumbs {
-  padding: 0.37rem 0;
-  &__list {
+  background: var(--Foundation-White, #fff);
+  padding: 1.25rem 0;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 1rem 0;
+  }
+
+  &__container {
     display: flex;
-    align-items: center;
-    gap: 0.38rem;
-    list-style: none;
-  }
+    flex-direction: column;
+    gap: 0.75rem;
 
-  &__item,
-  &__link {
-    // // @extend.secondary-caption;
-  }
-
-  &__link {
-    color: var(--blue-brand, #003f87);
-    transition: var(--transition);
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    &:hover,
-    &:focus-visible {
-      color: var(--blue-500, #5a7798);
+    @include mixins.breakpoint-up(mobile) {
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
 
-  &__item {
-    color: var(--blue-500, #5a7798);
-    display: block;
-    overflow: hidden;
-    max-width: 100%;
-    min-width: 0;
-    flex-shrink: 1;
+  &__read-time {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    flex-shrink: 0;
+    color: var(--Foundation-Orchestrated-Green, #063e2d);
+    @include text-styles.text-style("mobile-body-large");
 
-    &[aria-current="page"] {
-      color: var(--blue-500, #5a7798);
-      display: block;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    @include mixins.breakpoint-up(mobile) {
+      padding: 0 1.5rem;
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+
+    color: var(--Foundation-Black, #1e2221);
+
+    .desktop-only {
+      display: none;
+    }
+
+    @include mixins.breakpoint-up(mobile) {
+      padding: 0 1.5rem;
+      .desktop-only {
+        display: inline;
+      }
+    }
+  }
+
+  &__link {
+    color: var(--Foundation-Black, #1e2221);
+    text-decoration: none;
+    transition: var(--transition);
+    @include text-styles.text-style("desktop-h5");
+
+    &:hover,
+    &:focus-visible {
+      color: var(--Foundation-Operational-Green, #007a4e);
     }
   }
 
   &__separator {
-    color: var(--blue-500, #5a7798);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
+    padding: 0 0.3rem;
+    color: var(--Foundation-Black, #1e2221);
+    user-select: none;
+
+    &::after {
+      content: ">";
+    }
+  }
+
+  &__item {
+    color: var(--Foundation-Operational-Green, #007a4e);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 24rem;
+    @include text-styles.text-style("desktop-h5");
+
+    @include mixins.breakpoint-up(mobile) {
+      max-width: none;
+    }
   }
 }

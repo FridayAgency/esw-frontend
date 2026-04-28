@@ -63,19 +63,6 @@
     }
   }
 
-  &__cta {
-    border-radius: 2rem;
-    background: var(--Emphasis-Lime, #9ce533);
-    display: flex;
-    padding: 0.625rem 0.5rem 0.5625rem 0.5625rem;
-    justify-content: center;
-    align-items: center;
-    color: var(--Foundation-Black, #1e2221);
-    text-align: center;
-    @include text-styles.text-style("desktop-body-large-bold");
-    min-width: 10.2rem;
-  }
-
   &__socials {
     list-style: none;
     margin: 0;

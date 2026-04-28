@@ -37,12 +37,13 @@ const TalkToUsModal = forwardRef<HTMLDivElement, TalkToUsModalProps>(({ onClose 
           </p>
 
           <div className={styles["modal__cards"]}>
-            <a href="#" className={styles.card}>
+            <a href="https://service.esw.com/" target="_blank" rel="noopener noreferrer" className={styles.card}>
               <div className={styles["card__content"]}>
                 <p className={styles["card__title"]}>I&apos;m a Shopper.</p>
                 <p className={styles["card__body"]}>I need help with my order.</p>
               </div>
               <span className={styles["card__cta"]} aria-hidden="true">
+                <span className={styles["card__cta-dot"]} />
                 Orders &amp; Returns
               </span>
             </a>
@@ -53,6 +54,7 @@ const TalkToUsModal = forwardRef<HTMLDivElement, TalkToUsModalProps>(({ onClose 
                 <p className={styles["card__body"]}>I want to talk to the ESW team.</p>
               </div>
               <span className={styles["card__cta"]} aria-hidden="true">
+                <span className={styles["card__cta-dot"]} />
                 Talk to Us
               </span>
             </a>

@@ -66,7 +66,7 @@
   &__logo {
     background: var(--Foundation-White, #fff);
     // width: 10.1875rem;
-    height: 5.25656rem;
+    width: 10.1875rem;
     padding: 0.55825rem 1.11644rem;
 
     img {
@@ -78,7 +78,7 @@
     @include mixins.breakpoint-up(mobile) {
       grid-column: 1 / span 3;
 
-      height: 7.0625rem;
+      width: 13.6875rem;
     }
   }
 

@@ -192,3 +192,81 @@ ${FRAGMENTS.MEDIAITEM_FRAGMENT}
 ${FRAGMENTS.LINK_FRAGMENT}
 ${FRAGMENTS.ACF_MEDIA_ITEM}
 `;
+
+export const GET_AUTHOR_PAGE_DATA = `
+query GetAuthorPageData($first: Int = 50, $authorName: String, $userId: ID!) {
+  user(id: $userId, idType: SLUG) {
+    name
+    description
+    url
+    avatar(size: 160) {
+      url
+    }
+    authorCustomFields {
+      jobRole
+      linkedinUrl
+    }
+  }
+  posts(
+    where: {authorName: $authorName, orderby: {field: DATE, order: DESC}}
+    first: $first
+  ) {
+    edges {
+      node {
+        ...PostFragment
+      }
+    }
+  }
+  newsArticles(
+    where: {authorName: $authorName, orderby: {field: DATE, order: DESC}}
+    first: $first
+  ) {
+    edges {
+      node {
+        ...NewsArticleFragment
+      }
+    }
+  }
+  careerPosts(
+    where: {authorName: $authorName, orderby: {field: DATE, order: DESC}}
+    first: $first
+  ) {
+    edges {
+      node {
+        ...CareerPostFragment
+      }
+    }
+  }
+}
+${POST_FRAGMENT}
+${NEWS_ARTICLE_FRAGMENT}
+${CAREER_POST_FRAGMENT}
+${FRAGMENTS.MEDIAITEM_FRAGMENT}
+${FRAGMENTS.LINK_FRAGMENT}
+${FRAGMENTS.ACF_MEDIA_ITEM}
+`;
+
+export const GET_LATEST_POSTS_AND_NEWS = `
+query GetPostsAndNews($first: Int = 10) {
+  posts(first: $first, where: {orderby: {field: DATE, order: DESC}}) {
+    edges {
+      node {
+        ...PostFragment
+      }
+    }
+  }
+  newsArticles(first: $first, where: {orderby: {field: DATE, order: DESC}}) {
+    edges {
+      node {
+        ...NewsArticleFragment
+      }
+    }
+  }
+}
+${POST_FRAGMENT}
+${NEWS_ARTICLE_FRAGMENT}
+${FRAGMENTS.MEDIAITEM_FRAGMENT}
+${FRAGMENTS.LINK_FRAGMENT}
+${FRAGMENTS.ACF_MEDIA_ITEM}
+
+`;
