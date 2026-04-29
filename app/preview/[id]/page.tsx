@@ -48,7 +48,8 @@ const CatchallPreviewPage = async ({ params }: PageParams) => {
     case "Post":
     case "NewsArticle":
     case "CareerPost": {
-      return <PostTemplate post={contentNode as Post | NewsArticle | CareerPost} />;
+      const node = content as Post | NewsArticle | CareerPost;
+      return <PostTemplate post={node as Post | NewsArticle | CareerPost} />;
     }
 
     default:

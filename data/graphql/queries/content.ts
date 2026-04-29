@@ -168,6 +168,7 @@ query GetContentNodePreview($id: ID!) {
         }
       } 
     }
+   }
   }
 }
 ${PAGEPANELS_FRAGMENT}
