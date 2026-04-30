@@ -10,8 +10,10 @@
   }
 
   &__container {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+    padding: 2.5rem 1rem;
+    max-width: var(--page-width);
+    margin-right: auto;
+    margin-left: auto;
 
     @include mixins.breakpoint-up(mobile) {
       display: grid;

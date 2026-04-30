@@ -96,7 +96,7 @@ const Footer: React.FC = async () => {
 
   return (
     <footer className={styles.footer}>
-      <Container className={styles["footer__container"]}>
+      <div className={styles["footer__container"]}>
         {/* Logo + CTA — mobile: stacked at top; desktop: left sidebar via grid */}
         <div className={styles["footer__header"]}>
           <Logo />
@@ -253,11 +253,11 @@ const Footer: React.FC = async () => {
           Monthly Active Recipients: Pursuant to the Digital Services Act, Article 24(2), our average monthly recipients
           are 241,559.42.
         </p>
-      </Container>
+      </div>
 
       {/* Copyright bar */}
       <div className={styles["footer__copyright"]}>
-        <Container className={styles["footer__copyright-container"]}>
+        <div className={styles["footer__copyright-container"]}>
           <div className={styles["footer__copyright-left"]}>
             <span className={styles["footer__copyright-year"]}>&copy; {new Date().getFullYear()} ESW</span>
             <span className={styles["footer__copyright-rights"]}>All Rights Reserved</span>
@@ -265,7 +265,7 @@ const Footer: React.FC = async () => {
           <span className={styles["footer__copyright-site"]}>
             Site by <a href="#">Friday</a>
           </span>
-        </Container>
+        </div>
       </div>
     </footer>
   );
