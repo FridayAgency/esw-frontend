@@ -7,6 +7,19 @@
   gap: 1.5rem;
   padding: 1.5rem 1rem;
   background: var(--Foundation-Commerce-Canvas, #f2f6f3);
+
+  &--white {
+    background: var(--Foundation-White, #fff);
+
+    &:after {
+      display: none;
+    }
+
+    @include mixins.breakpoint-up(tablet) {
+      padding: 0 1.5rem 2rem !important;
+    }
+  }
+
   @include mixins.breakpoint-up(tablet) {
     padding: 2rem 11rem 2rem 6rem;
     position: relative;

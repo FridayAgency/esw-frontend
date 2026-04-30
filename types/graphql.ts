@@ -10831,6 +10831,83 @@ export type PagePanelsPagePanelsCaseStudyGatewayLayout_FieldsCaseStudiesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** The &quot;PagePanelsPagePanelsFaqCenterLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsFaqCenterLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsFaqCenterLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsFaqCenterLayout';
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqCenterLayout&quot; Field Group */
+  faqSection?: Maybe<Array<Maybe<PagePanelsPagePanelsFaqSection>>>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsFaqCenterLayout&quot; Field Group */
+export type PagePanelsPagePanelsFaqCenterLayout_Fields = {
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqCenterLayout&quot; Field Group */
+  faqSection?: Maybe<Array<Maybe<PagePanelsPagePanelsFaqSection>>>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PagePanelsPagePanelsFaqSection&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsFaqSection = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsFaqSection_Fields & {
+  __typename?: 'PagePanelsPagePanelsFaqSection';
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqSection&quot; Field Group */
+  faqs?: Maybe<Array<Maybe<PagePanelsPagePanelsFaqSectionFaqs>>>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqSection&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PagePanelsPagePanelsFaqSectionFaqs&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsFaqSectionFaqs = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsFaqSectionFaqs_Fields & {
+  __typename?: 'PagePanelsPagePanelsFaqSectionFaqs';
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqSectionFaqs&quot; Field Group */
+  content?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqSectionFaqs&quot; Field Group */
+  question?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsFaqSectionFaqs&quot; Field Group */
+export type PagePanelsPagePanelsFaqSectionFaqs_Fields = {
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqSectionFaqs&quot; Field Group */
+  content?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqSectionFaqs&quot; Field Group */
+  question?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsFaqSection&quot; Field Group */
+export type PagePanelsPagePanelsFaqSection_Fields = {
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqSection&quot; Field Group */
+  faqs?: Maybe<Array<Maybe<PagePanelsPagePanelsFaqSectionFaqs>>>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFaqSection&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 /** The &quot;PagePanelsPagePanelsFeatureBlockGreenEmphasisLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PagePanelsPagePanelsFeatureBlockGreenEmphasisLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsFeatureBlockGreenEmphasisLayout_Fields & PagePanelsPagePanels_Layout & {
   __typename?: 'PagePanelsPagePanelsFeatureBlockGreenEmphasisLayout';
@@ -10907,6 +10984,29 @@ export type PagePanelsPagePanelsFeatureBlockLayout_Fields = {
   text?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFeatureBlockLayout&quot; Field Group */
   title?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PagePanelsPagePanelsFormEmbedLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsFormEmbedLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsFormEmbedLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsFormEmbedLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFormEmbedLayout&quot; Field Group */
+  formEmbedCode?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsFormEmbedLayout&quot; Field Group */
+export type PagePanelsPagePanelsFormEmbedLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsFormEmbedLayout&quot; Field Group */
+  formEmbedCode?: Maybe<Scalars['String']['output']>;
 };
 
 /** The &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */

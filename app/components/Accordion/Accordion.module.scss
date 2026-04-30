@@ -6,15 +6,16 @@
 }
 
 .accordion-item {
-  border-bottom: 2px solid var(--Foundation-Commerce-Canvas, #f2f6f3);
-  &.open {
-    border-bottom: 2px solid var(--Foundation-Operational-Green, #007a4e);
-  }
+  box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.07);
+  // border-bottom: 2px solid var(--Foundation-Commerce-Canvas, #f2f6f3);
+  // &.open {
+  //   border-bottom: 2px solid var(--Foundation-Operational-Green, #007a4e);
+  // }
 
-  &:hover,
-  &:focus-visible {
-    border-bottom: 2px solid var(--Foundation-Operational-Green, #007a4e);
-  }
+  // &:hover,
+  // &:focus-visible {
+  //   border-bottom: 2px solid var(--Foundation-Operational-Green, #007a4e);
+  // }
   &__trigger {
     // // @extend.secondary-copy-bold;
     display: flex;
@@ -26,6 +27,8 @@
     text-decoration: none;
     border: none;
 
+    border-bottom: 2px solid var(--Foundation-Commerce-Canvas, #f2f6f3);
+
     background: var(--Foundation-White, #fff);
     padding: 0.75rem 1rem;
     transition: var(--transition);
@@ -34,7 +37,9 @@
     @include text-styles.text-style("mobile-h5");
 
     /* shadow/drop 1 */
-    box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.07);
+
+    /* shadow/drop 1 */
+    // box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.07);
 
     @include mixins.breakpoint-up(tablet) {
       @include text-styles.text-style("desktop-h5");
@@ -42,9 +47,22 @@
 
     cursor: pointer;
 
-    &:focus-visible {
-      outline: 2px solid var(--blue-500, #003f87);
+    &:hover {
+      @include mixins.breakpoint-up(tablet) {
+        border-bottom: 2px solid var(--Foundation-Operational-Green, #007a4e);
+      }
+      color: var(--Foundation-Operational-Green, #007a4e);
+
+      svg {
+        path {
+          fill: var(--Foundation-Operational-Green, #007a4e);
+        }
+      }
     }
+
+    // &:focus-visible {
+    //   outline: 2px solid var(--blue-500, #003f87);
+    // }
 
     svg {
       flex-shrink: 0;
@@ -55,9 +73,13 @@
     }
 
     &.open {
-      border-bottom: none;
+      color: var(--Foundation-Operational-Green, #007a4e);
+
       svg {
         transform: rotate(180deg);
+        path {
+          fill: var(--Foundation-Operational-Green, #007a4e);
+        }
       }
     }
   }
@@ -65,10 +87,15 @@
   &__content {
     overflow: hidden;
     transition: max-height 0.3s ease;
+    background: #fff;
+  }
+
+  &.open &__content {
+    border-bottom: 2px solid var(--Foundation-Operational-Green, #007a4e);
   }
 
   &__inner {
-    border-bottom: 2px solid transparent;
+    // border-bottom: 2px solid transparent;
     padding: 2rem 1rem;
     background: var(--Foundation-White, #fff);
   }

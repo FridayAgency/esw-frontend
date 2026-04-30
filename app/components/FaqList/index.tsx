@@ -13,11 +13,12 @@ interface FaqListItem {
 interface FaqListProps {
   items: FaqListItem[];
   heading?: string;
+  whiteBackground?: boolean;
 }
 
-const FaqList: React.FC<FaqListProps> = ({ items, heading }) => {
+const FaqList: React.FC<FaqListProps> = ({ items, heading, whiteBackground }) => {
   return (
-    <div className={styles["faqList"]}>
+    <div className={styles["faqList"] + (whiteBackground ? " " + styles["faqList--white"] : "")}>
       <Divider />
       {heading && <h2 className={styles["faqList__heading"]}>{heading}</h2>}
       <ul className={styles["faqList__list"]}>

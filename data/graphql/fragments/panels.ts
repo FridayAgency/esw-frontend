@@ -23,6 +23,13 @@ import { ACF_MEDIAITEM_FRAGMENT } from "./media";
 import { LATESTNEWS_FRAGMENT, POST_LIST_FRAGMENT } from "./posts";
 import { HEROHEADER_LOGOS_FRAGMENT } from "@/app/components/Panels/HeroHeaderLogos";
 import { TWO_LISTS_PANEL_FRAGMENT } from "@/app/components/Panels/TwoListsPanel";
+import { FAQ_CENTER_FRAGMENT } from "@/app/components/Panels/FaqCenter";
+
+export const FORM_EMBED_FRAGMENT = `
+
+    formEmbedCode
+
+`;
 
 export const PAGEPANELS_FRAGMENT = (() => {
   const mappings: [typeName: string, fragment: string][] = [
@@ -49,6 +56,8 @@ export const PAGEPANELS_FRAGMENT = (() => {
     ["PagePanelsPagePanelsPostsListLayout", POST_LIST_FRAGMENT],
     ["PagePanelsPagePanelsHeroHeaderLogosLayout", HEROHEADER_LOGOS_FRAGMENT],
     ["PagePanelsPagePanelsTwoListsPanelLayout", TWO_LISTS_PANEL_FRAGMENT],
+    ["PagePanelsPagePanelsFaqCenterLayout", FAQ_CENTER_FRAGMENT],
+    ["PagePanelsPagePanelsFormEmbedLayout", FORM_EMBED_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");
