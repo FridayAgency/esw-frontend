@@ -75,8 +75,9 @@
 
       &.wide {
         right: 0;
-        width: auto;
-        left: 0;
+        left: auto;
+        width: max-content;
+        max-width: 100%;
       }
       background: var(--Foundation-White, #fff);
       border-radius: 0 0 0.5rem 0.5rem;

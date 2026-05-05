@@ -104,7 +104,7 @@ const NavItemWithChildrenDesktop: React.FC<{ item: MenuItem }> = ({ item }) => {
   return (
     <li
       className={itemClass.toString()}
-      style={groupedItems.length < 4 ? { position: "relative" } : undefined}
+      style={groupedItems.length < 3 ? { position: "relative" } : undefined}
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -132,7 +132,7 @@ const NavItemWithChildrenDesktop: React.FC<{ item: MenuItem }> = ({ item }) => {
         role="region"
         aria-labelledby={triggerId}
         className={`${styles["nav__item-children"]} ${showSubmenu ? styles.show : styles.hide} ${
-          groupedItems.length > 3 ? styles.wide : ""
+          groupedItems.length >= 3 ? styles.wide : ""
         }`}
       >
         <div className={styles["nav__item-children-container"]}>
