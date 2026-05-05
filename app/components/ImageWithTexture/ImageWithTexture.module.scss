@@ -2,6 +2,7 @@
 
 .image {
   position: relative;
+
   height: 100%;
 
   // Inner image area — the texture overlay is scoped here so it never
@@ -11,6 +12,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    max-height: 100%;
 
     // Dot texture overlay — covers only the image, not the frame gap
     &::after {
@@ -25,6 +27,7 @@
 
     img {
       z-index: 1;
+      max-height: 100%;
     }
   }
 

@@ -1,0 +1,49 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.contact-form {
+  background: var(--Foundation-Black, #1e2221);
+
+  &__container {
+    padding-top: 2.5rem;
+    padding-bottom: 7.5rem;
+    background-image: url("/assets/contact-mobile.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+
+    @include mixins.breakpoint-up(tablet) {
+      padding-top: 5rem;
+      padding-bottom: 10rem;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      background-image: url("/assets/contact-desktop.svg");
+      background-position: bottom center;
+    }
+  }
+
+  &__form {
+    flex: 1;
+    min-width: 0;
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 2 / span 5;
+    }
+  }
+
+  &__images {
+    display: none;
+
+    @include mixins.breakpoint-up(tablet) {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex-shrink: 0;
+      grid-column: 10 / span 2;
+    }
+  }
+
+  &__image-frame {
+    width: 100%;
+  }
+}

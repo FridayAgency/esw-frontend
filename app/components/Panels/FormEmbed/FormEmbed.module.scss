@@ -1,0 +1,49 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.form-embed {
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--Foundation-Orchestrated-Green, #063e2d);
+  box-shadow: 0 0 30px 6px rgba(0, 0, 0, 0.16);
+
+  &::before {
+    content: "";
+    position: absolute;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: calc(50% - 6.25rem);
+    opacity: 0.8;
+    background-image: radial-gradient(circle, var(--Foundation-Operational-Green) 3px, transparent 3px);
+    background-size: 10px 10px;
+    opacity: 0.4;
+
+    @include mixins.breakpoint-up(mobile) {
+      width: calc(50% - 5rem);
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__card {
+    background: var(--Foundation-Black, #1e2221);
+    border-radius: 0.5rem;
+    padding: 3.625rem 1rem;
+    box-shadow: var(--shadow-drop-1-box-shadow);
+    width: 100%;
+    max-width: 35rem;
+
+    @include mixins.breakpoint-up(tablet) {
+      padding: 3.625rem 2.5rem;
+    }
+  }
+}

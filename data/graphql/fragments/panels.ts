@@ -24,12 +24,9 @@ import { LATESTNEWS_FRAGMENT, POST_LIST_FRAGMENT } from "./posts";
 import { HEROHEADER_LOGOS_FRAGMENT } from "@/app/components/Panels/HeroHeaderLogos";
 import { TWO_LISTS_PANEL_FRAGMENT } from "@/app/components/Panels/TwoListsPanel";
 import { FAQ_CENTER_FRAGMENT } from "@/app/components/Panels/FaqCenter";
-
-export const FORM_EMBED_FRAGMENT = `
-
-    formEmbedCode
-
-`;
+import { CONTACT_FORM_FRAGMENT } from "@/app/components/Panels/ContactForm";
+import { FORM_EMBED_FRAGMENT } from "@/app/components/Panels/FormEmbed";
+import { HERO_HEADER_TWO_IMAGES_FRAGMENT } from "@/app/components/Panels/HeroHeaderTwoImages";
 
 export const PAGEPANELS_FRAGMENT = (() => {
   const mappings: [typeName: string, fragment: string][] = [
@@ -58,6 +55,8 @@ export const PAGEPANELS_FRAGMENT = (() => {
     ["PagePanelsPagePanelsTwoListsPanelLayout", TWO_LISTS_PANEL_FRAGMENT],
     ["PagePanelsPagePanelsFaqCenterLayout", FAQ_CENTER_FRAGMENT],
     ["PagePanelsPagePanelsFormEmbedLayout", FORM_EMBED_FRAGMENT],
+    ["PagePanelsPagePanelsContactFormLayout", CONTACT_FORM_FRAGMENT],
+    ["PagePanelsPagePanelsHeroHeaderTwoImagesLayout", HERO_HEADER_TWO_IMAGES_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");
