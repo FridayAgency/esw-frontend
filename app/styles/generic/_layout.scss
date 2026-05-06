@@ -66,6 +66,10 @@ html {
   padding-right: 0;
 }
 
+.container--narrow {
+  max-width: 560px;
+}
+
 .inner-container {
   display: block;
   margin-right: auto;

@@ -10808,6 +10808,29 @@ export type PagePanelsPagePanelsCareersBlogListLayout_FieldsFeaturedPostArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** The &quot;PagePanelsPagePanelsCareersOpenRolesLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsCareersOpenRolesLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsCareersOpenRolesLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsCareersOpenRolesLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsCareersOpenRolesLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsCareersOpenRolesLayout&quot; Field Group */
+export type PagePanelsPagePanelsCareersOpenRolesLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsCareersOpenRolesLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 /** The &quot;PagePanelsPagePanelsCaseStudiesListLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PagePanelsPagePanelsCaseStudiesListLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsCaseStudiesListLayout_Fields & PagePanelsPagePanels_Layout & {
   __typename?: 'PagePanelsPagePanelsCaseStudiesListLayout';
