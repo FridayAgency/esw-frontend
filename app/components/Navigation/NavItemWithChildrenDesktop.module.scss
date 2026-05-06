@@ -102,7 +102,7 @@
       }
 
       &-container {
-        padding: 1.5rem 1.5rem 4rem;
+        padding: 1.5rem 1.5rem 2.5rem;
         display: flex;
         gap: 2rem;
         justify-content: flex-end;
@@ -160,17 +160,36 @@
         transition: color 0.2s ease-in;
         max-width: 14rem;
 
+        position: relative;
+
+        &:before {
+          content: "";
+          position: absolute;
+          left: -1rem;
+          top: calc(50% - 0.25rem);
+          width: 0.5rem;
+          height: 0.5rem;
+          background: var(--Foundation-Signal-Green, #00d180);
+          border-radius: 50%;
+          opacity: 0;
+          transition: opacity 0.2s ease-in;
+        }
+
         &:hover,
         &:focus-visible {
-          color: var(--Foundation-Signal-Green, #00d180);
+          color: var(--Foundation-Operational-Green, #007a4e);
+
+          &:before {
+            opacity: 1;
+          }
         }
 
         &.active {
-          color: var(--Foundation-Signal-Green, #00d180);
+          color: var(--Foundation-Operational-Green, #007a4e);
         }
 
         &:focus-visible {
-          outline: 4px solid var(--Foundation-Signal-Green, #00d180);
+          outline: 4px solid var(--Foundation-Operational-Green, #007a4e);
           border-radius: 0.25rem;
           outline-offset: 0.25rem;
         }

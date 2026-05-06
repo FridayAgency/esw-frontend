@@ -3,6 +3,7 @@ import client from "@/lib/client";
 import {
   NewsArticleConnection,
   NewsCategory,
+  PagePanelsPagePanelsNewsListLayout,
   PagePanelsPagePanelsPostsListLayout,
   Post,
   RootQueryToNewsCategoryConnection,
@@ -14,7 +15,7 @@ import PostsList from "../../PostsList";
 import styles from "./PostsList.module.scss";
 
 interface PostListProps {
-  panel: PagePanelsPagePanelsPostsListLayout;
+  panel: PagePanelsPagePanelsNewsListLayout;
 }
 
 const NewsList: React.FC<PostListProps> = async ({ panel }) => {
@@ -31,7 +32,13 @@ const NewsList: React.FC<PostListProps> = async ({ panel }) => {
 
   return (
     <section className={styles["posts-list"]}>
-      <PostsList items={items} categories={rawCategories} featuredPost={featuredItem} activeCategory="all" />
+      <PostsList
+        items={items}
+        categories={rawCategories}
+        featuredPost={featuredItem}
+        activeCategory="all"
+        categoryBasePath="/newsroom/category/"
+      />
     </section>
   );
 };

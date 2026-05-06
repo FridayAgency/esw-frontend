@@ -160,6 +160,10 @@
     a {
       color: var(--Neutral-Mid-Grey, #beccc5);
       @include text-styles.text-style("mobile-body-default");
+
+      &:hover {
+        color: var(--Foundation-Signal-Green);
+      }
     }
   }
 

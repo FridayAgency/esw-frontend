@@ -257,7 +257,7 @@ const Footer: React.FC = async () => {
 
       {/* Copyright bar */}
       <div className={styles["footer__copyright"]}>
-        <div className={styles["footer__copyright-container"]}>
+        <Container className={styles["footer__copyright-container"]}>
           <div className={styles["footer__copyright-left"]}>
             <span className={styles["footer__copyright-year"]}>&copy; {new Date().getFullYear()} ESW</span>
             <span className={styles["footer__copyright-rights"]}>All Rights Reserved</span>
@@ -265,7 +265,7 @@ const Footer: React.FC = async () => {
           <span className={styles["footer__copyright-site"]}>
             Site by <a href="#">Friday</a>
           </span>
-        </div>
+        </Container>
       </div>
     </footer>
   );

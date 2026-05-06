@@ -2,9 +2,9 @@
 
 .divider {
   display: block;
-  width: 3.5rem;
-  height: 0.75rem;
-  background-size: 4px 4px;
+  width: 56px;
+  height: 6px;
+  background-size: 3px 3px;
 
   &--white {
     background-image: radial-gradient(circle, var(--Foundation-White, #fff) 1px, transparent 1px);

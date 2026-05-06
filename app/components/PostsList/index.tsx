@@ -1,6 +1,6 @@
 "use client";
 
-import { CareerPost, Category, NewsArticle, NewsCategory, Post } from "@/types/graphql";
+import { CareerCategory, CareerPost, Category, NewsArticle, NewsCategory, Post } from "@/types/graphql";
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Container from "../Container";
@@ -15,10 +15,12 @@ const ITEMS_PER_PAGE = 6;
 interface PostsListProps {
   items: (Post | NewsArticle | CareerPost)[];
   itemsPerPage?: number;
-  categories?: Category[] | NewsCategory[];
-  featuredPost?: Post;
+  categories?: Category[] | NewsCategory[] | CareerCategory[];
+  featuredPost?: Post | NewsArticle | CareerPost;
   activeCategory?: string;
   title?: string;
+  categoryBasePath?: string;
+  allPostsHref?: string;
 }
 export const PostsList: React.FC<PostsListProps> = ({
   items,
@@ -27,6 +29,8 @@ export const PostsList: React.FC<PostsListProps> = ({
   featuredPost,
   activeCategory,
   title,
+  categoryBasePath = "/blog/category",
+  allPostsHref = "/blog",
 }) => {
   const [visibleCount, setVisibleCount] = useState(itemsPerPage);
 
@@ -58,7 +62,10 @@ export const PostsList: React.FC<PostsListProps> = ({
             <nav aria-label="Browse by category">
               <ul>
                 <li>
-                  <Link href="/blog" className={activeCategory?.replaceAll("/", "") === "all" ? styles["active"] : ""}>
+                  <Link
+                    href={allPostsHref}
+                    className={activeCategory?.replaceAll("/", "") === "all" ? styles["active"] : ""}
+                  >
                     All
                   </Link>
                 </li>
@@ -67,7 +74,7 @@ export const PostsList: React.FC<PostsListProps> = ({
                   return (
                     <li key={key}>
                       <Link
-                        href={`/blog/category/${cat.slug}`}
+                        href={`${categoryBasePath}/${cat.slug}`}
                         className={activeCategory?.replaceAll("/", "") === cat.slug ? styles["active"] : ""}
                       >
                         {cat.name ?? cat.slug}
@@ -89,13 +96,7 @@ export const PostsList: React.FC<PostsListProps> = ({
               {gridItems.length > 0 && (
                 <div className={styles["posts__list"]}>
                   {gridItems.map((item) => (
-                    <PostCard
-                      key={item.databaseId ?? item.slug}
-                      post={item}
-                      postType={item.__typename === "NewsArticle" ? "news" : item.__typename === "CareerPost" ? "career" : "blog"}
-                      showAuthor
-                      showDate
-                    />
+                    <PostCard key={item.databaseId ?? item.slug} post={item} showAuthor showDate />
                   ))}
                 </div>
               )}

@@ -27,6 +27,11 @@ import { FAQ_CENTER_FRAGMENT } from "@/app/components/Panels/FaqCenter";
 import { CONTACT_FORM_FRAGMENT } from "@/app/components/Panels/ContactForm";
 import { FORM_EMBED_FRAGMENT } from "@/app/components/Panels/FormEmbed";
 import { HERO_HEADER_TWO_IMAGES_FRAGMENT } from "@/app/components/Panels/HeroHeaderTwoImages";
+import { THANK_YOU_HEADER_FRAGMENT } from "@/app/components/Panels/ThankYouHeader";
+
+const LATEST_CAREERS_POSTS_FRAGMENT = `
+  title
+`;
 
 export const PAGEPANELS_FRAGMENT = (() => {
   const mappings: [typeName: string, fragment: string][] = [
@@ -57,6 +62,8 @@ export const PAGEPANELS_FRAGMENT = (() => {
     ["PagePanelsPagePanelsFormEmbedLayout", FORM_EMBED_FRAGMENT],
     ["PagePanelsPagePanelsContactFormLayout", CONTACT_FORM_FRAGMENT],
     ["PagePanelsPagePanelsHeroHeaderTwoImagesLayout", HERO_HEADER_TWO_IMAGES_FRAGMENT],
+    ["PagePanelsPagePanelsLatestCareersPostsLayout", LATEST_CAREERS_POSTS_FRAGMENT],
+    ["PagePanelsPagePanelsThankYouHeaderLayout", THANK_YOU_HEADER_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");

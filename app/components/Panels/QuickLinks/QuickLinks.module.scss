@@ -66,15 +66,16 @@
     text-decoration: none;
     color: var(--Foundation-Black, #1e2221);
     transition: color var(--transition, 0.3s ease-in-out);
-
+    width: fit-content;
     @include text-styles.text-style("mobile-h4");
+    transition: var(--transition);
 
     @include mixins.breakpoint-up(mobile) {
       @include text-styles.text-style("desktop-h4");
     }
 
     &:hover {
-      color: var(--Foundation-Orchestrated-Green, #063e2d);
+      background: rgba(0, 209, 128, 0.6);
 
       .quick-links__arrow {
         transform: translateX(4px);

@@ -75,10 +75,8 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
     left: 1rem;
     background: #1e2221;
     text-decoration: none;
-    isolation: isolate;
     z-index: 3;
 
-    // 1. The initial 3px solid border
     border: 3px solid var(--Foundation-Signal-Green, #00d180);
     transition: border-color 0.3s ease;
 
@@ -90,7 +88,7 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
       bottom: -3.75rem;
     }
 
-    // 2. THE CORNER DOTS
+    // THE CORNER DOTS
     &::before {
       content: "";
       position: absolute;
@@ -112,46 +110,18 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
       transition: background-image 0.3s ease;
     }
 
-    // 3. THE GRADIENT OVERLAY (appears on hover)
-    &::after {
-      content: "";
-      position: absolute;
-      // Inset must be negative border-width to cover the original border area
-      inset: -#{3px};
-      padding: #{3px};
-      background: $article-gradient;
-
-      // Mask logic: draws the gradient ONLY in the padding area
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
-    }
-
     &:hover {
-      border-color: transparent; // Swap solid for gradient
-
-      &::after {
-        opacity: 1;
-      }
+      border-color: transparent;
+      background:
+        linear-gradient(#1e2221, #1e2221) padding-box,
+        $article-gradient border-box;
 
       &::before {
         background-image:
           radial-gradient(circle, #9ce533 50%, transparent 50%),
-          // Top Left
           radial-gradient(circle, #85d852 50%, transparent 50%),
-          // Top Right
           radial-gradient(circle, #9ce533 50%, transparent 50%),
-          // Bottom Left
-          radial-gradient(circle, #5dca7f 50%, transparent 50%); // Bottom Right
+          radial-gradient(circle, #5dca7f 50%, transparent 50%);
       }
     }
 

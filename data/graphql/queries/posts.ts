@@ -113,18 +113,37 @@ ${FRAGMENTS.ACF_MEDIA_ITEM}
 `;
 
 export const GET_NEWS_ARTICLES_BY_CATEGORY = `
-query GetNewsArticlesByCategory($first: Int = 50, $categoryName: String) {
-  newsArticles(
-    where: {newsCategoryName: $categoryName, orderby: {field: DATE, order: DESC}}
-    first: $first
-  ) {
-    edges {
-      node {
-        ...NewsArticleFragment
+query GetNewsArticlesByCategory($first: Int = 50, $slug: [String]) {
+  page(id: "/newsroom/", idType: URI) {
+    id
+    pagePanels {
+      pagePanels {
+        ... on PagePanelsPagePanelsBlogLandingHeaderLayout {
+          __typename
+          copy
+          title
+        }
+        ... on PagePanelsPagePanelsNewsListLayout {
+          __typename
+          ${POST_LIST_FRAGMENT}
+        }
       }
     }
   }
-  newsCategories(first: $first) {
+  filteredCategory: newsCategories(where: { slug: $slug }, first: 1) {
+    edges {
+      node {
+        newsArticles(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+          edges {
+            node {
+              ...NewsArticleFragment
+            }
+          }
+        }
+      }
+    }
+  }
+  newsCategories(first: 50) {
     edges {
       node {
         name
@@ -166,18 +185,21 @@ ${FRAGMENTS.ACF_MEDIA_ITEM}
 `;
 
 export const GET_CAREER_POSTS_BY_CATEGORY = `
-query GetCareerPostsByCategory($first: Int = 50, $categoryName: String) {
-  careerPosts(
-    where: {careerCategoryName: $categoryName, orderby: {field: DATE, order: DESC}}
-    first: $first
-  ) {
+query GetCareerPostsByCategory($first: Int = 50, $slug: [String]) {
+  filteredCategory: careerCategories(where: { slug: $slug }, first: 1) {
     edges {
       node {
-        ...CareerPostFragment
+        careerPosts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+          edges {
+            node {
+              ...CareerPostFragment
+            }
+          }
+        }
       }
     }
   }
-  careerCategories(first: $first) {
+  careerCategories(first: 50) {
     edges {
       node {
         name
@@ -262,9 +284,17 @@ query GetPostsAndNews($first: Int = 10) {
       }
     }
   }
+  careerPosts(first: $first, where: {orderby: {field: DATE, order: DESC}}) {
+    edges {
+      node {
+        ...CareerPostFragment
+      }
+    }
+  }
 }
 ${POST_FRAGMENT}
 ${NEWS_ARTICLE_FRAGMENT}
+${CAREER_POST_FRAGMENT}
 ${FRAGMENTS.MEDIAITEM_FRAGMENT}
 ${FRAGMENTS.LINK_FRAGMENT}
 ${FRAGMENTS.ACF_MEDIA_ITEM}

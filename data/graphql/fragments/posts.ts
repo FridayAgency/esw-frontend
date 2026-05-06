@@ -63,6 +63,27 @@ fragment NewsArticleFragment on NewsArticle {
         name
         databaseId
         slug
+        newsArticles(first: 3) {
+          edges {
+            node {
+              databaseId
+              title
+              slug
+              uri
+              date
+              excerpt
+              content
+              featuredImage {
+                ...MediaItemFragment
+              }
+              author {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -130,6 +151,27 @@ fragment CareerPostFragment on CareerPost {
         name
         databaseId
         slug
+        careerPosts(first: 3) {
+          edges {
+            node {
+              databaseId
+              title
+              slug
+              uri
+              date
+              excerpt
+              content
+              featuredImage {
+                ...MediaItemFragment
+              }
+              author {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

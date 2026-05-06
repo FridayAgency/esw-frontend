@@ -150,6 +150,10 @@
     }
   }
 
+  th {
+    transition: var(--transition);
+  }
+
   // ESW column cells
   &__td--esw {
     @include text-styles.text-style("mobile-body-default");
@@ -158,7 +162,7 @@
     border-bottom: 1px solid var(--Neutral-Dark-Grey);
     padding: 1.5rem;
     vertical-align: middle;
-
+    transition: var(--transition);
     @include mixins.breakpoint-up(tablet) {
       @include text-styles.text-style("desktop-body-default");
     }
@@ -173,9 +177,25 @@
     border-left: 1px solid var(--Neutral-Dark-Grey);
     padding: 1.5rem;
     vertical-align: middle;
+    transition: var(--transition);
 
     @include mixins.breakpoint-up(tablet) {
       @include text-styles.text-style("desktop-body-default");
+    }
+  }
+
+  &__row {
+    &:hover {
+      th {
+        color: var(--Foundation-Signal-Green, #00d180);
+      }
+      .lets-compare__td--esw {
+        background: var(--Foundation-Signal-Green, #00d180);
+      }
+
+      .lets-compare__td--competitors {
+        background: var(--Neutral-Mid-Grey, #beccc5);
+      }
     }
   }
 }

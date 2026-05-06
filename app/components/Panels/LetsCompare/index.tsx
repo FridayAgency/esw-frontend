@@ -38,7 +38,7 @@ const LetsCompare = ({ panel }: LetsCompareProps) => {
               </thead>
               <tbody>
                 {(rows?.filter(Boolean) as PagePanelsPagePanelsRows[]).map(({ category, column1Copy, column2Copy }) => (
-                  <tr key={category}>
+                  <tr className={styles["lets-compare__row"]} key={category}>
                     <th className={styles["lets-compare__row-header"]} scope="row">
                       {category}
                     </th>

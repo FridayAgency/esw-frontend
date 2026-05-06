@@ -41,7 +41,7 @@ export type Acfe_AdvancedLink_Url = Acfe_AdvancedLink & {
   url?: Maybe<Scalars['String']['output']>;
 };
 
-/** Connection between the PagePanelsPagePanelsPostsListLayout_Fields type and the ContentNode type */
+/** Connection between the PagePanelsPagePanelsHeroHeaderLayout_Fields type and the ContentNode type */
 export type AcfContentNodeConnection = Connection & ContentNodeConnection & {
   __typename?: 'AcfContentNodeConnection';
   /** Edges for the AcfContentNodeConnection connection */
@@ -10767,6 +10767,47 @@ export type PagePanelsPagePanelsCallToActionWithImagesLayout_FieldsImagesArgs = 
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** The &quot;PagePanelsPagePanelsCareersBlogListLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsCareersBlogListLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsCareersBlogListLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsCareersBlogListLayout';
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsCareersBlogListLayout&quot; Field Group */
+  featuredPost?: Maybe<AcfContentNodeConnection>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The &quot;PagePanelsPagePanelsCareersBlogListLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsCareersBlogListLayoutFeaturedPostArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsCareersBlogListLayout&quot; Field Group */
+export type PagePanelsPagePanelsCareersBlogListLayout_Fields = {
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsCareersBlogListLayout&quot; Field Group */
+  featuredPost?: Maybe<AcfContentNodeConnection>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsCareersBlogListLayout&quot; Field Group */
+export type PagePanelsPagePanelsCareersBlogListLayout_FieldsFeaturedPostArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** The &quot;PagePanelsPagePanelsCaseStudiesListLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PagePanelsPagePanelsCaseStudiesListLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsCaseStudiesListLayout_Fields & PagePanelsPagePanels_Layout & {
   __typename?: 'PagePanelsPagePanelsCaseStudiesListLayout';
@@ -11059,6 +11100,8 @@ export type PagePanelsPagePanelsHeroHeaderLayout = AcfFieldGroup & AcfFieldGroup
   __typename?: 'PagePanelsPagePanelsHeroHeaderLayout';
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group */
   copy?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group */
+  featuredPost?: Maybe<AcfContentNodeConnection>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -11068,10 +11111,21 @@ export type PagePanelsPagePanelsHeroHeaderLayout = AcfFieldGroup & AcfFieldGroup
   title?: Maybe<Scalars['String']['output']>;
 };
 
+
+/** The &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsHeroHeaderLayoutFeaturedPostArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** Interface representing fields of the ACF &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group */
 export type PagePanelsPagePanelsHeroHeaderLayout_Fields = {
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group */
   copy?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group */
+  featuredPost?: Maybe<AcfContentNodeConnection>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -11079,6 +11133,15 @@ export type PagePanelsPagePanelsHeroHeaderLayout_Fields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group */
   title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsHeroHeaderLayout&quot; Field Group */
+export type PagePanelsPagePanelsHeroHeaderLayout_FieldsFeaturedPostArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** The &quot;PagePanelsPagePanelsHeroHeaderLogosLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -11301,6 +11364,29 @@ export type PagePanelsPagePanelsIntegrationsLayout_Fields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
+/** The &quot;PagePanelsPagePanelsLatestCareersPostsLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsLatestCareersPostsLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsLatestCareersPostsLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsLatestCareersPostsLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsLatestCareersPostsLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsLatestCareersPostsLayout&quot; Field Group */
+export type PagePanelsPagePanelsLatestCareersPostsLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsLatestCareersPostsLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 /** The &quot;PagePanelsPagePanelsLatestNewsLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PagePanelsPagePanelsLatestNewsLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsLatestNewsLayout_Fields & PagePanelsPagePanels_Layout & {
   __typename?: 'PagePanelsPagePanelsLatestNewsLayout';
@@ -11309,8 +11395,6 @@ export type PagePanelsPagePanelsLatestNewsLayout = AcfFieldGroup & AcfFieldGroup
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsLatestNewsLayout&quot; Field Group */
-  subtitle?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsLatestNewsLayout&quot; Field Group */
   title?: Maybe<Scalars['String']['output']>;
 };
@@ -11322,8 +11406,6 @@ export type PagePanelsPagePanelsLatestNewsLayout_Fields = {
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsLatestNewsLayout&quot; Field Group */
-  subtitle?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsLatestNewsLayout&quot; Field Group */
   title?: Maybe<Scalars['String']['output']>;
 };
@@ -11859,6 +11941,59 @@ export type PagePanelsPagePanelsTestimonialLayout_Fields = {
 
 /** Interface representing fields of the ACF &quot;PagePanelsPagePanelsTestimonialLayout&quot; Field Group */
 export type PagePanelsPagePanelsTestimonialLayout_FieldsTestimonialArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** The &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsThankYouHeaderLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsThankYouHeaderLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsThankYouHeaderLayout';
+  /** Field of the &quot;link&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+  callToAction?: Maybe<AcfLink>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;gallery&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+  images?: Maybe<AcfMediaItemConnection>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsThankYouHeaderLayoutImagesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+export type PagePanelsPagePanelsThankYouHeaderLayout_Fields = {
+  /** Field of the &quot;link&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+  callToAction?: Maybe<AcfLink>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;gallery&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+  images?: Maybe<AcfMediaItemConnection>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsThankYouHeaderLayout&quot; Field Group */
+export type PagePanelsPagePanelsThankYouHeaderLayout_FieldsImagesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;

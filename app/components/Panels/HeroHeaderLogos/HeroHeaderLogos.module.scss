@@ -10,7 +10,7 @@ $ball-desktop: 12.25rem; // 196px
   min-height: 41.5rem;
 
   @include mixins.breakpoint-up(mobile) {
-    min-height: 54.125rem;
+    height: 37.8125rem;
   }
 
   &:before {

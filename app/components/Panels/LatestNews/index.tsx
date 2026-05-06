@@ -1,8 +1,8 @@
-import { GET } from "@/app/api/submit-contact/route";
-import { GET_LATEST_POSTS_AND_NEWS, GET_POSTS } from "@/data";
+import { GET_LATEST_POSTS_AND_NEWS } from "@/data";
 import client from "@/lib/client";
 import {
   CareerPost,
+  CareerPostConnection,
   NewsArticle,
   NewsArticleConnection,
   PagePanelsPagePanelsLatestNewsLayout,
@@ -20,9 +20,10 @@ interface LatestNewsProps {
   panel?: PagePanelsPagePanelsLatestNewsLayout;
   title?: string;
   posts?: (Post | NewsArticle | CareerPost)[];
+  currentPostId?: number;
 }
 
-const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, posts: propPosts }) => {
+const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, posts: propPosts, currentPostId }) => {
   const { title: panelTitle } = panel || {};
 
   const title = propTitle || panelTitle;
@@ -33,9 +34,10 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
     if (propPosts && propPosts.length > 0) {
       postsToDisplay = propPosts;
     } else {
-      const { posts, newsArticles } = await client.query<{
+      const { posts, newsArticles, careerPosts } = await client.query<{
         posts: PostConnection;
         newsArticles: NewsArticleConnection;
+        careerPosts: CareerPostConnection;
       }>(GET_LATEST_POSTS_AND_NEWS, {
         variables: { first: 10 },
       });
@@ -43,10 +45,12 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
       const allPosts = [
         ...(posts ? (removeNodes<Post>(posts) as Post[]) : []),
         ...(newsArticles ? (removeNodes<NewsArticle>(newsArticles) as NewsArticle[]) : []),
+        ...(careerPosts ? (removeNodes<CareerPost>(careerPosts) as CareerPost[]) : []),
       ];
 
       postsToDisplay = allPosts
         .sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime())
+        .filter((p) => p.databaseId !== currentPostId)
         .slice(0, 3);
     }
 

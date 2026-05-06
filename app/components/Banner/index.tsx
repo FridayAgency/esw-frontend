@@ -15,7 +15,7 @@ const Banner: React.FC = (): JSX.Element | null => {
 
   return (
     <section className={`${styles.banner} ${isScrolled ? styles.hide : styles.show}`}>
-      <Container flush>
+      <Container>
         <nav aria-label="Company Information Navigation">
           <ul>
             <li>

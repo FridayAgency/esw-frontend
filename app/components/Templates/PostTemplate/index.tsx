@@ -14,13 +14,15 @@ const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async 
   const { title, featuredImage, postfields } = post;
 
   let relatedPosts: (Post | NewsArticle | CareerPost)[] = [];
-  if ('categories' in post && post.categories?.edges?.[0]?.node?.posts) {
+  if ("categories" in post && post.categories?.edges?.[0]?.node?.posts) {
     relatedPosts = removeNodes<Post>(post.categories.edges[0].node.posts);
-  } else if ('newsCategories' in post && post.newsCategories?.edges?.[0]?.node?.newsArticles) {
+  } else if ("newsCategories" in post && post.newsCategories?.edges?.[0]?.node?.newsArticles) {
     relatedPosts = removeNodes<NewsArticle>(post.newsCategories.edges[0].node.newsArticles);
-  } else if ('careerCategories' in post && post.careerCategories?.edges?.[0]?.node?.careerPosts) {
+  } else if ("careerCategories" in post && post.careerCategories?.edges?.[0]?.node?.careerPosts) {
     relatedPosts = removeNodes<CareerPost>(post.careerCategories.edges[0].node.careerPosts);
   }
+
+  relatedPosts = relatedPosts.filter((p) => p.databaseId !== post.databaseId);
 
   const tldr = postfields?.tldr ? postfields.tldr : null;
 
@@ -36,7 +38,7 @@ const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async 
 
         {content && <PostContent content={content as PostfieldsOpenContent_Layout[]} />}
         {post.author?.node && <PostAuthor author={post.author.node} />}
-        {relatedPosts?.length && <LatestNews posts={relatedPosts} title="More Like This" />}
+        <LatestNews posts={relatedPosts.length ? relatedPosts : undefined} title="More Like This" currentPostId={post.databaseId} />
       </article>
     </>
   );

@@ -64,12 +64,13 @@ const Testimonial: React.FC<TestimonialProps> = ({ panel }) => {
           <div className={styles["testimonial__text"]}>{parse(testimonial.testimonailDetails?.quote || "")}</div>
 
           <div className={styles["testimonial__author"]}>
-            <div className={styles["testimonial__author-image"]}>
-              {testimonial.testimonailDetails?.quoteAuthorImage &&
-                testimonial?.testimonailDetails?.quoteAuthorImage?.node && (
+            {testimonial.testimonailDetails?.quoteAuthorImage &&
+              testimonial?.testimonailDetails?.quoteAuthorImage?.node && (
+                <div className={styles["testimonial__author-image"]}>
                   <ImageComponent image={testimonial.testimonailDetails.quoteAuthorImage.node} />
-                )}
-            </div>
+                </div>
+              )}
+
             {testimonial.testimonailDetails?.quoteAuthor && <p>{testimonial.testimonailDetails?.quoteAuthor}</p>}
           </div>
         </div>
