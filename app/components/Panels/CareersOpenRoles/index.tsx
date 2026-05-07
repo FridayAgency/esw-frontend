@@ -1,6 +1,6 @@
-// "use client";
+"use client";
 
-// import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 import { GET_CAREER_POSTS } from "@/data";
 import client from "@/lib/client";
@@ -30,31 +30,27 @@ const calculateDifferenceInDays = (dateInPast: Date) => {
   return differenceInDays(new Date(), dateInPast)
 }
 
-// const fetchOpenRoles = async () => {
-//   console.warn("fetchOpenRoles")
-//   const fetchCareerOpenRolesResponse = await fetch(`https://boards-api.greenhouse.io/v1/boards/esw/jobs/?content=true`);
-//   if (fetchCareerOpenRolesResponse.ok) {
-//     careerOpenRolesRef.current = await fetchCareerOpenRolesResponse.json();
-//   } else {
-//     console.error("Error fetching career open roles");
-//   }
-//   console.warn("careerOpenRolesRef.current")
-//   console.log(careerOpenRolesRef.current);
-// }
-
-// useEffect(() => {
-//   fetchOpenRoles();
-// }, []);
-
-const CareersOpenRoles: React.FC<CareersOpenRolesProps> = async ({ panel }) => {
-  const careerOpenRolesResponse = await fetch(`https://boards-api.greenhouse.io/v1/boards/esw/jobs/?content=true`);
-
+const CareersOpenRoles: React.FC<CareersOpenRolesProps> = ({ panel }) => {
+  // const careerOpenRolesResponse = await fetch(`https://boards-api.greenhouse.io/v1/boards/esw/jobs/?content=true`);
   let careerOpenRoles: {jobs: any[], meta: {total: number}} = {jobs: [], meta: {total: 0}};
-  if (careerOpenRolesResponse.ok) {
-    careerOpenRoles = await careerOpenRolesResponse.json();
-  } else {
-    console.error("Error fetching career open roles");
+  let careerOpenRolesResponse = null;
+
+  const fetchOpenRoles = async () => {
+    console.warn("fetchOpenRoles")
+    const fetchCareerOpenRolesResponse = await fetch(`https://boards-api.greenhouse.io/v1/boards/esw/jobs/?content=true`);
+    careerOpenRolesResponse = await fetchCareerOpenRolesResponse.json();
+    console.log({ careerOpenRolesResponse })
+    // if (fetchCareerOpenRolesResponse.ok) {
+    //   // careerOpenRolesRef.current = await fetchCareerOpenRolesResponse.json();
+    // } else {
+    //   console.error("Error fetching career open roles");
+    // }
   }
+  
+  useEffect(() => {
+    fetchOpenRoles();
+  }, []);
+
   console.log({careerOpenRoles});
 
   const items = careerOpenRoles?.jobs ? careerOpenRoles.jobs : [];
@@ -86,8 +82,12 @@ const CareersOpenRoles: React.FC<CareersOpenRolesProps> = async ({ panel }) => {
     <section className={styles["careers-open-roles"]}>
       <Container flush narrow className={styles.careersOpenRoles}>
         <div className="careers-open-roles__filter">
-          {/* <h2>Find Your Role</h2>
-          <input type="text"></input>
+          <h2 className="careers-open-roles__filter__title">Find Your Role</h2>
+
+          {/* <form onSubmit={handleSubmit} noValidate>
+            <input type="text"></input>
+          </form> */}
+
           <h2>Departments</h2>
           {departments.map((department, index) => (
             <div key={index} className={styles["careers-open-roles__department"]}>
@@ -100,7 +100,7 @@ const CareersOpenRoles: React.FC<CareersOpenRolesProps> = async ({ panel }) => {
             <div key={index} className={styles["careers-open-roles__location"]}>
               <div className={styles["careers-open-roles__location-name"]}>{location}</div>
             </div>
-          ))} */}
+          ))}
         </div>
 
         <div className="careers-open-roles__list">

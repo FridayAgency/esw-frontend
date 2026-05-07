@@ -156,3 +156,9 @@ img {
   width: 100%;
   object-fit: cover;
 }
+
+  @include mixins.breakpoint-up(tablet) {
+    .container--narrow {
+      padding: 5rem 1.5rem;
+    }
+  }
