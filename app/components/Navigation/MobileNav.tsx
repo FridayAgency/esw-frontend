@@ -16,6 +16,7 @@ import NavItem from "./NavItem";
 import Logo from "../Logo";
 import Link from "next/link";
 import Icon from "../Icon";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
   const navRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
@@ -54,6 +55,9 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
         className={`${styles.nav} ${isOpen ? styles.show : styles.hide} `}
       >
         <ul className={styles["nav__list"]}>
+          <li className={styles["nav__locale"]}>
+            <LanguageSwitcher />
+          </li>
           {menu?.menuItems?.edges?.length &&
             menu?.menuItems?.edges
               .filter((item: any) => !item.node.parentId)
@@ -76,7 +80,7 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
 
         <div className={styles["nav__actions"]}>
           <button onClick={() => setTalkToUsOpen(true)}>Talk to Us</button>
-          <a href="#">
+          <a href="#" aria-label="My Account">
             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10.1671 20.1426C23.0282 20.0861 23.0282 0.524448 10.1671 0.471069C-2.76301 0.694003 -2.75987 19.9259 10.1671 20.1426Z"

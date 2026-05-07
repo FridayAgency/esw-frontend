@@ -26,6 +26,14 @@ query GetContentNode($uri: ID!) {
       }
     }
 
+    ... on Campaign{
+      id
+      title
+      pagePanels {
+        ...PagePanelsFragment
+      }
+    }
+
     ... on Post {
       ...PostFragment
     }
@@ -70,6 +78,23 @@ query GetContentNodePreview($id: ID!) {
     __typename
 
     ... on Page {
+      id
+      title
+      pagePanels {
+        ...PagePanelsFragment
+      }
+      revisions(first: 1, where: {orderby: {field: MODIFIED, order: DESC}}) {
+        edges {
+          node {
+            pagePanels {
+              ...PagePanelsFragment
+            }
+          }
+        }
+      }
+    }
+
+    ... on Campaign {
       id
       title
       pagePanels {

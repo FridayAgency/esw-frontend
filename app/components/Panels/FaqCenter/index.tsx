@@ -1,5 +1,6 @@
 import { PagePanelsPagePanelsFaqCenterLayout } from "@/types/graphql";
 import FaqCenterClient from "./FaqCenterClient";
+import { Suspense } from "react";
 
 export const FAQ_CENTER_FRAGMENT = `
     faqSection {
@@ -20,7 +21,11 @@ const FaqCenter: React.FC<FaqCenterProps> = ({ panel }) => {
 
   const categories = faqSection?.flatMap((faq) => (faq?.title ? [faq.title] : [])) || [];
 
-  return <FaqCenterClient categorys={categories} fags={faqSection} />;
+  return (
+    <Suspense>
+      <FaqCenterClient categorys={categories} fags={faqSection} />
+    </Suspense>
+  );
 };
 
 export default FaqCenter;

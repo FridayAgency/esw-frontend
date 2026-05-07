@@ -2,7 +2,7 @@ import { processPageUri } from "@fridayagency/utils";
 import { generateSeoMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import client from "@/lib/client";
-import { CareerPost, CaseStudy, Industry, NewsArticle, Page, Post, Product } from "@/types/graphql";
+import { Campaign, CareerPost, CaseStudy, Industry, NewsArticle, Page, Post, Product } from "@/types/graphql";
 import { GET_CONTENTNODE } from "@/data";
 import { Metadata } from "next";
 import PostTemplate from "../components/Templates/PostTemplate";
@@ -41,7 +41,7 @@ const CatchallPage = async ({ params }: PageParams) => {
   if (!pageUri) notFound();
 
   const { contentNode } = await client.query<{
-    contentNode: Page | Post | Product | CaseStudy | Industry | NewsArticle | CareerPost;
+    contentNode: Page | Post | Product | CaseStudy | Industry | NewsArticle | CareerPost | Campaign;
   }>(GET_CONTENTNODE, { variables: { uri: pageUri } });
 
   if (!contentNode) notFound();
@@ -50,7 +50,8 @@ const CatchallPage = async ({ params }: PageParams) => {
     case "Page":
     case "Product":
     case "CaseStudy":
-    case "Industry": {
+    case "Industry":
+    case "Campaign": {
       const node = contentNode as NodeWithPanels;
       const breadcrumbs = breadcrumbConfig[contentNode.__typename ?? ""];
       const panels = extractPanels(node);

@@ -5,6 +5,8 @@ import Icon from "../../Icon";
 
 import styles from "./QuickLinks.module.scss";
 
+import parse from "html-react-parser";
+
 export const QUICK_LINKS_FRAGMENT = `
     title
     links {
@@ -39,7 +41,7 @@ const QuickLinks: React.FC<QuickLinksProps> = ({ panel }) => {
                 return (
                   <li key={index}>
                     <a href={link.url} target={link.target ?? "_self"} className={styles["quick-links__item"]}>
-                      <span>{link.title}</span>
+                      <span>{parse(link.title ?? "")}</span>
                       <span className={styles["quick-links__arrow"]}>
                         <Icon type="arrowRight" />
                       </span>

@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import { DM_Sans } from "next/font/google";
 import GSAPProvider from "./components/GsapProvider";
 import Banner from "./components/Banner";
+import Script from "next/script";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={dmSans.variable} data-scroll-behavior="smooth">
       <body>
+        <Script type="text/javascript" src="https://cdn-redirector.glopal.com/glopal-loader.js?glopal_store_id=esw" />
         <GSAPProvider>
           <Header />
           <main>{children}</main>

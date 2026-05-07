@@ -2,7 +2,7 @@ import PagePanelsTemplate from "@/app/components/Templates/PagePanelsTemplate";
 import PostTemplate from "@/app/components/Templates/PostTemplate";
 import { GET_CONTENTNODE_PREVIEW } from "@/data";
 import client from "@/lib/client";
-import { CareerPost, CaseStudy, Industry, NewsArticle, Page, Post, Product } from "@/types/graphql";
+import { Campaign, CareerPost, CaseStudy, Industry, NewsArticle, Page, Post, Product } from "@/types/graphql";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 
@@ -10,7 +10,7 @@ interface PageParams {
   params: Promise<{ id: string }>;
 }
 
-type ContentNode = Page | Post | Product | CaseStudy | Industry | NewsArticle | CareerPost;
+type ContentNode = Page | Post | Product | CaseStudy | Industry | NewsArticle | CareerPost | Campaign;
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -40,8 +40,10 @@ const CatchallPreviewPage = async ({ params }: PageParams) => {
     case "Page":
     case "Product":
     case "CaseStudy":
-    case "Industry": {
-      const node = content as Page;
+    case "Industry":
+    case "Industry":
+    case "Campaign": {
+      const node = content as Page | Product | CaseStudy | Industry | Campaign;
       return <PagePanelsTemplate panels={node?.pagePanels?.pagePanels} pageTitle={node.title ?? ""} />;
     }
 

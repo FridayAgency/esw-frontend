@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Maybe, PagePanelsPagePanelsFaqSection } from "@/types/graphql";
 import FaqList from "@/app/components/FaqList";
 import styles from "./FaqCenter.module.scss";
@@ -21,10 +22,40 @@ function slugify(text: string) {
   );
 }
 
+function slugifyCategory(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 const FaqCenterClient: React.FC<FaqCenterClientProps> = ({ categorys, fags }) => {
-  const [activeCategory, setActiveCategory] = useState<string>(categorys[0] ?? "");
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const initialCategory =
+    (categoryParam && categorys.find((c) => slugifyCategory(c) === categoryParam)) ||
+    categorys[0] ||
+    "";
+  const [activeCategory, setActiveCategory] = useState<string>(initialCategory);
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
   const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!categoryParam) return;
+    const matched = categorys.find((c) => slugifyCategory(c) === categoryParam);
+    if (!matched) return;
+    // defer scroll until after paint so refs are populated
+    const id = requestAnimationFrame(() => {
+      const el = sectionRefs.current.get(matched);
+      if (!el) return;
+      const headerEl = document.querySelector("header") as HTMLElement | null;
+      const offset = (headerEl?.offsetHeight ?? 0) + 16;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    });
+    return () => cancelAnimationFrame(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const ticking = { current: false };

@@ -238,6 +238,304 @@ export type Banner_Fields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
+/** The campaign type */
+export type Campaign = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfPagePanels & {
+  __typename?: 'Campaign';
+  /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+  ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  campaignId: Scalars['Int']['output'];
+  /** Connection between the HierarchicalContentNode type and the ContentNode type */
+  children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** The excerpt of the post. */
+  excerpt?: Maybe<Scalars['String']['output']>;
+  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+  /** The database identifier for the featured image node assigned to the content node */
+  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Globally unique ID of the featured image assigned to the node */
+  featuredImageId?: Maybe<Scalars['ID']['output']>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the campaign object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
+  /** The globally unique identifier of the campaign object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** True if the node is a revision of another node */
+  isRevision?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: Maybe<Scalars['Int']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /** Fields of the PagePanels ACF Field Group */
+  pagePanels?: Maybe<PagePanels>;
+  /** The parent of the node. The parent object can be of various types */
+  parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
+  /** Database id of the parent node */
+  parentDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** The globally unique identifier of the parent node. */
+  parentId?: Maybe<Scalars['ID']['output']>;
+  /** The password for the campaign object. */
+  password?: Maybe<Scalars['String']['output']>;
+  /** Connection between the campaign type and the campaign type */
+  preview?: Maybe<CampaignToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
+  revisionOf?: Maybe<NodeWithRevisionsToContentNodeConnectionEdge>;
+  /** Connection between the Campaign type and the campaign type */
+  revisions?: Maybe<CampaignToRevisionConnection>;
+  /** The Yoast SEO data of the ContentNode */
+  seo?: Maybe<PostTypeSeo>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to a node of content */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The campaign type */
+export type CampaignAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs>;
+};
+
+
+/** The campaign type */
+export type CampaignChildrenArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs>;
+};
+
+
+/** The campaign type */
+export type CampaignContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The campaign type */
+export type CampaignEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The campaign type */
+export type CampaignEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The campaign type */
+export type CampaignExcerptArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The campaign type */
+export type CampaignRevisionsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CampaignToRevisionConnectionWhereArgs>;
+};
+
+
+/** The campaign type */
+export type CampaignTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** A paginated collection of campaign Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of campaign Nodes */
+export type CampaignConnection = {
+  /** A list of edges (relational context) between RootQuery and connected campaign Nodes */
+  edges: Array<CampaignConnectionEdge>;
+  /** A list of connected campaign Nodes */
+  nodes: Array<Campaign>;
+  /** Information about pagination in a connection. */
+  pageInfo: CampaignConnectionPageInfo;
+};
+
+/** Represents a connection to a campaign. Contains both the campaign Node and metadata about the relationship. */
+export type CampaignConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected campaign Node */
+  node: Campaign;
+};
+
+/** Pagination metadata specific to &quot;CampaignConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CampaignConnectionEdge&quot; Nodes. */
+export type CampaignConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Identifier types for retrieving a specific Campaign. Specifies which unique attribute is used to find an exact Campaign. */
+export enum CampaignIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the campaign type and the campaign type */
+export type CampaignToPreviewConnectionEdge = CampaignConnectionEdge & Edge & OneToOneConnection & {
+  __typename?: 'CampaignToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Campaign;
+};
+
+/** Connection between the Campaign type and the campaign type */
+export type CampaignToRevisionConnection = CampaignConnection & Connection & {
+  __typename?: 'CampaignToRevisionConnection';
+  /** Edges for the CampaignToRevisionConnection connection */
+  edges: Array<CampaignToRevisionConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Campaign>;
+  /** Information about pagination in a connection. */
+  pageInfo: CampaignToRevisionConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type CampaignToRevisionConnectionEdge = CampaignConnectionEdge & Edge & {
+  __typename?: 'CampaignToRevisionConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Campaign;
+};
+
+/** Pagination metadata specific to &quot;CampaignToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of CampaignToRevisionConnection Nodes. */
+export type CampaignToRevisionConnectionPageInfo = CampaignConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'CampaignToRevisionConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the CampaignToRevisionConnection connection */
+export type CampaignToRevisionConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** The careerCategory type */
 export type CareerCategory = DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & {
   __typename?: 'CareerCategory';
@@ -4085,6 +4383,8 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Attachment = 'ATTACHMENT',
   /** The Type of Content object */
+  Campaign = 'CAMPAIGN',
+  /** The Type of Content object */
   Career = 'CAREER',
   /** The Type of Content object */
   CaseStudy = 'CASE_STUDY',
@@ -4275,6 +4575,39 @@ export enum ContentTypesOfTagEnum {
   /** The Type of Content object */
   Post = 'POST'
 }
+
+/** Input for the createCampaign mutation. */
+export type CreateCampaignInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The excerpt of the object */
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The ID of the parent object */
+  parentId?: InputMaybe<Scalars['ID']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createCampaign mutation. */
+export type CreateCampaignPayload = {
+  __typename?: 'CreateCampaignPayload';
+  /** The Post object mutation type. */
+  campaign?: Maybe<Campaign>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+};
 
 /** Input for the createCareerCategory mutation. */
 export type CreateCareerCategoryInput = {
@@ -5002,6 +5335,29 @@ export type DefaultTemplate = ContentTemplate & {
   __typename?: 'DefaultTemplate';
   /** The name of the template */
   templateName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Input for the deleteCampaign mutation. */
+export type DeleteCampaignInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The ID of the campaign to delete */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** The payload for the deleteCampaign mutation. */
+export type DeleteCampaignPayload = {
+  __typename?: 'DeleteCampaignPayload';
+  /** The object before it was deleted */
+  campaign?: Maybe<Campaign>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
 };
 
 /** Input for the deleteCareerCategory mutation. */
@@ -8143,7 +8499,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkable Interface */
-export type MenuItemObjectUnion = CareerCategory | CareerPost | CareerTag | CaseStudy | CaseStudyCategory | Category | Industry | Integration | IntegrationCategory | NewsArticle | NewsCategory | NewsTag | Page | Post | Product | Tag | Testimonial;
+export type MenuItemObjectUnion = Campaign | CareerCategory | CareerPost | CareerTag | CaseStudy | CaseStudyCategory | Category | Industry | Integration | IntegrationCategory | NewsArticle | NewsCategory | NewsTag | Page | Post | Product | Tag | Testimonial;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -14520,6 +14876,8 @@ export type RestoreCommentPayload = {
 /** The root mutation */
 export type RootMutation = {
   __typename?: 'RootMutation';
+  /** The createCampaign mutation */
+  createCampaign?: Maybe<CreateCampaignPayload>;
   /** The createCareerCategory mutation */
   createCareerCategory?: Maybe<CreateCareerCategoryPayload>;
   /** The createCareerPost mutation */
@@ -14562,6 +14920,8 @@ export type RootMutation = {
   createTestimonial?: Maybe<CreateTestimonialPayload>;
   /** The createUser mutation */
   createUser?: Maybe<CreateUserPayload>;
+  /** The deleteCampaign mutation */
+  deleteCampaign?: Maybe<DeleteCampaignPayload>;
   /** The deleteCareerCategory mutation */
   deleteCareerCategory?: Maybe<DeleteCareerCategoryPayload>;
   /** The deleteCareerPost mutation */
@@ -14618,6 +14978,8 @@ export type RootMutation = {
   restoreComment?: Maybe<RestoreCommentPayload>;
   /** Send password reset email to user */
   sendPasswordResetEmail?: Maybe<SendPasswordResetEmailPayload>;
+  /** The updateCampaign mutation */
+  updateCampaign?: Maybe<UpdateCampaignPayload>;
   /** The updateCareerCategory mutation */
   updateCareerCategory?: Maybe<UpdateCareerCategoryPayload>;
   /** The updateCareerPost mutation */
@@ -14662,6 +15024,12 @@ export type RootMutation = {
   updateTestimonial?: Maybe<UpdateTestimonialPayload>;
   /** The updateUser mutation */
   updateUser?: Maybe<UpdateUserPayload>;
+};
+
+
+/** The root mutation */
+export type RootMutationCreateCampaignArgs = {
+  input: CreateCampaignInput;
 };
 
 
@@ -14788,6 +15156,12 @@ export type RootMutationCreateTestimonialArgs = {
 /** The root mutation */
 export type RootMutationCreateUserArgs = {
   input: CreateUserInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteCampaignArgs = {
+  input: DeleteCampaignInput;
 };
 
 
@@ -14960,6 +15334,12 @@ export type RootMutationSendPasswordResetEmailArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdateCampaignArgs = {
+  input: UpdateCampaignInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdateCareerCategoryArgs = {
   input: UpdateCareerCategoryInput;
 };
@@ -15095,6 +15475,15 @@ export type RootQuery = WithAcfOptionsPageCompanyDetails & WithAcfOptionsPageOpt
   __typename?: 'RootQuery';
   /** Entry point to get all settings for the site */
   allSettings?: Maybe<Settings>;
+  /** An object of the campaign Type.  */
+  campaign?: Maybe<Campaign>;
+  /**
+   * A campaign object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  campaignBy?: Maybe<Campaign>;
+  /** Connection between the RootQuery type and the campaign type */
+  campaigns?: Maybe<RootQueryToCampaignConnection>;
   /** Connection between the RootQuery type and the careerCategory type */
   careerCategories?: Maybe<RootQueryToCareerCategoryConnection>;
   /** A 0bject */
@@ -15289,6 +15678,32 @@ export type RootQuery = WithAcfOptionsPageCompanyDetails & WithAcfOptionsPageOpt
   viewer?: Maybe<User>;
   /** Fields of the &#039;WritingSettings&#039; settings group */
   writingSettings?: Maybe<WritingSettings>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryCampaignArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<CampaignIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryCampaignByArgs = {
+  campaignId?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  uri?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryCampaignsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToCampaignConnectionWhereArgs>;
 };
 
 
@@ -15934,6 +16349,79 @@ export type RootQueryUsersArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<RootQueryToUserConnectionWhereArgs>;
+};
+
+/** Connection between the RootQuery type and the campaign type */
+export type RootQueryToCampaignConnection = CampaignConnection & Connection & {
+  __typename?: 'RootQueryToCampaignConnection';
+  /** Edges for the RootQueryToCampaignConnection connection */
+  edges: Array<RootQueryToCampaignConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Campaign>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToCampaignConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToCampaignConnectionEdge = CampaignConnectionEdge & Edge & {
+  __typename?: 'RootQueryToCampaignConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Campaign;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToCampaignConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCampaignConnection Nodes. */
+export type RootQueryToCampaignConnectionPageInfo = CampaignConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToCampaignConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToCampaignConnection connection */
+export type RootQueryToCampaignConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Connection between the RootQuery type and the careerCategory type */
@@ -18243,6 +18731,7 @@ export type SeoContentTypeArchive = {
 /** The Yoast SEO search appearance content types */
 export type SeoContentTypes = {
   __typename?: 'SEOContentTypes';
+  campaign?: Maybe<SeoContentType>;
   careerPost?: Maybe<SeoContentType>;
   caseStudy?: Maybe<SeoContentType>;
   industry?: Maybe<SeoContentType>;
@@ -19744,6 +20233,43 @@ export type UniformResourceIdentifiable = {
   isTermNode: Scalars['Boolean']['output'];
   /** The unique resource identifier path */
   uri?: Maybe<Scalars['String']['output']>;
+};
+
+/** Input for the updateCampaign mutation. */
+export type UpdateCampaignInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The excerpt of the object */
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the campaign object */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The ID of the parent object */
+  parentId?: InputMaybe<Scalars['ID']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updateCampaign mutation. */
+export type UpdateCampaignPayload = {
+  __typename?: 'UpdateCampaignPayload';
+  /** The Post object mutation type. */
+  campaign?: Maybe<Campaign>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
 };
 
 /** Input for the updateCareerCategory mutation. */

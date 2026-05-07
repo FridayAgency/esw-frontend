@@ -128,12 +128,22 @@
     }
   }
 
+  &__locale {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
 
     height: 100%;
     gap: 1rem;
+    position: relative;
   }
 }
 

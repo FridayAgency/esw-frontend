@@ -25,6 +25,7 @@
 
   @include mixins.breakpoint-up(tablet) {
     display: block;
+    overflow: visible;
 
     background: var(--Pure-Black, #000);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.06);
@@ -38,17 +39,17 @@
     }
   }
 
-  nav {
+  &__nav {
     display: flex;
     justify-content: flex-end;
     padding: 0.5rem 0;
 
-    ul {
+    &-list {
       display: flex;
       gap: 1.5rem;
       align-items: center;
 
-      li {
+      &-item {
         a {
           display: flex;
           align-items: center;

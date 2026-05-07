@@ -26,7 +26,7 @@ export const GET = async (request: NextRequest) => {
   }
 
   // Validate postType is one of the allowed types
-  const allowedTypes = ["post", "page", "projects", "caseStudy", "industry", "newsArticle", "career"];
+  const allowedTypes = ["post", "page", "projects", "caseStudy", "industry", "newsArticle", "career", "campaign"];
   if (postType && !allowedTypes.includes(postType)) {
     return new NextResponse(JSON.stringify({ success: false, message: "Invalid post type" }), {
       status: 400,
