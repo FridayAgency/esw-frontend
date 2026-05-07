@@ -4,6 +4,7 @@
 
 import { GET_CAREER_POSTS } from "@/data";
 import client from "@/lib/client";
+import Link from "next/link";
 import { PagePanelsPagePanelsCareersOpenRolesLayout } from "@/types/graphql";
 
 import Container from "@/app/components/Container";
@@ -84,39 +85,42 @@ const CareersOpenRoles: React.FC<CareersOpenRolesProps> = async ({ panel }) => {
   return (
     <section className={styles["careers-open-roles"]}>
       <Container flush narrow className={styles.careersOpenRoles}>
-        <h2>Find Your Role</h2>
-        <input type="text"></input>
-        <h2>Departments</h2>
-        {departments.map((department, index) => (
-          <div key={index} className={styles["careers-open-roles__department"]}>
-            <div className={styles["careers-open-roles__department-name"]}>{department}</div>
-          </div>
-        ))}
+        <div className="careers-open-roles__filter">
+          {/* <h2>Find Your Role</h2>
+          <input type="text"></input>
+          <h2>Departments</h2>
+          {departments.map((department, index) => (
+            <div key={index} className={styles["careers-open-roles__department"]}>
+              <div className={styles["careers-open-roles__department-name"]}>{department}</div>
+            </div>
+          ))}
 
-        <h2>Locations</h2>
-        {locations.map((location, index) => (
-          <div key={index} className={styles["careers-open-roles__location"]}>
-            <div className={styles["careers-open-roles__location-name"]}>{location}</div>
-          </div>
-        ))}
-
-
-      <h2 className={styles["careers-open-roles__title"]}>{itemsTotal} Open Roles Found</h2>
-      {/* <PostsList
-        items={items}
-        categories={rawCategories}
-        featuredPost={featuredItem}
-        activeCategory="all"
-        categoryBasePath="/life-at-esw-blog/category/"
-      /> */}
-      {itemsFormatted.map((item) => (
-        <div key={item.id} className={styles["careers-open-roles__item"]}>
-          <h3 className={styles["careers-open-roles__item-title"]}>{item.title}</h3>
-          <div className={styles["careers-open-roles__item-location"]}><Icon type="location" />{item.location}</div>
-          <div className={styles["careers-open-roles__item-department"]}><Icon type="target" />{item.department}</div>
-          <div className={styles["careers-open-roles__item-updated_at"]}><Icon type="clock" />{calculateDifferenceInDays(new Date(item.updated_at))} DAYS AGO</div>
+          <h2>Locations</h2>
+          {locations.map((location, index) => (
+            <div key={index} className={styles["careers-open-roles__location"]}>
+              <div className={styles["careers-open-roles__location-name"]}>{location}</div>
+            </div>
+          ))} */}
         </div>
-      ))}
+
+        <div className="careers-open-roles__list">
+          <h3 className={styles["careers-open-roles__list__title"]}>{itemsTotal} Open Roles Found</h3>
+          {itemsFormatted.map((item) => (
+            <Link href={`/open-roles/${item.id}`} key={item.id} className={styles["careers-open-roles__list__item"]}>
+              <div className={styles["careers-open-roles__list__item__heading"]}>
+                <h4 className={styles["careers-open-roles__list__item__title"]}>{item.title}</h4>
+                <div className={styles["careers-open-roles__list__item__updated-at"]}><Icon type="clock" />{calculateDifferenceInDays(new Date(item.updated_at))} DAYS AGO</div>
+              </div>
+              <div className={styles["careers-open-roles__list__item__details"]}>
+                <div className={styles["careers-open-roles__list__item__location"]}><Icon type="location" />{item.location}</div>
+                <div className={styles["careers-open-roles__list__item__department"]}><Icon type="target" />{item.department}</div>
+              </div>
+              <div className={styles["careers-open-roles__list__item__footer"]}>
+                <div className={styles["careers-open-roles__list__item__footer__arrow"]}><Icon type="arrowRight" /></div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </Container>
     </section>
   );
