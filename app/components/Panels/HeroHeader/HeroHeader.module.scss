@@ -18,7 +18,7 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
     flex-direction: column;
     gap: 1.75rem;
     padding-top: 14.5rem;
-    padding-bottom: 12.2rem;
+    padding-bottom: 18.2rem;
 
     @include mixins.breakpoint-up(mobile) {
       padding-top: 16.5rem;
@@ -118,10 +118,8 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
 
       &::before {
         background-image:
-          radial-gradient(circle, #9ce533 50%, transparent 50%),
-          radial-gradient(circle, #85d852 50%, transparent 50%),
-          radial-gradient(circle, #9ce533 50%, transparent 50%),
-          radial-gradient(circle, #5dca7f 50%, transparent 50%);
+          radial-gradient(circle, #9ce533 50%, transparent 50%), radial-gradient(circle, #85d852 50%, transparent 50%),
+          radial-gradient(circle, #9ce533 50%, transparent 50%), radial-gradient(circle, #5dca7f 50%, transparent 50%);
       }
     }
 

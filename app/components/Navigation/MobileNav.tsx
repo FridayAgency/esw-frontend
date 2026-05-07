@@ -77,7 +77,35 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
         <div className={styles["nav__actions"]}>
           <button onClick={() => setTalkToUsOpen(true)}>Talk to Us</button>
           <a href="#">
-            <Icon type="profile" />
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10.1671 20.1426C23.0282 20.0861 23.0282 0.524448 10.1671 0.471069C-2.76301 0.694003 -2.75987 19.9259 10.1671 20.1426Z"
+                stroke="#1E2221"
+                strokeWidth="0.941972"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M10.1652 12.274C15.3115 12.252 15.3115 4.42737 10.1652 4.4054C5.01889 4.42737 5.02203 12.252 10.1652 12.274Z"
+                stroke="#1E2221"
+                strokeWidth="0.941972"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M16.0666 18.1769C16.0352 10.4559 4.29507 10.4685 4.26367 18.1769"
+                stroke="#1E2221"
+                strokeWidth="0.941972"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M14.7378 13.0307C16.3674 13.0056 16.3674 15.5677 14.7378 15.5426C13.1082 15.5677 13.1082 13.0056 14.7378 13.0307Z"
+                fill="#00D180"
+                stroke="#1E2221"
+                strokeWidth="0.941972"
+              />
+            </svg>
             My Account
           </a>
         </div>

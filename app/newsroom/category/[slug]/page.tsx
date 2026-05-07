@@ -14,6 +14,8 @@ import { Metadata, NextPage } from "next";
 import { generateCategorySeoMetadata } from "@/lib/seo";
 import PagePanels from "@/app/components/PagePanels";
 
+import styles from "./Page.module.scss";
+
 interface PageParams {
   params: Promise<{ slug: string }>;
 }
@@ -72,7 +74,7 @@ const NewsCategoryPage: NextPage<PageParams> = async ({ params }) => {
           }
           pageTitle={page?.title ?? ""}
         />
-        <section>
+        <section className={styles["posts-list"]}>
           <PostList
             items={items}
             categories={categories}

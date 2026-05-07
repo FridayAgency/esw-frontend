@@ -1,0 +1,158 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.b2b2c-difference {
+  background-color: var(--Foundation-Commerce-Canvas, #f2f6f3);
+  padding: 4rem 0;
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 5.5rem 0;
+  }
+
+  &__container {
+    @include mixins.breakpoint-up(tablet) {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  &__card {
+    background-color: var(--Foundation-Black, #1e2221);
+    overflow: hidden;
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-column: 1 / -1;
+      background: linear-gradient(71.37deg, #1e2221 22.61%, #184c39 89.12%);
+    }
+  }
+
+  &__card-body {
+    position: relative;
+    z-index: 1;
+    padding: 4rem 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      padding: 4rem 6rem;
+    }
+  }
+
+  &__divider {
+    margin-bottom: 1.5rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      gap: 2rem;
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      max-width: 32rem;
+    }
+  }
+
+  &__subtitle {
+    @include text-styles.text-style("mobile-caption");
+    color: var(--Foundation-Signal-Green, #00d180);
+    text-transform: uppercase;
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-caption");
+    }
+  }
+
+  &__title {
+    @include text-styles.text-style("mobile-h4");
+    color: var(--Foundation-White, #fff);
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-h4");
+    }
+  }
+
+  &__stats {
+    display: flex;
+    flex-direction: column;
+
+    @include mixins.breakpoint-up(mobile) {
+      flex-direction: row;
+    }
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      flex: 1;
+      padding: 1.5rem;
+    }
+
+    &--retail {
+      background-color: var(--Foundation-Orchestrated-Green, #063e2d);
+
+      border-radius: 0.5rem 0.5rem 0 0;
+
+      p {
+        color: var(--Foundation-Commerce-Canvas, #f2f6f3);
+      }
+
+      @include mixins.breakpoint-up(mobile) {
+        border-radius: 0.5rem 0 0 0.5rem;
+      }
+    }
+
+    &--b2b2c {
+      background-color: var(--Function-Mint, #80e8bf);
+      color: var(--Foundation-Black, #1e2221);
+      border-radius: 0 0 0.5rem 0.5rem;
+
+      @include mixins.breakpoint-up(mobile) {
+        border-radius: 0 0.5rem 0.5rem 0;
+      }
+    }
+
+    &-label {
+      @include text-styles.text-style("mobile-caption");
+      text-transform: uppercase;
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-caption");
+      }
+    }
+
+    &-value {
+      @include text-styles.text-style("mobile-stats");
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-stats");
+      }
+    }
+
+    &-description {
+      @include text-styles.text-style("mobile-h4");
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-h4");
+      }
+    }
+  }
+
+  &__underline {
+    height: 0.75rem;
+    background-color: var(--Foundation-Signal-Green, #00d180);
+  }
+}

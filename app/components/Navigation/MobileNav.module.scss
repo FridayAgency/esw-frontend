@@ -5,6 +5,7 @@
 
 .container {
   position: relative;
+  padding: 0 1.5rem;
 
   @include mixins.breakpoint-up(tablet) {
     display: none;
@@ -12,10 +13,12 @@
 }
 
 .header {
-  position: fixed;
-  top: 2rem;
-  right: 1.5rem;
-  left: 1.5rem;
+  // position: fixed;
+  // top: 2rem;
+  // right: 1.5rem;
+  // left: 1.5rem;
+  position: relative;
+
   z-index: 6;
   display: flex;
   justify-content: space-between;
@@ -45,7 +48,7 @@
   top: 0;
   bottom: 0;
   right: -100%;
-  padding: 8rem 1.5rem 1.5rem;
+  padding: 10rem 1.5rem 1.5rem;
   width: 100%;
   z-index: 4;
   height: 100vh;
@@ -96,7 +99,7 @@
 
       color: var(--Foundation-Black, #1e2221);
       text-align: center;
-      @include text-styles.text-style("desktop-h5");
+      @include text-styles.text-style("mobile-h5");
 
       &:focus-visible {
         outline: 4px solid var(--Black);
@@ -113,9 +116,13 @@
     a {
       background: var(--Neutral-Soft-Grey, #deebe5);
       text-decoration: none;
+      display: flex;
+      justify-content: center;
+      gap: 0.61rem;
 
       svg {
-        height: 100%;
+        width: 1.20888rem;
+        height: 1.2295rem;
         width: auto;
       }
     }
@@ -124,7 +131,9 @@
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+
+    height: 100%;
+    gap: 1rem;
   }
 }
 

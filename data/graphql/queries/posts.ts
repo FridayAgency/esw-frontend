@@ -186,6 +186,22 @@ ${FRAGMENTS.ACF_MEDIA_ITEM}
 
 export const GET_CAREER_POSTS_BY_CATEGORY = `
 query GetCareerPostsByCategory($first: Int = 50, $slug: [String]) {
+   page(id: "/life-at-esw-blog/", idType: URI) {
+    id
+    pagePanels {
+      pagePanels {
+        ... on PagePanelsPagePanelsBlogLandingHeaderLayout {
+          __typename
+          copy
+          title
+        }
+        ... on PagePanelsPagePanelsCareersBlogListLayout {
+          __typename
+          ${POST_LIST_FRAGMENT}
+        }
+      }
+    }
+  }
   filteredCategory: careerCategories(where: { slug: $slug }, first: 1) {
     edges {
       node {

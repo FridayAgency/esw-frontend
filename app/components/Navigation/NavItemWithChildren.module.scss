@@ -45,12 +45,12 @@
 
     &-children {
       position: fixed;
-      top: 8rem;
+      top: 10rem;
       bottom: 0;
       right: -100%;
       width: 100%;
       z-index: 5;
-      height: calc(100vh - 8rem);
+      height: calc(100vh - 10rem);
 
       transition: all 0.3s ease-in;
       background: var(--Foundation-White, #fff);

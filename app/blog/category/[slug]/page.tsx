@@ -1,4 +1,3 @@
-import { PageParams } from "@/app/[[...uri]]/page";
 import PagePanels from "@/app/components/PagePanels/PagePanels";
 import PostsList from "@/app/components/PostsList";
 import notFound from "@/app/not-found";
@@ -15,11 +14,32 @@ import {
 import { processPageUri, removeNodes } from "@fridayagency/utils";
 
 import styles from "./Page.module.scss";
+import { generateCategorySeoMetadata } from "@/lib/seo";
+import { Metadata } from "next";
+
+interface PageParams {
+  params: Promise<{ slug: string }>;
+}
+
+interface GenerateMetadataProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  return [];
+}
+
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { slug } = await params;
+  const pageUri = processPageUri(slug);
+
+  return generateCategorySeoMetadata(pageUri, "category");
+}
 
 const BlogCategoryPage = async ({ params }: PageParams) => {
-  const { uri } = await params;
+  const { slug } = await params;
 
-  const pageUri = processPageUri(uri);
+  const pageUri = processPageUri(slug);
 
   if (!pageUri) notFound();
 

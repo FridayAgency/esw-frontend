@@ -28,6 +28,7 @@ import { CONTACT_FORM_FRAGMENT } from "@/app/components/Panels/ContactForm";
 import { FORM_EMBED_FRAGMENT } from "@/app/components/Panels/FormEmbed";
 import { HERO_HEADER_TWO_IMAGES_FRAGMENT } from "@/app/components/Panels/HeroHeaderTwoImages";
 import { THANK_YOU_HEADER_FRAGMENT } from "@/app/components/Panels/ThankYouHeader";
+import { B2B2C_DIFFERECNCE_FRAGMENT } from "@/app/components/Panels/B2b2cDifference";
 
 const LATEST_CAREERS_POSTS_FRAGMENT = `
   title
@@ -64,6 +65,7 @@ export const PAGEPANELS_FRAGMENT = (() => {
     ["PagePanelsPagePanelsHeroHeaderTwoImagesLayout", HERO_HEADER_TWO_IMAGES_FRAGMENT],
     ["PagePanelsPagePanelsLatestCareersPostsLayout", LATEST_CAREERS_POSTS_FRAGMENT],
     ["PagePanelsPagePanelsThankYouHeaderLayout", THANK_YOU_HEADER_FRAGMENT],
+    ["PagePanelsPagePanelsB2b2cDifferenceLayout", B2B2C_DIFFERECNCE_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");

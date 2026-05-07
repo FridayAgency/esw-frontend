@@ -1,8 +1,17 @@
 @use "@/app/styles/generic/text-styles";
 @use "@/app/styles/generic/mixins";
 
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .banner {
-  display: none;
+  // display: none;
   transition: all 0.3s ease;
   overflow: hidden;
 
@@ -11,7 +20,7 @@
   }
 
   &.show {
-    max-height: 3.5rem;
+    max-height: 7rem;
   }
 
   @include mixins.breakpoint-up(tablet) {
@@ -19,6 +28,14 @@
 
     background: var(--Pure-Black, #000);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  &__nav-container {
+    display: none;
+
+    @include mixins.breakpoint-up(tablet) {
+      display: block;
+    }
   }
 
   nav {
@@ -47,6 +64,86 @@
           }
         }
       }
+    }
+  }
+
+  &__message {
+    background: var(--ColorEmphasis-Olive, #7f9e3e);
+    // height: 3rem;
+    overflow: hidden;
+    padding: 0.5rem 0;
+
+    @include mixins.breakpoint-up(tablet) {
+      display: flex;
+      justify-content: center;
+    }
+
+    &-container {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      height: 100%;
+    }
+
+    &-container {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      height: 100%;
+    }
+
+    &-track {
+      flex: 1;
+      overflow: hidden;
+      min-width: 0;
+
+      @include mixins.breakpoint-up(tablet) {
+        text-align: center;
+      }
+    }
+
+    &-inner {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: ticker 20s linear infinite;
+
+      @include mixins.breakpoint-up(tablet) {
+        animation: none;
+      }
+    }
+
+    &-text {
+      @include text-styles.text-style("mobile-body-default");
+      color: var(--Foundation-Black, #1e2221);
+      padding-right: 3rem;
+
+      @include mixins.breakpoint-up(tablet) {
+        padding-right: 0;
+      }
+
+      &--duplicate {
+        @include mixins.breakpoint-up(tablet) {
+          display: none;
+        }
+      }
+
+      a {
+        color: var(--Foundation-Black, #1e2221);
+      }
+    }
+
+    &-dismiss {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
     }
   }
 }

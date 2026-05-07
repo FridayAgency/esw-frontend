@@ -1,0 +1,30 @@
+@use "@/app/styles/generic/mixins";
+
+.posts-list {
+  background: var(--Foundation-Commerce-Canvas, #f2f6f3);
+  @include mixins.breakpoint-up(tablet) {
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      background-image: url("/assets/blog.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
+
+      width: 100%;
+      height: 100%;
+      background-position: bottom left;
+    }
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}

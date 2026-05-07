@@ -49,7 +49,7 @@ export async function generateSeoMetadata(uri: string | null, fallbackTitle = "P
       return createFallbackMetadata(fallbackTitle, "The requested page could not be found.");
     }
 
-    return convertSeoWithEnv(seo);
+    return convertSeoWithEnv(seo?.seo);
   } catch (error) {
     return handleSeoError(error, "page", uri, fallbackTitle);
   }

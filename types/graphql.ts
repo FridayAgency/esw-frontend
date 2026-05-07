@@ -215,6 +215,29 @@ export enum AvatarRatingEnum {
   X = 'X'
 }
 
+/** The &quot;Banner&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type Banner = AcfFieldGroup & AcfFieldGroupFields & Banner_Fields & {
+  __typename?: 'Banner';
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;Banner&quot; Field Group */
+  bannerText?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;Banner&quot; Field Group */
+export type Banner_Fields = {
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;Banner&quot; Field Group */
+  bannerText?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
 /** The careerCategory type */
 export type CareerCategory = DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & {
   __typename?: 'CareerCategory';
@@ -10173,7 +10196,7 @@ export enum OrderEnum {
 }
 
 /** A standalone content entry generally used for static, non-chronological content such as &quot;About Us&quot; or &quot;Contact&quot; pages. */
-export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfPagePanels & {
+export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfBanner & WithAcfPagePanels & {
   __typename?: 'Page';
   /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
   ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
@@ -10183,6 +10206,8 @@ export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   authorDatabaseId?: Maybe<Scalars['Int']['output']>;
   /** The globally unique identifier of the author of the node */
   authorId?: Maybe<Scalars['ID']['output']>;
+  /** Fields of the Banner ACF Field Group */
+  banner?: Maybe<Banner>;
   /** Connection between the HierarchicalContentNode type and the ContentNode type */
   children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
   /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
@@ -10480,6 +10505,72 @@ export type PagePanelsPagePanelsAccordionPanelLayout_Fields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsAccordionPanelLayout&quot; Field Group */
   title?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsB2b2cDifferenceLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsB2b2cDifferenceLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsB2b2cDifferenceLayout';
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+  bcstats?: Maybe<Array<Maybe<PagePanelsPagePanelsBcstats>>>;
+  /** Field of the &quot;link&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+  callToAction?: Maybe<AcfLink>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+  subtitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+export type PagePanelsPagePanelsB2b2cDifferenceLayout_Fields = {
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+  bcstats?: Maybe<Array<Maybe<PagePanelsPagePanelsBcstats>>>;
+  /** Field of the &quot;link&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+  callToAction?: Maybe<AcfLink>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+  subtitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PagePanelsPagePanelsBcstats&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsBcstats = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsBcstats_Fields & {
+  __typename?: 'PagePanelsPagePanelsBcstats';
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBcstats&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBcstats&quot; Field Group */
+  stat?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBcstats&quot; Field Group */
+  subtitle?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsBcstats&quot; Field Group */
+export type PagePanelsPagePanelsBcstats_Fields = {
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBcstats&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBcstats&quot; Field Group */
+  stat?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsBcstats&quot; Field Group */
+  subtitle?: Maybe<Scalars['String']['output']>;
 };
 
 /** The &quot;PagePanelsPagePanelsBlocksDividerLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -10806,6 +10897,29 @@ export type PagePanelsPagePanelsCareersBlogListLayout_FieldsFeaturedPostArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** The &quot;PagePanelsPagePanelsCareersOpenRolesLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsCareersOpenRolesLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsCareersOpenRolesLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsCareersOpenRolesLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsCareersOpenRolesLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsCareersOpenRolesLayout&quot; Field Group */
+export type PagePanelsPagePanelsCareersOpenRolesLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsCareersOpenRolesLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 /** The &quot;PagePanelsPagePanelsCaseStudiesListLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -21508,6 +21622,12 @@ export type WpPageInfo = {
 export type WithAcfAuthorCustomFields = {
   /** Fields of the AuthorCustomFields ACF Field Group */
   authorCustomFields?: Maybe<AuthorCustomFields>;
+};
+
+/** Provides access to fields of the &quot;Banner&quot; ACF Field Group via the &quot;banner&quot; field */
+export type WithAcfBanner = {
+  /** Fields of the Banner ACF Field Group */
+  banner?: Maybe<Banner>;
 };
 
 /** Provides access to fields of the &quot;CaseStudyCard&quot; ACF Field Group via the &quot;caseStudyCard&quot; field */
