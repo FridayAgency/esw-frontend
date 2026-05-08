@@ -104,17 +104,27 @@ const Footer: React.FC = async () => {
             <TalkToUsButton />
             <ul className={styles["footer__socials"]}>
               <li className={styles["footer__socials-item"]}>
-                <a href="#" aria-label="LinkedIn">
+                <a
+                  href="https://www.linkedin.com/company/esw/"
+                  target="__blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
                   <Icon type="linkedIn" />
                 </a>
               </li>
               <li className={styles["footer__socials-item"]}>
-                <a href="#" aria-label="Vimeo">
+                <a href="https://vimeo.com/eswglobal" target="__blank" rel="noopener noreferrer" aria-label="Vimeo">
                   <Icon type="vimeo" />
                 </a>
               </li>
               <li className={styles["footer__socials-item"]}>
-                <a href="#" aria-label="Instagram">
+                <a
+                  href="https://www.instagram.com/eswglobal/"
+                  target="__blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
                   <Icon type="instagram" />
                 </a>
               </li>
