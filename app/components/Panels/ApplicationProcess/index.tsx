@@ -15,39 +15,33 @@ interface Step {
 const steps: Step[] = [
   {
     id: 1,
-    title: "Submit an application",
+    title: "Apply",
     description:
-      "Our talent acquisition team will review your application and provide a response within 14 days of submission if your skills align with our needs.",
+      "Start by applying for a role that matches your skills and interests.",
   },
   {
     id: 2,
-    title: "Initial screening",
+    title: "Recruiter Review",
     description:
-      "A member of our talent acquisition team will reach out to schedule a brief introductory call to discuss your background and the role in more detail.",
+      "If your profile looks like a good fit, a member of our Talent Acquisition team will reach out for a first conversation.",
   },
   {
     id: 3,
-    title: "First interview",
+    title: "Interview",
     description:
-      "Meet with the hiring manager and a team member for an in-depth conversation about your experience, skills, and how you might contribute to our team.",
+      "Our interview process is designed to be structured, fair and relevant to the role. Depending on the position, this may include one or more interviews, typically a mix of virtual and in‑person conversations.",
   },
   {
     id: 4,
-    title: "Skills assessment",
+    title: "Feedback",
     description:
-      "Depending on the role, you may be asked to complete a practical assessment or case study to demonstrate your technical or functional expertise.",
+      "After each stage, we aim to keep you informed and provide an update on next steps as quickly as possible.",
   },
   {
     id: 5,
-    title: "Final interview",
+    title: "Offer",
     description:
-      "A final conversation with senior leadership to ensure alignment on values, culture, and long-term career aspirations within ESW.",
-  },
-  {
-    id: 6,
-    title: "Offer & onboarding",
-    description:
-      "Congratulations! You'll receive a formal offer and be guided through our comprehensive onboarding programme to set you up for success from day one.",
+      "If everything aligns, we’ll be delighted to make you an offer.",
   },
 ];
 

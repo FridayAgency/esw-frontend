@@ -8,6 +8,7 @@ interface SectionProps {
   className?: string;
   flush?: boolean;
   grid?: boolean;
+  narrow?: boolean;
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -17,10 +18,12 @@ const Section: React.FC<SectionProps> = ({
   className = "",
   flush = false,
   grid = false,
+  narrow = false,
 }) => {
   const containerClass = new ClassName([className, innerSection ? "inner-container" : "container"]);
   containerClass.addIf("container--flush", flush);
   containerClass.addIf("container--grid", grid);
+  containerClass.addIf("container--narrow", narrow);
 
   return createElement(tag, { className: containerClass.toString() }, children);
 };
