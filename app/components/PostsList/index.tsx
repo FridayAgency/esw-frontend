@@ -63,6 +63,7 @@ export const PostsList: React.FC<PostsListProps> = ({
               <ul>
                 <li>
                   <Link
+                    scroll={false}
                     href={allPostsHref}
                     className={activeCategory?.replaceAll("/", "") === "all" ? styles["active"] : ""}
                   >
@@ -74,6 +75,7 @@ export const PostsList: React.FC<PostsListProps> = ({
                   return (
                     <li key={key}>
                       <Link
+                        scroll={false}
                         href={`${categoryBasePath}/${cat.slug}`}
                         className={activeCategory?.replaceAll("/", "") === cat.slug ? styles["active"] : ""}
                       >
