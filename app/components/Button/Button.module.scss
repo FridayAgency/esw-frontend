@@ -82,6 +82,7 @@
   &.primary {
     background: var(--Foundation-Signal-Green, #00d180);
     color: var(--Foundation-Black, #1e2221);
+    border: none;
 
     .ellipse {
       --border-colour: var(--Foundation-Black, #1e2221);

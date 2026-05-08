@@ -34,11 +34,13 @@ const StayConnected = () => {
           <div className={styles.stayConnected__header}>
             <h2 className={styles.stayConnected__title}>Stay connected</h2>
             <p className={styles.stayConnected__subtitle}>
-              {"Didn't find the right role today? Share your details and we'll reach out when the right opportunity comes up."}
+              {
+                "Didn't find the right role today? Share your details and we'll reach out when the right opportunity comes up."
+              }
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} noValidate>
+          <form className={styles.stayConnected__form} onSubmit={handleSubmit} noValidate>
             <div className={styles.stayConnected__section}>
               <div className={styles.stayConnected__fields}>
                 <FormInput

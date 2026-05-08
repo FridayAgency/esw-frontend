@@ -16,10 +16,7 @@ interface GroupedItems {
   items: MenuToMenuItemConnectionEdge[];
 }
 
-const NavitemWithChildren: React.FC<{ item: MenuItem; isParentOpen?: boolean }> = ({
-  item,
-  isParentOpen = true,
-}) => {
+const NavitemWithChildren: React.FC<{ item: MenuItem; isParentOpen?: boolean }> = ({ item, isParentOpen = true }) => {
   const [showSubmenu, setShowSubmenu] = useState<boolean>(false);
   const [mounted, setMounted] = useState(false);
   const path = usePathname();
@@ -83,6 +80,8 @@ const NavitemWithChildren: React.FC<{ item: MenuItem; isParentOpen?: boolean }> 
     }
   }, [isParentOpen]);
 
+  console.log(isParentOpen);
+
   // Normalize paths by removing trailing slashes
   const normalizedPath = mounted ? path.replace(/\/$/, "") : "";
 
@@ -119,11 +118,7 @@ const NavitemWithChildren: React.FC<{ item: MenuItem; isParentOpen?: boolean }> 
               key={groupIndex}
               className={`${styles["nav__item-children-group"]} ${group.heading === "Platform" ? styles["platform"] : ""}`}
             >
-              {group.heading && (
-                <span className={styles["nav__item-children-heading"]}>
-                  {group.heading}
-                </span>
-              )}
+              {group.heading && <span className={styles["nav__item-children-heading"]}>{group.heading}</span>}
               <ul>
                 {group.items.map((edge: MenuToMenuItemConnectionEdge) => {
                   const label = edge.node.label || "";

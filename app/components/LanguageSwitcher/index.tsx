@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback, useId } from "react";
+import { createPortal } from "react-dom";
 import styles from "./LanguageSwitcher.module.scss";
 
 interface GlopalMarket {
@@ -37,11 +38,17 @@ interface LanguageSwitcherProps {
   className?: string;
 }
 
+interface DropdownPos {
+  top: number;
+  right: number;
+}
+
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   const ref = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownPos, setDropdownPos] = useState<DropdownPos | null>(null);
   const [currentLabel, setCurrentLabel] = useState("EN");
   const [markets, setMarkets] = useState<GlopalMarket[]>([]);
   const menuId = useId();
@@ -61,7 +68,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
     if (!isOpen) return;
 
     const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const insideTrigger = ref.current?.contains(target);
+      const insideDropdown = listRef.current?.contains(target);
+      if (!insideTrigger && !insideDropdown) {
         setIsOpen(false);
       }
     };
@@ -144,7 +154,13 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
       <button
         ref={triggerRef}
         className={styles["language-switcher__trigger"]}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          if (!isOpen && triggerRef.current) {
+            const rect = triggerRef.current.getBoundingClientRect();
+            setDropdownPos({ top: rect.bottom + 4, right: window.innerWidth - rect.right });
+          }
+          setIsOpen((prev) => !prev);
+        }}
         onKeyDown={handleTriggerKeyDown}
         aria-expanded={isOpen}
         aria-haspopup="menu"
@@ -183,35 +199,39 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
         </svg>
       </button>
 
-      {isOpen && markets.length > 0 && (
-        <ul
-          id={menuId}
-          ref={listRef}
-          className={styles["language-switcher__dropdown"]}
-          role="menu"
-          aria-label="Select language"
-          onKeyDown={handleMenuKeyDown}
-        >
-          {markets.map((market) => {
-            const label = market.label ?? market.locale.toUpperCase();
-            const isActive = market.locale.toUpperCase() === currentLabel;
-            return (
-              <li key={market.locale} role="none">
-                <button
-                  className={`${styles["language-switcher__option"]} ${isActive ? styles["language-switcher__option--active"] : ""}`}
-                  role="menuitem"
-                  aria-current={isActive ? "true" : undefined}
-                  lang={localeToLang(market.locale, market.countryCode)}
-                  onClick={() => handleSwitch(market.url)}
-                  tabIndex={-1}
-                >
-                  {label}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      {isOpen && markets.length > 0 && dropdownPos &&
+        createPortal(
+          <ul
+            id={menuId}
+            ref={listRef}
+            className={styles["language-switcher__dropdown"]}
+            role="menu"
+            aria-label="Select language"
+            onKeyDown={handleMenuKeyDown}
+            style={{ top: dropdownPos.top, right: dropdownPos.right }}
+          >
+            {markets.map((market) => {
+              const label = market.label ?? market.locale.toUpperCase();
+              const isActive = market.locale.toUpperCase() === currentLabel;
+              return (
+                <li key={market.locale} role="none">
+                  <button
+                    className={`${styles["language-switcher__option"]} ${isActive ? styles["language-switcher__option--active"] : ""}`}
+                    role="menuitem"
+                    aria-current={isActive ? "true" : undefined}
+                    lang={localeToLang(market.locale, market.countryCode)}
+                    onClick={() => handleSwitch(market.url)}
+                    tabIndex={-1}
+                  >
+                    {label}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>,
+          document.body
+        )
+      }
     </div>
   );
 };

@@ -15,11 +15,12 @@ import Button from "../../Button";
 import { removeNodes } from "@fridayagency/utils";
 
 interface LatestNewsProps {
-  panel: PagePanelsPagePanelsLatestCareersPostsLayout;
+  panel?: PagePanelsPagePanelsLatestCareersPostsLayout;
+  title?: string;
 }
 
-const LatestCareersPosts: React.FC<LatestNewsProps> = async ({ panel }) => {
-  const { title } = panel || {};
+const LatestCareersPosts: React.FC<LatestNewsProps> = async ({ panel, title }) => {
+  const { title: panelTitle } = panel || {};
 
   let postsToDisplay: (Post | NewsArticle | CareerPost)[] = [];
 
@@ -35,7 +36,7 @@ const LatestCareersPosts: React.FC<LatestNewsProps> = async ({ panel }) => {
     return (
       <section className={styles["latest-posts"]}>
         <Container className={styles["latest-posts__container"]}>
-          <h2 className={styles["latest-posts__title"]}>{title}</h2>
+          <h2 className={styles["latest-posts__title"]}>{title || panelTitle}</h2>
           <div className={styles["latest-posts__grid"]} role="tabpanel">
             {postsToDisplay.map((post) => (
               <PostCard

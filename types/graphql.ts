@@ -10863,6 +10863,37 @@ export type PagePanelsPagePanelsAccordionPanelLayout_Fields = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
+/** The &quot;PagePanelsPagePanelsApplicationProcessLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsApplicationProcessLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsApplicationProcessLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsApplicationProcessLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsApplicationProcessLayout&quot; Field Group */
+  image?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsApplicationProcessLayout&quot; Field Group */
+  process?: Maybe<Array<Maybe<PagePanelsPagePanelsProcess>>>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsApplicationProcessLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsApplicationProcessLayout&quot; Field Group */
+export type PagePanelsPagePanelsApplicationProcessLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsApplicationProcessLayout&quot; Field Group */
+  image?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsApplicationProcessLayout&quot; Field Group */
+  process?: Maybe<Array<Maybe<PagePanelsPagePanelsProcess>>>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsApplicationProcessLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 /** The &quot;PagePanelsPagePanelsB2b2cDifferenceLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PagePanelsPagePanelsB2b2cDifferenceLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsB2b2cDifferenceLayout_Fields & PagePanelsPagePanels_Layout & {
   __typename?: 'PagePanelsPagePanelsB2b2cDifferenceLayout';
@@ -12208,6 +12239,33 @@ export type PagePanelsPagePanelsPrimaryProductSectionLayout_FieldsProductsArgs =
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** The &quot;PagePanelsPagePanelsProcess&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsProcess = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsProcess_Fields & {
+  __typename?: 'PagePanelsPagePanelsProcess';
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsProcess&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsProcess&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsProcess&quot; Field Group */
+export type PagePanelsPagePanelsProcess_Fields = {
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsProcess&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsProcess&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 /** The &quot;PagePanelsPagePanelsQuickLinksLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -14240,6 +14298,47 @@ export type PostfieldsOpenContentFullWidthImageLayout_Fields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentFullWidthImageLayout&quot; Field Group */
   image?: Maybe<AcfMediaItemConnectionEdge>;
+};
+
+/** The &quot;PostfieldsOpenContentGalleryLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostfieldsOpenContentGalleryLayout = AcfFieldGroup & AcfFieldGroupFields & PostfieldsOpenContentGalleryLayout_Fields & PostfieldsOpenContent_Layout & {
+  __typename?: 'PostfieldsOpenContentGalleryLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;gallery&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentGalleryLayout&quot; Field Group */
+  images?: Maybe<AcfMediaItemConnection>;
+};
+
+
+/** The &quot;PostfieldsOpenContentGalleryLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PostfieldsOpenContentGalleryLayoutImagesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;PostfieldsOpenContentGalleryLayout&quot; Field Group */
+export type PostfieldsOpenContentGalleryLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;gallery&quot; Field Type added to the schema as part of the &quot;PostfieldsOpenContentGalleryLayout&quot; Field Group */
+  images?: Maybe<AcfMediaItemConnection>;
+};
+
+
+/** Interface representing fields of the ACF &quot;PostfieldsOpenContentGalleryLayout&quot; Field Group */
+export type PostfieldsOpenContentGalleryLayout_FieldsImagesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** The &quot;PostfieldsOpenContentImage50Text50Layout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */

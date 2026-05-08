@@ -20,7 +20,8 @@
         flex-flow: row wrap;
         margin-bottom: var(--spacing-md);
 
-        label, input {
+        label,
+        input {
           flex: 1 0 100%;
         }
 
@@ -118,15 +119,13 @@
       align-items: flex-start;
       justify-content: flex-start;
       gap: var(--spacing-sm);
-
+      border-radius: 0.125rem;
       margin-bottom: var(--spacing-md);
       padding: 1.25rem;
       background-color: var(--Foundation-White);
       border: solid 1px var(--Foundation-Black);
       box-shadow: var(--drop-3-box-shadow);
-
       text-decoration: none;
-
       transition: border-color var(--transition);
 
       &__heading {
@@ -138,9 +137,11 @@
       }
       &__title {
         flex: 1 1 auto;
-         span {
-          transition: background var(--transition), color var(--transition);
-         }
+        span {
+          transition:
+            background var(--transition),
+            color var(--transition);
+        }
       }
       &__updated-at {
         flex: 0 1 8.5rem;

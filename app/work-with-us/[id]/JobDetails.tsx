@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from 'react'
+import * as React from "react";
 import { useState, useEffect } from "react";
 import styles from "./openRole.module.scss";
 
@@ -8,8 +8,8 @@ import parse from "html-react-parser";
 import Link from "next/link";
 import Container from "@/app/components/Container";
 import HeroHeaderSimple from "@/app/components/Panels/HeroHeaderSimple";
-import ApplicationProcess from '@/app/components/Panels/ApplicationProcess';
-import FeatureBlock from '@/app/components/Panels/FeatureBlock';
+import ApplicationProcess from "@/app/components/Panels/ApplicationProcess/ApplicationProcessClient";
+import FeatureBlock from "@/app/components/Panels/FeatureBlock";
 import Icon from "@/app/components/Icon";
 
 import { differenceInDays } from "date-fns";
@@ -31,20 +31,27 @@ const normalizeHtmlForParser = (html: string) => {
 };
 
 const calculateDifferenceInDays = (dateInPast: Date) => {
-  return differenceInDays(new Date(), dateInPast)
-}
+  return differenceInDays(new Date(), dateInPast);
+};
 
 // const OpenRolePage: NextPage<PageParams> = async ({ params }) => {
-const OpenRolePage = ({params}: {params: Promise<{ id: string }>}) => {
-  const { id } = React.use(params);
-  console.log({id});
+const JobDetails = ({ id }: { id: string }) => {
+  console.log({ id });
 
-  const [careerOpenRole, setCareerOpenRole] = React.useState<openRole>({id: parseInt(id), title: "", updated_at: "", content: "", location: "", team: "", absolute_url: ""});
+  const [careerOpenRole, setCareerOpenRole] = React.useState<openRole>({
+    id: parseInt(id),
+    title: "",
+    updated_at: "",
+    content: "",
+    location: "",
+    team: "",
+    absolute_url: "",
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   let careerOpenRoleResponse = null;
-  
+
   useEffect(() => {
     const fetchOpenRole = async () => {
       setLoading(true);
@@ -55,12 +62,17 @@ const OpenRolePage = ({params}: {params: Promise<{ id: string }>}) => {
           throw new Error(`HTTP error! status: ${fetchCareerOpenRoleResponse.status}`);
         } else {
           careerOpenRoleResponse = await fetchCareerOpenRoleResponse.json();
-          console.log({careerOpenRoleResponse});
+          console.log({ careerOpenRoleResponse });
           setCareerOpenRole({
-            id: careerOpenRoleResponse.id, title: careerOpenRoleResponse.title, updated_at: careerOpenRoleResponse.updated_at, 
-            content: careerOpenRoleResponse.content ? parse(normalizeHtmlForParser(careerOpenRoleResponse.content)) as string : "",
-            location: careerOpenRoleResponse?.offices[0]?.name, team: careerOpenRoleResponse.departments[0].name,
-            absolute_url: careerOpenRoleResponse.absolute_url
+            id: careerOpenRoleResponse.id,
+            title: careerOpenRoleResponse.title,
+            updated_at: careerOpenRoleResponse.updated_at,
+            content: careerOpenRoleResponse.content
+              ? (parse(normalizeHtmlForParser(careerOpenRoleResponse.content)) as string)
+              : "",
+            location: careerOpenRoleResponse?.offices[0]?.name,
+            team: careerOpenRoleResponse.departments[0].name,
+            absolute_url: careerOpenRoleResponse.absolute_url,
           });
         }
       } catch (error) {
@@ -69,17 +81,20 @@ const OpenRolePage = ({params}: {params: Promise<{ id: string }>}) => {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     fetchOpenRole();
   }, []);
 
   return (
     <section className={styles["careers-open-role"]}>
-      <HeroHeaderSimple panel={{title: careerOpenRole.title}} />
+      <HeroHeaderSimple panel={{ title: careerOpenRole.title }} />
       <Container className={styles["careers-open-role__container"]}>
         <div className={styles["careers-open-role__content"]}>
-          <div dangerouslySetInnerHTML={{ __html: careerOpenRole.content }} className={styles["careers-open-role__content__text"]} />
+          <div
+            dangerouslySetInnerHTML={{ __html: careerOpenRole.content }}
+            className={styles["careers-open-role__content__text"]}
+          />
         </div>
         <div className={styles["careers-open-role__details"]}>
           <div className={styles["careers-open-role__details__location"]}>
@@ -96,7 +111,7 @@ const OpenRolePage = ({params}: {params: Promise<{ id: string }>}) => {
           </div>
           <Link
             href={careerOpenRole.absolute_url}
-            target='_blank'
+            target="_blank"
             className={styles["careers-open-role__details__button"]}
           >
             <span className={styles["careers-open-role__details__button__dot"]}></span>
@@ -104,16 +119,18 @@ const OpenRolePage = ({params}: {params: Promise<{ id: string }>}) => {
           </Link>
         </div>
       </Container>
-      <ApplicationProcess />
-      <FeatureBlock panel={{
-        background: "dark",
-        title: "Life at ESW",
-        subtitle: "Why ESW?",
-        text: "<p>At ESW, we’re fostering a culture where innovation thrives, collaboration comes naturally, and inclusion is at the heart of everything we do, so our people can create work that truly matters.</p>",
-        callToAction: {title: "Read More", url: "/life-at-esw/"}
-        }} />
+      {/* <ApplicationProcess />
+      <FeatureBlock
+        panel={{
+          background: "dark",
+          title: "Life at ESW",
+          subtitle: "Why ESW?",
+          text: "<p>At ESW, we’re fostering a culture where innovation thrives, collaboration comes naturally, and inclusion is at the heart of everything we do, so our people can create work that truly matters.</p>",
+          callToAction: { title: "Read More", url: "/life-at-esw/" },
+        }}
+      /> */}
     </section>
   );
 };
 
-export default OpenRolePage;
+export default JobDetails;

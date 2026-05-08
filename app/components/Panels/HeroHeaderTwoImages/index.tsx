@@ -37,7 +37,7 @@ const HeroHeaderTwoImages: React.FC<HeroHeaderTwoImagesProps> = ({ panel, showBr
   const images = (image?.edges.map((e) => e.node) ?? []) as MediaItem[];
 
   return (
-    <>
+    <div className={styles["header__wrapper"]}>
       <section className={styles["header"]}>
         <div className={styles["header__background"]}></div>
         <Container className={styles["header__container"]}>
@@ -57,7 +57,7 @@ const HeroHeaderTwoImages: React.FC<HeroHeaderTwoImagesProps> = ({ panel, showBr
       </section>
 
       {showBreadcrumbs && breadcrumbs && <Breadcrumbs items={breadcrumbs} title={title ?? ""} readTime={readTime} />}
-    </>
+    </div>
   );
 };
 

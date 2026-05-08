@@ -65,7 +65,7 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
                 if (item.node.childItems?.edges.length) {
                   return (
                     <Fragment key={item.node.id}>
-                      <NavItemWithChildren item={item.node} />
+                      <NavItemWithChildren item={item.node} isParentOpen={isOpen} />
                     </Fragment>
                   );
                 } else {

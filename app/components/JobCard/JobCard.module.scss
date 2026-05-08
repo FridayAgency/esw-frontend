@@ -8,12 +8,13 @@
   padding: 1.25rem;
   background: var(--Foundation-White, #fff);
   border: 1px solid var(--Foundation-Black, #1e2221);
-  border-radius: 2px;
+
   box-shadow: var(--shadow-drop-1-box-shadow);
   text-decoration: none;
   color: inherit;
   overflow: hidden;
   transition: box-shadow var(--transition);
+  border-radius: 0.125rem;
 
   &:hover {
     box-shadow: var(--drop-2-box-shadow);

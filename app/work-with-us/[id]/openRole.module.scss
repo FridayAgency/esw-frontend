@@ -15,7 +15,7 @@
     margin-bottom: var(--spacing-md);
     color: var(--Foundation-Orchestrated-Green);
   }
-  
+
   &__content {
     flex: 1 0 100%;
     padding: 1rem;
@@ -42,6 +42,7 @@
     ul {
       margin-bottom: 2.5rem;
       list-style: none;
+      padding-left: 2rem;
 
       li {
         position: relative;
@@ -74,7 +75,8 @@
     background-color: var(--Foundation-Commerce-Canvas);
     order: 1;
 
-    &__location, &__team {
+    &__location,
+    &__team {
       margin-bottom: 0.25rem;
     }
 
