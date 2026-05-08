@@ -15,13 +15,13 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  return generateSeoMetadata(processPageUri("/careers/work-with-us/"), "page");
+  return generateSeoMetadata(processPageUri("/careers/open-roles/"), "page");
 }
 
 const WorkWithUsPage = async () => {
   const { contentNode } = await client.query<{
     contentNode: Page | Post | Product | CaseStudy | Industry | NewsArticle | CareerPost | Campaign;
-  }>(GET_CONTENTNODE, { variables: { uri: "/work-with-us/" } });
+  }>(GET_CONTENTNODE, { variables: { uri: "/careers/open-roles/" } });
 
   if (!contentNode) notFound();
 

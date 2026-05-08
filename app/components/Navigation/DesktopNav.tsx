@@ -46,11 +46,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menu }) => {
       </Link>
       <nav className={styles["nav-list-wrapper"]} aria-label="Primary navigation">
         <ul className={styles["nav-list"]}>{topLevel.map((item) => renderNode(item))}</ul>
-        {isCareersSection ? (
-          <CtaButton href="/careers/work-with-us/open-roles">Open Roles</CtaButton>
-        ) : (
-          <TalkToUsButton />
-        )}
+        {isCareersSection ? <CtaButton href="/careers/open-roles">Open Roles</CtaButton> : <TalkToUsButton />}
       </nav>
     </Container>
   );

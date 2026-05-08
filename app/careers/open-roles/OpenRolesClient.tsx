@@ -18,8 +18,7 @@ export interface Job {
   offices: { location: string }[];
 }
 
-const calculateDifferenceInDays = (dateInPast: Date) =>
-  differenceInDays(new Date(), dateInPast);
+const calculateDifferenceInDays = (dateInPast: Date) => differenceInDays(new Date(), dateInPast);
 
 const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,18 +27,12 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
   const [appliedFilters, setAppliedFilters] = useState({ searchTerm: "", location: "", team: "" });
 
   const locations = useMemo(
-    () =>
-      Array.from(
-        new Set(jobs.flatMap((j) => j.offices.map((o) => o.location)).filter(Boolean)),
-      ).sort(),
+    () => Array.from(new Set(jobs.flatMap((j) => j.offices.map((o) => o.location)).filter(Boolean))).sort(),
     [jobs],
   );
 
   const teams = useMemo(
-    () =>
-      Array.from(
-        new Set(jobs.flatMap((j) => j.departments.map((d) => d.name)).filter(Boolean)),
-      ).sort(),
+    () => Array.from(new Set(jobs.flatMap((j) => j.departments.map((d) => d.name)).filter(Boolean))).sort(),
     [jobs],
   );
 
@@ -47,14 +40,10 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
     () =>
       jobs.filter((job) => {
         const matchesSearch =
-          !appliedFilters.searchTerm ||
-          job.title.toLowerCase().includes(appliedFilters.searchTerm.toLowerCase());
+          !appliedFilters.searchTerm || job.title.toLowerCase().includes(appliedFilters.searchTerm.toLowerCase());
         const matchesLocation =
-          !appliedFilters.location ||
-          job.offices.some((o) => o.location === appliedFilters.location);
-        const matchesTeam =
-          !appliedFilters.team ||
-          job.departments.some((d) => d.name === appliedFilters.team);
+          !appliedFilters.location || job.offices.some((o) => o.location === appliedFilters.location);
+        const matchesTeam = !appliedFilters.team || job.departments.some((d) => d.name === appliedFilters.team);
         return matchesSearch && matchesLocation && matchesTeam;
       }),
     [jobs, appliedFilters],
@@ -74,10 +63,7 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
           <div className={styles["careers-open-roles__filter"]}>
             <form onSubmit={handleSubmit} className={styles["careers-open-roles__filter__form"]}>
               <div className={styles["careers-open-roles__filter__form__input-group"]}>
-                <label
-                  htmlFor="search-term"
-                  className={styles["careers-open-roles__filter__form__label"]}
-                >
+                <label htmlFor="search-term" className={styles["careers-open-roles__filter__form__label"]}>
                   Search
                 </label>
                 <input
@@ -91,10 +77,7 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
                 />
               </div>
               <div className={styles["careers-open-roles__filter__form__input-group"]}>
-                <label
-                  htmlFor="location"
-                  className={styles["careers-open-roles__filter__form__label"]}
-                >
+                <label htmlFor="location" className={styles["careers-open-roles__filter__form__label"]}>
                   Location
                 </label>
                 <select
@@ -112,18 +95,10 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
                 </select>
               </div>
               <div className={styles["careers-open-roles__filter__form__input-group"]}>
-                <label
-                  htmlFor="team"
-                  className={styles["careers-open-roles__filter__form__label"]}
-                >
+                <label htmlFor="team" className={styles["careers-open-roles__filter__form__label"]}>
                   Team
                 </label>
-                <select
-                  id="team"
-                  name="team"
-                  value={teamFilter}
-                  onChange={(e) => setTeamFilter(e.target.value)}
-                >
+                <select id="team" name="team" value={teamFilter} onChange={(e) => setTeamFilter(e.target.value)}>
                   <option value="">All Teams</option>
                   {teams.map((team) => (
                     <option key={team} value={team}>
@@ -133,10 +108,7 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
                 </select>
               </div>
 
-              <button
-                type="submit"
-                className={styles["careers-open-roles__filter__form__button"]}
-              >
+              <button type="submit" className={styles["careers-open-roles__filter__form__button"]}>
                 <span className={styles["careers-open-roles__filter__form__button__dot"]}></span>
                 Search Open Roles
               </button>
@@ -146,12 +118,10 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
           {fetchError && <p className={styles["careers-open-roles__error"]}>{fetchError}</p>}
 
           <div className={styles["careers-open-roles__list"]}>
-            <h3 className={styles["careers-open-roles__list__title"]}>
-              {filteredJobs.length} Open Roles Found
-            </h3>
+            <h3 className={styles["careers-open-roles__list__title"]}>{filteredJobs.length} Open Roles Found</h3>
             {filteredJobs.map((role) => (
               <Link
-                href={`/careers/work-with-us/${role.id}`}
+                href={`/careers/open-roles/${role.id}`}
                 key={role.id}
                 className={styles["careers-open-roles__list__item"]}
               >
