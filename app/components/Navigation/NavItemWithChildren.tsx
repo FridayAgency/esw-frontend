@@ -80,8 +80,6 @@ const NavitemWithChildren: React.FC<{ item: MenuItem; isParentOpen?: boolean }> 
     }
   }, [isParentOpen]);
 
-  console.log(isParentOpen);
-
   // Normalize paths by removing trailing slashes
   const normalizedPath = mounted ? path.replace(/\/$/, "") : "";
 

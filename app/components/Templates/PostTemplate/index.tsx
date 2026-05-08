@@ -9,6 +9,7 @@ import PostTLDR from "../../PostTLDR";
 import PostContent from "../../PostContent";
 import PostAuthor from "../../PostAuthor";
 import LatestNews from "../../Panels/LatestNews";
+import LatestCareersPosts from "../../Panels/LatestCareersPosts";
 
 const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async ({ post }) => {
   const { title, featuredImage, postfields } = post;
@@ -28,6 +29,8 @@ const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async 
 
   const content = postfields?.openContent ? postfields.openContent : null;
 
+  const isCareerPost = post.__typename === "CareerPost";
+
   return (
     <>
       <article className={styles["post"]}>
@@ -38,7 +41,19 @@ const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async 
 
         {content && <PostContent content={content as PostfieldsOpenContent_Layout[]} />}
         {post.author?.node && <PostAuthor author={post.author.node} />}
-        <LatestNews posts={relatedPosts.length ? relatedPosts : undefined} title="More Like This" currentPostId={post.databaseId} />
+        {isCareerPost ? (
+          <LatestCareersPosts
+            posts={relatedPosts.length ? (relatedPosts as CareerPost[]) : undefined}
+            title="More Like This"
+            currentPostId={post.databaseId}
+          />
+        ) : (
+          <LatestNews
+            posts={relatedPosts.length ? relatedPosts : undefined}
+            title="More Like This"
+            currentPostId={post.databaseId}
+          />
+        )}
       </article>
     </>
   );

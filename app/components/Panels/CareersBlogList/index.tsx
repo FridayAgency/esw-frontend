@@ -37,7 +37,7 @@ const CareersBlogList: React.FC<PostListProps> = async ({ panel }) => {
         categories={rawCategories}
         featuredPost={featuredItem}
         activeCategory="all"
-        categoryBasePath="/life-at-esw-blog/category/"
+        categoryBasePath="/careers/life-at-esw-blog/category/"
       />
     </section>
   );

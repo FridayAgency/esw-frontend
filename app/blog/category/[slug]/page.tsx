@@ -43,8 +43,6 @@ const BlogCategoryPage = async ({ params }: PageParams) => {
 
   if (!pageUri) notFound();
 
-  console.log("Blog category URI:", pageUri);
-
   const { page, posts, categories } = await client.query<{
     page: Page;
     posts: RootQueryToPostConnection;

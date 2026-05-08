@@ -12,6 +12,9 @@ import TalkToUsButton from "../TalkToUsButton";
 import Container from "../Container";
 import NavItemWithChildrenDesktop from "./NavItemWithChildrenDesktop";
 import NavItem from "./NavItem";
+import { use } from "react";
+import { usePathname } from "next/navigation";
+import CtaButton from "../CtaButton";
 
 interface DesktopNavProps {
   menu: Menu;
@@ -21,6 +24,9 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menu }) => {
   if (!menu?.menuItems?.edges) {
     return null;
   }
+
+  const path = usePathname();
+  const isCareersSection = path.startsWith("/careers");
 
   const topLevel = menu.menuItems.edges
     .filter((item): item is MenuToMenuItemConnectionEdge => !(item.node as MenuItem).parentId)
@@ -40,7 +46,11 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menu }) => {
       </Link>
       <nav className={styles["nav-list-wrapper"]} aria-label="Primary navigation">
         <ul className={styles["nav-list"]}>{topLevel.map((item) => renderNode(item))}</ul>
-        <TalkToUsButton />
+        {isCareersSection ? (
+          <CtaButton href="/careers/work-with-us/open-roles">Open Roles</CtaButton>
+        ) : (
+          <TalkToUsButton />
+        )}
       </nav>
     </Container>
   );
