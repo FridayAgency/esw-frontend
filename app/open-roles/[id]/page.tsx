@@ -19,6 +19,8 @@ interface openRole {
   title: string;
   updated_at: string;
   content: string;
+  location: string;
+  team: string;
   absolute_url: string;
 }
 
@@ -37,7 +39,7 @@ const OpenRolePage = ({params}: {params: Promise<{ id: string }>}) => {
   const { id } = React.use(params);
   console.log({id});
 
-  const [careerOpenRole, setCareerOpenRole] = React.useState<openRole>({id: parseInt(id), title: "", updated_at: "", content: "", absolute_url: ""});
+  const [careerOpenRole, setCareerOpenRole] = React.useState<openRole>({id: parseInt(id), title: "", updated_at: "", content: "", location: "", team: "", absolute_url: ""});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -57,6 +59,7 @@ const OpenRolePage = ({params}: {params: Promise<{ id: string }>}) => {
           setCareerOpenRole({
             id: careerOpenRoleResponse.id, title: careerOpenRoleResponse.title, updated_at: careerOpenRoleResponse.updated_at, 
             content: careerOpenRoleResponse.content ? parse(normalizeHtmlForParser(careerOpenRoleResponse.content)) as string : "",
+            location: careerOpenRoleResponse?.offices[0]?.name, team: careerOpenRoleResponse.departments[0].name,
             absolute_url: careerOpenRoleResponse.absolute_url
           });
         }
@@ -75,12 +78,30 @@ const OpenRolePage = ({params}: {params: Promise<{ id: string }>}) => {
     <section className={styles["careers-open-role"]}>
       <HeroHeaderSimple panel={{title: careerOpenRole.title}} />
       <Container className={styles["careers-open-role__container"]}>
-        <div className="careers-open-roles__content">
-          <div dangerouslySetInnerHTML={{ __html: careerOpenRole.content }} className={styles["careers-open-roles__item-content"]} />
-          {/* <div className={styles["careers-open-role__details"]}>
-            <p>{careerOpenRole.location}</p>
-            <p>{careerOpenRole.team}</p>
-          </div> */}
+        <div className={styles["careers-open-role__content"]}>
+          <div dangerouslySetInnerHTML={{ __html: careerOpenRole.content }} className={styles["careers-open-role__content__text"]} />
+        </div>
+        <div className={styles["careers-open-role__details"]}>
+          <div className={styles["careers-open-role__details__location"]}>
+            <h4 className={styles["careers-open-role__details__label"]}>
+              <Icon type="location" /> Location
+            </h4>
+            <span className={styles["careers-open-role__details__content"]}>{careerOpenRole.location}</span>
+          </div>
+          <div className={styles["careers-open-role__details__team"]}>
+            <h4 className={styles["careers-open-role__details__label"]}>
+              <Icon type="target" /> Team
+            </h4>
+            <span className={styles["careers-open-role__details__content"]}>{careerOpenRole.team}</span>
+          </div>
+          <Link
+            href={careerOpenRole.absolute_url}
+            target='_blank'
+            className={styles["careers-open-role__details__button"]}
+          >
+            <span className={styles["careers-open-role__details__button__dot"]}></span>
+            Apply Now
+          </Link>
         </div>
       </Container>
       <ApplicationProcess />
