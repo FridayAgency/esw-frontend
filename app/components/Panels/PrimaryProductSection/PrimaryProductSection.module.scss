@@ -81,7 +81,7 @@
 
   &__product {
     text-decoration: none;
-    padding: 3.4rem 1rem 2.5rem;
+    padding: 2rem 1rem;
     background: var(--Foundation-White, #fff);
     box-shadow: 0 4px 16px 6px rgba(0, 0, 0, 0.07);
     position: relative;
@@ -104,12 +104,13 @@
       display: flex;
       gap: 1.5rem;
       padding: 1rem 2rem 1rem 6rem;
+      height: 100%;
     }
 
     &-icon {
       position: absolute;
       top: 0;
-      right: 1.5rem;
+      right: 1rem;
 
       @include mixins.breakpoint-up(mobile) {
         right: unset;
@@ -130,6 +131,18 @@
     &-content {
       display: grid;
       gap: 0.5rem;
+      max-width: 85%;
+
+      @include mixins.breakpoint-up(mobile) {
+        right: unset;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        flex: 1;
+        max-width: unset;
+      }
     }
 
     &-title {
@@ -137,8 +150,10 @@
       @include text-styles.text-style("mobile-h4");
       transition: var(--transition);
       width: fit-content;
+      max-width: 13.5rem;
       @include mixins.breakpoint-up(mobile) {
         @include text-styles.text-style("desktop-h4");
+        max-width: 100%;
       }
     }
 
@@ -149,7 +164,7 @@
 
     &-arrow {
       position: absolute;
-      bottom: 1rem;
+      bottom: 0.25rem;
       right: 1.5rem;
 
       @include mixins.breakpoint-up(mobile) {

@@ -1,6 +1,10 @@
+@use "@/app/styles/generic/mixins";
+
 .open-content {
   position: relative;
-  background-image: url("/assets/open-content.svg");
-  background-position: right top;
-  background-repeat: repeat-y;
+  @include mixins.breakpoint-up(mobile) {
+    background-image: url("/assets/open-content.svg");
+    background-position: right top;
+    background-repeat: repeat-y;
+  }
 }

@@ -48,7 +48,7 @@ const LatestCareersPosts: React.FC<LatestNewsProps> = async ({ panel }) => {
             ))}
 
             <span className={styles["latest-posts__cta"]}>
-              <Button variant="text" className={styles["latest-posts__button"]} href="/blog">
+              <Button variant="text" className={styles["latest-posts__button"]} href="/life-at-esw-blog/">
                 View More
               </Button>
             </span>

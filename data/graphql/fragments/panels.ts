@@ -20,7 +20,7 @@ import { TESTIMONIAL_FRAGMENT } from "@/app/components/Panels/Testimonial";
 import { FRAGMENTS } from "@fridayagency/graphql-client";
 
 import { ACF_MEDIAITEM_FRAGMENT } from "./media";
-import { LATESTNEWS_FRAGMENT, POST_LIST_FRAGMENT } from "./posts";
+import { CAREERS_LIST_FRAGMENT, LATESTNEWS_FRAGMENT, NEWS_LIST_FRAGMENT, POST_LIST_FRAGMENT } from "./posts";
 import { HEROHEADER_LOGOS_FRAGMENT } from "@/app/components/Panels/HeroHeaderLogos";
 import { TWO_LISTS_PANEL_FRAGMENT } from "@/app/components/Panels/TwoListsPanel";
 import { FAQ_CENTER_FRAGMENT } from "@/app/components/Panels/FaqCenter";
@@ -32,8 +32,8 @@ import { B2B2C_DIFFERECNCE_FRAGMENT } from "@/app/components/Panels/B2b2cDiffere
 
 const LATEST_CAREERS_POSTS_FRAGMENT = `
   title
-`;
 
+`;
 export const PAGEPANELS_FRAGMENT = (() => {
   const mappings: [typeName: string, fragment: string][] = [
     ["PagePanelsPagePanelsHeroHeaderSimpleLayout", HERO_HEADER_SIMPLE_FRAGMENT],
@@ -66,6 +66,8 @@ export const PAGEPANELS_FRAGMENT = (() => {
     ["PagePanelsPagePanelsLatestCareersPostsLayout", LATEST_CAREERS_POSTS_FRAGMENT],
     ["PagePanelsPagePanelsThankYouHeaderLayout", THANK_YOU_HEADER_FRAGMENT],
     ["PagePanelsPagePanelsB2b2cDifferenceLayout", B2B2C_DIFFERECNCE_FRAGMENT],
+    ["PagePanelsPagePanelsNewsListLayout", NEWS_LIST_FRAGMENT],
+    ["PagePanelsPagePanelsCareersBlogListLayout", CAREERS_LIST_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");

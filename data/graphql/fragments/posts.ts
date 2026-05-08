@@ -216,6 +216,82 @@ featuredPost {
 }
 `;
 
+export const NEWS_LIST_FRAGMENT = `
+featuredPost {
+  nodes {
+    ... on NewsArticle {
+      databaseId
+      uri
+      title
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+          srcSet
+          mediaDetails {
+            height
+            width
+          }
+        }
+      }
+      author {
+        node {
+          name
+          avatar {
+            url
+          }
+        }
+      }
+      newsCategories {
+        edges {
+          node {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+export const CAREERS_LIST_FRAGMENT = `
+featuredPost {
+  nodes {
+    ... on CareerPost {
+      databaseId
+      uri
+      title
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+          srcSet
+          mediaDetails {
+            height
+            width
+          }
+        }
+      }
+      author {
+        node {
+          name
+          avatar {
+            url
+          }
+        }
+      }
+      careerCategories {
+        edges {
+          node {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
 export const POST_FRAGMENT = `
 fragment PostFragment on Post {
   __typename
