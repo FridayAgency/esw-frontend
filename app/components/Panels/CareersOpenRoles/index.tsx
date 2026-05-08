@@ -1,10 +1,9 @@
-"use client";
+// "use client";
 
-import { useEffect } from "react";
+// import { useEffect, useRef } from "react";
 
 import { GET_CAREER_POSTS } from "@/data";
 import client from "@/lib/client";
-import Link from "next/link";
 import { PagePanelsPagePanelsCareersOpenRolesLayout } from "@/types/graphql";
 
 import Container from "@/app/components/Container";
@@ -30,27 +29,31 @@ const calculateDifferenceInDays = (dateInPast: Date) => {
   return differenceInDays(new Date(), dateInPast)
 }
 
-const CareersOpenRoles: React.FC<CareersOpenRolesProps> = ({ panel }) => {
-  // const careerOpenRolesResponse = await fetch(`https://boards-api.greenhouse.io/v1/boards/esw/jobs/?content=true`);
+// const fetchOpenRoles = async () => {
+//   console.warn("fetchOpenRoles")
+//   const fetchCareerOpenRolesResponse = await fetch(`https://boards-api.greenhouse.io/v1/boards/esw/jobs/?content=true`);
+//   if (fetchCareerOpenRolesResponse.ok) {
+//     careerOpenRolesRef.current = await fetchCareerOpenRolesResponse.json();
+//   } else {
+//     console.error("Error fetching career open roles");
+//   }
+//   console.warn("careerOpenRolesRef.current")
+//   console.log(careerOpenRolesRef.current);
+// }
+
+// useEffect(() => {
+//   fetchOpenRoles();
+// }, []);
+
+const CareersOpenRoles: React.FC<CareersOpenRolesProps> = async ({ panel }) => {
+  const careerOpenRolesResponse = await fetch(`https://boards-api.greenhouse.io/v1/boards/esw/jobs/?content=true`);
+
   let careerOpenRoles: {jobs: any[], meta: {total: number}} = {jobs: [], meta: {total: 0}};
-  let careerOpenRolesResponse = null;
-
-  const fetchOpenRoles = async () => {
-    console.warn("fetchOpenRoles")
-    const fetchCareerOpenRolesResponse = await fetch(`https://boards-api.greenhouse.io/v1/boards/esw/jobs/?content=true`);
-    careerOpenRolesResponse = await fetchCareerOpenRolesResponse.json();
-    console.log({ careerOpenRolesResponse })
-    // if (fetchCareerOpenRolesResponse.ok) {
-    //   // careerOpenRolesRef.current = await fetchCareerOpenRolesResponse.json();
-    // } else {
-    //   console.error("Error fetching career open roles");
-    // }
+  if (careerOpenRolesResponse.ok) {
+    careerOpenRoles = await careerOpenRolesResponse.json();
+  } else {
+    console.error("Error fetching career open roles");
   }
-  
-  useEffect(() => {
-    fetchOpenRoles();
-  }, []);
-
   console.log({careerOpenRoles});
 
   const items = careerOpenRoles?.jobs ? careerOpenRoles.jobs : [];
@@ -81,44 +84,32 @@ const CareersOpenRoles: React.FC<CareersOpenRolesProps> = ({ panel }) => {
   return (
     <section className={styles["careers-open-roles"]}>
       <Container flush narrow className={styles.careersOpenRoles}>
-        <div className="careers-open-roles__filter">
-          <h2 className="careers-open-roles__filter__title">Find Your Role</h2>
+        {/* <h2>Find Your Role</h2>
+        <input type="text"></input>
+        <h2>Departments</h2>
+        {departments.map((department, index) => (
+          <div key={index} className={styles["careers-open-roles__department"]}>
+            <div className={styles["careers-open-roles__department-name"]}>{department}</div>
+          </div>
+        ))}
 
-          {/* <form onSubmit={handleSubmit} noValidate>
-            <input type="text"></input>
-          </form> */}
+        <h2>Locations</h2>
+        {locations.map((location, index) => (
+          <div key={index} className={styles["careers-open-roles__location"]}>
+            <div className={styles["careers-open-roles__location-name"]}>{location}</div>
+          </div>
+        ))} */}
 
-          <h2>Departments</h2>
-          {departments.map((department, index) => (
-            <div key={index} className={styles["careers-open-roles__department"]}>
-              <div className={styles["careers-open-roles__department-name"]}>{department}</div>
-            </div>
-          ))}
 
-          <h2>Locations</h2>
-          {locations.map((location, index) => (
-            <div key={index} className={styles["careers-open-roles__location"]}>
-              <div className={styles["careers-open-roles__location-name"]}>{location}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="careers-open-roles__list">
-          <h3 className={styles["careers-open-roles__list__title"]}>{itemsTotal} Open Roles Found</h3>
+        <div className="careers-open-roles-list">
+          <h2 className={styles["careers-open-roles-list__title"]}>{itemsTotal} Open Roles Found</h2>
           {itemsFormatted.map((item) => (
-            <Link href={`/open-roles/${item.id}`} key={item.id} className={styles["careers-open-roles__list__item"]}>
-              <div className={styles["careers-open-roles__list__item__heading"]}>
-                <h4 className={styles["careers-open-roles__list__item__title"]}>{item.title}</h4>
-                <div className={styles["careers-open-roles__list__item__updated-at"]}><Icon type="clock" />{calculateDifferenceInDays(new Date(item.updated_at))} DAYS AGO</div>
-              </div>
-              <div className={styles["careers-open-roles__list__item__details"]}>
-                <div className={styles["careers-open-roles__list__item__location"]}><Icon type="location" />{item.location}</div>
-                <div className={styles["careers-open-roles__list__item__department"]}><Icon type="target" />{item.department}</div>
-              </div>
-              <div className={styles["careers-open-roles__list__item__footer"]}>
-                <div className={styles["careers-open-roles__list__item__footer__arrow"]}><Icon type="arrowRight" /></div>
-              </div>
-            </Link>
+            <div key={item.id} className={styles["careers-open-roles-list__item"]}>
+              <h3 className={styles["careers-open-roles-list__item-title"]}>{item.title}</h3>
+              <div className={styles["careers-open-roles-list__item-location"]}><Icon type="location" />{item.location}</div>
+              <div className={styles["careers-open-roles-list__item-department"]}><Icon type="target" />{item.department}</div>
+              <div className={styles["careers-open-roles-list__item-updated_at"]}><Icon type="clock" />{calculateDifferenceInDays(new Date(item.updated_at))} DAYS AGO</div>
+            </div>
           ))}
         </div>
       </Container>

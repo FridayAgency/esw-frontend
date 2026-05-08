@@ -40,7 +40,7 @@ const OpenRolesPage = () => {
         }
       } catch (error) {
         console.error(error);
-        setError('Error loading open roles.');
+        setError("Error loading open roles.");
       } finally {
         setLoading(false);
       }
