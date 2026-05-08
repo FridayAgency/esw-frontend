@@ -35,6 +35,7 @@
 
     @include mixins.breakpoint-up(mobile) {
       width: 90vw;
+      height: 32.4375rem;
       max-width: 59rem;
       padding: 3rem 5.75rem 3.5rem;
     }
