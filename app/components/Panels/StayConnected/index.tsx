@@ -8,6 +8,7 @@ import FileUpload from "../../FileUpload";
 import styles from "./StayConnected.module.scss";
 
 interface FormState {
+  prospect: boolean;
   name: string;
   email: string;
   areaOfInterest: string;
@@ -16,6 +17,7 @@ interface FormState {
 
 const StayConnected = () => {
   const [form, setForm] = useState<FormState>({
+    prospect: true,
     name: "",
     email: "",
     areaOfInterest: "",
