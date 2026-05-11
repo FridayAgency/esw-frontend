@@ -48,11 +48,12 @@
   &__image {
     background: var(--Foundation-Operational-Green, #007a4e);
     transition: background 0.6s ease;
-    // overflow: hidden;
+    overflow: hidden;
     position: relative;
     height: 17.5rem;
     @include mixins.breakpoint-up(mobile) {
       height: 100%;
+      overflow: visible;
     }
   }
 
