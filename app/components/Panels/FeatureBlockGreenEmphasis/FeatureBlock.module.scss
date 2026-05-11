@@ -110,6 +110,10 @@
     padding: 0 1.5rem;
     display: grid;
     gap: 1rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      padding: 0;
+    }
   }
 
   &__subtitle {
@@ -117,6 +121,7 @@
 
     @include mixins.breakpoint-up(mobile) {
       @include text-styles.text-style("desktop-h5");
+      padding: 0 1.5rem;
     }
   }
 
@@ -125,6 +130,7 @@
 
     @include mixins.breakpoint-up(mobile) {
       @include text-styles.text-style("desktop-h3");
+      padding: 0 1.5rem;
     }
   }
 
@@ -133,6 +139,7 @@
 
     @include mixins.breakpoint-up(mobile) {
       @include text-styles.text-style("desktop-body-large");
+      padding: 0 1.5rem;
     }
   }
 }

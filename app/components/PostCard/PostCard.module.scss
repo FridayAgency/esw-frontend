@@ -162,7 +162,7 @@
 
     @include mixins.breakpoint-up(mobile) {
       position: absolute;
-      bottom: 2rem;
+      bottom: 1rem;
       right: 2rem;
       svg {
         transform: translateX(-1rem);

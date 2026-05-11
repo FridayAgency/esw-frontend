@@ -1,7 +1,13 @@
 import { FRAGMENTS } from "@fridayagency/graphql-client";
 
 import { CATEGORY_FRAGMENT } from "../fragments/categories";
-import { CAREER_POST_FRAGMENT, NEWS_ARTICLE_FRAGMENT, POST_FRAGMENT, POST_LIST_FRAGMENT } from "../fragments/posts";
+import {
+  CAREER_POST_FRAGMENT,
+  CAREERS_LIST_FRAGMENT,
+  NEWS_ARTICLE_FRAGMENT,
+  POST_FRAGMENT,
+  POST_LIST_FRAGMENT,
+} from "../fragments/posts";
 
 export const GET_POSTS = `
 query GetPosts($first: Int = 50) {
@@ -186,7 +192,7 @@ ${FRAGMENTS.ACF_MEDIA_ITEM}
 
 export const GET_CAREER_POSTS_BY_CATEGORY = `
 query GetCareerPostsByCategory($first: Int = 50, $slug: [String]) {
-   page(id: "/life-at-esw-blog/", idType: URI) {
+   page(id: "/careers/life-at-esw-blog/", idType: URI) {
     id
     pagePanels {
       pagePanels {
@@ -197,7 +203,7 @@ query GetCareerPostsByCategory($first: Int = 50, $slug: [String]) {
         }
         ... on PagePanelsPagePanelsCareersBlogListLayout {
           __typename
-          ${POST_LIST_FRAGMENT}
+          ${CAREERS_LIST_FRAGMENT}
         }
       }
     }

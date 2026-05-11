@@ -10,7 +10,7 @@
   display: flex;
   gap: 1rem;
 
-  &:hover {
+  &:is(a):hover {
     h3 {
       background: rgba(0, 209, 128, 0.6);
     }

@@ -7,6 +7,7 @@ import styles from "./ApplicationProcess.module.scss";
 import { ClassName } from "@fridayagency/classnames";
 import { PagePanelsPagePanelsApplicationProcessLayout } from "@/types/graphql";
 import Divider from "../../Divider";
+import parse from "html-react-parser";
 
 interface ApplicationProcessClientProps {
   panel: PagePanelsPagePanelsApplicationProcessLayout;
@@ -86,7 +87,7 @@ const ApplicationProcessClient: React.FC<ApplicationProcessClientProps> = ({ pan
                 className={styles["application-process__panel"]}
               >
                 <h3 className={styles["application-process__step-title"]}>{step.title}</h3>
-                <p className={styles["application-process__step-description"]}>{step.copy}</p>
+                <span className={styles["application-process__step-description"]}>{parse(step.copy ?? "")}</span>
               </div>
             );
           })}

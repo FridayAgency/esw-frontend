@@ -22,7 +22,7 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
 
     @include mixins.breakpoint-up(mobile) {
       padding-top: 16.5rem;
-      padding-bottom: 22.4rem;
+      padding-bottom: 10.88rem;
       gap: 1.5rem;
       display: grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -38,7 +38,7 @@ $signal-green: var(--Foundation-Signal-Green, #00d180);
     }
 
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 1 / span 8;
+      grid-column: 1 / span 7;
     }
 
     h1 {

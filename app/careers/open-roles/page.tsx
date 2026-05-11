@@ -36,13 +36,13 @@ const WorkWithUsPage = async () => {
     fetchError = "We couldn't load open roles right now. Please try again later.";
   } else {
     const jobsData = await jobsResponse.json();
-    jobs = jobsData.jobs;
+    jobs = jobsData?.jobs;
   }
 
   return (
     <>
       {node?.pagePanels && <PagePanelsTemplate panels={node.pagePanels.pagePanels as any} />}
-      <OpenRolesClient jobs={jobs} fetchError={fetchError} />
+      <OpenRolesClient jobs={jobs.filter((jobs) => jobs.id !== 8541068002)} fetchError={fetchError} />
     </>
   );
 };

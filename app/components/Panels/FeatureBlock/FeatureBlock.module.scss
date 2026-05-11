@@ -134,6 +134,7 @@
 
   &__image {
     width: 16.4375rem;
+    aspect-ratio: 1/1;
 
     @include mixins.breakpoint-up(mobile) {
       grid-column: 9 / span 4;

@@ -11,6 +11,7 @@ import Globe from "./GlobeClient";
 import { PagePanelsPagePanelsFeatureBlockGreenEmphasisLayout } from "@/types/graphql";
 
 import parse from "html-react-parser";
+import Divider from "../../Divider";
 
 export const FEATURE_BLOCK_GREEN_EMPHASIS_FRAGMENT = `
   copy
@@ -55,7 +56,7 @@ const FeatureBlockGreenEmphasis: React.FC<FeatureBlockProps> = ({ panel }) => {
           />
         </div>
         <div className={styles["feature-block__content"]}>
-          <div className={`${styles["feature-block__texture"]} `}></div>
+          <Divider colour="foundation-green" />
           <div className={styles["feature-block__text"]}>
             {title && <h2 className={styles["feature-block__title"]}>{title}</h2>}
             <div className={styles["feature-block__description"]}>{parse(copy || "")}</div>

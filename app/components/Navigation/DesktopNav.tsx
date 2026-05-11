@@ -12,18 +12,22 @@ import TalkToUsButton from "../TalkToUsButton";
 import Container from "../Container";
 import NavItemWithChildrenDesktop from "./NavItemWithChildrenDesktop";
 import NavItem from "./NavItem";
-import { use } from "react";
+
 import { usePathname } from "next/navigation";
 import CtaButton from "../CtaButton";
+import { useScrolled } from "@/app/hooks/useScrolled";
 
 interface DesktopNavProps {
   menu: Menu;
 }
 
+const SCROLL_THRESHOLD = 50;
+
 const DesktopNav: React.FC<DesktopNavProps> = ({ menu }) => {
   if (!menu?.menuItems?.edges) {
     return null;
   }
+  const isScrolled = useScrolled(SCROLL_THRESHOLD);
 
   const path = usePathname();
   const isCareersSection = path.startsWith("/careers");
@@ -41,7 +45,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menu }) => {
 
   return (
     <Container flush className={styles.nav}>
-      <Link href="/" className={styles.logo} aria-label="Go to homepage">
+      <Link href="/" className={`${styles.logo} ${isScrolled ? styles.scrolled : ""}`} aria-label="Go to homepage">
         <Logo />
       </Link>
       <nav className={styles["nav-list-wrapper"]} aria-label="Primary navigation">
