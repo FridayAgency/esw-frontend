@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import styles from "./openRoles.module.scss";
 
+import { ClassName } from "@fridayagency/classnames";
+
 import Link from "next/link";
 import Container from "@/app/components/Container";
 import Icon from "@/app/components/Icon";
@@ -19,6 +21,8 @@ export interface Job {
 }
 
 const calculateDifferenceInDays = (dateInPast: Date) => differenceInDays(new Date(), dateInPast);
+
+const PAGE_SIZE = 8;
 
 const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,7 +56,33 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setAppliedFilters({ searchTerm, location: locationFilter, team: teamFilter });
+  };
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const indexOfLastPost: number = currentPage * PAGE_SIZE;
+  const indexOfFirstPost: number = indexOfLastPost - PAGE_SIZE;
+  const pageNumbers: number[] = [];
+  const pagedJobs = useMemo(
+    () => filteredJobs.slice(indexOfFirstPost, indexOfLastPost),
+    [currentPage, filteredJobs]
+  );
+
+  for (let i = 1; i <= Math.ceil(filteredJobs.length / PAGE_SIZE); i++) {
+    pageNumbers.push(i);
   }
+
+  const previousButtonDisabled = currentPage <= 1;
+  const previousButtonClass = new ClassName([styles["careers-open-roles__pagination__previous"]]);
+  if (previousButtonDisabled) previousButtonClass.add(styles["disabled"]);
+
+  const nextButtonDisabled = currentPage >= pageNumbers.length;
+  const nextButtonClass = new ClassName([styles["careers-open-roles__pagination__next"]]);
+  if (nextButtonDisabled) nextButtonClass.add(styles["disabled"]);
+
+  const paginate = (pageNumber: number, e: any) => {
+    e.preventDefault();
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <>
@@ -119,7 +149,7 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
 
           <div className={styles["careers-open-roles__list"]}>
             <h3 className={styles["careers-open-roles__list__title"]}>{filteredJobs.length} Open Roles Found</h3>
-            {filteredJobs.map((role) => (
+            {pagedJobs.map((role) => (
               <Link
                 href={`/careers/open-roles/${role.id}`}
                 key={role.id}
@@ -151,6 +181,48 @@ const OpenRolesPage = ({ jobs, fetchError }: { jobs: Job[]; fetchError?: string 
                 </div>
               </Link>
             ))}
+            {pageNumbers.length > 1 && (
+            <nav aria-label="pagination">
+              <ul className={styles["careers-open-roles__pagination"]}>
+                <button
+                  aria-controls="pagination"
+                  className={previousButtonClass.toString()}
+                  onClick={(e) => paginate(currentPage - 1, e)}
+                  disabled={currentPage <= 1}
+                >
+                  <Icon type="chevronDown" />
+                </button>
+                {pageNumbers.map((number, index) => {
+                  const isActive = currentPage === index + 1;
+                  const tabClass = new ClassName([styles["careers-open-roles__pagination__page-item"]]);
+                  if (isActive) tabClass.add(styles["careers-open-roles__pagination__page-item--active"]);
+                  return (
+                    <li
+                      key={number}
+                      className={tabClass.toString()}
+                    >
+                      <a
+                        onClick={(e) => paginate(number, e)}
+                        href="!#"
+                        className={styles["careers-open-roles__pagination__page-item__page-link"]}
+                        aria-selected={isActive}
+                      >
+                        {number}
+                      </a>
+                    </li>
+                  )
+                })}
+                <button
+                  aria-controls="pagination"
+                  className={nextButtonClass.toString()}
+                  onClick={(e) => paginate(currentPage + 1, e)}
+                  disabled={currentPage >= pageNumbers.length ? true : false}
+                >
+                  <Icon type="chevronDown" />
+                </button>
+              </ul>
+            </nav>
+            )}
           </div>
         </Container>
       </section>
