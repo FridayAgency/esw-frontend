@@ -17,7 +17,7 @@ const GalleryBlock: React.FC<GalleryBlockProps> = ({ panel }) => {
   return (
     <Container className={styles["image"]}>
       <div className={styles["image__container"]}>
-        <Carousel dark loop={false}>
+        <Carousel className={styles["image__carousel"]} dark loop={false} centerArrows>
           {images.map((image, index) => {
             const node = image?.node as MediaItem | undefined;
             return (

@@ -28,10 +28,10 @@ declare global {
 const FALLBACK_MARKETS: GlopalMarket[] = [
   { countryCode: "GB", locale: "EN-UK", label: "EN-UK", url: "#" },
   { countryCode: "US", locale: "EN-US", label: "EN-US", url: "#" },
-  { countryCode: "ES", locale: "ES",    label: "ES",    url: "#" },
-  { countryCode: "DE", locale: "DE",    label: "DE",    url: "#" },
-  { countryCode: "FR", locale: "FR",    label: "FR",    url: "#" },
-  { countryCode: "PT", locale: "PT",    label: "PT",    url: "#" },
+  { countryCode: "ES", locale: "ES", label: "ES", url: "#" },
+  { countryCode: "DE", locale: "DE", label: "DE", url: "#" },
+  { countryCode: "FR", locale: "FR", label: "FR", url: "#" },
+  { countryCode: "PT", locale: "PT", label: "PT", url: "#" },
 ];
 
 interface LanguageSwitcherProps {
@@ -51,10 +51,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   const [dropdownPos, setDropdownPos] = useState<DropdownPos | null>(null);
   const [currentLabel, setCurrentLabel] = useState("EN");
   const [markets, setMarkets] = useState<GlopalMarket[]>([]);
-  const menuId = useId();
 
   useEffect(() => {
     const glopalConfig = window.glopal?.config;
+
     const target = glopalConfig?.target;
     const availableMarkets = glopalConfig?.markets ?? FALLBACK_MARKETS;
 
@@ -106,9 +106,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
 
   const handleMenuKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLUListElement>) => {
-      const items = Array.from(
-        listRef.current?.querySelectorAll<HTMLButtonElement>("button") ?? []
-      );
+      const items = Array.from(listRef.current?.querySelectorAll<HTMLButtonElement>("button") ?? []);
       const idx = items.indexOf(document.activeElement as HTMLButtonElement);
 
       switch (e.key) {
@@ -137,7 +135,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
           break;
       }
     },
-    [close]
+    [close],
   );
 
   const handleSwitch = useCallback((url: string) => {
@@ -164,7 +162,6 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
         onKeyDown={handleTriggerKeyDown}
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        aria-controls={menuId}
         aria-label={`Select language, current language: ${currentLabel}`}
       >
         <svg
@@ -199,10 +196,11 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
         </svg>
       </button>
 
-      {isOpen && markets.length > 0 && dropdownPos &&
+      {isOpen &&
+        markets.length > 0 &&
+        dropdownPos &&
         createPortal(
           <ul
-            id={menuId}
             ref={listRef}
             className={styles["language-switcher__dropdown"]}
             role="menu"
@@ -229,9 +227,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
               );
             })}
           </ul>,
-          document.body
-        )
-      }
+          document.body,
+        )}
     </div>
   );
 };

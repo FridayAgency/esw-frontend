@@ -67,6 +67,12 @@
         }
       }
     }
+
+    &--centered {
+      @include mixins.breakpoint-up(mobile) {
+        justify-content: center;
+      }
+    }
   }
 
   &__arrow {
