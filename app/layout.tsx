@@ -30,10 +30,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           type="text/javascript"
           src="https://cdn-redirector.glopal.com/glopal-loader.js?glopal_store_id=esw"
         />
-        {/* <GSAPProvider />
-        <Header /> */}
+        <GSAPProvider />
+        <Header />
         <main>{children}</main>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
