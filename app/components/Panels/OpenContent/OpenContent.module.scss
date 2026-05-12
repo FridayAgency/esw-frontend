@@ -2,9 +2,20 @@
 
 .open-content {
   position: relative;
-  @include mixins.breakpoint-up(mobile) {
-    background-image: url("/assets/open-content.svg");
-    background-position: right top;
-    background-repeat: repeat-y;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+
+    @include mixins.breakpoint-up(mobile) {
+      opacity: 0.4;
+      background-image: url("/assets/open-content.svg");
+      background-position: right top;
+      background-repeat: repeat-y;
+    }
   }
 }
