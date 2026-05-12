@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning className={dmSans.variable} data-scroll-behavior="smooth">
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning data-gp-noloc="tree">
         <Script
           strategy="beforeInteractive"
           type="text/javascript"
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         <GSAPProvider />
         <Header />
-        <main>{children}</main>
+        <main suppressHydrationWarning>{children}</main>
         <Footer />
       </body>
     </html>

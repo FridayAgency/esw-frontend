@@ -26,12 +26,13 @@ declare global {
 }
 
 const FALLBACK_MARKETS: GlopalMarket[] = [
-  { countryCode: "GB", locale: "EN-UK", label: "EN-UK", url: "#" },
-  { countryCode: "US", locale: "EN-US", label: "EN-US", url: "#" },
-  { countryCode: "ES", locale: "ES", label: "ES", url: "#" },
-  { countryCode: "DE", locale: "DE", label: "DE", url: "#" },
-  { countryCode: "FR", locale: "FR", label: "FR", url: "#" },
-  { countryCode: "PT", locale: "PT", label: "PT", url: "#" },
+  { countryCode: "GB", locale: "EN-UK", label: "EN-UK", url: "https://uk.esw.com" },
+  { countryCode: "US", locale: "EN-US", label: "EN-US", url: process.env.NEXT_PUBLIC_EN_US_URL ?? "#" },
+  { countryCode: "ES", locale: "ES", label: "ES", url: "https://es.esw.com" },
+  { countryCode: "DE", locale: "DE", label: "DE", url: "https://de.esw.com" },
+  { countryCode: "FR", locale: "FR", label: "FR", url: "https://fr.esw.com" },
+  { countryCode: "IT", locale: "IT", label: "IT", url: "https://it.esw.com" },
+  { countryCode: "PT", locale: "PT", label: "PT", url: "https://pt.esw.com" },
 ];
 
 interface LanguageSwitcherProps {
@@ -50,30 +51,24 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPos, setDropdownPos] = useState<DropdownPos | null>(null);
   const [currentLabel, setCurrentLabel] = useState("EN");
-  const [markets, setMarkets] = useState<GlopalMarket[]>([]);
+  const markets = FALLBACK_MARKETS;
 
   useEffect(() => {
     let attempts = 0;
     const MAX_ATTEMPTS = 20;
 
     const init = () => {
-      const glopalConfig = window.glopal?.config;
+      const target = window.glopal?.config?.target;
 
-      if (!glopalConfig && attempts < MAX_ATTEMPTS) {
+      if (!target && attempts < MAX_ATTEMPTS) {
         attempts++;
         setTimeout(init, 250);
         return;
       }
 
-      console.log("Glopal config loaded:", glopalConfig);
-
-      const target = glopalConfig?.target;
-      const availableMarkets = glopalConfig?.markets ?? FALLBACK_MARKETS;
-
       if (target?.locale) {
         setCurrentLabel(target.locale.toUpperCase());
       }
-      setMarkets(availableMarkets);
     };
 
     init();
@@ -154,7 +149,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   );
 
   const handleSwitch = useCallback((url: string) => {
-    window.location.href = url;
+    const path = window.location.pathname + window.location.search;
+    window.location.href = url.replace(/\/$/, "") + path;
   }, []);
 
   const localeToLang = (locale: string, countryCode: string): string => {
