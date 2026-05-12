@@ -194,7 +194,9 @@ const Footer: React.FC = async () => {
                           const child = node as MenuItem;
                           return (
                             <li key={child.databaseId} className={styles["footer__nav-item"]}>
-                              <a href={child.uri ?? child.path ?? "#"}>{child.label}</a>
+                              <a href={child.uri ?? child.path ?? "#"} target={child?.target ?? "_self"}>
+                                {child.label}
+                              </a>
                             </li>
                           );
                         })}
@@ -243,28 +245,28 @@ const Footer: React.FC = async () => {
         <nav className={styles["footer__legal"]} aria-label="Legal">
           <ul className={styles["footer__legal-list"]}>
             <li className={styles["footer__legal-item"]}>
-              <a href="#">Privacy Policy</a>
+              <a href="/privacy-policy/">Privacy Policy</a>
             </li>
             <li className={styles["footer__legal-item"]}>
               <a href="#">Cookie Settings</a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="#">Terms &amp; Conditions</a>
+              <a href="/terms-and-conditions-of-use/">Terms &amp; Conditions</a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="#">Acceptable Use Policy</a>
+              <a href="/acceptable-use-policy/">Acceptable Use Policy</a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="#">Modern Slavery Statement</a>
+              <a href="/modern-slavery-statement/">Modern Slavery Statement</a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="#">Sitemap</a>
+              <a href="/sitemap/">Sitemap</a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="#">Legal Hub</a>
+              <a href="/legal-hub/">Legal Hub</a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="#">Accessibility Statement</a>
+              <a href="/accessibility-statement/">Accessibility Statement</a>
             </li>
           </ul>
         </nav>
@@ -279,11 +281,16 @@ const Footer: React.FC = async () => {
       <div className={styles["footer__copyright"]}>
         <Container className={styles["footer__copyright-container"]}>
           <div className={styles["footer__copyright-left"]}>
-            <span suppressHydrationWarning className={styles["footer__copyright-year"]}>&copy; {new Date().getFullYear()} ESW</span>
+            <span suppressHydrationWarning className={styles["footer__copyright-year"]}>
+              &copy; {new Date().getFullYear()} ESW
+            </span>
             <span className={styles["footer__copyright-rights"]}>All Rights Reserved</span>
           </div>
           <span className={styles["footer__copyright-site"]}>
-            Site by <a href="#">Friday</a>
+            Site by{" "}
+            <a href="https://www.friday.ie" target="_blank" rel="noopener noreferrer">
+              Friday
+            </a>
           </span>
         </Container>
       </div>

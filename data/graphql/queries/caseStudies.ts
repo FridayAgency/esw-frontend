@@ -8,6 +8,14 @@ export const GET_CASE_STUDIES = `
           name
           uri
           databaseId
+             caseStudies(first: 200) {
+                  edges {
+                    node {
+                      id
+                      title
+                    }
+                  }
+                }
         }
       }
     }

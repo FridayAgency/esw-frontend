@@ -77,8 +77,13 @@
 
     &:focus {
       outline: none;
+    }
+
+    &:focus-visible {
       border-color: var(--brand-blue, #003f87);
       box-shadow: 0 0 0 3px rgba(0, 63, 135, 0.1);
+      outline: 2px solid var(--brand-blue, #003f87);
+      outline-offset: 2px;
     }
 
     &[aria-invalid="true"] {
@@ -102,6 +107,12 @@
     label {
       color: var(--Foundation-White, #fff);
       font-weight: 500;
+      font-size: 1.125rem;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     input,
@@ -110,18 +121,68 @@
       background: var(--Foundation-White, #fff);
       box-shadow: none;
       border-radius: 0.25rem;
-      padding: 0.75rem 1rem;
+      height: 3rem;
+      padding: 0.4375rem 1rem;
       color: var(--Neutral-Dark-Grey, #8f9a95);
+      font-size: 1rem;
 
       &::placeholder {
         font-weight: 400;
         color: var(--Neutral-Dark-Grey, #8f9a95);
+        font-size: 1rem;
       }
 
       &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
         border-color: var(--Foundation-Signal-Green, #00d180);
         box-shadow: 0 0 0 3px rgba(0, 209, 128, 0.15);
+        outline: 2px solid var(--Foundation-Signal-Green, #00d180);
+        outline-offset: 2px;
       }
+
+      // Keep white border in dark theme even on error — error communicated via message below
+      &[aria-invalid="true"] {
+        border-color: var(--Foundation-White, #fff);
+        padding-right: 2.5rem;
+      }
+    }
+
+    // Filled state: label dims, checkmark appears, input text goes dark & bold
+    &:has(input:not(:placeholder-shown)),
+    &:has(textarea:not(:placeholder-shown)) {
+      label {
+        color: var(--Neutral-Dark-Grey, #8f9a95);
+
+        &::after {
+          content: "";
+          display: block;
+          width: 1.5rem;
+          height: 1.5rem;
+          flex-shrink: 0;
+          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='11' stroke='%2300d180' stroke-width='1.5'/%3E%3Cpath d='M7 12l3.5 3.5L17 8' stroke='%2300d180' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+      }
+
+      input,
+      textarea {
+        color: var(--Foundation-Black, #1e2221);
+        font-weight: 500;
+        font-size: 1.125rem;
+      }
+    }
+
+    // Error colours in dark theme
+    .error {
+      color: #f99ea5;
+    }
+
+    .field__wrapper {
+      color: #f99ea5;
     }
   }
 }

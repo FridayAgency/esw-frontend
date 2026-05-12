@@ -1,43 +1,52 @@
 /** @format */
 
 import apiClient from "@/lib/client";
-import { Page, Post, RootQueryToPageConnection, RootQueryToPostConnection } from "@/types/graphql";
+import {
+  Campaign,
+  CareerPost,
+  Industry,
+  NewsArticle,
+  Page,
+  Post,
+  Product,
+  RootQueryToCampaignConnection,
+  RootQueryToCareerPostConnection,
+  RootQueryToIndustryConnection,
+  RootQueryToNewsArticleConnection,
+  RootQueryToPageConnection,
+  RootQueryToPostConnection,
+  RootQueryToProductConnection,
+} from "@/types/graphql";
 import { removeNodes } from "@fridayagency/utils";
 
 import { MetadataRoute } from "next";
 
-export const formatDateForSitemap = (dateString: string): string => {
-  // Parse input as UTC to prevent unintended shifts
-  const date = new Date(`${dateString}Z`);
-
-  // Get Ireland's timezone offset dynamically
-  const offsetMinutes = date.getTimezoneOffset(); // Offset in minutes
-  const offsetHours = Math.abs(offsetMinutes) / 60;
-  const offsetSign = offsetMinutes <= 0 ? "+" : "-"; // Flip sign since getTimezoneOffset() is negative for UTC+
-
-  // Format offset as ±HH:MM
-  const formattedOffset = `${offsetSign}${String(Math.floor(offsetHours)).padStart(2, "0")}:${String(
-    Math.abs(offsetMinutes) % 60,
-  ).padStart(2, "0")}`;
-
-  // Manually reconstruct the correct date string without any timezone conversion
-  const isoString = date.toISOString().slice(0, 19); // Keep only YYYY-MM-DDTHH:mm:ss
-
-  return `${isoString}${formattedOffset}`;
-};
-
 export const dynamic = "force-dynamic";
 
-const URL = process.env.NEXT_PUBLIC_LOCAL_URL ?? "";
+const SITE_URL = process.env.NEXT_PUBLIC_LOCAL_URL ?? "";
+
+const toSitemapEntry = (uri: string, modified: string | null | undefined) => ({
+  url: `${SITE_URL}${uri}`,
+  lastModified: modified ? new Date(modified) : new Date(),
+});
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const uris = await apiClient.query<{ pages: RootQueryToPageConnection; posts: RootQueryToPostConnection }>(
+  const uris = await apiClient.query<{
+    pages: RootQueryToPageConnection;
+    posts: RootQueryToPostConnection;
+    products: RootQueryToProductConnection;
+    newsArticles: RootQueryToNewsArticleConnection;
+    careerPosts: RootQueryToCareerPostConnection;
+    caseStudies: RootQueryToPageConnection;
+    campaigns: RootQueryToCampaignConnection;
+    industries: RootQueryToIndustryConnection;
+  }>(
     `
     query GetSitemapPages {
       pages(first: 1000) {
         edges {
           node {
-            slug
+            uri
             modified
           }
         }
@@ -45,7 +54,55 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       posts(first: 1000) {
         edges {
           node {
-            slug
+            uri
+            modified
+          }
+        }
+      }
+      products(first: 1000) {
+        edges {
+          node {
+            uri
+            modified
+          }
+        }
+      }
+      newsArticles(first: 1000) {
+        edges {
+          node {
+            uri
+            modified
+          }
+        }
+      }
+      careerPosts(first: 1000) {
+        edges {
+          node {
+            uri
+            modified
+          }
+        }
+      }
+      caseStudies(first: 1000) {
+        edges {
+          node {
+            uri
+            modified
+          }
+        }
+      }
+      campaigns(first: 1000) {
+        edges {
+          node {
+            uri
+            modified
+          }
+        }
+      }
+      industries(first: 1000) {
+        edges {
+          node {
+            uri
             modified
           }
         }
@@ -56,16 +113,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const pages = removeNodes<Page>(uris.pages);
   const posts = removeNodes<Post>(uris.posts);
+  const products = removeNodes<Product>(uris.products);
+  const newsArticles = removeNodes<NewsArticle>(uris.newsArticles);
+  const careerPosts = removeNodes<CareerPost>(uris.careerPosts);
+  const caseStudies = removeNodes<Page>(uris.caseStudies);
+  const campaigns = removeNodes<Campaign>(uris.campaigns);
+  const industries = removeNodes<Industry>(uris.industries);
 
-  const urisFormatted = pages.map((page) => ({
-    url: `${URL}/${page.slug}`,
-    lastModified: formatDateForSitemap(page.modified ?? ""),
-  }));
+  const allEntries = [
+    ...pages.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+    ...posts.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+    ...products.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+    ...newsArticles.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+    ...careerPosts.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+    ...caseStudies.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+    ...campaigns.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+    ...industries.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+  ];
 
-  const postsFormatted = posts.map((post) => ({
-    url: `${URL}/${post.slug}`,
-    lastModified: formatDateForSitemap(post.modified ?? ""),
-  }));
+  const seen = new Map<string, MetadataRoute.Sitemap[number]>();
+  for (const entry of allEntries) {
+    const existing = seen.get(entry.url);
+    if (!existing || (entry.lastModified as Date) > (existing.lastModified as Date)) {
+      seen.set(entry.url, entry);
+    }
+  }
 
-  return [...urisFormatted, ...postsFormatted];
+  return Array.from(seen.values());
 }

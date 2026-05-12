@@ -47,15 +47,21 @@ const CaseStdiesListClient: React.FC<CaseStdiesListClientProps> = ({ caseStudies
               >
                 All
               </button>
-              {caseStudyCategories.map((category) => (
-                <button
-                  key={category.databaseId}
-                  className={`${styles["case-study-gateway__pill"]} ${selectedCategory === category.databaseId ? styles["case-study-gateway__pill--active"] : ""}`}
-                  onClick={() => handleCategoryChange(category.databaseId)}
-                >
-                  {category.name}
-                </button>
-              ))}
+              {caseStudyCategories.map((category) => {
+                console.log(category);
+
+                if (!category?.caseStudies?.edges?.length) return null;
+
+                return (
+                  <button
+                    key={category.databaseId}
+                    className={`${styles["case-study-gateway__pill"]} ${selectedCategory === category.databaseId ? styles["case-study-gateway__pill--active"] : ""}`}
+                    onClick={() => handleCategoryChange(category.databaseId)}
+                  >
+                    {category.name}
+                  </button>
+                );
+              })}
             </div>
           </Container>
         </div>

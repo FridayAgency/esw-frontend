@@ -135,9 +135,9 @@ const HeroHeaderLogosClient: React.FC<HeroHeaderLogosClientProps> = ({ logos }) 
 
     const resizeObserver = new ResizeObserver(() => {
       if (!hasStartedRef.current || !wallsRef.current) return;
-      const container = containerRef.current!;
-      const newWidth = container.offsetWidth;
-      const newHeight = container.offsetHeight;
+      const container = containerRef?.current!;
+      const newWidth = container?.offsetWidth;
+      const newHeight = container?.offsetHeight;
 
       Matter.Body.setPosition(wallsRef.current.left, { x: -WALL / 2, y: newHeight / 2 });
       Matter.Body.setPosition(wallsRef.current.right, { x: newWidth + WALL / 2, y: newHeight / 2 });

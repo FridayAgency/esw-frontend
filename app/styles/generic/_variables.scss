@@ -190,9 +190,9 @@ $fallback-stack:
   --Foundation-White: #ffffff;
   --Function-Deep-Blue: #006c86;
   --Pure-Black: #000000;
+  --error: #f99ea5;
 
-  /* Typography Tokens - Generated from SCSS map */
-  // @each $name, $props in $typography-tokens {
+  /* Typography Tokens - Generated from SCSS map */ // @each $name, $props in $typography-tokens {
   //   --#{$name}-font-family: #{map.get($props, family)};
   //   --#{$name}-font-size: #{map.get($props, size)};
   //   --#{$name}-line-height: #{map.get($props, line-height)};
@@ -200,7 +200,6 @@ $fallback-stack:
   //   --#{$name}-font-style: #{map.get($props, style)};
   //   --#{$name}-letter-spacing: #{map.get($props, letter-spacing)};
   // }
-
   /* Legacy Font Variables */
   --font-body:
     var(--font-dm-sans), "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial,

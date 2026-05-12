@@ -6,6 +6,7 @@ interface FileUploadProps {
   label?: string;
   accept?: string;
   maxSizeMB?: number;
+  hint?: string;
   onChange?: (file: File | null) => void;
   error?: string;
   theme?: "light" | "dark";
@@ -16,6 +17,7 @@ const FileUpload = ({
   label = "Upload your CV",
   accept = ".pdf,.doc,.docx",
   maxSizeMB = 10,
+  hint,
   onChange,
   error,
   theme = "light",
@@ -79,7 +81,7 @@ const FileUpload = ({
             {fileName ?? label}
           </p>
         </div>
-        <p className={styles.fileUpload__hint}>PDF, DOC up to {maxSizeMB}MB</p>
+        <p className={styles.fileUpload__hint}>{hint ?? `PDF, DOC up to ${maxSizeMB}MB`}</p>
       </div>
       {error && (
         <span id={`${id}-error`} className={styles.fileUpload__error} role="alert">

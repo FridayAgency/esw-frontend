@@ -56,7 +56,7 @@ const BannerClient: React.FC<BannerClientProps> = ({ bannerText }) => {
       <Container className={styles["banner__nav-container"]}>
         <nav className={styles["banner__nav"]} aria-label="Company Information Navigation">
           <ul className={styles["banner__nav-list"]}>
-            <li className={styles["banner__nav-list-item"]}>
+            {/* <li className={styles["banner__nav-list-item"]}>
               <a href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="39" height="40" viewBox="0 0 39 40" fill="none">
                   <path
@@ -93,7 +93,7 @@ const BannerClient: React.FC<BannerClientProps> = ({ bannerText }) => {
                 </svg>
                 My Account
               </a>
-            </li>
+            </li> */}
 
             <li className={styles["banner__nav-list-item"]}>
               <LanguageSwitcher />
