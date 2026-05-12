@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function GSAPProvider({ children }: { children: React.ReactNode }) {
+export default function GSAPProvider() {
   useEffect(() => {
     const onLoad = () => ScrollTrigger.refresh();
 
@@ -19,5 +19,5 @@ export default function GSAPProvider({ children }: { children: React.ReactNode }
     return () => window.removeEventListener("load", onLoad);
   }, []);
 
-  return <>{children}</>;
+  return null;
 }

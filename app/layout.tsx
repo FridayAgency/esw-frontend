@@ -25,12 +25,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning className={dmSans.variable} data-scroll-behavior="smooth">
       <body suppressHydrationWarning>
-        <Script type="text/javascript" src="https://cdn-redirector.glopal.com/glopal-loader.js?glopal_store_id=esw" />
-        <GSAPProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </GSAPProvider>
+        <Script
+          strategy="beforeInteractive"
+          type="text/javascript"
+          src="https://cdn-redirector.glopal.com/glopal-loader.js?glopal_store_id=esw"
+        />
+        <GSAPProvider />
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
