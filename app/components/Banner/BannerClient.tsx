@@ -8,7 +8,7 @@ import { useScrolled } from "@/app/hooks/useScrolled";
 import styles from "./Banner.module.scss";
 import { usePathname } from "next/navigation";
 import parse from "html-react-parser";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 const SCROLL_THRESHOLD = 50;
 
 interface BannerClientProps {
@@ -96,7 +96,9 @@ const BannerClient: React.FC<BannerClientProps> = ({ bannerText }) => {
             </li> */}
 
             <li className={styles["banner__nav-list-item"]}>
-              <LanguageSwitcher />
+              <Suspense>
+                <LanguageSwitcher />
+              </Suspense>
             </li>
           </ul>
         </nav>

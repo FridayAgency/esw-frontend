@@ -53,17 +53,30 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   const [markets, setMarkets] = useState<GlopalMarket[]>([]);
 
   useEffect(() => {
-    const glopalConfig = window.glopal?.config;
+    let attempts = 0;
+    const MAX_ATTEMPTS = 20;
 
-    console.log("Glopal config:", glopalConfig);
+    const init = () => {
+      const glopalConfig = window.glopal?.config;
 
-    const target = glopalConfig?.target;
-    const availableMarkets = glopalConfig?.markets ?? FALLBACK_MARKETS;
+      if (!glopalConfig && attempts < MAX_ATTEMPTS) {
+        attempts++;
+        setTimeout(init, 250);
+        return;
+      }
 
-    if (target?.locale) {
-      setCurrentLabel(target.locale.toUpperCase());
-    }
-    setMarkets(availableMarkets);
+      console.log("Glopal config loaded:", glopalConfig);
+
+      const target = glopalConfig?.target;
+      const availableMarkets = glopalConfig?.markets ?? FALLBACK_MARKETS;
+
+      if (target?.locale) {
+        setCurrentLabel(target.locale.toUpperCase());
+      }
+      setMarkets(availableMarkets);
+    };
+
+    init();
   }, []);
 
   useEffect(() => {
