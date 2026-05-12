@@ -150,6 +150,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   return (
     <div ref={ref} className={`${styles["language-switcher"]} ${className ?? ""}`}>
       <button
+        suppressHydrationWarning
         ref={triggerRef}
         className={styles["language-switcher__trigger"]}
         onClick={() => {
