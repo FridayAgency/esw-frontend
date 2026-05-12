@@ -18,6 +18,7 @@
     "@fridayagency/hooks": "^1.0.4",
     "@fridayagency/utils": "^2.1.0",
     "@gsap/react": "^2.1.2",
+    "@sentry/nextjs": "^10.53.1",
     "@types/matter-js": "^0.20.2",
     "babel-plugin-react-compiler": "^1.0.0",
     "class-variance-authority": "^0.7.1",

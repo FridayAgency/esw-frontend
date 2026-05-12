@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
 import ErrorFallback from "./components/ErrorFallback";
-import { logError } from "@/utils/logError";
 
 interface GlobalErrorProps {
   error: Error & { digest?: string };
@@ -11,7 +11,7 @@ interface GlobalErrorProps {
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   useEffect(() => {
-    logError("Global layout error", error);
+    Sentry.captureException(error);
   }, [error]);
 
   return (
