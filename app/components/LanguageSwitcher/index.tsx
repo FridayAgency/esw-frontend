@@ -55,6 +55,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   useEffect(() => {
     const glopalConfig = window.glopal?.config;
 
+    console.log("Glopal config:", glopalConfig);
+
     const target = glopalConfig?.target;
     const availableMarkets = glopalConfig?.markets ?? FALLBACK_MARKETS;
 
@@ -179,7 +181,9 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
           <ellipse cx="10" cy="10" rx="3.5" ry="7.5" stroke="currentColor" strokeWidth="1.2" />
           <line x1="2.5" y1="10" x2="17.5" y2="10" stroke="currentColor" strokeWidth="1.2" />
         </svg>
-        <span aria-hidden="true" suppressHydrationWarning>{currentLabel}</span>
+        <span aria-hidden="true" suppressHydrationWarning>
+          {currentLabel}
+        </span>
         <svg
           className={`${styles["language-switcher__chevron"]} ${isOpen ? styles["language-switcher__chevron--up"] : ""}`}
           width="17"
