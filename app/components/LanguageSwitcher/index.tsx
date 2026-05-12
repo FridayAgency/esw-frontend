@@ -197,7 +197,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
         </svg>
       </button>
 
-      {/* {isOpen &&
+      {isOpen &&
         markets.length > 0 &&
         dropdownPos &&
         createPortal(
@@ -229,7 +229,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
             })}
           </ul>,
           document.body,
-        )} */}
+        )}
     </div>
   );
 };
