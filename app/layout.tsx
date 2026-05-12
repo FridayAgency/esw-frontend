@@ -23,8 +23,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={dmSans.variable} data-scroll-behavior="smooth">
-      <body>
+    <html lang="en" suppressHydrationWarning className={dmSans.variable} data-scroll-behavior="smooth">
+      <body suppressHydrationWarning>
         <Script type="text/javascript" src="https://cdn-redirector.glopal.com/glopal-loader.js?glopal_store_id=esw" />
         <GSAPProvider>
           <Header />

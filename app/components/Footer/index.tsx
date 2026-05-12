@@ -279,7 +279,7 @@ const Footer: React.FC = async () => {
       <div className={styles["footer__copyright"]}>
         <Container className={styles["footer__copyright-container"]}>
           <div className={styles["footer__copyright-left"]}>
-            <span className={styles["footer__copyright-year"]}>&copy; {new Date().getFullYear()} ESW</span>
+            <span suppressHydrationWarning className={styles["footer__copyright-year"]}>&copy; {new Date().getFullYear()} ESW</span>
             <span className={styles["footer__copyright-rights"]}>All Rights Reserved</span>
           </div>
           <span className={styles["footer__copyright-site"]}>
