@@ -10,6 +10,7 @@ import PostContent from "../../PostContent";
 import PostAuthor from "../../PostAuthor";
 import LatestNews from "../../Panels/LatestNews";
 import LatestCareersPosts from "../../Panels/LatestCareersPosts";
+import PostSchema from "@/app/Schema/Schemas/PostSchema";
 
 const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async ({ post }) => {
   const { title, featuredImage, postfields } = post;
@@ -33,6 +34,7 @@ const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async 
 
   return (
     <>
+      <PostSchema post={post} />
       <article className={styles["post"]}>
         <BlogLandingHeader title={(title as string) ?? ""} reducedPadding />
         {/* TODO: ADD BREADCRUMBS */}

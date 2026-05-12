@@ -260,7 +260,7 @@ const Footer: React.FC = async () => {
               <a href="/modern-slavery-statement/">Modern Slavery Statement</a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="/sitemap/">Sitemap</a>
+              <a href="/site-map/">Sitemap</a>
             </li>
             <li className={styles["footer__legal-item"]}>
               <a href="/legal-hub/">Legal Hub</a>

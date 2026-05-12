@@ -23,14 +23,22 @@ interface BreadcrumbItem {
 }
 
 interface HeroHeaderSimpleProps {
-  panel: PagePanelsPagePanelsHeroHeaderSimpleLayout;
+  panel?: PagePanelsPagePanelsHeroHeaderSimpleLayout;
   showBreadcrumbs?: boolean;
   breadcrumbs?: BreadcrumbItem[];
   readTime?: number;
+  title?: string;
 }
 
-const HeroHeaderSimple: React.FC<HeroHeaderSimpleProps> = ({ panel, showBreadcrumbs, breadcrumbs, readTime }) => {
-  const { title, copy, callToAction, image } = panel || {};
+const HeroHeaderSimple: React.FC<HeroHeaderSimpleProps> = ({
+  panel,
+  showBreadcrumbs,
+  breadcrumbs,
+  readTime,
+  title,
+}) => {
+  const { title: panelTitle, copy, callToAction, image } = panel || {};
+  const displayTitle = title || panelTitle;
 
   return (
     <>
@@ -43,7 +51,7 @@ const HeroHeaderSimple: React.FC<HeroHeaderSimpleProps> = ({ panel, showBreadcru
             </div>
           )}
           <div className={styles["header__content"]}>
-            {title && <h1>{title}</h1>}
+            {displayTitle && <h1>{displayTitle}</h1>}
             {copy && <p>{copy}</p>}
             {callToAction && <Button href={callToAction.url ?? ""}>{callToAction.title}</Button>}
           </div>

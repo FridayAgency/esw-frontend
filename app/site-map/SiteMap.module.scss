@@ -1,0 +1,68 @@
+@use "@/app/styles/generic/text-styles";
+@use "@/app/styles/generic/mixins";
+
+.sitemap {
+  padding: 4rem 0 6rem;
+  background: var(--Foundation-Commerce-Canvas, #f2f6f3);
+
+  @include mixins.breakpoint-up(mobile) {
+    padding: 5rem 0 8rem;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 3rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 4rem;
+    }
+
+    @include mixins.breakpoint-up(tablet) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__group-title {
+    @include text-styles.text-style("mobile-h4");
+    color: var(--Foundation-Black, #1e2221);
+    border-bottom: 2px solid var(--Foundation-Signal-Green, #00d180);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      @include text-styles.text-style("desktop-h5");
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  &__item {
+    display: flex;
+  }
+
+  &__link {
+    @include text-styles.text-style("desktop-body-default");
+    color: var(--Foundation-Operational-Green, #007a4e);
+    text-decoration: none;
+    transition: color var(--transition, 0.3s ease-in-out);
+
+    &:hover,
+    &:focus {
+      color: var(--Foundation-Black, #1e2221);
+      text-decoration: underline;
+    }
+  }
+}

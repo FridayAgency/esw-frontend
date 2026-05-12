@@ -12,6 +12,12 @@ fragment NewsArticleFragment on NewsArticle {
   date
   excerpt
   content
+  seo{
+   breadcrumbs {
+     url
+     text
+   }
+  }
   postfields {
       tldr {
         listItem
@@ -100,6 +106,12 @@ fragment CareerPostFragment on CareerPost {
   date
   excerpt
   content
+    seo{
+   breadcrumbs {
+     url
+     text
+   }
+  }
   postfields {
       tldr {
         listItem
@@ -302,6 +314,12 @@ fragment PostFragment on Post {
   date
   excerpt
   content
+  seo{
+   breadcrumbs {
+     url
+     text
+   }
+  }
   postfields {
       tldr {
         listItem
