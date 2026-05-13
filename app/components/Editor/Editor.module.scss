@@ -71,4 +71,35 @@
   strong {
     font-weight: 700;
   }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2.5rem 0;
+    font-size: var(--desktop-body-default-font-size);
+    line-height: var(--desktop-body-default-line-height);
+    border: 1px solid var(--Neutral-Mid-Grey);
+
+    th,
+    td {
+      padding: 0.875rem 1.25rem;
+      text-align: left;
+      border: 1px solid var(--Neutral-Mid-Grey);
+    }
+
+    th {
+      font-weight: 600;
+      background-color: var(--Foundation-Black);
+      color: var(--Foundation-White);
+      border-color: var(--Neutral-Dark-Grey);
+    }
+
+    tbody tr:nth-child(odd) td {
+      background-color: var(--Foundation-White);
+    }
+
+    tbody tr:nth-child(even) td {
+      background-color: var(--Foundation-Commerce-Canvas);
+    }
+  }
 }
