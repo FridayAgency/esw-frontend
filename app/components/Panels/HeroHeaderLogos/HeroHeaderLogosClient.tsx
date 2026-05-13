@@ -35,7 +35,7 @@ const HeroHeaderLogosClient: React.FC<HeroHeaderLogosClientProps> = ({ logos }) 
   const wallsRef = useRef<{ floor: Matter.Body; left: Matter.Body; right: Matter.Body } | null>(null);
 
   const logosToUse = (logos?.edges.map((e) => e.node) ?? []) as MediaItem[];
-  const logoNodes = [...logosToUse, ...logosToUse]; // duplicate for a fuller canvas
+  const logoNodes = [...logosToUse]; // duplicate for a fuller canvas
   const count = logoNodes.length;
 
   useEffect(() => {
