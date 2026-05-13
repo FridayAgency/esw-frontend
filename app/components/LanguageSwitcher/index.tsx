@@ -17,9 +17,10 @@ declare global {
       config?: {
         target?: {
           countryCode: string;
-          locale: string;
+          languageTag: string;
+          currencyCode?: string;
+          currencySymbol?: string;
         };
-        markets?: GlopalMarket[];
       };
     };
   }
@@ -51,6 +52,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPos, setDropdownPos] = useState<DropdownPos | null>(null);
   const [currentLabel, setCurrentLabel] = useState("EN");
+  const [currentCountryCode, setCurrentCountryCode] = useState<string | null>(null);
   const markets = FALLBACK_MARKETS;
 
   useEffect(() => {
@@ -58,6 +60,9 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
     const MAX_ATTEMPTS = 20;
 
     const init = () => {
+      // window.glopal is only defined on localized sites
+      if (window.glopal === undefined) return;
+
       const target = window.glopal?.config?.target;
 
       if (!target && attempts < MAX_ATTEMPTS) {
@@ -66,8 +71,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
         return;
       }
 
-      if (target?.locale) {
-        setCurrentLabel(target.locale.toUpperCase());
+      if (target) {
+        const match = FALLBACK_MARKETS.find((m) => m.countryCode === target.countryCode);
+        setCurrentLabel(match?.label ?? target.languageTag.toUpperCase());
+        setCurrentCountryCode(target.countryCode);
       }
     };
 
@@ -224,7 +231,9 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
           >
             {markets.map((market) => {
               const label = market.label ?? market.locale.toUpperCase();
-              const isActive = market.locale.toUpperCase() === currentLabel;
+              const isActive = currentCountryCode
+                ? market.countryCode === currentCountryCode
+                : market.locale.toUpperCase() === currentLabel;
               return (
                 <li key={market.locale} role="none">
                   <button

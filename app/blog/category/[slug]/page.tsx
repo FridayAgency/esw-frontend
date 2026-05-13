@@ -16,6 +16,7 @@ import { processPageUri, removeNodes } from "@fridayagency/utils";
 import styles from "./Page.module.scss";
 import { generateCategorySeoMetadata } from "@/lib/seo";
 import { Metadata } from "next";
+import BlogLandingSchema from "@/app/Schema/Schemas/BlogLandingSchema";
 
 interface PageParams {
   params: Promise<{ slug: string }>;
@@ -62,6 +63,11 @@ const BlogCategoryPage = async ({ params }: PageParams) => {
 
   return (
     <>
+      <BlogLandingSchema
+        posts={postsLists}
+        section="blog"
+        category={rawCategories.find((cat) => cat.slug === pageUri)}
+      />
       <PagePanels
         panels={
           page?.pagePanels?.pagePanels?.filter(

@@ -58,7 +58,9 @@ const HeroHeaderSimple: React.FC<HeroHeaderSimpleProps> = ({
         </Container>
       </section>
 
-      {showBreadcrumbs && breadcrumbs && <Breadcrumbs items={breadcrumbs} title={title ?? ""} readTime={readTime} />}
+      {showBreadcrumbs && breadcrumbs && (
+        <Breadcrumbs items={breadcrumbs} title={displayTitle ?? ""} readTime={readTime} />
+      )}
     </>
   );
 };

@@ -39,7 +39,8 @@
 
   &__list {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
     align-items: center;
     gap: 0;
     list-style: none;
@@ -51,6 +52,8 @@
     }
 
     @include mixins.breakpoint-up(mobile) {
+      flex-wrap: wrap;
+      overflow: visible;
       padding: 0 1.5rem;
       .desktop-only {
         display: inline;
@@ -63,6 +66,7 @@
     text-decoration: none;
     transition: var(--transition);
     @include text-styles.text-style("desktop-h5");
+    white-space: nowrap;
 
     &:hover,
     &:focus-visible {
@@ -85,6 +89,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    min-width: 0;
     max-width: 24rem;
     @include text-styles.text-style("desktop-h5");
 

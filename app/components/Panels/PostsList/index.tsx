@@ -12,6 +12,7 @@ import { removeNodes } from "@fridayagency/utils";
 import PostsList from "../../PostsList";
 
 import styles from "./PostsList.module.scss";
+import BlogLandingSchema from "@/app/Schema/Schemas/BlogLandingSchema";
 
 interface PostListProps {
   panel: PagePanelsPagePanelsPostsListLayout;
@@ -30,9 +31,12 @@ const PostList: React.FC<PostListProps> = async ({ panel }) => {
   const featuredItem = ((panel?.featuredPost as any)?.nodes?.[0] as Post) ?? undefined;
 
   return (
-    <section className={styles["posts-list"]}>
-      <PostsList items={items} categories={rawCategories} featuredPost={featuredItem} activeCategory="all" />
-    </section>
+    <>
+      <BlogLandingSchema posts={items} section="blog" />
+      <section className={styles["posts-list"]}>
+        <PostsList items={items} categories={rawCategories} featuredPost={featuredItem} activeCategory="all" />
+      </section>
+    </>
   );
 };
 

@@ -14,6 +14,7 @@ import { Metadata, NextPage } from "next";
 import { generateCategorySeoMetadata } from "@/lib/seo";
 import PagePanels from "@/app/components/PagePanels/PagePanels";
 import styles from "./Page.module.scss";
+import BlogLandingSchema from "@/app/Schema/Schemas/BlogLandingSchema";
 
 interface PageParams {
   params: Promise<{ slug: string }>;
@@ -59,10 +60,13 @@ const CareersBlogCategoryPage: NextPage<PageParams> = async ({ params }) => {
     );
     const featuredPost = ((newsListPanel?.featuredPost as any)?.nodes?.[0] as CareerPost) ?? undefined;
 
-    console.log(newsListPanel);
-
     return (
       <>
+        <BlogLandingSchema
+          posts={items}
+          section="careers"
+          category={categories.find((cat) => cat.slug === categorySlug)}
+        />
         <PagePanels
           panels={
             page?.pagePanels?.pagePanels?.filter(

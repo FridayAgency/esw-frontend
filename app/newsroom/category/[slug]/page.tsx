@@ -15,6 +15,7 @@ import { generateCategorySeoMetadata } from "@/lib/seo";
 import PagePanels from "@/app/components/PagePanels";
 
 import styles from "./Page.module.scss";
+import BlogLandingSchema from "@/app/Schema/Schemas/BlogLandingSchema";
 
 interface PageParams {
   params: Promise<{ slug: string }>;
@@ -62,6 +63,11 @@ const NewsCategoryPage: NextPage<PageParams> = async ({ params }) => {
 
     return (
       <>
+        <BlogLandingSchema
+          posts={items}
+          section="news"
+          category={categories.find((cat) => cat.slug === categorySlug)}
+        />
         <PagePanels
           panels={
             page?.pagePanels?.pagePanels?.filter(

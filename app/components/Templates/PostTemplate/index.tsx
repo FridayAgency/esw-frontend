@@ -4,6 +4,7 @@ import styles from "./PostTemplate.module.scss";
 
 import { removeNodes } from "@fridayagency/utils";
 import BlogLandingHeader from "../../Panels/BlogLandingHeader";
+import Breadcrumbs from "../../Breadcrumbs";
 import FullWidthImage from "../../Panels/OpenContent/FullwidthImage";
 import PostTLDR from "../../PostTLDR";
 import PostContent from "../../PostContent";
@@ -11,6 +12,7 @@ import PostAuthor from "../../PostAuthor";
 import LatestNews from "../../Panels/LatestNews";
 import LatestCareersPosts from "../../Panels/LatestCareersPosts";
 import PostSchema from "@/app/Schema/Schemas/PostSchema";
+import { calculateReadTime } from "@/lib/readTime";
 
 const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async ({ post }) => {
   const { title, featuredImage, postfields } = post;
@@ -32,12 +34,21 @@ const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async 
 
   const isCareerPost = post.__typename === "CareerPost";
 
+  const breadcrumbItems =
+    post.__typename === "NewsArticle"
+      ? [{ href: "/newsroom", label: "Newsroom" }]
+      : post.__typename === "CareerPost"
+        ? [{ href: "/careers/life-at-esw-blog", label: "Life at ESW Blog" }]
+        : [{ href: "/blog", label: "Blog" }];
+
+  const readTime = content ? calculateReadTime(content as unknown[]) : undefined;
+
   return (
     <>
       <PostSchema post={post} />
       <article className={styles["post"]}>
         <BlogLandingHeader title={(title as string) ?? ""} reducedPadding />
-        {/* TODO: ADD BREADCRUMBS */}
+        <Breadcrumbs items={breadcrumbItems} title={(title as string) ?? ""} readTime={readTime} />
         <FullWidthImage image={featuredImage} />
         {tldr && <PostTLDR tldr={tldr as PostfieldsTldr[]} />}
 

@@ -13,6 +13,7 @@ import { removeNodes } from "@fridayagency/utils";
 import PostsList from "../../PostsList";
 
 import styles from "./PostsList.module.scss";
+import BlogLandingSchema from "@/app/Schema/Schemas/BlogLandingSchema";
 
 interface PostListProps {
   panel: PagePanelsPagePanelsNewsListLayout;
@@ -31,15 +32,18 @@ const NewsList: React.FC<PostListProps> = async ({ panel }) => {
   const featuredItem = ((panel?.featuredPost as any)?.nodes?.[0] as Post) ?? undefined;
 
   return (
-    <section className={styles["posts-list"]}>
-      <PostsList
-        items={items}
-        categories={rawCategories}
-        featuredPost={featuredItem}
-        activeCategory="all"
-        categoryBasePath="/newsroom/category/"
-      />
-    </section>
+    <>
+      <BlogLandingSchema posts={items} section="news" />
+      <section className={styles["posts-list"]}>
+        <PostsList
+          items={items}
+          categories={rawCategories}
+          featuredPost={featuredItem}
+          activeCategory="all"
+          categoryBasePath="/newsroom/category/"
+        />
+      </section>
+    </>
   );
 };
 
