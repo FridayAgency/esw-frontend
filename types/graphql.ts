@@ -12434,6 +12434,33 @@ export type PagePanelsPagePanelsStats_Fields = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
+/** The &quot;PagePanelsPagePanelsStayConnectedLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PagePanelsPagePanelsStayConnectedLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsStayConnectedLayout_Fields & PagePanelsPagePanels_Layout & {
+  __typename?: 'PagePanelsPagePanelsStayConnectedLayout';
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsStayConnectedLayout&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsStayConnectedLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PagePanelsPagePanelsStayConnectedLayout&quot; Field Group */
+export type PagePanelsPagePanelsStayConnectedLayout_Fields = {
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsStayConnectedLayout&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsStayConnectedLayout&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 /** The &quot;PagePanelsPagePanelsTestimonialLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PagePanelsPagePanelsTestimonialLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsTestimonialLayout_Fields & PagePanelsPagePanels_Layout & {
   __typename?: 'PagePanelsPagePanelsTestimonialLayout';
@@ -18798,6 +18825,7 @@ export type SeoConfig = {
   redirects?: Maybe<Array<Maybe<SeoRedirect>>>;
   schema?: Maybe<SeoSchema>;
   social?: Maybe<SeoSocial>;
+  taxonomyArchives?: Maybe<SeoTaxonomyTypes>;
   webmaster?: Maybe<SeoWebmaster>;
 };
 
@@ -19014,6 +19042,34 @@ export type SeoSocialYoutube = {
 export type SeoTaxonomySchema = {
   __typename?: 'SEOTaxonomySchema';
   raw?: Maybe<Scalars['String']['output']>;
+};
+
+/** The Yoast SEO search appearance Taxonomy types fields */
+export type SeoTaxonomyType = {
+  __typename?: 'SEOTaxonomyType';
+  archive?: Maybe<SeoTaxonomyTypeArchive>;
+};
+
+/** The Yoast SEO search appearance Taxonomy types fields */
+export type SeoTaxonomyTypeArchive = {
+  __typename?: 'SEOTaxonomyTypeArchive';
+  metaDesc?: Maybe<Scalars['String']['output']>;
+  metaRobotsNoindex?: Maybe<Scalars['Boolean']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** The Yoast SEO archive configuration data for taxonomies */
+export type SeoTaxonomyTypes = {
+  __typename?: 'SEOTaxonomyTypes';
+  careerCategory?: Maybe<SeoTaxonomyType>;
+  careerTag?: Maybe<SeoTaxonomyType>;
+  caseStudyCategory?: Maybe<SeoTaxonomyType>;
+  category?: Maybe<SeoTaxonomyType>;
+  integrationCategory?: Maybe<SeoTaxonomyType>;
+  newsCategory?: Maybe<SeoTaxonomyType>;
+  newsTag?: Maybe<SeoTaxonomyType>;
+  postFormat?: Maybe<SeoTaxonomyType>;
+  tag?: Maybe<SeoTaxonomyType>;
 };
 
 export type SeoUser = {

@@ -228,6 +228,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
               return (
                 <li key={market.locale} role="none">
                   <button
+                    suppressHydrationWarning
                     className={`${styles["language-switcher__option"]} ${isActive ? styles["language-switcher__option--active"] : ""}`}
                     role="menuitem"
                     aria-current={isActive ? "true" : undefined}

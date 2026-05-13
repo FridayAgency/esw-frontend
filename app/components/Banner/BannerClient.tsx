@@ -29,8 +29,11 @@ const BannerClient: React.FC<BannerClientProps> = ({ bannerText }) => {
           <Container className={styles["banner__message-container"]}>
             <div className={styles["banner__message-track"]}>
               <div className={styles["banner__message-inner"]}>
-                <span className={styles["banner__message-text"]}>{parse(bannerText)}</span>
+                <span suppressHydrationWarning className={styles["banner__message-text"]}>
+                  {parse(bannerText)}
+                </span>
                 <span
+                  suppressHydrationWarning
                   className={`${styles["banner__message-text"]} ${styles["banner__message-text--duplicate"]}`}
                   aria-hidden="true"
                 >

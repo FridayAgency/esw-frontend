@@ -30,6 +30,7 @@ import { HERO_HEADER_TWO_IMAGES_FRAGMENT } from "@/app/components/Panels/HeroHea
 import { THANK_YOU_HEADER_FRAGMENT } from "@/app/components/Panels/ThankYouHeader";
 import { B2B2C_DIFFERECNCE_FRAGMENT } from "@/app/components/Panels/B2b2cDifference";
 import { APLICATION_PROCESS_FRAGMENT } from "@/app/components/Panels/ApplicationProcess";
+import { STAY_CONNECTED_FRAGMENT } from "@/app/components/Panels/StayConnected";
 
 const LATEST_CAREERS_POSTS_FRAGMENT = `
   title
@@ -70,6 +71,7 @@ export const PAGEPANELS_FRAGMENT = (() => {
     ["PagePanelsPagePanelsNewsListLayout", NEWS_LIST_FRAGMENT],
     ["PagePanelsPagePanelsCareersBlogListLayout", CAREERS_LIST_FRAGMENT],
     ["PagePanelsPagePanelsApplicationProcessLayout", APLICATION_PROCESS_FRAGMENT],
+    ["PagePanelsPagePanelsStayConnectedLayout", STAY_CONNECTED_FRAGMENT],
   ];
 
   const blocks = mappings.map(([type, fragment]) => `... on ${type} {\n${fragment}\n}`).join("\n      ");
