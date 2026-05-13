@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
         hostname: "**.gravatar.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "esw1.wpenginepowered.com",
+        pathname: "/**",
+      },
     ],
   },
 
