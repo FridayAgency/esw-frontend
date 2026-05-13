@@ -28,7 +28,7 @@ declare global {
 
 const FALLBACK_MARKETS: GlopalMarket[] = [
   { countryCode: "GB", locale: "EN-UK", label: "EN-UK", url: "https://uk.esw.com" },
-  { countryCode: "US", locale: "EN-US", label: "EN-US", url: process.env.NEXT_PUBLIC_EN_US_URL ?? "#" },
+  { countryCode: "US", locale: "EN-US", label: "EN-US", url: process.env.NEXT_PUBLIC_LOCAL_URL ?? "#" },
   { countryCode: "ES", locale: "ES", label: "ES", url: "https://es.esw.com" },
   { countryCode: "DE", locale: "DE", label: "DE", url: "https://de.esw.com" },
   { countryCode: "FR", locale: "FR", label: "FR", url: "https://fr.esw.com" },
