@@ -36,7 +36,6 @@ class PanelErrorBoundary extends Component<PanelErrorBoundaryProps, PanelErrorBo
             This panel couldn&apos;t be displayed.
             {this.props.panelType ? (
               <>
-                {" "}
                 <code
                   style={{
                     fontFamily: "monospace",

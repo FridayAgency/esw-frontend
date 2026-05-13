@@ -90,11 +90,11 @@
 
         &:hover,
         &:focus-visible {
-          color: var(--rose, #d60270);
+          color: var(--Foundation-Signal-Green, #00d180);
         }
 
         &:focus-visible {
-          outline: 4px solid var(--rose, #d60270);
+          outline: 4px solid var(--Foundation-Signal-Green, #00d180);
           border-radius: 0.25rem;
           outline-offset: 0.25rem;
         }

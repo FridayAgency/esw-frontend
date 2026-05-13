@@ -11,17 +11,23 @@
     position: absolute;
     // 3× the section height, centred — the section's overflow:hidden clips
     // the excess above and below, giving the parallax room to travel
-    top: -100%;
+    top: -75%;
     left: 0;
     right: 0;
     height: 300%;
     background-image: url(/assets/pattern-03.svg);
     background-repeat: no-repeat;
     background-position: center right;
-    background-size: 100% 100%;
+    background-size: 300% 300%;
 
     pointer-events: none;
     will-change: transform;
+
+    @include mixins.breakpoint-up(mobile) {
+      background-size: 100% 100%;
+      top: -100%;
+      background-position: center right;
+    }
   }
 
   &__container {

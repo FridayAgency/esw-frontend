@@ -7,6 +7,7 @@ import { NewsArticle, PagePanelsPagePanelsHeroHeaderLayout, Post } from "@/types
 
 import parse from "html-react-parser";
 import Link from "next/link";
+import TalkToUsButton from "../../TalkToUsButton";
 
 export const HERO_HEADER_FRAGMENT = `
     copy
@@ -54,7 +55,9 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({ panel }) => {
           returnDuration={1.5}
         />
       </Suspense>
-      <Container className={styles["hero-header__container"]}>
+      <Container
+        className={`${styles["hero-header__container"]} ${!article ? styles["hero-header__container--small"] : ""}`}
+      >
         <div className={styles["hero-header__content"]}>
           {title && (
             <TextRevealHeading blockColour="#00D180">
@@ -63,6 +66,10 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({ panel }) => {
           )}
 
           {copy && <div className={styles["hero-header__copy"]}>{parse(copy)}</div>}
+
+          <div className={styles["hero-header__cta"]}>
+            <TalkToUsButton />
+          </div>
         </div>
 
         {/* TODO : Connect this to a dynamic article link */}

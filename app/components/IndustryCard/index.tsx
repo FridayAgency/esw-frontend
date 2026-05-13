@@ -32,7 +32,6 @@ const IndustryCard: React.FC<IndustryCardProps> = ({ industry }) => {
         )}
       </div>
       <div className={styles["industry__arrow"]}>
-        {" "}
         <Icon type="arrowRight" />
       </div>
     </Link>

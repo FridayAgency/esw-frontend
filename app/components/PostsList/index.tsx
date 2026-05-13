@@ -50,7 +50,6 @@ export const PostsList: React.FC<PostsListProps> = ({
       )}
 
       <div className={styles["posts__content"]}>
-        {" "}
         {title && !categories?.length && (
           <div className={styles["posts__title"]}>
             <h2>{title}</h2>

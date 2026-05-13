@@ -29,6 +29,7 @@
   &__container {
     display: grid;
     gap: 0;
+    padding-top: 2.5rem;
 
     @include mixins.breakpoint-up(mobile) {
       grid-template-columns: repeat(12, minmax(0, 1fr));

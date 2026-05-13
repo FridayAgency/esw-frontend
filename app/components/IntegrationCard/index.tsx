@@ -24,7 +24,7 @@ const IntegrationCard: React.FC<IntegrationCardProps> = ({ integration }) => {
           <h3 className={styles["integration__title"]}>{title}</h3>
           <p className={styles["integration__description"]}>{integrationContent?.integrationContent}</p>
         </div>
-        <Icon type="arrowRight" />
+        {/* <Icon type="arrowRight" /> */}
       </div>
     </>
   );

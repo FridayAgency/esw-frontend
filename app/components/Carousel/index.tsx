@@ -42,6 +42,7 @@ const Carousel: React.FC<CarouselProps> = ({
   const slides = useMemo(() => React.Children.toArray(children), [children]);
   const containerRef = useRef<HTMLDivElement>(null);
   const firstSlideRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [measuredSlideWidth, setMeasuredSlideWidth] = useState(0);
   const [page, setPage] = useState(0);
@@ -128,6 +129,18 @@ const Carousel: React.FC<CarouselProps> = ({
 
   const translateX = computeTranslateX();
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 40) return;
+    goToPage(delta > 0 ? page + 1 : page - 1);
+  };
+
   const goToPage = (nextPage: number) => {
     if (pageCount === 0) return;
     if (loop) {
@@ -153,7 +166,7 @@ const Carousel: React.FC<CarouselProps> = ({
     <div
       className={`${styles.carousel}${autoClass}${multiClass}${disabledClass}${className ? ` ${className}` : ""}`.trim()}
     >
-      <div className={styles.carousel__viewport} ref={containerRef}>
+      <div className={styles.carousel__viewport} ref={containerRef} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <div className={styles.carousel__track} style={trackStyle}>
           {slides.map((slide, index) => (
             <div
