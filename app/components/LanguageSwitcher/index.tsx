@@ -51,7 +51,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
   const listRef = useRef<HTMLUListElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPos, setDropdownPos] = useState<DropdownPos | null>(null);
-  const [currentLabel, setCurrentLabel] = useState("EN");
+  const [currentLabel, setCurrentLabel] = useState<string | null>(null);
   const [currentCountryCode, setCurrentCountryCode] = useState<string | null>(null);
   const markets = FALLBACK_MARKETS;
 
@@ -61,7 +61,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
 
     const init = () => {
       // window.glopal is only defined on localized sites
-      if (window.glopal === undefined) return;
+      if (window.glopal === undefined) {
+        setCurrentLabel("EN");
+        return;
+      }
 
       const target = window.glopal?.config?.target;
 
@@ -75,6 +78,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
         const match = FALLBACK_MARKETS.find((m) => m.countryCode === target.countryCode);
         setCurrentLabel(match?.label ?? target.languageTag.toUpperCase());
         setCurrentCountryCode(target.countryCode);
+      } else {
+        setCurrentLabel("EN");
       }
     };
 
@@ -181,7 +186,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
         onKeyDown={handleTriggerKeyDown}
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        aria-label={`Select language, current language: ${currentLabel}`}
+        aria-label={`Select language${currentLabel ? `, current language: ${currentLabel}` : ""}`}
       >
         <svg
           className={styles["language-switcher__globe"]}
@@ -198,7 +203,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className }) => {
           <line x1="2.5" y1="10" x2="17.5" y2="10" stroke="currentColor" strokeWidth="1.2" />
         </svg>
         <span aria-hidden="true" suppressHydrationWarning>
-          {currentLabel}
+          {currentLabel ?? ""}
         </span>
         <svg
           className={`${styles["language-switcher__chevron"]} ${isOpen ? styles["language-switcher__chevron--up"] : ""}`}
