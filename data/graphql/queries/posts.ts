@@ -306,17 +306,11 @@ query GetPostsAndNews($first: Int = 10) {
       }
     }
   }
-  careerPosts(first: $first, where: {orderby: {field: DATE, order: DESC}}) {
-    edges {
-      node {
-        ...CareerPostFragment
-      }
-    }
-  }
+
 }
 ${POST_FRAGMENT}
 ${NEWS_ARTICLE_FRAGMENT}
-${CAREER_POST_FRAGMENT}
+
 ${FRAGMENTS.MEDIAITEM_FRAGMENT}
 ${FRAGMENTS.LINK_FRAGMENT}
 ${FRAGMENTS.ACF_MEDIA_ITEM}

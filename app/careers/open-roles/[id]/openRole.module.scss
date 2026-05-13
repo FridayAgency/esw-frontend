@@ -71,26 +71,35 @@
 
   &__details {
     flex: 1 0 100%;
-    padding: 1.25rem;
+    padding: 2.5rem 1.5rem;
     background-color: var(--Foundation-Commerce-Canvas);
     order: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    @include mixins.breakpoint-up(mobile) {
+      position: sticky;
+      top: 10rem;
+    }
 
     &__location,
     &__team {
-      margin-bottom: 0.25rem;
+      // margin-bottom: 0.25rem;
     }
 
     &__label {
-      margin-bottom: 0.125rem;
+      // margin-bottom: 0.125rem;
       font-size: 1.125rem;
       font-weight: var(--desktop-body-large-bold-font-weight);
+      display: flex;
+      // justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
 
       > svg {
-        width: 3rem;
-        height: auto;
-        margin-left: -0.875rem;
-        margin-right: -0.25rem;
-        margin-bottom: -1.125rem;
+        width: 1.3775rem;
+        height: 1.39719rem;
 
         > path {
           fill: none;

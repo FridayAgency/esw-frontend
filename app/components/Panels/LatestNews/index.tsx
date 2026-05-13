@@ -1,8 +1,6 @@
 import { GET_LATEST_POSTS_AND_NEWS } from "@/data";
 import client from "@/lib/client";
 import {
-  CareerPost,
-  CareerPostConnection,
   NewsArticle,
   NewsArticleConnection,
   PagePanelsPagePanelsLatestNewsLayout,
@@ -19,7 +17,7 @@ import { removeNodes } from "@fridayagency/utils";
 interface LatestNewsProps {
   panel?: PagePanelsPagePanelsLatestNewsLayout;
   title?: string;
-  posts?: (Post | NewsArticle | CareerPost)[];
+  posts?: (Post | NewsArticle)[];
   currentPostId?: number;
 }
 
@@ -28,16 +26,15 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
 
   const title = propTitle || panelTitle;
 
-  let postsToDisplay: (Post | NewsArticle | CareerPost)[] = [];
+  let postsToDisplay: (Post | NewsArticle)[] = [];
 
   try {
     if (propPosts && propPosts.length > 0) {
       postsToDisplay = propPosts;
     } else {
-      const { posts, newsArticles, careerPosts } = await client.query<{
+      const { posts, newsArticles } = await client.query<{
         posts: PostConnection;
         newsArticles: NewsArticleConnection;
-        careerPosts: CareerPostConnection;
       }>(GET_LATEST_POSTS_AND_NEWS, {
         variables: { first: 10 },
       });
@@ -45,7 +42,6 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
       const allPosts = [
         ...(posts ? (removeNodes<Post>(posts) as Post[]) : []),
         ...(newsArticles ? (removeNodes<NewsArticle>(newsArticles) as NewsArticle[]) : []),
-        ...(careerPosts ? (removeNodes<CareerPost>(careerPosts) as CareerPost[]) : []),
       ];
 
       postsToDisplay = allPosts
@@ -63,13 +59,7 @@ const LatestNews: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, 
               <PostCard
                 key={post.databaseId}
                 post={post}
-                postType={
-                  post.__typename === "NewsArticle"
-                    ? "news"
-                    : post.__typename === "CareerPost"
-                      ? "career"
-                      : "blog"
-                }
+                postType={post.__typename === "NewsArticle" ? "news" : "blog"}
               />
             ))}
 

@@ -21,7 +21,12 @@ interface LatestNewsProps {
   currentPostId?: number;
 }
 
-const LatestCareersPosts: React.FC<LatestNewsProps> = async ({ panel, title: propTitle, posts: propPosts, currentPostId }) => {
+const LatestCareersPosts: React.FC<LatestNewsProps> = async ({
+  panel,
+  title: propTitle,
+  posts: propPosts,
+  currentPostId,
+}) => {
   const { title: panelTitle } = panel || {};
 
   const title = propTitle || panelTitle;
@@ -50,17 +55,7 @@ const LatestCareersPosts: React.FC<LatestNewsProps> = async ({ panel, title: pro
           <h2 className={styles["latest-posts__title"]}>{title}</h2>
           <div className={styles["latest-posts__grid"]} role="tabpanel">
             {postsToDisplay.map((post) => (
-              <PostCard
-                key={post.databaseId}
-                post={post}
-                postType={
-                  post.__typename === "NewsArticle"
-                    ? "news"
-                    : post.__typename === "CareerPost"
-                      ? "career"
-                      : "blog"
-                }
-              />
+              <PostCard key={post.databaseId} post={post} postType="career" />
             ))}
 
             <span className={styles["latest-posts__cta"]}>

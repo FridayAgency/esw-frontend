@@ -60,7 +60,11 @@ const FeatureBlockGreenEmphasis: React.FC<FeatureBlockProps> = ({ panel }) => {
           <div className={styles["feature-block__text"]}>
             {title && <h2 className={styles["feature-block__title"]}>{title}</h2>}
             <div className={styles["feature-block__description"]}>{parse(copy || "")}</div>
-            {callToAction && <Button variant="text">{callToAction.title}</Button>}
+            {callToAction && (
+              <Button href={callToAction.url ?? ""} variant="text">
+                {callToAction.title}
+              </Button>
+            )}
           </div>
         </div>
       </Container>

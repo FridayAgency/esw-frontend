@@ -51,7 +51,7 @@ const PostTemplate: React.FC<{ post: Post | NewsArticle | CareerPost }> = async 
           />
         ) : (
           <LatestNews
-            posts={relatedPosts.length ? relatedPosts : undefined}
+            posts={relatedPosts.length ? (relatedPosts as (Post | NewsArticle)[]) : undefined}
             title="More Like This"
             currentPostId={post.databaseId}
           />
