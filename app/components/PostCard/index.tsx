@@ -16,8 +16,10 @@ interface PostCardProps {
 const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAuthor }) => {
   const { uri, title, featuredImage, author } = post;
 
+  const blogUri = post.__typename === "Post" ? `/blog/${uri}` : uri;
+
   return (
-    <Link className={styles["card"]} href={uri ?? ""}>
+    <Link className={styles["card"]} href={blogUri ?? ""}>
       {featuredImage && (
         <div className={styles["card__image"]}>
           <div className={styles["card__image-wrapper"]}>

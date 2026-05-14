@@ -29,6 +29,11 @@ const CareersBlogList: React.FC<PostListProps> = async ({ panel }) => {
 
   const rawCategories = careerCategories ? removeNodes<CareerCategory>(careerCategories) : [];
 
+  const activeCategorySlugs = new Set(
+    items.flatMap((post) => post.careerCategories?.edges?.map((e) => e?.node?.slug).filter(Boolean) ?? []),
+  );
+  const categories = rawCategories.filter((cat) => cat.slug && activeCategorySlugs.has(cat.slug));
+
   const featuredItem = ((panel?.featuredPost as any)?.nodes?.[0] as Post) ?? undefined;
 
   return (
@@ -37,7 +42,7 @@ const CareersBlogList: React.FC<PostListProps> = async ({ panel }) => {
       <section className={styles["posts-list"]}>
         <PostsList
           items={items}
-          categories={rawCategories}
+          categories={categories}
           featuredPost={featuredItem}
           activeCategory="all"
           categoryBasePath="/careers/life-at-esw-blog/category"

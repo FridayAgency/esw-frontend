@@ -55,7 +55,7 @@ export const PostsList: React.FC<PostsListProps> = ({
             <h2>{title}</h2>
           </div>
         )}
-        {categories && categories.length > 0 && (
+        {categories && categories.filter((cat) => (cat.count ?? 0) > 0).length > 0 && (
           <div className={styles["posts__categories"]}>
             <h2>Categories</h2>
             <nav aria-label="Browse by category">
@@ -69,7 +69,7 @@ export const PostsList: React.FC<PostsListProps> = ({
                     All
                   </Link>
                 </li>
-                {categories.map((cat) => {
+                {categories.filter((cat) => (cat.count ?? 0) > 0).map((cat) => {
                   const key = String(cat?.slug ?? cat?.databaseId ?? cat?.name ?? "cat");
                   return (
                     <li key={key}>

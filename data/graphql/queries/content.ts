@@ -34,10 +34,6 @@ query GetContentNode($uri: ID!) {
       }
     }
 
-    ... on Post {
-      ...PostFragment
-    }
-
     ... on CaseStudy {
       id
       title
@@ -65,7 +61,6 @@ query GetContentNode($uri: ID!) {
 }
 ${PAGEPANELS_FRAGMENT}
 ${FRAGMENTS.MEDIAITEM_FRAGMENT}
-${POST_FRAGMENT}
 ${NEWS_ARTICLE_FRAGMENT}
 ${CAREER_POST_FRAGMENT}
 `;

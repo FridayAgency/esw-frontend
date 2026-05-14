@@ -44,9 +44,15 @@ const CaseStudyGateway: React.FC<CaseStudyGatewayProps> = ({ panel }) => {
     <section className={styles["case-study-gateway"]}>
       <Container flush className={styles["case-study-gateway__container"]}>
         <div className={styles["case-study-gateway__header"]}>
-          {title && <h2 className={styles["case-study-gateway__title"]}>{title}</h2>}
+          {title && (
+            <h2 suppressHydrationWarning className={styles["case-study-gateway__title"]}>
+              {title}
+            </h2>
+          )}
           <div className={styles["case-study-gateway__cta-desktop"]}>
-            <Button variant="text">Read All</Button>
+            <Button href="/customer-success-stories/" variant="text" colour="light">
+              Read All
+            </Button>
           </div>
         </div>
 
@@ -70,7 +76,7 @@ const CaseStudyGateway: React.FC<CaseStudyGatewayProps> = ({ panel }) => {
         )}
 
         <div className={styles["case-study-gateway__cta-mobile"]}>
-          <Button variant="text" colour="light">
+          <Button href="/customer-success-stories/" variant="text" colour="light">
             Read All
           </Button>
         </div>

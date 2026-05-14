@@ -17,27 +17,29 @@
       border: none;
 
       &.show {
+        color: var(--Foundation-Signal-Green, #00d180);
+
         .icon--down {
           transform: rotate(180deg);
         }
       }
 
       &.active {
-        color: var(--rose, #d60270);
+        color: var(--Foundation-Signal-Green, #00d180);
         svg {
           path {
-            fill: var(--rose, #d60270);
+            fill: var(--Foundation-Signal-Green, #00d180);
           }
         }
       }
 
       &:hover,
       &:focus-visible {
-        color: var(--rose, #d60270);
+        color: var(--Foundation-Signal-Green, #00d180);
       }
 
       &:focus-visible {
-        outline: 4px solid var(--rose, #d60270);
+        outline: 4px solid var(--Foundation-Signal-Green, #00d180);
         border-radius: 0.25rem;
         outline-offset: 0.25rem;
       }

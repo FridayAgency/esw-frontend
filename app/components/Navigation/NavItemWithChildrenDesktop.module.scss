@@ -38,8 +38,14 @@
       }
 
       &.show {
+        color: var(--Foundation-Signal-Green, #00d180);
+
         .icon--down svg {
           transform: rotate(180deg);
+
+          path {
+            fill: var(--Foundation-Signal-Green, #00d180);
+          }
         }
       }
 

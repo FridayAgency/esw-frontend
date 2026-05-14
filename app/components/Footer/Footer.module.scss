@@ -114,6 +114,10 @@
   &__nav-heading {
     color: var(--Foundation-White, #fff);
     @include text-styles.text-style("mobile-body-default");
+
+    &:is(a):hover {
+      color: var(--Foundation-Signal-Green);
+    }
   }
 
   &__nav-sub-group {

@@ -3,5 +3,6 @@ fragment CategoryFragment on Category {
   name
   slug
   databaseId
+  count
 }
 `;

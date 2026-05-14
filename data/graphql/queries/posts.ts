@@ -108,6 +108,7 @@ query GetNewsArticles($first: Int = 50) {
         name
         slug
         databaseId
+        count
       }
     }
   }
@@ -155,6 +156,7 @@ query GetNewsArticlesByCategory($first: Int = 50, $slug: [String]) {
         name
         slug
         databaseId
+        count
       }
     }
   }
@@ -180,6 +182,7 @@ query GetCareerPosts($first: Int = 50) {
         name
         slug
         databaseId
+        count
       }
     }
   }
@@ -227,6 +230,7 @@ query GetCareerPostsByCategory($first: Int = 50, $slug: [String]) {
         name
         slug
         databaseId
+        count
       }
     }
   }
@@ -315,4 +319,16 @@ ${FRAGMENTS.MEDIAITEM_FRAGMENT}
 ${FRAGMENTS.LINK_FRAGMENT}
 ${FRAGMENTS.ACF_MEDIA_ITEM}
 
+`;
+
+export const GET_POST_BY_SLUG = `
+ query GetPostBySlug($slug: ID!) {
+  post(id: $slug, idType: SLUG) {
+    ...PostFragment
+}
+}
+${POST_FRAGMENT}
+${FRAGMENTS.MEDIAITEM_FRAGMENT}
+${FRAGMENTS.LINK_FRAGMENT}
+${FRAGMENTS.ACF_MEDIA_ITEM}
 `;

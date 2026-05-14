@@ -1,10 +1,10 @@
 import { GET_NEWS_ARTICLES } from "@/data";
 import client from "@/lib/client";
 import {
+  NewsArticle,
   NewsArticleConnection,
   NewsCategory,
   PagePanelsPagePanelsNewsListLayout,
-  PagePanelsPagePanelsPostsListLayout,
   Post,
   RootQueryToNewsCategoryConnection,
 } from "@/types/graphql";
@@ -25,9 +25,16 @@ const NewsList: React.FC<PostListProps> = async ({ panel }) => {
     newsCategories: RootQueryToNewsCategoryConnection;
   }>(GET_NEWS_ARTICLES);
 
-  const items = newsArticles ? removeNodes(newsArticles) : [];
+  const items = newsArticles ? removeNodes<NewsArticle>(newsArticles) : [];
 
   const rawCategories = newsCategories ? removeNodes<NewsCategory>(newsCategories) : [];
+
+  const activeCategorySlugs = new Set(
+    items.flatMap(
+      (post) => post.newsCategories?.edges?.map((e) => (e?.node as NewsCategory)?.slug).filter(Boolean) ?? [],
+    ),
+  );
+  const categories = rawCategories.filter((cat) => cat.slug && activeCategorySlugs.has(cat.slug));
 
   const featuredItem = ((panel?.featuredPost as any)?.nodes?.[0] as Post) ?? undefined;
 
@@ -37,7 +44,7 @@ const NewsList: React.FC<PostListProps> = async ({ panel }) => {
       <section className={styles["posts-list"]}>
         <PostsList
           items={items}
-          categories={rawCategories}
+          categories={categories}
           featuredPost={featuredItem}
           activeCategory="all"
           categoryBasePath="/newsroom/category/"

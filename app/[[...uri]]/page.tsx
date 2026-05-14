@@ -67,7 +67,6 @@ const CatchallPage = async ({ params }: PageParams) => {
       );
     }
 
-    case "Post":
     case "NewsArticle":
     case "CareerPost": {
       return <PostTemplate post={contentNode as Post | NewsArticle | CareerPost} />;

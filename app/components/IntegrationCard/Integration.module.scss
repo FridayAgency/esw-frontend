@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.25rem;
+    padding: 1rem;
     @include mixins.breakpoint-up(mobile) {
       width: 11rem;
       height: 9.51931rem;
