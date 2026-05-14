@@ -96,22 +96,37 @@
 
   &__dot {
     appearance: none;
-    width: 0.75rem;
-    height: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
     padding: 0;
     border: none;
-    border-radius: 0.625rem;
-    background: var(--Neutral-Dark-Grey, #8f9a95);
+    background: none;
     cursor: pointer;
-    transition: var(--transition);
 
     &:hover {
-      opacity: 0.5;
+      .carousel__dot-inner {
+        opacity: 0.5;
+      }
     }
 
     &--active {
-      width: 2.5rem;
-      background: var(--Foundation-Signal-Green, #00d180);
+      .carousel__dot-inner {
+        width: 2.5rem;
+        background: var(--Foundation-Signal-Green, #00d180);
+      }
     }
+  }
+
+  &__dot-inner {
+    display: block;
+    width: 0.75rem;
+    height: 2px;
+    border-radius: 0.625rem;
+    background: var(--Neutral-Dark-Grey, #8f9a95);
+    transition: var(--transition);
+    pointer-events: none;
   }
 }

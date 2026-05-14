@@ -58,23 +58,14 @@
   }
 
   &__globe {
-    &-mobile {
-      position: absolute;
-      top: 1rem;
+    position: absolute;
+    top: -2rem;
+    left: -8rem;
 
-      @include mixins.breakpoint-up(mobile) {
-        display: none;
-      }
-    }
-
-    &-desktop {
-      display: none;
-      @include mixins.breakpoint-up(mobile) {
-        display: block;
-        position: absolute;
-        bottom: -27rem;
-        left: -20rem;
-      }
+    @include mixins.breakpoint-up(mobile) {
+      top: auto;
+      left: -20rem;
+      bottom: -27rem;
     }
   }
 

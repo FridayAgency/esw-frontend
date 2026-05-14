@@ -136,6 +136,9 @@ export interface GlobeProps {
 
   /** Callback when globe is clicked */
   onGlobeClick?: (coords: { lat: number; lng: number }, event: MouseEvent) => void;
+
+  /** Delay in ms before loading the globe scripts (default: 3000) */
+  delay?: number;
 }
 
 interface LandDot {
@@ -240,6 +243,7 @@ export const Globe: React.FC<GlobeProps> = ({
   onGlobeClick,
   pointResolution = 4,
   globeOpacity = 1,
+  delay = 3000,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const globeRef = useRef<GlobeInstance | null>(null);
@@ -327,8 +331,8 @@ export const Globe: React.FC<GlobeProps> = ({
       }
     };
 
-    setTimeout(loadScripts, 3000);
-  }, []);
+    setTimeout(loadScripts, delay);
+  }, [delay]);
 
   const processLandMap = useCallback(
     (image: HTMLImageElement): LandDot[] => {

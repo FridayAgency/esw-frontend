@@ -105,6 +105,7 @@ const Footer: React.FC = async () => {
             <ul className={styles["footer__socials"]}>
               <li className={styles["footer__socials-item"]}>
                 <a
+                  suppressHydrationWarning
                   href="https://www.linkedin.com/company/esw/"
                   target="__blank"
                   rel="noopener noreferrer"
@@ -114,12 +115,19 @@ const Footer: React.FC = async () => {
                 </a>
               </li>
               <li className={styles["footer__socials-item"]}>
-                <a href="https://vimeo.com/eswglobal" target="__blank" rel="noopener noreferrer" aria-label="Vimeo">
+                <a
+                  suppressHydrationWarning
+                  href="https://vimeo.com/eswglobal"
+                  target="__blank"
+                  rel="noopener noreferrer"
+                  aria-label="Vimeo"
+                >
                   <Icon type="vimeo" />
                 </a>
               </li>
               <li className={styles["footer__socials-item"]}>
                 <a
+                  suppressHydrationWarning
                   href="https://www.instagram.com/eswglobal/"
                   target="__blank"
                   rel="noopener noreferrer"
@@ -142,7 +150,7 @@ const Footer: React.FC = async () => {
             return (
               <div key={item.databaseId} className={styles["footer__nav-group"]}>
                 {colIndex === 0 && homeItem && (
-                  <a href={homeItem.path ?? "/"} className={styles["footer__nav-heading"]}>
+                  <a suppressHydrationWarning href={homeItem.path ?? "/"} className={styles["footer__nav-heading"]}>
                     {homeItem.label}
                   </a>
                 )}
@@ -156,7 +164,9 @@ const Footer: React.FC = async () => {
                         <ul className={styles["footer__nav-list"]}>
                           {section.items.map((child) => (
                             <li key={child.databaseId} className={styles["footer__nav-item"]}>
-                              <a href={child.uri ?? child.path ?? "#"}>{child.label}</a>
+                              <a suppressHydrationWarning href={child.uri ?? child.path ?? "#"}>
+                                {child.label}
+                              </a>
                             </li>
                           ))}
                         </ul>
@@ -170,7 +180,9 @@ const Footer: React.FC = async () => {
                       const child = node as MenuItem;
                       return (
                         <li key={child.databaseId} className={styles["footer__nav-item"]}>
-                          <a href={child.uri ?? child.path ?? "#"}>{child.label}</a>
+                          <a suppressHydrationWarning href={child.uri ?? child.path ?? "#"}>
+                            {child.label}
+                          </a>
                         </li>
                       );
                     })}
@@ -187,14 +199,20 @@ const Footer: React.FC = async () => {
                 const children = item.childItems?.edges ?? [];
                 return (
                   <li key={item.databaseId} className={styles["footer__nav-item"]}>
-                    <a href={item.uri ?? item.path ?? "#"}>{item.label}</a>
+                    <a suppressHydrationWarning href={item.uri ?? item.path ?? "#"}>
+                      {item.label}
+                    </a>
                     {children.length > 0 && (
                       <ul className={styles["footer__nav-list"]}>
                         {children.map(({ node }) => {
                           const child = node as MenuItem;
                           return (
                             <li key={child.databaseId} className={styles["footer__nav-item"]}>
-                              <a href={child.uri ?? child.path ?? "#"} target={child?.target ?? "_self"}>
+                              <a
+                                suppressHydrationWarning
+                                href={child.uri ?? child.path ?? "#"}
+                                target={child?.target ?? "_self"}
+                              >
                                 {child.label}
                               </a>
                             </li>
@@ -245,33 +263,49 @@ const Footer: React.FC = async () => {
         <nav className={styles["footer__legal"]} aria-label="Legal">
           <ul className={styles["footer__legal-list"]}>
             <li className={styles["footer__legal-item"]}>
-              <a href="/privacy-policy/">Privacy Policy</a>
+              <a suppressHydrationWarning href="/privacy-policy/">
+                Privacy Policy
+              </a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="#">Cookie Settings</a>
+              <a suppressHydrationWarning href="#">
+                Cookie Settings
+              </a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="/terms-and-conditions-of-use/">Terms &amp; Conditions</a>
+              <a suppressHydrationWarning href="/terms-and-conditions-of-use/">
+                Terms &amp; Conditions
+              </a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="/acceptable-use-policy/">Acceptable Use Policy</a>
+              <a suppressHydrationWarning href="/acceptable-use-policy/">
+                Acceptable Use Policy
+              </a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="/modern-slavery-statement/">Modern Slavery Statement</a>
+              <a suppressHydrationWarning href="/modern-slavery-statement/">
+                Modern Slavery Statement
+              </a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="/site-map/">Sitemap</a>
+              <a suppressHydrationWarning href="/site-map/">
+                Sitemap
+              </a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="/legal-hub/">Legal Hub</a>
+              <a suppressHydrationWarning href="/legal-hub/">
+                Legal Hub
+              </a>
             </li>
             <li className={styles["footer__legal-item"]}>
-              <a href="/accessibility-statement/">Accessibility Statement</a>
+              <a suppressHydrationWarning href="/accessibility-statement/">
+                Accessibility Statement
+              </a>
             </li>
           </ul>
         </nav>
 
-        <p className={styles["footer__disclaimer"]}>
+        <p suppressHydrationWarning className={styles["footer__disclaimer"]}>
           Monthly Active Recipients: Pursuant to the Digital Services Act, Article 24(2), our average monthly recipients
           are 241,559.42.
         </p>
@@ -284,11 +318,13 @@ const Footer: React.FC = async () => {
             <span suppressHydrationWarning className={styles["footer__copyright-year"]}>
               &copy; {new Date().getFullYear()} ESW
             </span>
-            <span className={styles["footer__copyright-rights"]}>All Rights Reserved</span>
+            <span suppressHydrationWarning className={styles["footer__copyright-rights"]}>
+              All Rights Reserved
+            </span>
           </div>
           <span className={styles["footer__copyright-site"]}>
             Site by{" "}
-            <a href="https://www.friday.ie" target="_blank" rel="noopener noreferrer">
+            <a suppressHydrationWarning href="https://www.friday.ie" target="_blank" rel="noopener noreferrer">
               Friday
             </a>
           </span>

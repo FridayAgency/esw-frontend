@@ -119,6 +119,7 @@ const StayConnectedClient: React.FC<StayConnectedClientProps> = ({ title, copy }
                       onChange={handleChange("name")}
                       error={errors.name}
                       theme="dark"
+                      autoComplete="name"
                     />
                     <FormInput
                       id="stay-connected-email"
@@ -129,6 +130,7 @@ const StayConnectedClient: React.FC<StayConnectedClientProps> = ({ title, copy }
                       onChange={handleChange("email")}
                       error={errors.email}
                       theme="dark"
+                      autoComplete="email"
                     />
                     <FormInput
                       id="stay-connected-area"

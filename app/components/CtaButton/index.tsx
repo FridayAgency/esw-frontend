@@ -27,7 +27,7 @@ const CtaButton: React.FC<CtaButtonProps> = ({
   const inner = (
     <>
       <span className={styles.ellipse} aria-hidden="true" />
-      {children != null && <span>{children}</span>}
+      {children != null && <span suppressHydrationWarning>{children}</span>}
     </>
   );
 
@@ -41,6 +41,7 @@ const CtaButton: React.FC<CtaButtonProps> = ({
 
   return (
     <Link
+      suppressHydrationWarning
       className={cls.toString()}
       href={href}
       target={target}

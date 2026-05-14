@@ -6,8 +6,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { DM_Sans } from "next/font/google";
 import GSAPProvider from "./components/GsapProvider";
-import Banner from "./components/Banner";
 import Script from "next/script";
+import { Suspense } from "react";
+import GoogleTagManager from "./components/GoggleTag";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -30,9 +31,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           type="text/javascript"
           src="https://cdn-redirector.glopal.com/glopal-loader.js?glopal_store_id=esw"
         />
+        <Suspense>
+          {process.env.NEXT_PUBLIC_GOOGLE_ID && <GoogleTagManager id={process.env.NEXT_PUBLIC_GOOGLE_ID} />}
+        </Suspense>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <GSAPProvider />
         <Header />
-        <main suppressHydrationWarning>{children}</main>
+        <main id="main-content" suppressHydrationWarning>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

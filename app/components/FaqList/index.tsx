@@ -20,7 +20,11 @@ const FaqList: React.FC<FaqListProps> = ({ items, heading, whiteBackground }) =>
   return (
     <div className={styles["faqList"] + (whiteBackground ? " " + styles["faqList--white"] : "")}>
       <Divider />
-      {heading && <h2 className={styles["faqList__heading"]}>{heading}</h2>}
+      {heading && (
+        <h2 suppressHydrationWarning className={styles["faqList__heading"]}>
+          {heading}
+        </h2>
+      )}
       <ul className={styles["faqList__list"]}>
         {items.map((item, index) => (
           <AccordionItem key={index} title={item.title} content={item.content} />

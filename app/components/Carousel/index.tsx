@@ -166,7 +166,12 @@ const Carousel: React.FC<CarouselProps> = ({
     <div
       className={`${styles.carousel}${autoClass}${multiClass}${disabledClass}${className ? ` ${className}` : ""}`.trim()}
     >
-      <div className={styles.carousel__viewport} ref={containerRef} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+      <div
+        className={styles.carousel__viewport}
+        ref={containerRef}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className={styles.carousel__track} style={trackStyle}>
           {slides.map((slide, index) => (
             <div
@@ -190,6 +195,7 @@ const Carousel: React.FC<CarouselProps> = ({
         >
           {showArrows && (
             <button
+              suppressHydrationWarning
               className={`${styles.carousel__arrow} ${styles["carousel__arrow--prev"]}`}
               onClick={() => goToPage(page - 1)}
               disabled={!loop && page === 0}
@@ -208,6 +214,7 @@ const Carousel: React.FC<CarouselProps> = ({
             <div className={styles.carousel__dots} role="tablist" aria-label="Carousel navigation">
               {Array.from({ length: pageCount }).map((_, index) => (
                 <button
+                  suppressHydrationWarning
                   key={index}
                   role="tab"
                   aria-selected={index === page}
@@ -215,13 +222,16 @@ const Carousel: React.FC<CarouselProps> = ({
                   className={`${styles.carousel__dot}${index === page ? ` ${styles["carousel__dot--active"]}` : ""}`}
                   onClick={() => goToPage(index)}
                   type="button"
-                />
+                >
+                  <span className={styles["carousel__dot-inner"]} />
+                </button>
               ))}
             </div>
           )}
 
           {showArrows && (
             <button
+              suppressHydrationWarning
               className={`${styles.carousel__arrow} ${styles["carousel__arrow--next"]}`}
               onClick={() => goToPage(page + 1)}
               disabled={!loop && (pageCount === 0 || page === pageCount - 1)}

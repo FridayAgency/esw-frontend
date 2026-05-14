@@ -31,7 +31,13 @@ const Logos: React.FC<LogosProps> = ({ logos }) => {
     <section className={styles["logo-block"]}>
       <Container className={styles["logo-block__container"]}>
         <div className={styles["logo-block__track-wrapper"]}>
-          <div className={styles["logo-block__track"]} data-paused={paused} aria-label="Logo ticker">
+          <div
+            suppressHydrationWarning
+            className={styles["logo-block__track"]}
+            data-paused={paused}
+            role="region"
+            aria-label="Logo ticker"
+          >
             {items.map((logo, index) => (
               <div key={`${logo.id}-${index}`} className={styles["logo-block__item"]}>
                 <ImageComponent image={logo} />
@@ -42,6 +48,7 @@ const Logos: React.FC<LogosProps> = ({ logos }) => {
 
         <div className={styles["logo-block__controls"]}>
           <button
+            suppressHydrationWarning
             type="button"
             className={styles["logo-block__toggle"]}
             onClick={() => setPaused((p) => !p)}

@@ -12,8 +12,12 @@ export const InstructionsBlock = ({ leadText, items }: InstructionsBlockProps) =
       <ul className={styles["instructions__list"]}>
         {items.map((item, index) => (
           <li className={styles["instructions__list-item"]} key={index}>
-            <span className={styles["instructions__list-number"]}>{index + 1}</span>
-            <span className={styles["instructions__list-text"]}>{item}</span>
+            <span suppressHydrationWarning className={styles["instructions__list-number"]}>
+              {index + 1}
+            </span>
+            <span suppressHydrationWarning className={styles["instructions__list-text"]}>
+              {item}
+            </span>
           </li>
         ))}
       </ul>

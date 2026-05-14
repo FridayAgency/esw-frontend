@@ -17,9 +17,22 @@ export const RadioOptionCard = ({ name, value, checked, onChange, label, icon, a
 
   return (
     <label className={className}>
-      <input type="radio" name={name} value={value} checked={checked} onChange={(e) => onChange(e.target.value)} />
-      {icon && <span className={styles.optionIcon}>{icon}</span>}
-      <span className={styles.optionLabel}>{label}</span>
+      <input
+        suppressHydrationWarning
+        type="radio"
+        name={name}
+        value={value}
+        checked={checked}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      {icon && (
+        <span suppressHydrationWarning className={styles.optionIcon}>
+          {icon}
+        </span>
+      )}
+      <span suppressHydrationWarning className={styles.optionLabel}>
+        {label}
+      </span>
     </label>
   );
 };

@@ -57,7 +57,7 @@ const Button: React.FC<ButtonProps> = ({
         {...props}
       >
         <span className={styles.ellipse}></span>
-        {children != null && <span>{children}</span>}
+        {children != null && <span suppressHydrationWarning>{children}</span>}
       </button>
     );
 
@@ -77,7 +77,7 @@ const Button: React.FC<ButtonProps> = ({
         {...(props as any)}
       >
         <span className={styles.ellipse}></span>
-        {children != null && <span>{children}</span>}
+        {children != null && <span suppressHydrationWarning>{children}</span>}
       </span>
     );
   }
@@ -92,7 +92,7 @@ const Button: React.FC<ButtonProps> = ({
       {...linkProps}
     >
       <span className={styles.ellipse}></span>
-      {children != null && <span>{children}</span>}
+      {children != null && <span suppressHydrationWarning>{children}</span>}
     </Link>
   );
 };

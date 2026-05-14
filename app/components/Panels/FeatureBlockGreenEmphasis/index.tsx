@@ -1,6 +1,3 @@
-import globe from "@/public/assets/glob.gif";
-
-import Image from "next/image";
 import Container from "../../Container";
 import Button from "../../Button";
 import ScrollTriggerWrapper from "../../ScrollTriggerWrapper";
@@ -37,15 +34,7 @@ const FeatureBlockGreenEmphasis: React.FC<FeatureBlockProps> = ({ panel }) => {
       <Container flush className={styles["feature-block__container"]}>
         <div className={styles["feature-block__image"]}>
           <Globe
-            className={styles["feature-block__globe-mobile"]}
-            primaryColor="#00D180"
-            neutralColor="#00D180"
-            globeColor="#007A4E"
-            showAtmosphere={false}
-            globeOpacity={0.5}
-          />
-          <Globe
-            className={styles["feature-block__globe-desktop"]}
+            className={styles["feature-block__globe"]}
             primaryColor="#00D180"
             neutralColor="#00D180"
             globeColor="#007A4E"
@@ -53,6 +42,7 @@ const FeatureBlockGreenEmphasis: React.FC<FeatureBlockProps> = ({ panel }) => {
             globeOpacity={0.5}
             width={950}
             height={870}
+            delay={1500}
           />
         </div>
         <div className={styles["feature-block__content"]}>

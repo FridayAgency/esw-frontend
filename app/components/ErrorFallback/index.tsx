@@ -25,15 +25,21 @@ const ErrorFallback = ({ title, description, onRetry }: ErrorFallbackProps) => {
           gap: "0.75rem",
         }}
       >
-        <h1 style={{ margin: 0, color: "var(--copy)" }}>{title}</h1>
-        <p style={{ margin: 0, color: "var(--copy)" }}>{description}</p>
+        <h1 suppressHydrationWarning style={{ margin: 0, color: "var(--copy)" }}>
+          {title}
+        </h1>
+        <p suppressHydrationWarning style={{ margin: 0, color: "var(--copy)" }}>
+          {description}
+        </p>
         <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>
           {onRetry ? (
-            <Button type="button" onClick={onRetry}>
+            <Button suppressHydrationWarning type="button" onClick={onRetry}>
               Try again
             </Button>
           ) : null}
-          <Button href="/">Back to homepage</Button>
+          <Button suppressHydrationWarning href="/">
+            Back to homepage
+          </Button>
         </div>
       </section>
     </Container>

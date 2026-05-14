@@ -10,6 +10,7 @@ interface SelectFieldProps {
   placeholder?: string;
   error?: string;
   required?: boolean;
+  autoComplete?: string;
 }
 
 export const SelectField = ({
@@ -21,17 +22,19 @@ export const SelectField = ({
   placeholder,
   error,
   required,
+  autoComplete,
 }: SelectFieldProps) => {
   return (
     <div className={styles.fieldGroup}>
       {label && (
-        <label className="visuallyhidden" htmlFor={id}>
+        <label suppressHydrationWarning className="visuallyhidden" htmlFor={id}>
           {label}
           {required && <span className={styles.required}>*</span>}
         </label>
       )}
       <div className={styles.fieldWrapper}>
         <select
+          suppressHydrationWarning
           id={id}
           className={`${styles.selectField} ${error ? styles.fieldError : ""}`}
           value={value}
@@ -40,20 +43,25 @@ export const SelectField = ({
           aria-describedby={error ? `${id}-error` : undefined}
           required={required}
           aria-required={required}
+          autoComplete={autoComplete}
         >
-          {placeholder && <option value="">{placeholder}</option>}
+          {placeholder && (
+            <option suppressHydrationWarning value="">
+              {placeholder}
+            </option>
+          )}
           {options.map((option) => {
             const optionValue = typeof option === "string" ? option : option.value;
             const optionLabel = typeof option === "string" ? option : option.label;
             return (
-              <option key={optionValue} value={optionValue}>
+              <option suppressHydrationWarning key={optionValue} value={optionValue}>
                 {optionLabel}
               </option>
             );
           })}
         </select>
         {error && (
-          <span id={`${id}-error`} className={styles.error} role="alert">
+          <span suppressHydrationWarning id={`${id}-error`} className={styles.error} role="alert">
             {error}
           </span>
         )}

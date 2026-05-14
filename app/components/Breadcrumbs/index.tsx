@@ -21,7 +21,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, title, readTime }): JS
       <Container className={styles["breadcrumbs__container"]}>
         <ol className={styles["breadcrumbs__list"]}>
           <li className={styles["desktop-only"]}>
-            <Link href="/" className={styles["breadcrumbs__link"]}>
+            <Link suppressHydrationWarning href="/" className={styles["breadcrumbs__link"]}>
               Home
             </Link>
           </li>
@@ -30,7 +30,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, title, readTime }): JS
           {items.map((item) => (
             <React.Fragment key={item.href}>
               <li>
-                <Link href={item.href} className={styles["breadcrumbs__link"]}>
+                <Link suppressHydrationWarning href={item.href} className={styles["breadcrumbs__link"]}>
                   {item.label}
                 </Link>
               </li>
@@ -52,7 +52,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, title, readTime }): JS
               />
             </svg>
 
-            <span>
+            <span suppressHydrationWarning>
               {readTime} Minute{readTime !== 1 ? "s" : ""} Read
             </span>
           </div>

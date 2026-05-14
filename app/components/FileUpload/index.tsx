@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styles from "./FileUpload.module.scss";
 
 interface FileUploadProps {
@@ -22,7 +22,6 @@ const FileUpload = ({
   error,
   theme = "light",
 }: FileUploadProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,25 +30,19 @@ const FileUpload = ({
     onChange?.(file);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      inputRef.current?.click();
-    }
-  };
-
   return (
-    <div className={[styles.fileUpload, theme === "dark" ? styles["fileUpload--dark"] : undefined].filter(Boolean).join(" ")}>
-      <div
-        className={[styles.fileUpload__dropzone, error ? styles["fileUpload__dropzone--error"] : undefined].filter(Boolean).join(" ")}
-        onClick={() => inputRef.current?.click()}
-        onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={0}
-        aria-label={label}
+    <div
+      className={[styles.fileUpload, theme === "dark" ? styles["fileUpload--dark"] : undefined]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <label
+        htmlFor={id}
+        className={[styles.fileUpload__dropzone, error ? styles["fileUpload__dropzone--error"] : undefined]
+          .filter(Boolean)
+          .join(" ")}
       >
         <input
-          ref={inputRef}
           id={id}
           name={id}
           type="file"
@@ -77,14 +70,16 @@ const FileUpload = ({
               strokeLinejoin="round"
             />
           </svg>
-          <p className={styles.fileUpload__label}>
+          <p suppressHydrationWarning className={styles.fileUpload__label}>
             {fileName ?? label}
           </p>
         </div>
-        <p className={styles.fileUpload__hint}>{hint ?? `PDF, DOC up to ${maxSizeMB}MB`}</p>
-      </div>
+        <p suppressHydrationWarning className={styles.fileUpload__hint}>
+          {hint ?? `PDF, DOC up to ${maxSizeMB}MB`}
+        </p>
+      </label>
       {error && (
-        <span id={`${id}-error`} className={styles.fileUpload__error} role="alert">
+        <span suppressHydrationWarning id={`${id}-error`} className={styles.fileUpload__error} role="alert">
           {error}
         </span>
       )}

@@ -11,6 +11,7 @@ interface BurgerProps {
 const Burger = memo(({ onClick, isOpen = false }: BurgerProps) => {
   return (
     <button
+      suppressHydrationWarning
       aria-label={isOpen ? "Close Mobile Menu" : "Open Mobile Menu"}
       aria-expanded={isOpen}
       onClick={onClick}

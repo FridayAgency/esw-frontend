@@ -20,13 +20,17 @@ const AuthorHero: React.FC<AuthorHeroProps> = ({ author }) => {
             </div>
           )}
           <div className={styles["hero__identity"]}>
-            <h1 className={styles["hero__name"]}>{name}</h1>
+            <h1 suppressHydrationWarning className={styles["hero__name"]}>
+              {name}
+            </h1>
             {authorCustomFields?.jobRole && <p className={styles["hero__title"]}>{authorCustomFields.jobRole}</p>}
           </div>
         </div>
 
         <div className={styles["hero__about"]}>
-          <p className={styles["hero__about-label"]}>About</p>
+          <p suppressHydrationWarning className={styles["hero__about-label"]}>
+            About
+          </p>
           {description && <p className={styles["hero__bio"]}>{description}</p>}
           {authorCustomFields?.linkedinUrl && (
             <a
@@ -36,7 +40,7 @@ const AuthorHero: React.FC<AuthorHeroProps> = ({ author }) => {
               rel="noopener noreferrer"
             >
               <Icon type="linkedIn" />
-              <span>LinkedIn Profile</span>
+              <span suppressHydrationWarning>LinkedIn Profile</span>
             </a>
           )}
         </div>

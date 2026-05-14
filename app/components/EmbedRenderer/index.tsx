@@ -36,7 +36,7 @@ const EmbedRenderer: React.FC<EmbedRendererProps> = ({ embedCode, className }) =
     });
   }, [embedCode]);
 
-  return <div ref={containerRef} className={className} />;
+  return <div suppressHydrationWarning ref={containerRef} className={className} />;
 };
 
 export default EmbedRenderer;

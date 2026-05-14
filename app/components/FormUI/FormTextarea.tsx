@@ -13,6 +13,7 @@ interface FormTextareaProps {
   rows?: number;
   textareaRef?: RefObject<HTMLTextAreaElement | null>;
   className?: string;
+  autoComplete?: string;
 }
 
 const FormTextarea = ({
@@ -26,13 +27,20 @@ const FormTextarea = ({
   rows = 6,
   textareaRef,
   className,
+  autoComplete,
 }: FormTextareaProps) => (
   <div className={[styles.field, className].filter(Boolean).join(" ")}>
-    <label htmlFor={id}>
-      {label} {required && <span aria-label="required">*</span>}
+    <label suppressHydrationWarning htmlFor={id}>
+      {label}{" "}
+      {required && (
+        <span suppressHydrationWarning aria-label="required">
+          *
+        </span>
+      )}
     </label>
     <span className={styles["field__wrapper"]}>
       <textarea
+        suppressHydrationWarning
         ref={textareaRef}
         id={id}
         name={id}
@@ -43,11 +51,12 @@ const FormTextarea = ({
         aria-describedby={error ? `${id}-error` : undefined}
         rows={rows}
         required={required}
+        autoComplete={autoComplete}
       />
       {error && <ErrorIcon />}
     </span>
     {error && (
-      <span id={`${id}-error`} className={styles.error} role="alert">
+      <span suppressHydrationWarning id={`${id}-error`} className={styles.error} role="alert">
         {error}
       </span>
     )}

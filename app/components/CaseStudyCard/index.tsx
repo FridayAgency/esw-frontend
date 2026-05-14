@@ -21,8 +21,12 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ caseStudy, fullwidth }) =
       )}
       <div className={styles["case-study__content"]}>
         <div className={styles["case-study__copy"]}>
-          <h3 className={styles["case-study__title"]}>{title}</h3>
-          <p className={styles["case-study__description"]}>{caseStudyCard?.cardCopy}</p>
+          <h3 suppressHydrationWarning className={styles["case-study__title"]}>
+            {title}
+          </h3>
+          <p suppressHydrationWarning className={styles["case-study__description"]}>
+            {caseStudyCard?.cardCopy}
+          </p>
         </div>
 
         <div className={styles["case-study__read-more"]}>
