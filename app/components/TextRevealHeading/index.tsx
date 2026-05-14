@@ -129,7 +129,7 @@ const TextRevealHeading: React.FC<TextRevealHeadingProps> = ({
   // }, []);
 
   return (
-    <div ref={containerRef} data-copy-wrapper={true} className={styles.container}>
+    <div suppressHydrationWarning ref={containerRef} data-copy-wrapper={true} className={styles.container}>
       {children}
     </div>
   );

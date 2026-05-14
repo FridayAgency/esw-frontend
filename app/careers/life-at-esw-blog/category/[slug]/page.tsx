@@ -86,7 +86,7 @@ const CareersBlogCategoryPage: NextPage<PageParams> = async ({ params }) => {
             categories={categories}
             activeCategory={pageUri ?? ""}
             featuredPost={featuredPost}
-            categoryBasePath="/careers/life-at-esw-blog/category/"
+            categoryBasePath="/careers/life-at-esw-blog/category"
             allPostsHref="/careers/life-at-esw-blog/"
           />
         </section>
