@@ -67,7 +67,9 @@ const FeatureBlock: React.FC<FeatureBlockProps> = ({ panel }) => {
                 </TextRevealHeading>
               )}
             </div>
-            <div className={styles["feature-block__description"]}>{text && parse(text)}</div>
+            <div suppressHydrationWarning className={styles["feature-block__description"]}>
+              {text && parse(text)}
+            </div>
 
             {callToAction && callToAction.url && (
               <Button href={callToAction.url} variant="text" colour={background === "dark" ? "light" : "dark"}>

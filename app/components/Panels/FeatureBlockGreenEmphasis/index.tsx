@@ -59,7 +59,9 @@ const FeatureBlockGreenEmphasis: React.FC<FeatureBlockProps> = ({ panel }) => {
           <Divider colour="foundation-green" />
           <div className={styles["feature-block__text"]}>
             {title && <h2 className={styles["feature-block__title"]}>{title}</h2>}
-            <div className={styles["feature-block__description"]}>{parse(copy || "")}</div>
+            <div suppressHydrationWarning className={styles["feature-block__description"]}>
+              {parse(copy || "")}
+            </div>
             {callToAction && (
               <Button href={callToAction.url ?? ""} variant="text">
                 {callToAction.title}

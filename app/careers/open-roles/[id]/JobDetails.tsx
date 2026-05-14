@@ -36,8 +36,6 @@ const calculateDifferenceInDays = (dateInPast: Date) => {
 
 // const OpenRolePage: NextPage<PageParams> = async ({ params }) => {
 const JobDetails = ({ id }: { id: string }) => {
-
-
   const [careerOpenRole, setCareerOpenRole] = React.useState<openRole>({
     id: parseInt(id),
     title: "",
@@ -62,7 +60,7 @@ const JobDetails = ({ id }: { id: string }) => {
           throw new Error(`HTTP error! status: ${fetchCareerOpenRoleResponse.status}`);
         } else {
           careerOpenRoleResponse = await fetchCareerOpenRoleResponse.json();
-  
+
           setCareerOpenRole({
             id: careerOpenRoleResponse.id,
             title: careerOpenRoleResponse.title,
@@ -92,6 +90,7 @@ const JobDetails = ({ id }: { id: string }) => {
       <Container className={styles["careers-open-role__container"]}>
         <div className={styles["careers-open-role__content"]}>
           <div
+            suppressHydrationWarning
             dangerouslySetInnerHTML={{ __html: careerOpenRole.content }}
             className={styles["careers-open-role__content__text"]}
           />

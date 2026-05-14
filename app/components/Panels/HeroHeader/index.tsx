@@ -65,7 +65,11 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({ panel }) => {
             </TextRevealHeading>
           )}
 
-          {copy && <div className={styles["hero-header__copy"]}>{parse(copy)}</div>}
+          {copy && (
+            <div suppressHydrationWarning className={styles["hero-header__copy"]}>
+              {parse(copy)}
+            </div>
+          )}
 
           <div className={styles["hero-header__cta"]}>
             <TalkToUsButton />

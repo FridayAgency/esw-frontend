@@ -61,7 +61,9 @@ const Testimonial: React.FC<TestimonialProps> = ({ panel }) => {
         )}
 
         <div className={styles["testimonial__content"]}>
-          <div className={styles["testimonial__text"]}>{parse(testimonial.testimonailDetails?.quote || "")}</div>
+          <div suppressHydrationWarning className={styles["testimonial__text"]}>
+            {parse(testimonial.testimonailDetails?.quote || "")}
+          </div>
 
           <div className={styles["testimonial__author"]}>
             {testimonial.testimonailDetails?.quoteAuthorImage &&

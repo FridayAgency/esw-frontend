@@ -28,7 +28,9 @@ const FullWidthImage: React.FC<FullWidthImageProps> = ({ panel, image: propImage
       <figure className={styles["image__figure"]}>
         <ImageComponent image={image?.node} />
         {image?.node?.caption && (
-          <figcaption className={styles["image__caption"]}>{parse(image?.node?.caption || "")}</figcaption>
+          <figcaption suppressHydrationWarning className={styles["image__caption"]}>
+            {parse(image?.node?.caption || "")}
+          </figcaption>
         )}
       </figure>
     </Container>

@@ -47,7 +47,11 @@ const ThankYouHeader: React.FC<ThankYouHeaderProps> = ({ panel }) => {
 
           <div className={styles["thank-you-header__text"]}>
             {title && <h1 className={styles["thank-you-header__title"]}>{title}</h1>}
-            {copy && <div className={styles["thank-you-header__copy"]}>{parse(copy)}</div>}
+            {copy && (
+              <div suppressHydrationWarning className={styles["thank-you-header__copy"]}>
+                {parse(copy)}
+              </div>
+            )}
           </div>
 
           {callToAction?.url && callToAction?.title && (

@@ -43,7 +43,11 @@ const CallToActionWithImages: React.FC<CallToActionWithImagesProps> = ({ panel }
                   {subtitle && <p className={styles["cta-with-images__subtitle"]}>{subtitle}</p>}
                   {title && <h2 className={styles["cta-with-images__title"]}>{title}</h2>}
                 </div>
-                {copy && <div className={styles["cta-with-images__copy"]}>{parse(copy)}</div>}
+                {copy && (
+                  <div suppressHydrationWarning className={styles["cta-with-images__copy"]}>
+                    {parse(copy)}
+                  </div>
+                )}
                 {callToAction?.url && callToAction?.title && (
                   <div className={styles["cta-with-images__button"]}>
                     <Button

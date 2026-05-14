@@ -87,7 +87,9 @@ const ApplicationProcessClient: React.FC<ApplicationProcessClientProps> = ({ pan
                 className={styles["application-process__panel"]}
               >
                 <h3 className={styles["application-process__step-title"]}>{step.title}</h3>
-                <span className={styles["application-process__step-description"]}>{parse(step.copy ?? "")}</span>
+                <span suppressHydrationWarning className={styles["application-process__step-description"]}>
+                  {parse(step.copy ?? "")}
+                </span>
               </div>
             );
           })}

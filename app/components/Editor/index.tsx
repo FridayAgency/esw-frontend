@@ -17,7 +17,11 @@ const Editor: React.FC<{ content: string; className?: string }> = ({ content, cl
 
   if (!content) return null;
 
-  return <div className={editorClass.toString()}>{parse(normalizeHtmlForParser(content))}</div>;
+  return (
+    <div suppressHydrationWarning className={editorClass.toString()}>
+      {parse(normalizeHtmlForParser(content))}
+    </div>
+  );
 };
 
 export default Editor;

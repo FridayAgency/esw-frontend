@@ -28,12 +28,18 @@ const Image50Text50: React.FC<Image50Text50Props> = ({ panel }) => {
         <figure className={styles["image-50-text-50__figure"]}>
           <ImageComponent image={image.node} />
           {image?.node?.caption && (
-            <figcaption className={styles["image-50-text-50__caption"]}>{parse(image.node.caption)}</figcaption>
+            <figcaption suppressHydrationWarning className={styles["image-50-text-50__caption"]}>
+              {parse(image.node.caption)}
+            </figcaption>
           )}
         </figure>
       )}
 
-      {text && <div className={styles["image-50-text-50__content"]}>{parse(text ?? "")}</div>}
+      {text && (
+        <div suppressHydrationWarning className={styles["image-50-text-50__content"]}>
+          {parse(text ?? "")}
+        </div>
+      )}
     </Container>
   );
 };

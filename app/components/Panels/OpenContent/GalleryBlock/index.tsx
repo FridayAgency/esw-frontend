@@ -25,7 +25,9 @@ const GalleryBlock: React.FC<GalleryBlockProps> = ({ panel }) => {
                 <figure className={styles["image__figure"]}>
                   <ImageComponent image={node} />
                   {node?.caption && (
-                    <figcaption className={styles["image__caption"]}>{parse(node?.caption || "")}</figcaption>
+                    <figcaption suppressHydrationWarning className={styles["image__caption"]}>
+                      {parse(node?.caption || "")}
+                    </figcaption>
                   )}
                 </figure>
               </div>

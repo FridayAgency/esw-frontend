@@ -41,7 +41,7 @@ const QuickLinks: React.FC<QuickLinksProps> = ({ panel }) => {
                 return (
                   <li key={index}>
                     <a href={link.url} target={link.target ?? "_self"} className={styles["quick-links__item"]}>
-                      <span>{parse(link.title ?? "")}</span>
+                      <span suppressHydrationWarning>{parse(link.title ?? "")}</span>
                       <span className={styles["quick-links__arrow"]}>
                         <Icon type="arrowRight" />
                       </span>
