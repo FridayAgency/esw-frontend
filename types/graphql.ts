@@ -11981,6 +11981,8 @@ export type PagePanelsPagePanelsList = AcfFieldGroup & AcfFieldGroupFields & Pag
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;select&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsList&quot; Field Group */
   icon?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** Add an icon from the media library */
+  iconImg?: Maybe<AcfMediaItemConnectionEdge>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsList&quot; Field Group */
   title?: Maybe<Scalars['String']['output']>;
 };
@@ -12046,6 +12048,8 @@ export type PagePanelsPagePanelsList_Fields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;select&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsList&quot; Field Group */
   icon?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** Add an icon from the media library */
+  iconImg?: Maybe<AcfMediaItemConnectionEdge>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsList&quot; Field Group */
   title?: Maybe<Scalars['String']['output']>;
 };

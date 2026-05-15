@@ -1,4 +1,4 @@
-import { Maybe, PagePanelsPagePanelsIconBlockLayout } from "@/types/graphql";
+import { AcfMediaItemConnectionEdge, Maybe, PagePanelsPagePanelsIconBlockLayout } from "@/types/graphql";
 import Button from "../../Button";
 import Container from "../../Container";
 import TextRevealHeading from "../../TextRevealHeading";
@@ -6,6 +6,7 @@ import TextRevealHeading from "../../TextRevealHeading";
 import styles from "./IconBlock.module.scss";
 import Icon from "../../Icon";
 import { ClassName } from "@fridayagency/classnames";
+import ImageComponent from "../../ImageComponent";
 
 export const LIST_ICON_FRAGMENT = `
   title
@@ -13,22 +14,31 @@ export const LIST_ICON_FRAGMENT = `
     title
     icon
     copy
+     iconImg{
+    ...AcfMediaItem
+ }
   }
   callToAction {
     ...AcfLinkFragment
   }
+
+
+
 `;
 
 interface ListItemProps {
   icon: string | Maybe<string>[];
   title: string;
   copy: string;
+  img: Maybe<AcfMediaItemConnectionEdge> | null;
 }
 
-export const ListItem: React.FC<ListItemProps> = ({ icon, title, copy }) => {
+export const ListItem: React.FC<ListItemProps> = ({ icon, title, copy, img }) => {
+  const imgUrl = img?.node;
+
   return (
     <li className={styles["icon-block__list-item"]}>
-      {icon && <Icon type={icon?.[0] as any} />}
+      {imgUrl ? <ImageComponent image={img?.node} /> : icon && <Icon type={icon?.[0] as any} />}
       {title && <h3 className={styles["icon-block__list-item-title"]}>{title}</h3>}
       {copy && <p className={styles["icon-block__list-item-copy"]}>{copy}</p>}
     </li>
@@ -64,7 +74,16 @@ const IconBlock: React.FC<IconBlockProps> = ({ panel }) => {
             list.length &&
             list.map((item, index) => {
               if (!item) return null;
-              return <ListItem key={index} icon={item.icon ?? ""} title={item.title ?? ""} copy={item.copy ?? ""} />;
+
+              return (
+                <ListItem
+                  key={index}
+                  icon={item.icon ?? ""}
+                  title={item.title ?? ""}
+                  copy={item.copy ?? ""}
+                  img={item.iconImg ?? null}
+                />
+              );
             })}
         </ul>
         {callToAction && (
