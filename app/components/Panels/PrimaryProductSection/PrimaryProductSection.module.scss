@@ -165,7 +165,7 @@
     &-arrow {
       position: absolute;
       bottom: 0.25rem;
-      right: 1.5rem;
+      right: 2rem;
 
       @include mixins.breakpoint-up(mobile) {
         top: 0;

@@ -56,26 +56,6 @@ p {
   }
 }
 
-a {
-  color: var(--Foundation-Operational-Green, #007a4e);
-  transition: color 0.3s ease;
-
-  &:focus {
-    color: inherit;
-  }
-
-  &:hover {
-    color: var(--Foundation-Orchestrated-Green, #063e2d);
-  }
-
-  &:focus-visible {
-    outline: 4px solid var(--Foundation-Operational-Green, #007a4e);
-
-    border-radius: 0.25rem;
-    outline-offset: 0.25rem;
-  }
-}
-
 h1,
 h2,
 h3,

@@ -49,32 +49,21 @@
         }
 
         select {
-          position: relative;
           display: block;
           width: 100%;
-          padding: 11px var(--spacing-sm);
+          padding: 11px 2.5rem 11px var(--spacing-sm);
           font-weight: var(--form-label-font-weight);
           font-size: var(--form-label-font-size);
           line-height: var(--form-label-line-height);
           color: var(--Foundation-Black);
           border: solid 1px var(--Neutral-Dark-Grey);
           border-radius: 0.25rem;
-
-          &::after {
-            position: absolute;
-            display: block;
-            height: 1.5rem;
-            width: 1.5rem;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="%2300c851"/></svg>');
-            background-color: var(--Foundation-White);
-            background-repeat: no-repeat;
-            background-size: contain;
-            content: "";
-            z-index: 2;
-          }
+          appearance: none;
+          background-color: var(--Foundation-White);
+          background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 17.0855L19.4742 23.7756C19.7647 24.0748 20.2353 24.0748 20.5258 23.7756L27 17.0855L25.9494 16L20 22.1469L14.0505 16L13 17.0855Z" fill="%238F9A95"/></svg>');
+          background-repeat: no-repeat;
+          background-position: right 0.75rem center;
+          background-size: 2rem;
         }
       }
 

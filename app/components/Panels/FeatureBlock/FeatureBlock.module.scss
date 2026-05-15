@@ -63,12 +63,12 @@
   &.feature-block--no-image {
     .feature-block__content {
       @include mixins.breakpoint-up(mobile) {
-        grid-column: 2 / span 10;
+        grid-column: 2 / span 10 !important;
         grid-row: 1/2;
       }
 
       @include mixins.breakpoint-up(tablet) {
-        grid-column: 3 / span 8;
+        grid-column: 3 / span 8 !important;
       }
     }
 
