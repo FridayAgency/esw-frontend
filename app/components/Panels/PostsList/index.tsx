@@ -24,9 +24,14 @@ const PostList: React.FC<PostListProps> = async ({ panel }) => {
     categories: RootQueryToCategoryConnection;
   }>(GET_POSTS);
 
-  const items = posts ? removeNodes(posts) : [];
+  const items = posts ? removeNodes<Post>(posts) : [];
 
   const rawCategories = categories ? removeNodes<Category>(categories) : [];
+
+  const activeCategoryIds = new Set(
+    items.flatMap((post) => post.categories?.edges?.map((e) => e?.node?.databaseId).filter(Boolean) ?? []),
+  );
+  const filteredCategories = rawCategories.filter((cat) => activeCategoryIds.has(cat.databaseId));
 
   const featuredItem = ((panel?.featuredPost as any)?.nodes?.[0] as Post) ?? undefined;
 
@@ -34,7 +39,7 @@ const PostList: React.FC<PostListProps> = async ({ panel }) => {
     <>
       <BlogLandingSchema posts={items} section="blog" />
       <section className={styles["posts-list"]}>
-        <PostsList items={items} categories={rawCategories} featuredPost={featuredItem} activeCategory="all" />
+        <PostsList items={items} categories={filteredCategories} featuredPost={featuredItem} activeCategory="all" />
       </section>
     </>
   );

@@ -23,7 +23,7 @@
   &.image-left {
     @include mixins.breakpoint-up(mobile) {
       .image-50-text-50__figure {
-        grid-column: 1 / span 6;
+        grid-column: 1 / span 5;
         grid-row: 1 / span 1;
 
         &:after {
@@ -33,7 +33,7 @@
       }
 
       .image-50-text-50__content {
-        grid-column: 8 / span 5;
+        grid-column: 7 / span 5;
         grid-row: 1 / span 1;
       }
     }
@@ -42,7 +42,7 @@
   &.image-right {
     @include mixins.breakpoint-up(mobile) {
       .image-50-text-50__figure {
-        grid-column: 7 / span 6;
+        grid-column: 7 / span 5;
         grid-row: 1 / span 1;
 
         &:after {
@@ -52,7 +52,7 @@
       }
 
       .image-50-text-50__content {
-        grid-column: 1 / span 5;
+        grid-column: 2 / span 4;
         grid-row: 1 / span 1;
       }
     }
@@ -72,7 +72,7 @@
         width: 4rem;
         height: 4rem;
         background: var(--Foundation-Signal-Green, #00d180);
-        bottom: 1.7rem;
+        bottom: -1.3rem;
         z-index: -1;
       }
     }

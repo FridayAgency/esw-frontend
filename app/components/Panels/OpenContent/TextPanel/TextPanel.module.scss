@@ -17,7 +17,7 @@
 
   &__content {
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 1 / span 8;
+      grid-column: 2 / span 8;
     }
   }
 
@@ -27,5 +27,4 @@
       margin-left: 1.5rem;
     }
   }
-
 }

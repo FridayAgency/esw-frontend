@@ -54,7 +54,7 @@
     @include mixins.breakpoint-up(mobile) {
       flex-wrap: wrap;
       overflow: visible;
-      padding: 0 1.5rem;
+      // padding: 0 1.5rem;
       .desktop-only {
         display: inline;
       }

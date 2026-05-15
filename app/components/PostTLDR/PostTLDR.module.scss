@@ -26,7 +26,9 @@
     color: var(--Foundation-Black, #1e2221);
 
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 1 / span 9;
+      grid-column: 2 / span 9;
+
+      padding: 2.5rem 3rem;
     }
   }
 

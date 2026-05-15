@@ -29,7 +29,7 @@
       height: calc(100% - 4rem);
       top: 2rem;
 
-      left: 5.5rem;
+      left: 15rem;
     }
   }
 
@@ -37,7 +37,7 @@
     padding: 1.5rem 1rem;
 
     @include mixins.breakpoint-up(mobile) {
-      grid-column: 1 / span 8;
+      grid-column: 3 / span 8;
     }
 
     p {
