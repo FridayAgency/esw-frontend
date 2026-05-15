@@ -56,6 +56,7 @@ const CatchallPage = async ({ params }: PageParams) => {
       const breadcrumbs = breadcrumbConfig[contentNode.__typename ?? ""];
       const panels = extractPanels(node);
       const readTime = breadcrumbs ? calculateReadTime(panels ?? []) : undefined;
+
       return (
         <PagePanelsTemplate
           panels={panels}
