@@ -11,6 +11,7 @@ import ProductCard from "./ProductCard";
 
 export const PRIMARYPRODUCTSECTION_FRAGMENT = `
   title
+  copy
   products {
     edges {
       node {
@@ -34,7 +35,7 @@ interface PrimaryProductSectionProps {
 }
 
 const PrimaryProductSection: React.FC<PrimaryProductSectionProps> = ({ panel }) => {
-  const { title, products } = panel;
+  const { title, copy, products } = panel;
 
   if (!products || products.edges.length === 0) {
     return null;
@@ -101,7 +102,8 @@ const PrimaryProductSection: React.FC<PrimaryProductSectionProps> = ({ panel }) 
         </svg>
 
         <div className={styles["primary-product-section__list"]}>
-          <h2 className={styles["primary-product-section__list-title"]}>Products and Services</h2>
+          <h2 className={styles["primary-product-section__list-title"]}>{title}</h2>
+          {copy && <p className={styles["primary-product-section__list-copy"]}>{copy}</p>}
 
           <ul className={styles["primary-product-section__products"]}>
             {productsToDisplay.map((product) => (

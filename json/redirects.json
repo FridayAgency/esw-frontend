@@ -1,13 +1,13 @@
 {
     "plugin": {
         "version": "5.7.5",
-        "date": "Fri, 15 May 2026 10:18:08 +0000"
+        "date": "Fri, 15 May 2026 14:05:54 +0000"
     },
     "groups": [
         {
             "id": 1,
             "name": "Redirections",
-            "redirects": 426,
+            "redirects": 433,
             "module_id": 1,
             "moduleName": "WordPress",
             "enabled": true
@@ -11945,6 +11945,200 @@
             "regex": false,
             "group_id": 1,
             "position": 431,
+            "last_access": "-",
+            "enabled": true
+        },
+        {
+            "id": 433,
+            "url": "/Old URL",
+            "match_url": "/old%20url",
+            "match_data": {
+                "source": {
+                    "flag_query": "exact",
+                    "flag_case": true,
+                    "flag_trailing": true,
+                    "flag_regex": false
+                }
+            },
+            "action_code": 301,
+            "action_type": "url",
+            "action_data": {
+                "url": "New URL"
+            },
+            "match_type": "url",
+            "title": "",
+            "hits": 0,
+            "regex": false,
+            "group_id": 1,
+            "position": 426,
+            "last_access": "-",
+            "enabled": true
+        },
+        {
+            "id": 434,
+            "url": "/de/esw-ernennt-tonia-luykx-zur-chief-revenue-officer/",
+            "match_url": "/de/esw-ernennt-tonia-luykx-zur-chief-revenue-officer",
+            "match_data": {
+                "source": {
+                    "flag_query": "exact",
+                    "flag_case": true,
+                    "flag_trailing": true,
+                    "flag_regex": false
+                }
+            },
+            "action_code": 301,
+            "action_type": "url",
+            "action_data": {
+                "server": "https://esw.com",
+                "url_from": "https://de.esw.com/newsroom/",
+                "url_notfrom": ""
+            },
+            "match_type": "server",
+            "title": "",
+            "hits": 0,
+            "regex": false,
+            "group_id": 1,
+            "position": 427,
+            "last_access": "-",
+            "enabled": true
+        },
+        {
+            "id": 435,
+            "url": "/es/11-maneras-de-mejorar-la-experiencia-de-compra-en-ecommerce-dtc-en-2026/",
+            "match_url": "/es/11-maneras-de-mejorar-la-experiencia-de-compra-en-ecommerce-dtc-en-2026",
+            "match_data": {
+                "source": {
+                    "flag_query": "exact",
+                    "flag_case": true,
+                    "flag_trailing": true,
+                    "flag_regex": false
+                }
+            },
+            "action_code": 301,
+            "action_type": "url",
+            "action_data": {
+                "server": "https://esw.com",
+                "url_from": "https://es.esw.com/blog/11-ways-to-improve-the-dtc-ecommerce-shopper-experience-in-2026/",
+                "url_notfrom": ""
+            },
+            "match_type": "server",
+            "title": "",
+            "hits": 0,
+            "regex": false,
+            "group_id": 1,
+            "position": 428,
+            "last_access": "-",
+            "enabled": true
+        },
+        {
+            "id": 436,
+            "url": "/esw-and-scholl-partner-to-accelerate-cross-border-ecommerce-expansion-across-50-markets/",
+            "match_url": "/esw-and-scholl-partner-to-accelerate-cross-border-ecommerce-expansion-across-50-markets",
+            "match_data": {
+                "source": {
+                    "flag_query": "exact",
+                    "flag_case": true,
+                    "flag_trailing": true,
+                    "flag_regex": false
+                }
+            },
+            "action_code": 301,
+            "action_type": "url",
+            "action_data": {
+                "server": "https://esw.com",
+                "url_from": "https://esw.com/newsroom/",
+                "url_notfrom": ""
+            },
+            "match_type": "server",
+            "title": "",
+            "hits": 0,
+            "regex": false,
+            "group_id": 1,
+            "position": 429,
+            "last_access": "-",
+            "enabled": true
+        },
+        {
+            "id": 437,
+            "url": "/fr/4-bonnes-raisons-de-proposer-plusieurs-options-de-paiement-e-commerce/",
+            "match_url": "/fr/4-bonnes-raisons-de-proposer-plusieurs-options-de-paiement-e-commerce",
+            "match_data": {
+                "source": {
+                    "flag_query": "exact",
+                    "flag_case": true,
+                    "flag_trailing": true,
+                    "flag_regex": false
+                }
+            },
+            "action_code": 301,
+            "action_type": "url",
+            "action_data": {
+                "server": "https://esw.com",
+                "url_from": "https://fr.esw.com/payments-checkout-capabilities/",
+                "url_notfrom": ""
+            },
+            "match_type": "server",
+            "title": "",
+            "hits": 0,
+            "regex": false,
+            "group_id": 1,
+            "position": 430,
+            "last_access": "-",
+            "enabled": true
+        },
+        {
+            "id": 438,
+            "url": "/kuiu-unlocks-global-dtc-success-in-partnership-with-esw/",
+            "match_url": "/kuiu-unlocks-global-dtc-success-in-partnership-with-esw",
+            "match_data": {
+                "source": {
+                    "flag_query": "exact",
+                    "flag_case": true,
+                    "flag_trailing": true,
+                    "flag_regex": false
+                }
+            },
+            "action_code": 301,
+            "action_type": "url",
+            "action_data": {
+                "server": "https://esw.com",
+                "url_from": "https://esw.com/newsroom/",
+                "url_notfrom": ""
+            },
+            "match_type": "server",
+            "title": "",
+            "hits": 0,
+            "regex": false,
+            "group_id": 1,
+            "position": 431,
+            "last_access": "-",
+            "enabled": true
+        },
+        {
+            "id": 439,
+            "url": "/meet-the-team-behind-esws-agentic-hub-transforming-ecommerce-through-ai/",
+            "match_url": "/meet-the-team-behind-esws-agentic-hub-transforming-ecommerce-through-ai",
+            "match_data": {
+                "source": {
+                    "flag_query": "exact",
+                    "flag_case": true,
+                    "flag_trailing": true,
+                    "flag_regex": false
+                }
+            },
+            "action_code": 301,
+            "action_type": "url",
+            "action_data": {
+                "server": "https://esw.com",
+                "url_from": "https://esw.com/product/agentic-commerce/",
+                "url_notfrom": ""
+            },
+            "match_type": "server",
+            "title": "",
+            "hits": 0,
+            "regex": false,
+            "group_id": 1,
+            "position": 432,
             "last_access": "-",
             "enabled": true
         }

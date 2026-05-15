@@ -12199,6 +12199,8 @@ export type PagePanelsPagePanelsPostsListLayout_FieldsFeaturedPostArgs = {
 /** The &quot;PagePanelsPagePanelsPrimaryProductSectionLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PagePanelsPagePanelsPrimaryProductSectionLayout = AcfFieldGroup & AcfFieldGroupFields & PagePanelsPagePanelsPrimaryProductSectionLayout_Fields & PagePanelsPagePanels_Layout & {
   __typename?: 'PagePanelsPagePanelsPrimaryProductSectionLayout';
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsPrimaryProductSectionLayout&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -12221,6 +12223,8 @@ export type PagePanelsPagePanelsPrimaryProductSectionLayoutProductsArgs = {
 
 /** Interface representing fields of the ACF &quot;PagePanelsPagePanelsPrimaryProductSectionLayout&quot; Field Group */
 export type PagePanelsPagePanelsPrimaryProductSectionLayout_Fields = {
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PagePanelsPagePanelsPrimaryProductSectionLayout&quot; Field Group */
+  copy?: Maybe<Scalars['String']['output']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead

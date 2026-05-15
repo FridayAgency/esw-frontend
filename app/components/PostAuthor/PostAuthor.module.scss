@@ -23,7 +23,7 @@
 
     @include mixins.breakpoint-up(mobile) {
       display: grid;
-      grid-template-columns: 13.375rem 1fr;
+      // grid-template-columns: 13.375rem 1fr;
       gap: 0.5rem;
       padding: 1.5rem;
       align-items: flex-start;

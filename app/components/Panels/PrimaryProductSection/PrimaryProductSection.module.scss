@@ -53,10 +53,19 @@
 
     &-title {
       @include text-styles.text-style("mobile-h3");
-      color: var(--Foundation-Operational-Green, #007a4e);
+      color: var(--Foundation-Orchestrated-Green, #063e2d);
 
       @include mixins.breakpoint-up(mobile) {
         @include text-styles.text-style("desktop-h2");
+      }
+    }
+
+    &-copy {
+      @include text-styles.text-style("mobile-h5");
+      color: var(--Foundation-Orchestrated-Green, #063e2d);
+
+      @include mixins.breakpoint-up(mobile) {
+        @include text-styles.text-style("desktop-h5");
       }
     }
   }

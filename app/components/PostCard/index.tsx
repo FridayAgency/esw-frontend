@@ -31,13 +31,13 @@ const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAutho
       <div className={styles["card__content"]}>
         <div className={styles["card__content--meta"]}>
           {postType ? (
-            <div className={styles["card__content--category"]}>
+            <div suppressHydrationWarning className={styles["card__content--category"]}>
               {postType === "blog" ? "Blog" : postType === "news" ? "News" : "Career"}
             </div>
           ) : null}
 
           {showDate && post.date && (
-            <div className={styles["card__content--date"]}>
+            <div suppressHydrationWarning className={styles["card__content--date"]}>
               Published {new Date(post.date).toLocaleDateString("en-GB", { month: "long", year: "numeric" })}
             </div>
           )}
@@ -45,18 +45,23 @@ const PostCard: React.FC<PostCardProps> = ({ post, postType, showDate, showAutho
 
         <div className={styles["card__content--header"]}>
           <h3>
-            <span>{title}</span>
+            <span suppressHydrationWarning>{title}</span>
           </h3>
         </div>
 
         {showAuthor && author?.node?.name && (
+          // <div className={styles["card__author"]}>
+          //   {author.node.avatar?.url && (
+          //     <div className={styles["card__author-avatar"]}>
+          //       <Image src={author.node.avatar.url} alt={author.node.name} width={40} height={40} />
+          //     </div>
+          //   )}
+          //   <div className={styles["card__author-name"]}> {author.node.name}</div>
+          // </div>
           <div className={styles["card__author"]}>
-            {author.node.avatar?.url && (
-              <div className={styles["card__author-avatar"]}>
-                <Image src={author.node.avatar.url} alt={author.node.name} width={40} height={40} />
-              </div>
-            )}
-            <div className={styles["card__author-name"]}> {author.node.name}</div>
+            <div suppressHydrationWarning className={styles["card__author-name"]}>
+              ESW Content Team
+            </div>
           </div>
         )}
 

@@ -1,7 +1,7 @@
 # @format
 
 overwrite: true
-schema: "https://esw1dev.wpenginepowered.com/graphql"
+schema: "https://esw1.wpenginepowered.com/graphql"
 generates:
   types/graphql.ts:
     plugins:

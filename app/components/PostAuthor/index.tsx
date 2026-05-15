@@ -53,7 +53,7 @@ const PostAuthor: React.FC<PostAuthorProps> = ({ author }) => {
     <>
       <div className={styles["author__profile"]}>
         <p suppressHydrationWarning className={styles["author__name"]}>
-          "ESW Content Team"
+          ESW Content Team
         </p>
       </div>
     </>
