@@ -71,20 +71,6 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
-          {
-            key: "Content-Security-Policy-Report-Only",
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.glopal.com *.salesforce.com *.force.com *.exacttarget.com *.sfmc.co *.googletagmanager.com *.google-analytics.com *.cookieyes.com cdn-cookieyes.com *.my.site.com unpkg.com",
-              "style-src 'self' 'unsafe-inline' *.glopal.com *.salesforce.com fonts.googleapis.com",
-              "img-src 'self' data: https:",
-              "font-src 'self' data: https: fonts.gstatic.com",
-              "connect-src 'self' *.glopal.com *.salesforce.com *.force.com *.exacttarget.com *.sentry.io *.google-analytics.com *.analytics.google.com *.googletagmanager.com *.doubleclick.net *.cookieyes.com cdn-cookieyes.com",
-              "frame-src 'self' *.glopal.com *.salesforce.com *.force.com *.my.site.com",
-              "object-src 'none'",
-              "base-uri 'self'",
-            ].join("; "),
-          },
         ],
       },
     ];
