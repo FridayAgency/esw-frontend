@@ -148,6 +148,7 @@
 
       @include mixins.breakpoint-up(mobile) {
         overflow: unset;
+        flex-wrap: wrap;
       }
 
       @include mixins.breakpoint-up(tablet) {

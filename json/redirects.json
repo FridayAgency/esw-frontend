@@ -638,62 +638,7 @@
       "last_access": "-",
       "enabled": true
     },
-    {
-      "id": 24,
-      "url": "/careers",
-      "match_url": "/careers",
-      "match_data": {
-        "source": {
-          "flag_query": "exact",
-          "flag_case": true,
-          "flag_trailing": true,
-          "flag_regex": false
-        }
-      },
-      "action_code": 301,
-      "action_type": "url",
-      "action_data": {
-        "server": "https://esw.com",
-        "url_from": "https://esw.com/careers/",
-        "url_notfrom": ""
-      },
-      "match_type": "server",
-      "title": "",
-      "hits": 0,
-      "regex": false,
-      "group_id": 1,
-      "position": 23,
-      "last_access": "-",
-      "enabled": true
-    },
-    {
-      "id": 25,
-      "url": "/careers",
-      "match_url": "/careers",
-      "match_data": {
-        "source": {
-          "flag_query": "exact",
-          "flag_case": true,
-          "flag_trailing": true,
-          "flag_regex": false
-        }
-      },
-      "action_code": 301,
-      "action_type": "url",
-      "action_data": {
-        "server": "https://esw.com",
-        "url_from": "https://esw.com/careers/",
-        "url_notfrom": ""
-      },
-      "match_type": "server",
-      "title": "",
-      "hits": 0,
-      "regex": false,
-      "group_id": 1,
-      "position": 24,
-      "last_access": "-",
-      "enabled": true
-    },
+
     {
       "id": 26,
       "url": "/open-positions/",

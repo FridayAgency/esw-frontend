@@ -6,10 +6,12 @@ const initConfig = async () => {
 
   const redirectsSettings = redirects
     .map((item) => {
-      const source = item?.url.replace(/\?.*/, "");
+      const source = item?.url.replace(/\?.*/, "").replace("https://esw.com", "");
       const rawDest =
-        item?.action_data?.url?.replace(process.env.NEXT_PUBLIC_WORDPRESS_URL, "") ??
-        item?.action_data?.url_from?.replace(process.env.NEXT_PUBLIC_WORDPRESS_URL, "") ??
+        item?.action_data?.url?.replace(process.env.NEXT_PUBLIC_WORDPRESS_URL, "")?.replace("https://esw.com", "") ??
+        item?.action_data?.url_from
+          ?.replace(process.env.NEXT_PUBLIC_WORDPRESS_URL, "")
+          ?.replace("https://esw.com", "") ??
         item?.action_data?.url_from?.replace("https://esw.com", "") ??
         "/";
       return { source, destination: rawDest, permanent: true };

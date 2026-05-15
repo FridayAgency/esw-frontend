@@ -50,7 +50,7 @@ const CaseStudyGateway: React.FC<CaseStudyGatewayProps> = ({ panel }) => {
             </h2>
           )}
           <div className={styles["case-study-gateway__cta-desktop"]}>
-            <Button href="/customer-success-stories/" variant="text" colour="light">
+            <Button href="/customer-success-stories/" variant="text" colour="dark">
               Read All
             </Button>
           </div>
