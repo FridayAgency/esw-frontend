@@ -1,0 +1,45 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "http://localhost:3000/product/global-checkout/#product",
+      "name": "Global Checkout",
+      "description": "",
+      "url": "http://localhost:3000/product/global-checkout/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "url": "http://localhost:3000/product/global-checkout/" },
+      "provider": { "@type": "Organization", "@id": "http://localhost:3000/#organization", "name": "ESW" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "http://localhost:3000/product/global-checkout/#webpage",
+      "url": "http://localhost:3000/product/global-checkout/",
+      "name": "Global Checkout - ESW",
+      "description": "",
+      "isPartOf": { "@id": "http://localhost:3000/#website" },
+      "about": { "@id": "http://localhost:3000/#organization" },
+      "breadcrumb": { "@id": "http://localhost:3000/product/global-checkout/#breadcrumb" },
+      "inLanguage": "en-US",
+      "datePublished": "2026-04-09T14:21:19",
+      "dateModified": "2026-05-14T13:01:19",
+      "mainEntity": { "@id": "http://localhost:3000/product/global-checkout/#product" },
+      "potentialAction": [{ "@type": "ReadAction", "target": ["http://localhost:3000/product/global-checkout/"] }]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "http://localhost:3000/product/global-checkout/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://eswstaging.friday.ie/" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "http://localhost:3000/product/" },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Global Checkout",
+          "item": "https://eswstaging.friday.ie/product/global-checkout/"
+        }
+      ]
+    }
+  ]
+}

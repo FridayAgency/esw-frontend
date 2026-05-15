@@ -99,13 +99,13 @@ const DotGrid: React.FC<DotGridProps> = ({
     const canvas = canvasRef.current;
     if (!wrap || !canvas) return;
 
-    const { width, height } = wrap.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
+    // Read the canvas's actual CSS-rendered size so the buffer always matches what's on screen
+    const { width, height } = canvas.getBoundingClientRect();
 
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
+    // Round to integers to avoid fractional-pixel aspect ratio mismatch
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
     const ctx = canvas.getContext("2d");
     if (ctx) ctx.scale(dpr, dpr);
 
@@ -144,13 +144,17 @@ const DotGrid: React.FC<DotGridProps> = ({
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const dpr = window.devicePixelRatio || 1;
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
 
       const { x: px, y: py } = pointerRef.current;
 
       for (const dot of dotsRef.current) {
         const ox = dot.cx + dot.xOffset;
         const oy = dot.cy + dot.yOffset;
+        // Snap to nearest physical pixel to avoid sub-pixel blurring on fractional-DPR displays
+        const snappedX = Math.round(ox * dpr) / dpr;
+        const snappedY = Math.round(oy * dpr) / dpr;
         const dx = dot.cx - px;
         const dy = dot.cy - py;
         const dsq = dx * dx + dy * dy;
@@ -166,7 +170,7 @@ const DotGrid: React.FC<DotGridProps> = ({
         }
 
         ctx.save();
-        ctx.translate(ox, oy);
+        ctx.translate(snappedX, snappedY);
         ctx.fillStyle = style;
         ctx.fill(circlePath);
         ctx.restore();
@@ -188,9 +192,22 @@ const DotGrid: React.FC<DotGridProps> = ({
     } else {
       (window as Window).addEventListener("resize", buildGrid);
     }
+
+    // Rebuild when the window moves to a monitor with a different DPR
+    let mq: MediaQueryList | null = null;
+    const trackDPR = () => {
+      mq?.removeEventListener("change", trackDPR);
+      buildGrid();
+      mq = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`);
+      mq.addEventListener("change", trackDPR, { once: true });
+    };
+    mq = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`);
+    mq.addEventListener("change", trackDPR, { once: true });
+
     return () => {
       if (ro) ro.disconnect();
       else window.removeEventListener("resize", buildGrid);
+      mq?.removeEventListener("change", trackDPR);
     };
   }, [buildGrid]);
 
