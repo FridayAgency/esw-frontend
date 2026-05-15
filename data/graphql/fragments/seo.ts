@@ -26,6 +26,10 @@ const COMMON_SEO_FIELDS = `
 export const SEO_FRAGMENT = `
   fragment PostTypeSEOFragment on PostTypeSEO {
     ${COMMON_SEO_FIELDS}
+    breadcrumbs {
+      text
+      url
+    }
     cornerstone
     opengraphAuthor
     opengraphModifiedTime

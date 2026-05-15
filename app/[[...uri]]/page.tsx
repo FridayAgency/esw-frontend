@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import PostTemplate from "../components/Templates/PostTemplate";
 import PagePanelsTemplate from "../components/Templates/PagePanelsTemplate";
 import { calculateReadTime } from "@/lib/readTime";
+import { getSchemaForNode } from "@/lib/schema";
 
 export interface PageParams {
   params: Promise<{ uri: string[] }>;
@@ -56,15 +57,19 @@ const CatchallPage = async ({ params }: PageParams) => {
       const breadcrumbs = breadcrumbConfig[contentNode.__typename ?? ""];
       const panels = extractPanels(node);
       const readTime = breadcrumbs ? calculateReadTime(panels ?? []) : undefined;
+      const schema = getSchemaForNode(contentNode.__typename, pageUri, node);
 
       return (
-        <PagePanelsTemplate
-          panels={panels}
-          pageTitle={node.title ?? ""}
-          showBreadcrumbs={!!breadcrumbs}
-          breadcrumbs={breadcrumbs}
-          readTime={readTime}
-        />
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+          <PagePanelsTemplate
+            panels={panels}
+            pageTitle={node.title ?? ""}
+            showBreadcrumbs={!!breadcrumbs}
+            breadcrumbs={breadcrumbs}
+            readTime={readTime}
+          />
+        </>
       );
     }
 

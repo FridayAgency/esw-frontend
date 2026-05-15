@@ -2,6 +2,7 @@ import { FRAGMENTS } from "@fridayagency/graphql-client";
 
 import { PAGEPANELS_FRAGMENT } from "../fragments/panels";
 import { CAREER_POST_FRAGMENT, NEWS_ARTICLE_FRAGMENT, POST_FRAGMENT } from "../fragments/posts";
+import { SEO_FRAGMENT } from "../fragments/seo";
 
 export const GET_CONTENTNODE = `
 query GetContentNode($uri: ID!) {
@@ -13,6 +14,9 @@ query GetContentNode($uri: ID!) {
     ... on Page {
       id
       title
+      date
+      modified
+      seo { ...PostTypeSEOFragment }
       pagePanels {
         ...PagePanelsFragment
       }
@@ -21,14 +25,20 @@ query GetContentNode($uri: ID!) {
     ... on Product {
       id
       title
+      date
+      modified
+      seo { ...PostTypeSEOFragment }
       pagePanels {
         ...PagePanelsFragment
       }
     }
 
-    ... on Campaign{
+    ... on Campaign {
       id
       title
+      date
+      modified
+      seo { ...PostTypeSEOFragment }
       pagePanels {
         ...PagePanelsFragment
       }
@@ -37,6 +47,25 @@ query GetContentNode($uri: ID!) {
     ... on CaseStudy {
       id
       title
+      date
+      modified
+      excerpt
+      seo { ...PostTypeSEOFragment }
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      caseStudyCard {
+        cardCopy
+      }
+      caseStudyCategories {
+        edges {
+          node {
+            name
+          }
+        }
+      }
       pagePanels {
         ...PagePanelsFragment
       }
@@ -45,6 +74,9 @@ query GetContentNode($uri: ID!) {
     ... on Industry {
       databaseId
       title
+      date
+      modified
+      seo { ...PostTypeSEOFragment }
       pagePanels {
         ...PagePanelsFragment
       }
@@ -63,6 +95,7 @@ ${PAGEPANELS_FRAGMENT}
 ${FRAGMENTS.MEDIAITEM_FRAGMENT}
 ${NEWS_ARTICLE_FRAGMENT}
 ${CAREER_POST_FRAGMENT}
+${SEO_FRAGMENT}
 `;
 
 export const GET_CONTENTNODE_PREVIEW = `
