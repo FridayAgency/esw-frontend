@@ -122,7 +122,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const allEntries = [
     ...pages.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
-    ...posts.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
+    ...posts.map((p) => toSitemapEntry(`/blog${p.uri ?? ""}`, p.modified)),
     ...products.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
     ...newsArticles.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),
     ...careerPosts.map((p) => toSitemapEntry(p.uri ?? "", p.modified)),

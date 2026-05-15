@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  productionBrowserSourceMaps: true,
+
   trailingSlash: true,
   images: {
     unoptimized: process.env.NODE_ENV === "development",
@@ -75,12 +75,12 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy-Report-Only",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.glopal.com *.salesforce.com *.force.com *.exacttarget.com *.sfmc.co",
-              "style-src 'self' 'unsafe-inline' *.glopal.com *.salesforce.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.glopal.com *.salesforce.com *.force.com *.exacttarget.com *.sfmc.co *.googletagmanager.com *.google-analytics.com *.cookieyes.com",
+              "style-src 'self' 'unsafe-inline' *.glopal.com *.salesforce.com fonts.googleapis.com",
               "img-src 'self' data: https:",
-              "font-src 'self' data: https:",
-              "connect-src 'self' *.glopal.com *.salesforce.com *.force.com *.exacttarget.com *.sentry.io",
-              "frame-src 'self' *.glopal.com *.salesforce.com *.force.com",
+              "font-src 'self' data: https: fonts.gstatic.com",
+              "connect-src 'self' *.glopal.com *.salesforce.com *.force.com *.exacttarget.com *.sentry.io *.google-analytics.com *.analytics.google.com *.googletagmanager.com *.doubleclick.net *.cookieyes.com cdn-cookieyes.com",
+              "frame-src 'self' *.glopal.com *.salesforce.com *.force.com *.my.site.com",
               "object-src 'none'",
               "base-uri 'self'",
             ].join("; "),

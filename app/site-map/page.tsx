@@ -117,7 +117,7 @@ const SiteMapPage = async () => {
 
   const groups: SitemapGroup[] = [
     { label: "Pages", items: sortByTitle(pages) },
-    { label: "Blog", items: sortByTitle(posts) },
+    { label: "Blog", items: sortByTitle(posts).map((p) => ({ ...p, uri: p.uri ? `/blog${p.uri}` : p.uri })) },
     { label: "Products", items: sortByTitle(products) },
     { label: "News", items: sortByTitle(newsArticles) },
     { label: "Case Studies", items: sortByTitle(caseStudies) },
