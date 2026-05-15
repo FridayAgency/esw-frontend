@@ -80,7 +80,12 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
 
         <div className={styles["nav__actions"]}>
           <button onClick={() => setTalkToUsOpen(true)}>Talk to Us</button>
-          {/* <a href="#" aria-label="My Account">
+          <a
+            href="https://esp.eshopworld.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles["banner__nav-link"]}
+          >
             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10.1671 20.1426C23.0282 20.0861 23.0282 0.524448 10.1671 0.471069C-2.76301 0.694003 -2.75987 19.9259 10.1671 20.1426Z"
@@ -110,8 +115,8 @@ const MobileNav: React.FC<{ menu: Menu }> = ({ menu }) => {
                 strokeWidth="0.941972"
               />
             </svg>
-            My Account
-          </a> */}
+            Client Hub
+          </a>
         </div>
       </nav>
 

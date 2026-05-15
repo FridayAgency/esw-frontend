@@ -59,8 +59,13 @@ const BannerClient: React.FC<BannerClientProps> = ({ bannerText }) => {
       <Container className={styles["banner__nav-container"]}>
         <nav className={styles["banner__nav"]} aria-label="Company Information Navigation">
           <ul className={styles["banner__nav-list"]}>
-            {/* <li className={styles["banner__nav-list-item"]}>
-              <a href="#">
+            <li className={styles["banner__nav-list-item"]}>
+              <a
+                href="https://esp.eshopworld.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles["banner__nav-link"]}
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="39" height="40" viewBox="0 0 39 40" fill="none">
                   <path
                     d="M19.5 0C45.5016 0.442727 45.4984 39.1232 19.5 39.5628C-6.50157 39.1201 -6.49843 0.439587 19.5 0Z"
@@ -94,9 +99,9 @@ const BannerClient: React.FC<BannerClientProps> = ({ bannerText }) => {
                     strokeWidth="0.941972"
                   />
                 </svg>
-                My Account
+                Client Hub
               </a>
-            </li> */}
+            </li>
 
             <li className={styles["banner__nav-list-item"]}>
               <Suspense>

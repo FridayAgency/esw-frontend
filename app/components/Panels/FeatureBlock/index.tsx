@@ -72,7 +72,12 @@ const FeatureBlock: React.FC<FeatureBlockProps> = ({ panel }) => {
             </div>
 
             {callToAction && callToAction.url && (
-              <Button href={callToAction.url} variant="text" colour={background === "dark" ? "light" : "dark"}>
+              <Button
+                href={callToAction.url}
+                target={callToAction.target ?? "_self"}
+                variant="text"
+                colour={background === "dark" ? "light" : "dark"}
+              >
                 {callToAction.title}
               </Button>
             )}
