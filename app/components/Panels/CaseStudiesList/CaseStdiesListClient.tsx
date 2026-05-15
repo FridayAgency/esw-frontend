@@ -48,8 +48,6 @@ const CaseStdiesListClient: React.FC<CaseStdiesListClientProps> = ({ caseStudies
                 All
               </button>
               {caseStudyCategories.map((category) => {
-                console.log(category);
-
                 if (!category?.caseStudies?.edges?.length) return null;
 
                 return (

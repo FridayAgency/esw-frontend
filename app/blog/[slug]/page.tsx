@@ -34,8 +34,6 @@ const CatchallPage = async ({ params }: PageParams) => {
 
   if (!pageUri) notFound();
 
-  console.log("Fetching content node for URI:", pageUri);
-
   const { post } = await client.query<{
     post: Post;
   }>(GET_POST_BY_SLUG, { variables: { slug: pageUri } });

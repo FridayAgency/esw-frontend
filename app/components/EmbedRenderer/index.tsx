@@ -37,37 +37,37 @@ const EmbedRenderer: React.FC<EmbedRendererProps> = ({ embedCode, className }) =
 
     // --- tracking debug ---
 
-    const onMessage = (e: MessageEvent) => {
-      console.log("[EmbedRenderer] postMessage | origin:", e.origin, "| data:", JSON.stringify(e.data));
-    };
-    window.addEventListener("message", onMessage);
+    // const onMessage = (e: MessageEvent) => {
+    //   console.log("[EmbedRenderer] postMessage | origin:", e.origin, "| data:", JSON.stringify(e.data));
+    // };
+    // window.addEventListener("message", onMessage);
 
-    const _open = XMLHttpRequest.prototype.open;
-    XMLHttpRequest.prototype.open = function (method: string, url: string | URL) {
-      const self = this;
-      self.addEventListener("load", () => {
-        if (url?.toString().includes("eshopworld")) {
-          console.log("[EmbedRenderer] XHR:", method, url, "| status:", self.status);
-        }
-      });
-      return _open.apply(this, arguments as any);
-    };
+    // const _open = XMLHttpRequest.prototype.open;
+    // XMLHttpRequest.prototype.open = function (method: string, url: string | URL) {
+    //   const self = this;
+    //   self.addEventListener("load", () => {
+    //     if (url?.toString().includes("eshopworld")) {
+    //       console.log("[EmbedRenderer] XHR:", method, url, "| status:", self.status);
+    //     }
+    //   });
+    //   return _open.apply(this, arguments as any);
+    // };
 
-    const _fetch = window.fetch;
-    window.fetch = function (url, opts) {
-      return _fetch.apply(this, arguments as any).then((res: Response) => {
-        if (typeof url === "string" && url.includes("eshopworld")) {
-          console.log("[EmbedRenderer] fetch:", url, "| status:", res.status);
-        }
-        return res;
-      });
-    };
+    // const _fetch = window.fetch;
+    // window.fetch = function (url, opts) {
+    //   return _fetch.apply(this, arguments as any).then((res: Response) => {
+    //     if (typeof url === "string" && url.includes("eshopworld")) {
+    //       console.log("[EmbedRenderer] fetch:", url, "| status:", res.status);
+    //     }
+    //     return res;
+    //   });
+    // };
 
-    return () => {
-      window.removeEventListener("message", onMessage);
-      XMLHttpRequest.prototype.open = _open;
-      window.fetch = _fetch;
-    };
+    // return () => {
+    //   window.removeEventListener("message", onMessage);
+    //   XMLHttpRequest.prototype.open = _open;
+    //   window.fetch = _fetch;
+    // };
   }, [embedCode]);
 
   return <div suppressHydrationWarning ref={containerRef} className={className} />;

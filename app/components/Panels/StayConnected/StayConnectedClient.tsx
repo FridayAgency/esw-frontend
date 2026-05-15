@@ -78,8 +78,6 @@ const StayConnectedClient: React.FC<StayConnectedClientProps> = ({ title, copy }
 
       const response = await fetch("/api/greenhouse", { method: "POST", body });
 
-      console.log(response);
-
       if (!response.ok) throw new Error("Submission failed");
 
       setSubmitStatus("success");
