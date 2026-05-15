@@ -19,7 +19,7 @@ export const GET_CASE_STUDIES = `
         }
       }
     }
-    caseStudies(first: 200) {
+caseStudies(first: 200, where: {orderby: {field: MENU_ORDER, order: ASC}}) {
       edges {
         node {
           id
